@@ -8,6 +8,10 @@
 #ifndef MODULE_INC_INDEX_H_
 #define MODULE_INC_INDEX_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdio.h>
 #include "main.h"
 #include "stm32f4xx_hal.h"
@@ -18,9 +22,19 @@
 #include "usart.h"
 #include "gpio.h"
 #include "lsm6dsr_reg.h"
-
 #include "typedef.h"
 #include "macro.h"
+
+
+void CPP_main();
+t_encoder enc_R,enc_L;
+uint8_t mouse_mode;
+uint8_t is_mode_enable;
+
+uint8_t run_mode;
+t_sp_param machine;
+t_sp_param target;
+t_sp_param max_set;
 
 void Indicate_LED(uint8_t led_num);
 //interface
@@ -71,4 +85,8 @@ void Interrupt_PostProcess();
 void Interrupt_Get_Irsensor();
 void Interrupt_Get_Speed();
 void Interrupt_Set_Target_Speed();
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* MODULE_INC_INDEX_H_ */

@@ -12,12 +12,28 @@ RM := rm -rf
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include Core/Module/Src/subdir.mk
+-include Core/CPP/Src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(CC_DEPS)),)
+-include $(CC_DEPS)
+endif
+ifneq ($(strip $(C++_DEPS)),)
+-include $(C++_DEPS)
+endif
+ifneq ($(strip $(C_UPPER_DEPS)),)
+-include $(C_UPPER_DEPS)
+endif
+ifneq ($(strip $(CXX_DEPS)),)
+-include $(CXX_DEPS)
+endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
+endif
+ifneq ($(strip $(CPP_DEPS)),)
+-include $(CPP_DEPS)
 endif
 endif
 
@@ -42,7 +58,7 @@ all: mouse_type6.elf secondary-outputs
 
 # Tool invocations
 mouse_type6.elf: $(OBJS) $(USER_OBJS) C:\Users\sato1\Documents\git\mouse_type6_program\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld
-	arm-none-eabi-gcc -o "mouse_type6.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\sato1\Documents\git\mouse_type6_program\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\sato1\Documents\git\mouse_type6_program\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

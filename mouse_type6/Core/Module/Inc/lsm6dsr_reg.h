@@ -8,6 +8,10 @@
 #ifndef MODULE_INC_LSM6DSR_REG_H_
 #define MODULE_INC_LSM6DSR_REG_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define WHO_AM_I 0x0f	//RETURN Value is 0x6B
 
 //gyro output register
@@ -34,5 +38,10 @@
 #define GYRO_ODR_SET 0x80
 #define GYRO_2000_DPS 0x0C
 #define GYRO_4000_DPS 0x01
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif /* MODULE_INC_LSM6DSR_REG_H_ */

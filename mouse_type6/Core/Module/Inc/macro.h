@@ -8,6 +8,10 @@
 #ifndef MODULE_INC_MACRO_H_
 #define MODULE_INC_MACRO_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define DEBUG_MODE	0
 #define ENABLE_MODE1   0x10
 #define ENABLE_MODE2   0x20
@@ -83,5 +87,10 @@
 #define TIRE_RADIUS		(TIRE_DIAMETER/2.0f)			//mm
 #define MMPP			(TIRE_DIAMETER*PI/ENC_RESOLUTION)	//mm
 #define TREAD_WIDTH		((18.0-2.0)*2)
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif /* MODULE_INC_MACRO_H_ */

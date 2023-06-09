@@ -7,7 +7,6 @@
 
 
 #include "index.h"
-#include "glob_var.h"
 
 const int   m_dt = 1;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)

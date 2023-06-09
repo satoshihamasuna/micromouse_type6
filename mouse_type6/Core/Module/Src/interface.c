@@ -5,7 +5,6 @@
  *      Author: sato1
  */
 #include "index.h"
-#include "glob_var.h"
 
 #define MAX_MODE_NUM 0x0f
 

@@ -30,7 +30,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "index.h"
-#include "glob_var.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -105,6 +104,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
+  /*
   imu_initialize();
   Sensor_Initialize();
   Motor_Initialize();
@@ -114,77 +114,14 @@ int main(void)
   IMU_read_DMA_Start();
   mouse_mode = 0x00;
   is_mode_enable = 0;
+  */
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-	  /*
-	  uint8_t who_am_i = 0;
-	  who_am_i = read_byte(WHO_AM_I);
-	  //printf("who_am_I:%d,Renc:%ld,Lenc:%ld\n",who_am_i,Encoder_Counts_Right(),Encoder_Counts_Left());
-	  printf("%d,%d,%d,%d,",ADC_get_value(0),ADC_get_value(1),ADC_get_value(2),ADC_get_value(3));
-	  printf("%d,%d,%d,%d\n",ADC_get_value(4),ADC_get_value(5),ADC_get_value(6),ADC_get_value(7));
-	  HAL_Delay(10);
-	  int16_t test = 0;
-		*/
-
-	  Mode_Change_ENC();
-	  HAL_Delay(50);
-	  switch(is_mode_enable|mouse_mode){
-	  	  case (ENABLE_MODE3|0x00):
-	  			  printf("gyro:%lf\n",read_gyro_z_axis());
-	  			  break;
-	  	  case (ENABLE_MODE3|0x01):
-	  			  FAN_Motor_SetDuty(500);
-	  	  	  	  HAL_Delay(1500);
-	  	  	      FAN_Motor_SetDuty(0);
-	  	  	      HAL_Delay(100);
-	  	  	  	  is_mode_enable = DISABLE;
-	  			  break;
-	  	  case (ENABLE_MODE3|0x02):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x03):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x04):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x05):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x06):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x07):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x08):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x09):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x0A):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x0B):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x0C):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x0D):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x0E):
-	  			  break;
-	  	  case (ENABLE_MODE3|0x0F):
-	  			  break;
-	  }
-
-//	  if(mouse_mode == 0x00 && is_mode_enable == true) Sensor_StopADC();
-
-	  //if(i == 2)write_byte(CTRL2_G, GYRO_ODR_SET|GYRO_2000_DPS);
-	  /*read_byte(WHO_AM_I);
-	   * */
-
-	  //printf("%d\n",read_byte(CTRL2_G));
-	  //HAL_Delay(200);*/
-  }
+   while(1){
+	   CPP_main();
+   }
   /* USER CODE END 3 */
 }
 

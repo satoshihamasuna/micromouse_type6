@@ -5,18 +5,24 @@
  *      Author: sato1
  */
 
-#include "index.h"
-#include "macro.h"
+
 
 
 #ifndef MODULE_INC_TYPEDEF_H_
 #define MODULE_INC_TYPEDEF_H_
 
-typedef enum{
-	 false = 0,
-	 true  = 1,
-}t_bool;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+#include "index.h"
+#include "macro.h"
+/*
+typedef enum{
+	 False = 0,
+	 True  = 1,
+}t_bool;
+*/
 typedef struct{
 	int32_t sp_pulse;
 	int32_t prev_sp_pulse;
@@ -51,12 +57,16 @@ typedef struct{
 	float length;
 	float radian;
 }t_sp_param;
-
+/*
 typedef struct{
 	int16_t st_x;
 	int16_t st_y;
 	int16_t cost;
 	int16_t cost_h;
 }t_MapNode;
+*/
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* MODULE_INC_TYPEDEF_H_ */
