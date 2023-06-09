@@ -1125,6 +1125,176 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0xa0 Core/Module/Src/motor.o
  .debug_macro   0x0000000000000000       0x76 Core/Module/Src/motor.o
  .debug_macro   0x0000000000000000      0x14e Core/Module/Src/motor.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .group         0x0000000000000000        0xc Core/Module/Src/priority_queue.o
+ .text          0x0000000000000000        0x0 Core/Module/Src/priority_queue.o
+ .data          0x0000000000000000        0x0 Core/Module/Src/priority_queue.o
+ .bss           0x0000000000000000        0x0 Core/Module/Src/priority_queue.o
+ .text.list_init
+                0x0000000000000000       0x1c Core/Module/Src/priority_queue.o
+ .text.pop      0x0000000000000000       0x46 Core/Module/Src/priority_queue.o
+ .text.push     0x0000000000000000       0x3c Core/Module/Src/priority_queue.o
+ .text.swap     0x0000000000000000       0x3c Core/Module/Src/priority_queue.o
+ .text.min_heapify
+                0x0000000000000000       0xf4 Core/Module/Src/priority_queue.o
+ .text.build_heap
+                0x0000000000000000       0x3e Core/Module/Src/priority_queue.o
+ .text.heap_pop
+                0x0000000000000000       0x64 Core/Module/Src/priority_queue.o
+ .text.heap_push
+                0x0000000000000000       0x38 Core/Module/Src/priority_queue.o
+ .text.node_set
+                0x0000000000000000       0x44 Core/Module/Src/priority_queue.o
+ .debug_info    0x0000000000000000     0x1814 Core/Module/Src/priority_queue.o
+ .debug_abbrev  0x0000000000000000      0x289 Core/Module/Src/priority_queue.o
+ .debug_aranges
+                0x0000000000000000       0x60 Core/Module/Src/priority_queue.o
+ .debug_ranges  0x0000000000000000       0x50 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x3cc Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0xa5a Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x22 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x40 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x18 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x94 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x3c Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x34 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x16 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x57 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x97 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x330 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0xfd Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x10 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x52 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x1f Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x43 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x20 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x1a3 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x10 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x6a Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x1c Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x52 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x40 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x10 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x40 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0xd7 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x1c Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x3d Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x16 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x145 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x196 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x2e Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x28 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0xef Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x1df Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x1c Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x22 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0xd9 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000     0x102d Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x11f Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000     0xb937 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x43 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000     0x3659 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x54 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x447 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x9fe Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x15f Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x117 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x11b Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x27 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x287 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x5f Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x236 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x391 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x17d Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0xf9 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x132 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x264 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x2e Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x11a Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x85 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x89 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x225 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x8a0 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x47 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x287 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x126 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0xa0 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000       0x76 Core/Module/Src/priority_queue.o
+ .debug_macro   0x0000000000000000      0x14e Core/Module/Src/priority_queue.o
+ .debug_line    0x0000000000000000      0xa8b Core/Module/Src/priority_queue.o
+ .debug_str     0x0000000000000000    0x90037 Core/Module/Src/priority_queue.o
+ .comment       0x0000000000000000       0x7c Core/Module/Src/priority_queue.o
+ .debug_frame   0x0000000000000000      0x168 Core/Module/Src/priority_queue.o
+ .ARM.attributes
+                0x0000000000000000       0x39 Core/Module/Src/priority_queue.o
  .group         0x0000000000000000        0xc Core/Src/adc.o
  .group         0x0000000000000000        0xc Core/Src/adc.o
  .group         0x0000000000000000        0xc Core/Src/adc.o
@@ -5119,6 +5289,7 @@ LOAD Core/Module/Src/interface.o
 LOAD Core/Module/Src/interrupt.o
 LOAD Core/Module/Src/ir_sensor.o
 LOAD Core/Module/Src/motor.o
+LOAD Core/Module/Src/priority_queue.o
 LOAD Core/Src/adc.o
 LOAD Core/Src/dma.o
 LOAD Core/Src/gpio.o

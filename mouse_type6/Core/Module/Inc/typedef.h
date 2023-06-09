@@ -52,4 +52,11 @@ typedef struct{
 	float radian;
 }t_sp_param;
 
+typedef struct{
+	int16_t st_x;
+	int16_t st_y;
+	int16_t cost;
+	int16_t cost_h;
+}t_MapNode;
+
 #endif /* MODULE_INC_TYPEDEF_H_ */

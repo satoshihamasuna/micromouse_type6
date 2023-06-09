@@ -5,6 +5,7 @@
 "Core/Module/Src/interrupt.o"
 "Core/Module/Src/ir_sensor.o"
 "Core/Module/Src/motor.o"
+"Core/Module/Src/priority_queue.o"
 "Core/Src/adc.o"
 "Core/Src/dma.o"
 "Core/Src/gpio.o"
