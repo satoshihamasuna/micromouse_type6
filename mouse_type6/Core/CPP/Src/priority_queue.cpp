@@ -6,106 +6,35 @@
  */
 #include <queue.h>
 #include "iostream"
-#include <typedef_node.h>
+#include "maze_def.h"
 
-
-//#include "typedef_node.hpp"
-/*
-void list_init(t_queue *queue){
-	queue->tail = -1;
-}
-
-t_MapNode pop(t_queue *queue){
-	t_MapNode pop_data;
-	pop_data = queue->node[queue->tail];
-	queue->tail = queue->tail - 1;
-	return pop_data;
-}
-
-void push(t_queue *queue,t_MapNode input)
+template<typename T> bool less_than(T a,T b)
 {
-	queue->node[queue->tail + 1] = input;
-	queue->tail = queue->tail + 1;
+     return ((a < b) ? true : false);
 }
 
-void swap(t_MapNode* a,t_MapNode* b){
-	t_MapNode temp;
-	temp = *b;
-	*b = *a;
-	*a = temp;
-}
-
-
-void min_heapify(t_queue *queue,int i){	//iは親ノードの位置
-	int left_ch = 2*i + 1;
-	int right_ch = 2*i + 2;
-	int smallest = i;
-
-	while(1){
-		if(left_ch <= queue->tail && ((queue->node[smallest].cost+queue->node[smallest].cost_h) > (queue->node[left_ch].cost+queue->node[left_ch].cost_h)))
-			smallest = left_ch;
-		if(right_ch <= queue->tail && ((queue->node[smallest].cost+queue->node[smallest].cost_h) > (queue->node[right_ch].cost+queue->node[right_ch].cost_h)))
-			smallest = right_ch;
-
-		if(smallest != i){
-			swap(&queue->node[i],&queue->node[smallest]);
-			left_ch = 2*smallest + 1;
-			right_ch = 2*smallest + 2;
-			i = smallest;
-		}
-		else
-		{
-			break;
-		}
-	}
-}
-
-
-void build_heap(t_queue *queue){
-	if(queue->tail - 1 > 0)
-	{
-		for(int i = (queue->tail - 1)/2; i >= 0;i--){
-			min_heapify(queue,i);
-		}
-	}
-}
-
-t_MapNode heap_pop(t_queue *queue){
-	t_MapNode n;
-	n = queue->node[0];
-	queue->node[0] = queue->node[queue->tail];
-	queue->tail = queue->tail - 1;
-	if(queue->tail != -1)
-		min_heapify(queue,0);
-	return n;
-}
-
-void heap_push(t_queue *queue,t_MapNode element){
-	push(queue,element);
-	if(queue->tail - 1 > 0)
-	{
-		min_heapify(queue,queue->tail-1/2);
-	}
-}
-*/
-
-template<typename T> Priority_queue<T>::Priority_queue(int size)
+template<> bool less_than(t_MapNode a,t_MapNode b)
 {
-    buff = new T[size];
+     return ((a.cost < b.cost) ? true : false);
+}
+
+template<std::size_t SIZE,typename T> Priority_queue<SIZE,T>::Priority_queue()
+{
+
     tail = -1;
 }
 
-template<typename T> void Priority_queue<T>::queue_init()
+template<std::size_t SIZE,typename T> void Priority_queue<SIZE,T>::queue_init()
 {
 	tail = -1;
 }
 
-template<typename T> uint16_t Priority_queue<T>::queue_length(){
+template<std::size_t SIZE,typename T> uint16_t Priority_queue<SIZE,T>::queue_length(){
 	return tail + 1;
 }
 
 
-template<typename T> bool Priority_queue<T>::is_Empty_queue()
+template<std::size_t SIZE,typename T> bool Priority_queue<SIZE,T>::is_Empty_queue()
 {
 	if(queue_length() == 0)
 		return true;
@@ -113,7 +42,7 @@ template<typename T> bool Priority_queue<T>::is_Empty_queue()
 		return false;
 }
 
-template<typename T>  T Priority_queue<T>::heap_pop()
+template<std::size_t SIZE,typename T>  T Priority_queue<SIZE,T>::heap_pop()
 {
 	//T pop_data;
 	T pop_data = buff[0];
@@ -124,13 +53,13 @@ template<typename T>  T Priority_queue<T>::heap_pop()
 	return pop_data;
 }
 
-template<typename T> void Priority_queue<T>::push(T push_data)
+template<std::size_t SIZE,typename T> void Priority_queue<SIZE,T>::push(T push_data)
 {
 	buff[tail + 1] = push_data;
 	tail = tail + 1;
 }
 
-template<typename T> void Priority_queue<T>::heap_push(T push_data)
+template<std::size_t SIZE,typename T> void Priority_queue<SIZE,T>::heap_push(T push_data)
 {
 	buff[tail + 1] = push_data;
 	tail = tail + 1;
@@ -138,7 +67,7 @@ template<typename T> void Priority_queue<T>::heap_push(T push_data)
 	    min_heapify((tail-1)/2);
 }
 
-template<typename T> void Priority_queue<T>::swap(T *a,T *b)
+template<std::size_t SIZE,typename T> void Priority_queue<SIZE,T>::swap(T *a,T *b)
 {
 	T temp;
 	temp = *b;
@@ -146,7 +75,9 @@ template<typename T> void Priority_queue<T>::swap(T *a,T *b)
 	*a = temp;
 }
 
-template<> void Priority_queue<t_MapNode>::min_heapify(uint16_t parent_pos)
+
+
+template<std::size_t SIZE,typename T> void Priority_queue<SIZE,T>::min_heapify(uint16_t parent_pos)
 {
 	uint16_t left_ch  = 2*parent_pos + 1;
 	uint16_t right_ch = 2*parent_pos + 2;
@@ -154,9 +85,12 @@ template<> void Priority_queue<t_MapNode>::min_heapify(uint16_t parent_pos)
 
 	while(1)
 	{
-		if(left_ch <= tail && ((buff[smallest].cost) > (buff[left_ch].cost)))
+
+		//if(left_ch <= tail && ((buff[smallest]) > (buff[left_ch])))
+		if(left_ch <= tail && less_than(buff[left_ch],buff[smallest]))
 			smallest = left_ch;
-		if(right_ch <= tail && ((buff[smallest].cost) > (buff[right_ch].cost)))
+		//if(right_ch <= tail && ((buff[smallest]) > (buff[right_ch])))
+		if(right_ch <= tail && less_than(buff[right_ch],buff[smallest]))
 			smallest = right_ch;
 
 		if(smallest != parent_pos)
@@ -173,34 +107,7 @@ template<> void Priority_queue<t_MapNode>::min_heapify(uint16_t parent_pos)
 	}
 }
 
-template<typename T> void Priority_queue<T>::min_heapify(uint16_t parent_pos)
-{
-	uint16_t left_ch  = 2*parent_pos + 1;
-	uint16_t right_ch = 2*parent_pos + 2;
-	uint16_t smallest = parent_pos;
-
-	while(1)
-	{
-		if(left_ch <= tail && ((buff[smallest]) > (buff[left_ch])))
-			smallest = left_ch;
-		if(right_ch <= tail && ((buff[smallest]) > (buff[right_ch])))
-			smallest = right_ch;
-
-		if(smallest != parent_pos)
-		{
-			swap(&buff[parent_pos],&buff[smallest]);
-			left_ch = 2*smallest + 1;
-			right_ch = 2*smallest + 2;
-			parent_pos = smallest;
-		}
-		else
-		{
-			break;
-		}
-	}
-}
-
-template<typename T> void  Priority_queue<T>::build_heap()
+template<std::size_t SIZE,typename T> void  Priority_queue<SIZE,T>::build_heap()
 {
     if( queue_length() > 1)
     {

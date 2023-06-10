@@ -17,10 +17,11 @@
 //#include "typedef_node"
 #include <stdio.h>
 #include <iostream>
-#include <index.h>
-#include <typedef.h>
-#include "../Inc/typedef_node.h"
-#include "../Inc/queue.h"
+
+#include "index.h"
+#include "typedef.h"
+#include "queue.h"
+#include "maze_def.h"
 
 
 void CPP_main()
@@ -36,7 +37,7 @@ void CPP_main()
 	  mouse_mode = 0x00;
 	  is_mode_enable = 0;
 
-	  Priority_queue<t_MapNode> queue();
+	  Priority_queue<1024,t_MapNode> queue();
 
 
 	 while (1)

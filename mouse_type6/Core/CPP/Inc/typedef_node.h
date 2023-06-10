@@ -9,13 +9,13 @@
 #define CPP_INC_TYPEDEF_NODE_H_
 
 #include <iostream>
-
+/*
 typedef struct{
 	int16_t st_x;
 	int16_t st_y;
 	int16_t cost;
 	int16_t cost_h;
 }t_MapNode;
-
+*/
 
 #endif /* CPP_INC_TYPEDEF_NODE_HPP_ */

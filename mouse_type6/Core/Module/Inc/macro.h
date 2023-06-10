@@ -18,36 +18,6 @@ extern "C" {
 #define ENABLE_MODE3   0x30
 #define DISENABLE_MODE 0x00
 
-//MAZE macro
-#define MAZE_SIZE_X	32
-#define MAZE_SIZE_Y 32
-#define MAZE_SIZE	(MAZE_SIZE_X*MAZE_SIZE_Y)
-
-//GOAL Position Lower Left
-#define MAZE_GOAL_X 6
-#define MAZE_GOAL_Y 6
-
-//GOAL SIZE NxN
-#define MAZE_GOAL_SIZE 3
-
-#define MAP_MAX_VALUE MAZE_SIZE
-
-#define UNKNOWN	2
-#define NOWALL	0
-#define WALL	1
-#define VWALL	3
-
-#define RIGHT	0
-#define LEFT	1
-#define FRONT	2
-#define REAR	3
-
-#define MASK_SEARCH	0x01
-#define MASK_SECOND	0x03
-
-#define CONV_SEN2WALL(w)	((w)?WALL:NOWALL)
-
-
 #define ENC_RESOLUTION	(1024)
 
 #define MOUSE_ENABLE	(0x10)
