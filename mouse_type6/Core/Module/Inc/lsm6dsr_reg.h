@@ -5,8 +5,8 @@
  *      Author: sato1
  */
 
-#ifndef MODULE_INC_LSM6DSR_REG_H_
-#define MODULE_INC_LSM6DSR_REG_H_
+#ifndef CPP_INC_LSM6DSR_REG_H_
+#define CPP_INCLSM6DSR_REG_H_
 
 #ifdef __cplusplus
 extern "C" {

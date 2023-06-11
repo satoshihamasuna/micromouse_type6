@@ -5,4 +5,4 @@ interrupt.c:34:6:Interrupt_Main	4	static
 interrupt.c:39:6:Interrupt_PostProcess	8	static
 interrupt.c:44:6:Interrupt_Get_Irsensor	4	static
 interrupt.c:49:6:Interrupt_Get_Speed	8	static
-interrupt.c:64:6:Interrupt_Set_Target_Speed	4	static
+interrupt.c:66:6:Interrupt_Set_Target_Speed	4	static

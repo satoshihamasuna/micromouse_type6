@@ -1,1 +1,4 @@
-interface.c:11:6:Mode_Change_ENC	8	static
+interface.c:12:6:Mode_Change_ENC	8	static
+interface.c:35:6:Mode_Init	4	static
+interface.c:41:9:Mode_State	4	static
+interface.c:46:6:Mode_Disable	4	static

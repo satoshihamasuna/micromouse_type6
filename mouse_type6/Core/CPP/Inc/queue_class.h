@@ -5,8 +5,8 @@
  *      Author: sato1
  */
 
-#ifndef CPP_INC_QUEUE_H_
-#define CPP_INC_QUEUE_H_
+#ifndef CPP_INC_QUEUE_CLASS_H_
+#define CPP_INC_QUEUE_CLASS_H_
 
 #include <iostream>
 
@@ -45,4 +45,4 @@ template<std::size_t SIZE,typename T> class ring_queue{
 };
 
 
-#endif /* CPP_INC_QUEUE_H_ */
+#endif /* CPP_INC_QUEUE_CLASS_H_ */

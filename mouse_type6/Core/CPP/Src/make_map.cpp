@@ -1,13 +1,17 @@
 /*
- * search.cpp
+ * make_map.c
  *
- *  Created on: Jun 10, 2023
+ *  Created on: 2023/06/11
  *      Author: sato1
  */
-#include "adachi.h"
-#include "maze_def.h"
-#include "maze_var.h"
-#include "queue.h"
+
+
+#include "../Module/Inc/typedef.h"
+#include "../Module/Inc/index.h"
+
+#include "queue_class.h"
+#include "../Module/Inc/glob_var_machine.h"
+#include "../Module/Inc/glob_var_maze.h"
 
 t_MapNode node_set(int16_t st_x,int16_t st_y,int16_t cost,int16_t cost_h){
 	t_MapNode n;
@@ -129,6 +133,126 @@ void make_map_queue(int *x, int *y,int size,int mask)
 		}
 }
 
+void set_wall(int x, int y)	//壁情報を記録
+{
+//引数の座標x,yに壁情報を書き込む
+	int n_write,s_write,e_write,w_write;
+	n_write = 0;
+	s_write = 0;
+    e_write = 0;
+    w_write = 0;
+	//自分の方向に応じて書き込むデータを生成
+	//CONV_SEN2WALL()はmacro.hを参照
+	switch(mypos.dir){
+		case North:	//北を向いている時
+
+			n_write = CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//　前壁の有無を判断
+			e_write = CONV_SEN2WALL(sen_r.is_wall);				//右の有無を判断
+			w_write = CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
+			s_write = NOWALL;						//後ろは必ず壁がない
+
+			break;
+
+		case East:	//東を向いているとき
+
+			e_write = CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
+			s_write = CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
+			n_write = CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
+			w_write = NOWALL;						//後ろは必ず壁がない
+
+			break;
+
+		case South:	//南を向いているとき
+
+			s_write = CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
+			w_write = CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
+			e_write = CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
+			n_write = NOWALL;						//後ろは必ず壁がない
+
+			break;
+
+		case West:	//西を向いているとき
+
+			w_write = CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
+			n_write = CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
+			s_write = CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
+			e_write = NOWALL;						//後ろは必ず壁がない
+
+			break;
+
+		case NorthEast:
+		case SouthEast:
+		case SouthWest:
+		case NorthWest:
+		case Dir_None:
+			break;
+	}
+
+	if(wall[x][y].north == UNKNOWN || wall[x][y].north == n_write){
+		wall[x][y].north = n_write;	//実際に壁情報を書き込み
+	}
+	else
+	{
+		wall[x][y].north = VWALL;	//実際に壁情報を書き込み
+		n_write			 = VWALL;
+	}
+
+
+	if(wall[x][y].south == UNKNOWN || wall[x][y].south == s_write){
+		wall[x][y].south = s_write;	//実際に壁情報を書き込み
+	}
+	else
+	{
+		wall[x][y].south = VWALL;	//実際に壁情報を書き込み
+		s_write			 = VWALL;
+	}
+
+	if(wall[x][y].east == UNKNOWN || wall[x][y].east == e_write){
+		wall[x][y].east = e_write;	//実際に壁情報を書き込み
+	}
+	else
+	{
+		wall[x][y].east  = VWALL;	//実際に壁情報を書き込み
+		e_write			 = VWALL;
+	}
+
+	if(wall[x][y].west == UNKNOWN || wall[x][y].west == w_write){
+		wall[x][y].west = w_write;	//実際に壁情報を書き込み
+	}
+	else
+	{
+		wall[x][y].west  = VWALL;	//実際に壁情報を書き込み
+		w_write			 = VWALL;
+	}
+
+	/*
+	wall[x][y].north = n_write;
+	wall[x][y].south = s_write;	//実際に壁情報を書き込み
+	wall[x][y].east  = e_write;	//実際に壁情報を書き込み
+	wall[x][y].west  = w_write;	//実際に壁情報を書き込み
+	*/
+
+	if(y < MAZE_SIZE_Y-1)	//範囲チェック
+	{
+		wall[x][y+1].south = n_write;	//反対側から見た壁を書き込み
+	}
+
+	if(x < MAZE_SIZE_X-1)	//範囲チェック
+	{
+		wall[x+1][y].west = e_write;	//反対側から見た壁を書き込み
+	}
+
+	if(y > 0)	//範囲チェック
+	{
+        wall[x][y-1].north = s_write;	//反対側から見た壁を書き込み
+	}
+
+	if(x > 0)	//範囲チェック
+	{
+		wall[x-1][y].east = w_write;	//反対側から見た壁を書き込み
+	}
+
+}
 
 void goal_set_vwall(int *gx,int *gy,int goal_size){
 	if(goal_size == 3)
@@ -147,11 +271,11 @@ void goal_clear_vwall(int *gx,int *gy,int goal_size){
 	}
 }
 
-bool i_am_goal(int x,int y,int *gx,int *gy,int goal_size){
-	bool flag = false;
+t_bool i_am_goal(int x,int y,int *gx,int *gy,int goal_size){
+	t_bool flag = False;
 	for (int i = 0; i < goal_size;i++){
 		for(int j = 0; j < goal_size;j++){
-			if(x == gx[i] && y == gy[j]) flag = true;
+			if(x == gx[i] && y == gy[j]) flag = True;
 		}
 	}
 	return flag;

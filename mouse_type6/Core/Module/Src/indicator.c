@@ -5,7 +5,7 @@
  *      Author: sato1
  */
 
-#include "index.h"
+#include "../Inc/index.h"
 
 void Indicate_LED(uint8_t led_num)
 {

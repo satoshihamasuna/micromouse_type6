@@ -6,8 +6,8 @@
  */
 
 
-#include "index.h"
-#include "lsm6dsr_reg.h"
+#include "../Inc/index.h"
+#include "../Inc/lsm6dsr_reg.h"
 
 uint8_t imu_address = OUTX_L_G|0x80; //ACCEL_X_HIGH_BYTE
 uint8_t imu_value[13];

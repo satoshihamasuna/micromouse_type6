@@ -6,7 +6,7 @@
  */
 
 
-#include "index.h"
+#include "../Inc/index.h"
 
 #define ENC_CNT_L 		(TIM2 -> CNT)
 #define ENC_CNT_R 		(TIM3 -> CNT)

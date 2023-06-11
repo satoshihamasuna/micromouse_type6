@@ -6,19 +6,21 @@
  */
 
 
-#include "index.h"
+#include "../Inc/index.h"
+#include "../Inc/Macro.h"
+#include "../Inc/typedef.h"
 
 #define PCLK1			(50000000)//(HAL_RCC_GetPCLK1Freq())//25,000,000
-#define PCLK2			(50000000)(HAL_RCC_GetPCLK2Freq())//50,000,000
+#define PCLK2			(50000000)//(HAL_RCC_GetPCLK2Freq())//50,000,000
 #define PWMFREQ			(200000)
 #define FANPWMFREQ		(200000)
 #define MOT_DUTY_MIN	(30)
 #define MOT_DUTY_MAX	(950)
 
-#define MOT_SET_COMPARE_L_FORWARD(x)	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, x)
-#define MOT_SET_COMPARE_L_REVERSE(x)	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, x)
-#define MOT_SET_COMPARE_R_FORWARD(x)	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, x)
-#define MOT_SET_COMPARE_R_REVERSE(x)	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, x)
+#define MOT_SET_COMPARE_R_FORWARD(x)	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, x)
+#define MOT_SET_COMPARE_R_REVERSE(x)	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, x)
+#define MOT_SET_COMPARE_L_FORWARD(x)	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, x)
+#define MOT_SET_COMPARE_L_REVERSE(x)	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, x)
 
 void Motor_Initialize()
 {

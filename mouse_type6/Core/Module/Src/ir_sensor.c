@@ -5,7 +5,7 @@
  *      Author: sato1
  */
 
-#include "index.h"
+#include "../Inc/index.h"
 #include "tim.h"
 #include "dma.h"
 #include "stm32f4xx_hal.h"

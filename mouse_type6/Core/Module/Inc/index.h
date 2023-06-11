@@ -1,12 +1,14 @@
 /*
  * index.h
  *
- *  Created on: 2023/06/03
+ *  Created on: 2023/06/11
  *      Author: sato1
  */
 
-#ifndef MODULE_INC_INDEX_H_
-#define MODULE_INC_INDEX_H_
+#ifndef CPP_INC_INDEX_H_
+#define CPP_INC_INDEX_H_
+
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,24 +23,17 @@ extern "C" {
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-#include "lsm6dsr_reg.h"
 #include "typedef.h"
+#include "lsm6dsr_reg.h"
 #include "macro.h"
-
-
-void CPP_main();
-t_encoder enc_R,enc_L;
-uint8_t mouse_mode;
-uint8_t is_mode_enable;
-
-uint8_t run_mode;
-t_sp_param machine;
-t_sp_param target;
-t_sp_param max_set;
+//#include "../CPP/machine_var.h"
 
 void Indicate_LED(uint8_t led_num);
 //interface
 void Mode_Change_ENC();
+void Mode_Init();
+uint8_t Mode_State();
+void Mode_Disable();
 
 //imu
 uint8_t read_byte(uint8_t reg);
@@ -84,9 +79,14 @@ void Interrupt_Main();
 void Interrupt_PostProcess();
 void Interrupt_Get_Irsensor();
 void Interrupt_Get_Speed();
-void Interrupt_Set_Target_Speed();
+
+void goal_set_vwall(int *gx,int *gy,int goal_size);
+void goal_clear_vwall(int *gx,int *gy,int goal_size);
+t_bool i_am_goal(t_position my_pos,int *gx,int *gy,int goal_size);
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* MODULE_INC_INDEX_H_ */
+
+#endif /* CPP_INC_INDEX_H_ */

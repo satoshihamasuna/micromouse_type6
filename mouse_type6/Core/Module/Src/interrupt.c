@@ -1,11 +1,11 @@
 /*
- * interrupt.c
+ * Interrupt.c
  *
- *  Created on: Jun 7, 2023
+ *  Created on: 2023/06/11
  *      Author: sato1
  */
 
-
+#include <glob_var_machine.h>
 #include "index.h"
 
 const int   m_dt = 1;
@@ -48,6 +48,7 @@ void Interrupt_Get_Irsensor()
 
 void Interrupt_Get_Speed()
 {
+
 	enc_R.prev_sp_pulse = enc_R.sp_pulse;
 	enc_L.prev_sp_pulse = enc_L.sp_pulse;
 
@@ -59,9 +60,11 @@ void Interrupt_Get_Speed()
 
 	enc_R.wheel_speed =  (float)enc_R.sp_pulse * MMPP * m_dt; //計測はmm mm/ms-> m/s
 	enc_L.wheel_speed =  (float)enc_L.sp_pulse * MMPP * m_dt;
+
 }
 
 void Interrupt_Set_Target_Speed()
 {
 
 }
+

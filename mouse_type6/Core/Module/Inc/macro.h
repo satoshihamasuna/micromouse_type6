@@ -12,15 +12,23 @@
 extern "C" {
 #endif
 
-#define DEBUG_MODE	0
-#define ENABLE_MODE1   0x10
-#define ENABLE_MODE2   0x20
-#define ENABLE_MODE3   0x30
-#define DISENABLE_MODE 0x00
+#include<stdio.h>
 
-#define ENC_RESOLUTION	(1024)
+#define SECTION				(90.0)
+#define HALF_SECTION		(SECTION/2.0)
+#define DIAG_SECTION		(63.6396)
+#define DIAG_HALF_SECTION	(DIAG_SECTION/2.0)
+#define SEARCH_HOSEI		(48.0)
 
-#define MOUSE_ENABLE	(0x10)
+#define RIGHT	0
+#define LEFT	1
+#define FRONT	2
+#define REAR	3
+
+#define MASK_SEARCH	0x01
+#define MASK_SECOND	0x03
+
+#define CONV_SEN2WALL(w)	((w)?WALL:NOWALL)
 
 #define STRAIGHT_MODE	(1)
 #define TURN_MODE		(2)
@@ -28,6 +36,18 @@ extern "C" {
 #define DIAG_MODE		(3)
 #define NON_CON_MODE	(0)
 
+#define TIRE_DIAMETER	(14.0f)							//mm
+#define TIRE_RADIUS		(TIRE_DIAMETER/2.0f)			//mm
+#define MMPP			(TIRE_DIAMETER*PI/ENC_RESOLUTION)	//mm
+#define TREAD_WIDTH		((18.0-2.0)*2)
+
+#define ENC_RESOLUTION	(1024)
+
+#define DEBUG_MODE	0
+#define ENABLE_MODE1   0x10
+#define ENABLE_MODE2   0x20
+#define ENABLE_MODE3   0x30
+#define DISENABLE_MODE 0x00
 
 #define G					(9.80665f)					// 重量加速度[m/s^2]
 #define PI					(3.1415926f)				// 円周率
@@ -53,10 +73,14 @@ extern "C" {
 #define DIAG_HALF_SECTION	(DIAG_SECTION/2.0)
 #define SEARCH_HOSEI		(48.0)
 
-#define TIRE_DIAMETER	(14.0f)							//mm
-#define TIRE_RADIUS		(TIRE_DIAMETER/2.0f)			//mm
-#define MMPP			(TIRE_DIAMETER*PI/ENC_RESOLUTION)	//mm
-#define TREAD_WIDTH		((18.0-2.0)*2)
+#define MAZE_SIZE_X  32
+#define MAZE_SIZE_Y  32
+#define MAZE_SIZE  1024
+
+#define MAZE_GOAL_X  1
+#define MAZE_GOAL_Y  1
+#define MAZE_GOAL_SIZE  3
+#define MAP_MAX_VALUE 1024
 
 #ifdef __cplusplus
 }

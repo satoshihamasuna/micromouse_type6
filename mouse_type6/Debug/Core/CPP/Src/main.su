@@ -1,5 +1,0 @@
-gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
-main.cpp:27:6:void CPP_main()	16	static
-main.cpp:91:1:void __static_initialization_and_destruction_0(int, int)	16	static
-main.cpp:91:1:cpp)	8	static
-main.cpp:91:1:cpp)	8	static
