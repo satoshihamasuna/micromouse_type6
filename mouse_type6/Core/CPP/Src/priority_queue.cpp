@@ -4,9 +4,9 @@
  *  Created on: 2023/06/10
  *      Author: sato1
  */
-#include <../Include/queue_class.h>
+#include <queue_class.h>
 #include "iostream"
-#include "../Include/typedef.h"
+#include "typedef.h"
 
 template<typename T> bool less_than(T a,T b)
 {

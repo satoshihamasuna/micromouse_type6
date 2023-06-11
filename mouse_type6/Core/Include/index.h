@@ -34,8 +34,8 @@ void Indicate_LED(uint8_t led_num);
 //interface
 void Mode_Change_ENC();
 void Mode_Init();
-uint8_t Mode_State();
 void Mode_Disable();
+uint8_t Mode_State();
 
 //imu
 uint8_t read_byte(uint8_t reg);
