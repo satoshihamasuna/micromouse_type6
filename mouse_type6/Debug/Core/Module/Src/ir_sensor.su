@@ -1,6 +1,7 @@
-ir_sensor.c:40:6:Sensor_TurnOffLED	16	static
-ir_sensor.c:48:6:Sensor_TurnOnLED	8	static
-ir_sensor.c:59:6:Sensor_Initialize	8	static
-ir_sensor.c:75:6:Sensor_StopADC	8	static
-ir_sensor.c:82:9:ADC_get_value	16	static
-ir_sensor.c:87:9:Sensor_GetValue	16	static
+ir_sensor.c:41:6:Sensor_TurnOffLED	16	static
+ir_sensor.c:49:6:Sensor_TurnOnLED	8	static
+ir_sensor.c:60:6:Sensor_Initialize	8	static
+ir_sensor.c:76:6:Sensor_StopADC	8	static
+ir_sensor.c:83:9:ADC_get_value	16	static
+ir_sensor.c:88:9:Sensor_GetValue	16	static
+ir_sensor.c:108:8:Sensor_is_wall	16	static

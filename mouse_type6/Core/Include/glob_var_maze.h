@@ -19,7 +19,7 @@
 
 GLOBAL uint16_t map[MAZE_SIZE_X][MAZE_SIZE_Y];
 GLOBAL t_wall   wall[MAZE_SIZE_X][MAZE_SIZE_Y];
-
+GLOBAL t_position mypos;
 
 
 //#endif /* MODULE_INC_GLOB_VAR_H_ */

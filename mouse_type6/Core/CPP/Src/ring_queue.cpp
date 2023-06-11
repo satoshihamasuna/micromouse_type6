@@ -6,7 +6,7 @@
  */
 
 
-#include <queue_class.h>
+#include <../Include/queue_class.h>
 #include "iostream"
 
 /*

@@ -6,12 +6,10 @@
  */
 
 
-#include "../Module/Inc/typedef.h"
-#include "../Module/Inc/index.h"
-
 #include "queue_class.h"
-#include "../Module/Inc/glob_var_machine.h"
-#include "../Module/Inc/glob_var_maze.h"
+#include "typedef.h"
+#include "index.h"
+#include "glob_var_maze.h"
 
 t_MapNode node_set(int16_t st_x,int16_t st_y,int16_t cost,int16_t cost_h){
 	t_MapNode n;
@@ -146,36 +144,36 @@ void set_wall(int x, int y)	//壁情報を記録
 	switch(mypos.dir){
 		case North:	//北を向いている時
 
-			n_write = CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//　前壁の有無を判断
-			e_write = CONV_SEN2WALL(sen_r.is_wall);				//右の有無を判断
-			w_write = CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
+			n_write = Sensor_is_wall(sensor_fr)|Sensor_is_wall(sensor_fl);//CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//　前壁の有無を判断
+			e_write = Sensor_is_wall(sensor_sr);//CONV_SEN2WALL(sen_r.is_wall);				//右の有無を判断
+			w_write = Sensor_is_wall(sensor_sl);//CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
 			s_write = NOWALL;						//後ろは必ず壁がない
 
 			break;
 
 		case East:	//東を向いているとき
 
-			e_write = CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
-			s_write = CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
-			n_write = CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
+			e_write = Sensor_is_wall(sensor_fr)|Sensor_is_wall(sensor_fl);//CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
+			s_write = Sensor_is_wall(sensor_sr);//CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
+			n_write = Sensor_is_wall(sensor_sl);//				//左壁の有無を判断
 			w_write = NOWALL;						//後ろは必ず壁がない
 
 			break;
 
 		case South:	//南を向いているとき
 
-			s_write = CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
-			w_write = CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
-			e_write = CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
+			s_write = Sensor_is_wall(sensor_fr)|Sensor_is_wall(sensor_fl);//CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
+			w_write = Sensor_is_wall(sensor_sr);//CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
+			e_write = Sensor_is_wall(sensor_sl);//				//左壁の有無を判断
 			n_write = NOWALL;						//後ろは必ず壁がない
 
 			break;
 
 		case West:	//西を向いているとき
 
-			w_write = CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
-			n_write = CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
-			s_write = CONV_SEN2WALL(sen_l.is_wall);				//左壁の有無を判断
+			w_write = Sensor_is_wall(sensor_fr)|Sensor_is_wall(sensor_fl);//CONV_SEN2WALL(sen_fr.is_wall || sen_fl.is_wall);	//前壁の有無を判断
+			n_write = Sensor_is_wall(sensor_sr);//CONV_SEN2WALL(sen_r.is_wall);				//右壁の有無を判断
+			s_write = Sensor_is_wall(sensor_sl);//				//左壁の有無を判断
 			e_write = NOWALL;						//後ろは必ず壁がない
 
 			break;

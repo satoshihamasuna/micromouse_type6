@@ -28,6 +28,8 @@ extern "C" {
 #include "macro.h"
 //#include "../CPP/machine_var.h"
 
+void CPP_Main();
+
 void Indicate_LED(uint8_t led_num);
 //interface
 void Mode_Change_ENC();
@@ -63,6 +65,7 @@ void Sensor_TurnOnLED();
 void Sensor_TurnOffLED();
 int16_t ADC_get_value(int num);
 int16_t Sensor_GetValue(t_sensor_dir dir);
+t_bool Sensor_is_wall(t_sensor_dir dir);
 void Sensor_StopADC();
 //motor
 void Motor_Initialize();

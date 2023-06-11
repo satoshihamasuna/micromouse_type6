@@ -19,7 +19,6 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include <glob_var_maze.h>
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
@@ -30,7 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../Module/Inc/index.h"
+#include "../Include/index.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -106,15 +105,6 @@ int main(void)
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 
-  imu_initialize();
-  Sensor_Initialize();
-  Motor_Initialize();
-  FAN_Motor_Initialize();
-  Encoder_Initialize();
-  Interrupt_Initialize();
-  IMU_read_DMA_Start();
-  Mode_Init();
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -124,55 +114,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		  Mode_Change_ENC();
-		  HAL_Delay(50);
-		  switch(Mode_State()){
-		  	  case (ENABLE_MODE3|0x00):
-		  			  printf("gyro:%lf\n",read_gyro_z_axis());
-		  			  break;
-		  	  case (ENABLE_MODE3|0x01):
-		  			  HAL_Delay(1000);
-		  			  FAN_Motor_SetDuty(500);
-		  	  	  	  Motor_SetDuty_Left(-500);
-		  	  	      Motor_SetDuty_Right(-500);
-		  	  	  	  HAL_Delay(1000);
-		  	  	      FAN_Motor_SetDuty(0);
-		  	  	  	  Motor_SetDuty_Left(0);
-		  	  	      Motor_SetDuty_Right(0);
-		  	  	      HAL_Delay(100);
-		  	  	      Mode_Disable();
-		  			  break;
-		  	  case (ENABLE_MODE3|0x02):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x03):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x04):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x05):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x06):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x07):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x08):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x09):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x0A):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x0B):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x0C):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x0D):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x0E):
-		  			  break;
-		  	  case (ENABLE_MODE3|0x0F):
-		  			  break;
-		  }
-	  }
+	 CPP_Main();
 
+	  }
 
   /* USER CODE END 3 */
 }

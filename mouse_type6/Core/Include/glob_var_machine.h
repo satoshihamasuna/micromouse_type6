@@ -16,8 +16,6 @@
 #define GLOBAL extern
 #endif
 
-//GLOBAL t_sensor sen_fr,sen_fl,sen_r,sen_l;
-GLOBAL t_position mypos;
 GLOBAL uint16_t mouse_mode;
 GLOBAL uint16_t is_mode_enable;
 GLOBAL uint16_t run_mode;

@@ -1,4 +1,4 @@
-Core/Module/Src/motor.o: ../Core/Module/Src/motor.c \
+Core/CPP/Src/main.o: ../Core/CPP/Src/main.cpp \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/index.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
@@ -35,9 +35,7 @@ Core/Module/Src/motor.o: ../Core/Module/Src/motor.c \
  ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/typedef.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/lsm6dsr_reg.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/macro.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/Macro.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/typedef.h
+ C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/macro.h
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/index.h:
 
@@ -124,7 +122,3 @@ C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Co
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/lsm6dsr_reg.h:
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/macro.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/Macro.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/typedef.h:

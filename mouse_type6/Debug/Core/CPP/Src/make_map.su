@@ -1,14 +1,14 @@
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
-make_map.cpp:16:11:t_MapNode node_set(int16_t, int16_t, int16_t, int16_t)	24	static
+make_map.cpp:14:11:t_MapNode node_set(int16_t, int16_t, int16_t, int16_t)	24	static
 queue_class.h:31:45:ring_queue<1024, t_MapNode>::ring_queue()	16	static
-make_map.cpp:25:6:void init_maze()	24	static
-make_map.cpp:46:6:void init_map(int*, int*, int)	40	static
-make_map.cpp:61:6:void expand(t_MapNode, int)	72	static
-make_map.cpp:114:6:void make_map_queue(int*, int*, int, int)	64	static
-make_map.cpp:136:6:void set_wall(int, int)	32	static
-make_map.cpp:257:6:void goal_set_vwall(int*, int*, int)	32	static
-make_map.cpp:266:6:void goal_clear_vwall(int*, int*, int)	32	static
-make_map.cpp:274:8:t_bool i_am_goal(int, int, int*, int*, int)	40	static
-make_map.cpp:282:1:void __static_initialization_and_destruction_0(int, int)	16	static
-make_map.cpp:282:1:cpp)	8	static
-make_map.cpp:282:1:cpp)	8	static
+make_map.cpp:23:6:void init_maze()	24	static
+make_map.cpp:44:6:void init_map(int*, int*, int)	40	static
+make_map.cpp:59:6:void expand(t_MapNode, int)	72	static
+make_map.cpp:112:6:void make_map_queue(int*, int*, int, int)	64	static
+make_map.cpp:134:6:void set_wall(int, int)	40	static
+make_map.cpp:255:6:void goal_set_vwall(int*, int*, int)	32	static
+make_map.cpp:264:6:void goal_clear_vwall(int*, int*, int)	32	static
+make_map.cpp:272:8:t_bool i_am_goal(int, int, int*, int*, int)	40	static
+make_map.cpp:280:1:void __static_initialization_and_destruction_0(int, int)	16	static
+make_map.cpp:280:1:cpp)	8	static
+make_map.cpp:280:1:cpp)	8	static

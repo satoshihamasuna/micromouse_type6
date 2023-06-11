@@ -5,7 +5,8 @@
  *      Author: sato1
  */
 
-#include "../Inc/index.h"
+#include "index.h"
+#include "glob_var_machine.h"
 #include "tim.h"
 #include "dma.h"
 #include "stm32f4xx_hal.h"
@@ -99,6 +100,26 @@ int16_t Sensor_GetValue(t_sensor_dir dir)
 			break;
 		case sensor_sl:
 			return ((int16_t)adc_value[LED_SL_ON] - (int16_t)adc_value[LED_SL_OFF]);
+			break;
+	}
+	return 0;
+}
+
+t_bool Sensor_is_wall(t_sensor_dir dir)
+{
+	switch(dir)
+	{
+		case sensor_fl:
+			return sen_fl.is_wall;
+			break;
+		case sensor_fr:
+			return sen_fr.is_wall;
+			break;
+		case sensor_sr:
+			return sen_r.is_wall;
+			break;
+		case sensor_sl:
+			return sen_l.is_wall;
 			break;
 	}
 	return 0;
