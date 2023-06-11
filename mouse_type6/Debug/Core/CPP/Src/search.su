@@ -1,0 +1,13 @@
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+search.cpp:12:11:t_MapNode node_set(int16_t, int16_t, int16_t, int16_t)	24	static
+queue.h:31:45:ring_queue<1024, t_MapNode>::ring_queue()	16	static
+search.cpp:21:6:void init_maze()	24	static
+search.cpp:42:6:void init_map(int*, int*, int)	40	static
+search.cpp:57:6:void goal_set_vwall(int*, int*, int)	32	static
+search.cpp:66:6:void goal_clear_vwall(int*, int*, int)	32	static
+search.cpp:74:6:bool i_am_goal(int, int, int*, int*, int)	40	static
+search.cpp:84:6:void expand(t_MapNode, int)	72	static
+search.cpp:137:6:void make_map_queue(int*, int*, int, int)	64	static
+search.cpp:157:1:void __static_initialization_and_destruction_0(int, int)	16	static
+search.cpp:157:1:cpp)	8	static
+search.cpp:157:1:cpp)	8	static

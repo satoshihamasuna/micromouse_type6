@@ -9,7 +9,6 @@
 #define CPP_INC_QUEUE_H_
 
 #include <iostream>
-//#include <typedef_node.h>
 
 
 template<std::size_t SIZE,typename T> class Priority_queue{
@@ -29,16 +28,20 @@ template<std::size_t SIZE,typename T> class Priority_queue{
 	    T buff[SIZE];
 };
 
-template<typename T,int N> class ring_queue{
+template<std::size_t SIZE,typename T> class ring_queue{
 	private:
-		T buff[N];
-		uint16_t tail;
-		uint16_t head;
-		uint16_t cap;
+		T buff[SIZE];
+		int16_t tail;
+		int16_t head;
+		int16_t length;
+		const uint16_t cap = SIZE;
 	public:
-		ring_queue();
+		//ring_queue();
+		//~ring_queue();
 		T pop();
-		void push();
+		void push(T push_data);
+		int queue_length();
+		void queue_reset();
 };
 
 

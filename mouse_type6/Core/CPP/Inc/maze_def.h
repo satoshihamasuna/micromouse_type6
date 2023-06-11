@@ -9,10 +9,6 @@
 #define CPP_INC_MAZE_DEF_H_
 
 #include "iostream"
-#define UNKNOWN	2
-#define NOWALL	0
-#define WALL	1
-#define VWALL	3
 
 #define RIGHT	0
 #define LEFT	1
@@ -25,7 +21,6 @@
 #define CONV_SEN2WALL(w)	((w)?WALL:NOWALL)
 
 
-
 const uint16_t MAZE_SIZE_X = 32;
 const uint16_t MAZE_SIZE_Y = 32;
 const uint16_t MAZE_SIZE = (MAZE_SIZE_X*MAZE_SIZE_Y);
@@ -35,6 +30,13 @@ const uint16_t MAZE_GOAL_Y = 1;
 const uint16_t MAZE_GOAL_SIZE = 3;
 
 const uint16_t MAP_MAX_VALUE = MAZE_SIZE;
+
+typedef enum{
+	UNKNOWN	= 2,
+	NOWALL	= 0,
+	WALL	= 1,
+	VWALL   = 3,
+}t_wall_state;
 
 typedef enum{
 	front = 0,

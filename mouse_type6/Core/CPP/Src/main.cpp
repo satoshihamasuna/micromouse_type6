@@ -37,8 +37,6 @@ void CPP_main()
 	  mouse_mode = 0x00;
 	  is_mode_enable = 0;
 
-	  Priority_queue<1024,t_MapNode> queue();
-
 
 	 while (1)
 	  {
@@ -49,9 +47,14 @@ void CPP_main()
 		  			  printf("gyro:%lf\n",read_gyro_z_axis());
 		  			  break;
 		  	  case (ENABLE_MODE3|0x01):
+		  			  HAL_Delay(1000);
 		  			  FAN_Motor_SetDuty(500);
-		  	  	  	  HAL_Delay(1500);
+		  	  	  	  Motor_SetDuty_Left(500);
+		  	  	      Motor_SetDuty_Right(500);
+		  	  	  	  HAL_Delay(5000);
 		  	  	      FAN_Motor_SetDuty(0);
+		  	  	  	  Motor_SetDuty_Left(0);
+		  	  	      Motor_SetDuty_Right(0);
 		  	  	      HAL_Delay(100);
 		  	  	  	  is_mode_enable = DISABLE;
 		  			  break;
