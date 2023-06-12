@@ -119,6 +119,14 @@ typedef enum{
 	z_axis = 2,
 }t_axis;
 
+typedef enum
+{
+	non_task 		= 0,
+	search_run_task = 1,
+	fast_run_tas	= 2,
+
+}t_motion_task;
+
 
 #ifdef __cplusplus
 }

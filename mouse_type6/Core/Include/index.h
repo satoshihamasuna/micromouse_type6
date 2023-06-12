@@ -58,6 +58,11 @@ uint32_t Encoder_Counts_Left();
 uint32_t Encoder_Counts_Right();
 int32_t Encoder_GetPosition_Right();
 int32_t Encoder_GetPosition_Left();
+void Encoder_SetSpeed_Right();
+void Encoder_SetSpeed_Left();
+t_encoder Encoder_GetProperty_Right();
+t_encoder Encoder_GetProperty_Left();
+
 
 //ir_sensor
 void Sensor_Initialize();
@@ -65,7 +70,7 @@ void Sensor_TurnOnLED();
 void Sensor_TurnOffLED();
 int16_t ADC_get_value(int num);
 int16_t Sensor_GetValue(t_sensor_dir dir);
-t_bool Sensor_is_wall(t_sensor_dir dir);
+
 void Sensor_StopADC();
 //motor
 void Motor_Initialize();

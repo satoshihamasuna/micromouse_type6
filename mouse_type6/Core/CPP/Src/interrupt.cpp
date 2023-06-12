@@ -1,14 +1,13 @@
 /*
- * Interrupt.c
+ * interrupt.c
  *
- *  Created on: 2023/06/11
+ *  Created on: 2023/06/13
  *      Author: sato1
  */
 
-#include <glob_var_machine.h>
+
 #include "index.h"
 
-const int   m_dt = 1;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 
@@ -22,7 +21,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void Interrupt_Initialize(){
 	HAL_TIM_Base_Start_IT(&htim5);
 }
-
 
 void Interrupt_PreProcess(){
 	//get & calc encoder pulse
@@ -49,17 +47,8 @@ void Interrupt_Get_Irsensor()
 void Interrupt_Get_Speed()
 {
 
-	enc_R.prev_sp_pulse = enc_R.sp_pulse;
-	enc_L.prev_sp_pulse = enc_L.sp_pulse;
-
-	enc_R.sp_pulse = Encoder_GetPosition_Right();		Encoder_ResetPosition_Right();
-	enc_L.sp_pulse = Encoder_GetPosition_Left();		Encoder_ResetPosition_Left();
-
-	enc_R.prev_wheel_speed = enc_R.wheel_speed;
-	enc_L.prev_wheel_speed = enc_L.wheel_speed;
-
-	enc_R.wheel_speed =  (float)enc_R.sp_pulse * MMPP * m_dt; //計測はmm mm/ms-> m/s
-	enc_L.wheel_speed =  (float)enc_L.sp_pulse * MMPP * m_dt;
+	Encoder_SetSpeed_Left();
+	Encoder_SetSpeed_Right();
 
 }
 
