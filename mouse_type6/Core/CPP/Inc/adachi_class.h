@@ -10,11 +10,13 @@
 
 #include "make_map_class.h"
 #include "wall_class.h"
+#include <stdio.h>
+#include <macro.h>
 
 class adachi{
 	public:
-		void priority();
-		void get_next_dir(wall_class *wall_property,make_map *map_property);
+		int32_t priority();
+		int get_next_dir(t_wall wall_property[MAZE_SIZE_X][MAZE_SIZE_Y],uint16_t map_property[MAZE_SIZE_X][MAZE_SIZE_Y]);
 };
 
 
