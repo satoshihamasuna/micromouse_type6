@@ -8,6 +8,31 @@
 
 
 #include "wall_class.h"
+#include "typedef.h"
+
+void wall_class::init_maze(){
+	for( int i = 0 ; i < MAZE_SIZE_X ; i++ ){
+		for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
+			wall[i][j].north = UNKNOWN;
+			wall[i][j].east  = UNKNOWN;
+			wall[i][j].south = UNKNOWN;
+			wall[i][j].west  = UNKNOWN;
+		}
+	}
+
+	for( int i = 0 ; i < MAZE_SIZE_X ; i++ ){
+			wall[i][0].south = WALL;				//南側の壁を追加する
+			wall[i][MAZE_SIZE_Y - 1].north = WALL;	//北側の壁を追加する
+	}
+
+	for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
+			wall[0][j].west = WALL;					//西側の壁を追加する
+			wall[MAZE_SIZE_X - 1][j].east = WALL;	//東側の壁を追加する
+	}
+
+			wall[0][0].east = wall[1][0].west = WALL;				//スタートの東側の壁を追加
+
+}
 
 void wall_class::set_wall(t_position pos)
 {

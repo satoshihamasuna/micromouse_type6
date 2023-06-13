@@ -8,6 +8,7 @@
 
 #include "index.h"
 #include "stdio.h"
+#include "sensing_task.h"
 
 void CPP_Main()
 {
@@ -28,16 +29,14 @@ void CPP_Main()
 			  			  printf("gyro:%lf\n",read_gyro_z_axis());
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
-			  			  HAL_Delay(1000);
-			  			  FAN_Motor_SetDuty(500);
-			  	  	  	  Motor_SetDuty_Left(-500);
-			  	  	      Motor_SetDuty_Right(-500);
-			  	  	  	  HAL_Delay(1000);
-			  	  	      FAN_Motor_SetDuty(0);
-			  	  	  	  Motor_SetDuty_Left(0);
-			  	  	      Motor_SetDuty_Right(0);
-			  	  	      HAL_Delay(100);
-			  	  	      Mode_Disable();
+			  			  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+			  				  HAL_Delay(1000);
+			  				  FAN_Motor_SetDuty(500);;
+			  				  HAL_Delay(1000);
+			  				  FAN_Motor_SetDuty(0);;
+			  				  HAL_Delay(100);
+			  				  Mode_Disable();
+			  			  }
 			  			  break;
 			  	  case (ENABLE_MODE3|0x02):
 			  			  break;

@@ -82,11 +82,6 @@ void FAN_Motor_Initialize();
 void FAN_Motor_SetDuty(int16_t duty_f);
 //interrupt
 void Interrupt_Initialize();
-void Interrupt_PreProcess();
-void Interrupt_Main();
-void Interrupt_PostProcess();
-void Interrupt_Get_Irsensor();
-void Interrupt_Get_Speed();
 
 void goal_set_vwall(int *gx,int *gy,int goal_size);
 void goal_clear_vwall(int *gx,int *gy,int goal_size);

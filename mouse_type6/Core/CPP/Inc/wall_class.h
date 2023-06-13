@@ -10,14 +10,20 @@
 
 #include "typedef.h"
 #include "macro.h"
-
+#include "sensing_task.h"
 
 
 
 class wall_class
 {
+	SensingTask *ir_sens;
 	public:
+		wall_class(SensingTask *ir_sens_)
+		{
+			ir_sens = ir_sens_;
+		}
 		t_wall wall[MAZE_SIZE_X][MAZE_SIZE_Y];
+		void init_maze();
 		void set_wall(t_position pos);
 };
 

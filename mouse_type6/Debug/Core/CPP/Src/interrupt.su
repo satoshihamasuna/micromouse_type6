@@ -1,8 +1,7 @@
-interrupt.cpp:11:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	16	static
-interrupt.cpp:21:6:void Interrupt_Initialize()	8	static
-interrupt.cpp:25:6:void Interrupt_PreProcess()	8	static
-interrupt.cpp:32:6:void Interrupt_Main()	4	static
-interrupt.cpp:37:6:void Interrupt_PostProcess()	8	static
-interrupt.cpp:42:6:void Interrupt_Get_Irsensor()	4	static
-interrupt.cpp:47:6:void Interrupt_Get_Speed()	8	static
-interrupt.cpp:55:6:void Interrupt_Set_Target_Speed()	4	static
+interrupt.cpp:15:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	16	static
+interrupt.cpp:24:6:void Interrupt_Initialize()	8	static
+interrupt.cpp:28:6:void Interrupt::preprocess()	16	static
+interrupt.cpp:34:6:void Interrupt::main()	16	static
+interrupt.cpp:39:6:void Interrupt::postprocess()	16	static
+singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = Interrupt]	4	static
+singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static

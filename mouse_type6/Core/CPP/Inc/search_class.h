@@ -9,7 +9,10 @@
 #define CPP_INC_SEARCH_CLASS_H_
 
 
+class Search
+{
+	public:
 
-
+};
 
 #endif /* CPP_INC_SEARCH_CLASS_H_ */

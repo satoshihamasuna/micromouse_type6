@@ -10,5 +10,5 @@
 
 void motion_plan::straight()
 {
-	int i = 0;
+
 }

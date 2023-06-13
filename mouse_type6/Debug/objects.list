@@ -5,6 +5,7 @@
 "Core/CPP/Src/priority_queue.o"
 "Core/CPP/Src/ring_queue.o"
 "Core/CPP/Src/search.o"
+"Core/CPP/Src/sensing_task.o"
 "Core/CPP/Src/wall_class.o"
 "Core/Module/Src/encoder.o"
 "Core/Module/Src/imu.o"

@@ -21,30 +21,6 @@ t_MapNode node_set(int16_t st_x,int16_t st_y,int16_t cost,int16_t cost_h){
 	return n;
 }
 
-void make_map::init_maze(wall_class *wall_property){
-	for( int i = 0 ; i < MAZE_SIZE_X ; i++ ){
-		for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
-			wall_property->wall[i][j].north = UNKNOWN;
-			wall_property->wall[i][j].east  = UNKNOWN;
-			wall_property->wall[i][j].south = UNKNOWN;
-			wall_property->wall[i][j].west  = UNKNOWN;
-		}
-	}
-
-	for( int i = 0 ; i < MAZE_SIZE_X ; i++ ){
-			wall_property->wall[i][0].south = WALL;				//南側の壁を追加する
-			wall_property->wall[i][MAZE_SIZE_Y - 1].north = WALL;	//北側の壁を追加する
-	}
-
-	for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
-		wall_property->wall[0][j].west = WALL;					//西側の壁を追加する
-		wall_property->wall[MAZE_SIZE_X - 1][j].east = WALL;	//東側の壁を追加する
-	}
-
-	wall_property->wall[0][0].east = wall_property->wall[1][0].west = WALL;				//スタートの東側の壁を追加
-
-}
-
 void make_map::init_map(int *x, int *y,int goal_size){
 	for( int i = 0; i < MAZE_SIZE_X ; i++ ){
 		for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
@@ -60,7 +36,7 @@ void make_map::init_map(int *x, int *y,int goal_size){
 
 }
 
-void make_map::expand(t_MapNode n,int mask,wall_class *wall_property){
+void make_map::expand(t_MapNode n,int mask){
 
 	if(n.st_y < MAZE_SIZE_Y-1)					//範囲チェック
 	{
@@ -113,7 +89,7 @@ void make_map::expand(t_MapNode n,int mask,wall_class *wall_property){
 
 }
 
-void make_map::make_map_queue(int *x, int *y,t_position expand_end,int size,int mask,wall_class *wall_property)
+void make_map::make_map_queue(int *x, int *y,t_position expand_end,int size,int mask)
 {
 	//mapの初期化
 		init_map(x,y,size);
@@ -128,7 +104,7 @@ void make_map::make_map_queue(int *x, int *y,t_position expand_end,int size,int 
 	    t_MapNode n;
 		while(maze_q.queue_length() != 0){
 			n = maze_q.pop();
-			expand(n,mask,wall_property);
+			expand(n,mask);
 			if(expand_end.x == n.st_x && expand_end.y == n.st_y)
 				break;
 

@@ -1,1 +1,1 @@
-motion_plan.cpp:11:6:void motion_plan::straight()	24	static
+motion_plan.cpp:11:6:void motion_plan::straight()	16	static

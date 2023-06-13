@@ -1,10 +1,9 @@
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 queue_class.h:31:45:ring_queue<1024, t_MapNode>::ring_queue()	16	static
 make_map.cpp:17:11:t_MapNode node_set(int16_t, int16_t, int16_t, int16_t)	24	static
-make_map.cpp:24:6:void make_map::init_maze(wall_class*)	32	static
-make_map.cpp:48:6:void make_map::init_map(int*, int*, int)	40	static
-make_map.cpp:63:6:void make_map::expand(t_MapNode, int, wall_class*)	72	static
-make_map.cpp:116:6:void make_map::make_map_queue(int*, int*, t_position, int, int, wall_class*)	64	static
-make_map.cpp:136:1:void __static_initialization_and_destruction_0(int, int)	16	static
-make_map.cpp:136:1:cpp)	8	static
-make_map.cpp:136:1:cpp)	8	static
+make_map.cpp:24:6:void make_map::init_map(int*, int*, int)	40	static
+make_map.cpp:39:6:void make_map::expand(t_MapNode, int)	72	static
+make_map.cpp:92:6:void make_map::make_map_queue(int*, int*, t_position, int, int)	64	static
+make_map.cpp:112:1:void __static_initialization_and_destruction_0(int, int)	16	static
+make_map.cpp:112:1:cpp)	8	static
+make_map.cpp:112:1:cpp)	8	static

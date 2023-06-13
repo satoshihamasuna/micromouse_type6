@@ -5,7 +5,6 @@
  *      Author: sato1
  */
 
-#include <glob_var.h>
 #include "index.h"
 #include "tim.h"
 #include "dma.h"
