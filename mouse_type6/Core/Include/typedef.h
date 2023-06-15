@@ -85,6 +85,8 @@ typedef struct{
 
 typedef struct{
 	float velo;
+	float max_velo;
+	float end_velo;
 	float accel;
 	float deccel;
 	float length;

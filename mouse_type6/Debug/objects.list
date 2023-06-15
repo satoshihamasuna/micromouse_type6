@@ -4,6 +4,7 @@
 "Core/CPP/Src/motion.o"
 "Core/CPP/Src/priority_queue.o"
 "Core/CPP/Src/ring_queue.o"
+"Core/CPP/Src/run_task.o"
 "Core/CPP/Src/search.o"
 "Core/CPP/Src/sensing_task.o"
 "Core/CPP/Src/wall_class.o"

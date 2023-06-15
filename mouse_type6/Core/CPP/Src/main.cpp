@@ -33,8 +33,8 @@ void CPP_Main()
 			  	  case (ENABLE_MODE3|0x01):
 			  			  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
 			  				  HAL_Delay(1000);
-			  				  FAN_Motor_SetDuty(500);;
-			  				  HAL_Delay(1000);
+			  				  FAN_Motor_SetDuty(700);;
+			  				  HAL_Delay(6000);
 			  				  FAN_Motor_SetDuty(0);;
 			  				  HAL_Delay(100);
 			  				  Mode_Disable();
