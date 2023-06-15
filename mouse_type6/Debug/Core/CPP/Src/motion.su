@@ -1,0 +1,3 @@
+motion.cpp:12:6:void motion_task::motion_inInterrupt()	16	static
+motion.cpp:36:6:void motion_task::MotionFree()	16	static
+motion.cpp:43:6:void motion_plan::free_rotation(motion_task*)	16	static

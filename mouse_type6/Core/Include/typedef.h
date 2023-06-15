@@ -74,18 +74,25 @@ typedef struct{
 
 typedef struct{
 	float velo;
-	float prev_velo;
-	float I_velo;
 	float accel;
-	float prev_accel;
-	float rad_velo;
-	float prev_rad_velo;
-	float I_rad_velo;
-	float rad_accel;
-	float prev_rad_accel;
 	float length;
+	float rad_accel;
+	float rad_velo;
 	float radian;
-}t_sp_param;
+	float x_point;
+	float y_point;
+}t_machine_param;
+
+typedef struct{
+	float velo;
+	float accel;
+	float deccel;
+	float length;
+	float rad_accel;
+	float rad_velo;
+	float radian;
+}t_straight_param;
+
 
 typedef struct{
 	float Kp;

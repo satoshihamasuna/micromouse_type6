@@ -9,6 +9,8 @@
 #include "index.h"
 #include "stdio.h"
 #include "sensing_task.h"
+#include "motion.h"
+#include "interrupt.h"
 
 void CPP_Main()
 {
@@ -39,6 +41,15 @@ void CPP_Main()
 			  			  }
 			  			  break;
 			  	  case (ENABLE_MODE3|0x02):
+					  	  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+					  		  	 motion_plan mp;
+					  		  	 mp.free_rotation(&motion_task::getInstance());
+					  		  	 while(motion_task::getInstance().run_task != run_pt_none)
+					  		  	 {
+					  		  		 HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+					  		  		 HAL_Delay(50);
+					  		  	 }
+					  		}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x03):
 			  			  break;
