@@ -1,5 +1,5 @@
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 priority_queue.cpp:16:17:bool less_than(T, T) [with T = t_MapNode]	24	static
-priority_queue.cpp:119:1:void __static_initialization_and_destruction_0(int, int)	16	static
-priority_queue.cpp:119:1:cpp)	8	static
-priority_queue.cpp:119:1:cpp)	8	static
+priority_queue.cpp:116:1:void __static_initialization_and_destruction_0(int, int)	16	static
+priority_queue.cpp:116:1:cpp)	8	static
+priority_queue.cpp:116:1:cpp)	8	static

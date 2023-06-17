@@ -45,7 +45,7 @@ class PID_Controller
 };
 
 
-class Controll:public Singleton<Controll>
+class Controll
 {
 	public:
 		//template <class T> T *runtask;

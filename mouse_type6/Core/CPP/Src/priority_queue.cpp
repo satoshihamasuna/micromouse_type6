@@ -33,7 +33,6 @@ template<std::size_t SIZE,typename T> uint16_t Priority_queue<SIZE,T>::queue_len
 	return tail + 1;
 }
 
-
 template<std::size_t SIZE,typename T> bool Priority_queue<SIZE,T>::is_Empty_queue()
 {
 	if(queue_length() == 0)
@@ -74,8 +73,6 @@ template<std::size_t SIZE,typename T> void Priority_queue<SIZE,T>::swap(T *a,T *
 	*b = *a;
 	*a = temp;
 }
-
-
 
 template<std::size_t SIZE,typename T> void Priority_queue<SIZE,T>::min_heapify(uint16_t parent_pos)
 {

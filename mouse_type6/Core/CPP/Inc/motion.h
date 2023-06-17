@@ -12,7 +12,7 @@
 #include "typedef.h"
 #include "singleton.h"
 #include "run_task.h"
-
+#include "controll.h"
 
 
 class motion_task:public Singleton<motion_task>
@@ -23,10 +23,12 @@ class motion_task:public Singleton<motion_task>
 		float run_time_limit;
 		t_run_pattern	run_task = No_run;
 		RunTask rT;
+		Controll ct;
 		t_machine_param target,max_set,mouse;
 		t_straight_param st_set;
 		void motion_inInterrupt();
 		void motionControll();
+		t_bool is_controll_enable();
 };
 
 class motion_plan

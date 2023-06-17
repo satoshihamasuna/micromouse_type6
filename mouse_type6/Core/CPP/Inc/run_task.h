@@ -34,16 +34,18 @@ typedef enum{
 	Search_st_half		= 20,
 	Pivot_turn_R		= 21,
 	Pivot_turn_L		= 22,
-	run_pt_none			= 23,
+	run_brake			= 23,
 	motor_free			= 24,
 }t_run_pattern;
 
 class RunTask
 {
+	private:
+		t_bool is_runTask = False;
 	public:
-		t_bool is_pause = True;
+		t_bool is_exe_runTask();
 		void MotionFree(float *run_time);
-		void search_straight(t_straight_param st_param);
+		void search_straight(t_straight_param st_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void search_slalom();
 		void search_pivotturn();
 		void straight();

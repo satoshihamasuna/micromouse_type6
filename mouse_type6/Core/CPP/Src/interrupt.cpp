@@ -35,6 +35,7 @@ void Interrupt::preprocess(){
 void Interrupt::main()
 {
 	motion_task::getInstance().motion_inInterrupt();
+	motion_task::getInstance().motionControll();
 }
 
 void Interrupt::postprocess()

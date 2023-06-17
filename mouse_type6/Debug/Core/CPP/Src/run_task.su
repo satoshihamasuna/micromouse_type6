@@ -1,1 +1,3 @@
-run_task.cpp:11:6:void RunTask::MotionFree(float*)	16	static
+run_task.cpp:12:6:void RunTask::MotionFree(float*)	16	static
+run_task.cpp:18:6:void RunTask::search_straight(t_straight_param, t_machine_param*, t_machine_param*, float)	32	static
+run_task.cpp:49:8:t_bool RunTask::is_exe_runTask()	16	static

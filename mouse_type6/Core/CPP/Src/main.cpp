@@ -44,7 +44,7 @@ void CPP_Main()
 					  	  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
 					  		  	 motion_plan mp;
 					  		  	 mp.free_rotation(&motion_task::getInstance());
-					  		  	 while(motion_task::getInstance().run_task != run_pt_none)
+					  		  	 while(motion_task::getInstance().run_task !=No_run)
 					  		  	 {
 					  		  		 HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 					  		  		 HAL_Delay(50);
