@@ -42,9 +42,10 @@ class RunTask
 {
 	private:
 		t_bool is_runTask = False;
+		int	   brake_time = 0;
 	public:
 		t_bool is_exe_runTask();
-		void MotionFree(float *run_time);
+		void MotionFree(float *run_time,float run_time_limit);
 		void search_straight(t_straight_param st_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void search_slalom();
 		void search_pivotturn();

@@ -15,9 +15,14 @@
 
 #define ENC_ZERO		(20000)
 
-const int   m_dt = 1;
+float   m_dt = 1.0;
 
 t_encoder enc_R,enc_L;
+
+void set_ms_dt(float _m_dt)
+{
+	m_dt = _m_dt;
+}
 
 void Encoder_Initialize(){
 	HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);

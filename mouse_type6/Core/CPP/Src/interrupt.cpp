@@ -26,10 +26,17 @@ void Interrupt_Initialize(){
 }
 
 void Interrupt::preprocess(){
+
+	SensingTask::getInstance().IrSensorSet();
+
 	Encoder_SetSpeed_Left();
 	Encoder_SetSpeed_Right();
-	SensingTask::getInstance().IrSensorSet();
-	//Interrupt_Set_Target_Speed();
+	t_encoder Renc = Encoder_GetProperty_Right();
+	t_encoder Lenc = Encoder_GetProperty_Left();
+	motion_task::getInstance().mouse.velo 	= (Renc.wheel_speed - Lenc.wheel_speed)/2.0;
+	motion_task::getInstance().mouse.length += (Renc.wheel_speed - Lenc.wheel_speed)/2.0;
+
+
 }
 
 void Interrupt::main()
@@ -40,6 +47,8 @@ void Interrupt::main()
 
 void Interrupt::postprocess()
 {
+
+	motion_task::getInstance().motionPostControll();
 	IMU_read_DMA_Start();
 }
 

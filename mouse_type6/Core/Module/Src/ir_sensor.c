@@ -104,4 +104,6 @@ int16_t Sensor_GetValue(t_sensor_dir dir)
 	return 0;
 }
 
-
+int16_t Sensor_GetBatteryValue(){
+	return (adc_value[8] + adc_value[9])/2 ;
+}

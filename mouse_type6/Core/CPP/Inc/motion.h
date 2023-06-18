@@ -23,11 +23,12 @@ class motion_task:public Singleton<motion_task>
 		float run_time_limit;
 		t_run_pattern	run_task = No_run;
 		RunTask rT;
-		Controll ct;
+		mouse_Controll ct;
 		t_machine_param target,max_set,mouse;
 		t_straight_param st_set;
 		void motion_inInterrupt();
 		void motionControll();
+		void motionPostControll();
 		t_bool is_controll_enable();
 };
 

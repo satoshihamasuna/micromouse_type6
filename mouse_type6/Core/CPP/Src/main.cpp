@@ -11,6 +11,7 @@
 #include "sensing_task.h"
 #include "motion.h"
 #include "interrupt.h"
+#include "controll.h"
 
 void CPP_Main()
 {
@@ -29,6 +30,7 @@ void CPP_Main()
 			  switch(Mode_State()){
 			  	  case (ENABLE_MODE3|0x00):
 			  			  printf("gyro:%lf\n",read_gyro_z_axis());
+			  	  	  	  printf("length:%lf\n",motion_task::getInstance().target.velo);
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
 			  			  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
@@ -43,12 +45,15 @@ void CPP_Main()
 			  	  case (ENABLE_MODE3|0x02):
 					  	  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
 					  		  	 motion_plan mp;
-					  		  	 mp.free_rotation(&motion_task::getInstance());
+					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(1.0, 0.05, 0.0);
+					  		  	 mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
+					  		  	 HAL_Delay(2);
 					  		  	 while(motion_task::getInstance().run_task !=No_run)
 					  		  	 {
-					  		  		 HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-					  		  		 HAL_Delay(50);
+					  		  		printf("Kp:%lf,velo:%lf\n",motion_task::getInstance().mouse.velo,motion_task::getInstance().target.velo);
+					  		  		HAL_Delay(1);
 					  		  	 }
+					  		    Mode_Disable();
 					  		}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x03):

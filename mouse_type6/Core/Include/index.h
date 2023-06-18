@@ -62,7 +62,7 @@ void Encoder_SetSpeed_Right();
 void Encoder_SetSpeed_Left();
 t_encoder Encoder_GetProperty_Right();
 t_encoder Encoder_GetProperty_Left();
-
+void set_ms_dt(float _m_dt);
 
 //ir_sensor
 void Sensor_Initialize();
@@ -70,8 +70,9 @@ void Sensor_TurnOnLED();
 void Sensor_TurnOffLED();
 int16_t ADC_get_value(int num);
 int16_t Sensor_GetValue(t_sensor_dir dir);
-
+int16_t Sensor_GetBatteryValue();
 void Sensor_StopADC();
+
 //motor
 void Motor_Initialize();
 void Motor_Stop();

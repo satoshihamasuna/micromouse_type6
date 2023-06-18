@@ -1,3 +1,4 @@
+"Core/CPP/Src/controll.o"
 "Core/CPP/Src/interrupt.o"
 "Core/CPP/Src/main.o"
 "Core/CPP/Src/make_map.o"
@@ -9,6 +10,7 @@
 "Core/CPP/Src/search.o"
 "Core/CPP/Src/sensing_task.o"
 "Core/CPP/Src/wall_class.o"
+"Core/Module/Src/batteri.o"
 "Core/Module/Src/encoder.o"
 "Core/Module/Src/imu.o"
 "Core/Module/Src/indicator.o"

@@ -8,7 +8,7 @@
 
 #include "motion.h"
 #include "index.h"
-
+#include "controll.h"
 
 void motion_plan::free_rotation(motion_task *move_task)
 {
@@ -29,6 +29,9 @@ void motion_plan::search_straight(motion_task *move_task,float len_target,float 
 	st_set_.radian      =  0.0f;
 	move_task->st_set 	= st_set_;
 	move_task->run_task = Search_st_section;
-
+	move_task->ct.speed_ctrl.I_param_reset();
+	move_task->ct.omega_ctrl.I_param_reset();
+	move_task->mouse.length  = 0.0;
+	move_task->target.length = 0.0;
 }
 

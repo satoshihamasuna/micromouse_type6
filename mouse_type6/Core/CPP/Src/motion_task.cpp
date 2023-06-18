@@ -15,17 +15,14 @@ void motion_task::motion_inInterrupt(){
 	switch(run_task)
 	{
 		case Search_st_section:
+			rT.search_straight(st_set, &target, &mouse, 1.0);
 			break;
 		case Search_st_half:
 			break;
 		case Long_turnR90:
 			break;
 		case motor_free:
-				rT.MotionFree(&run_time);
-				if(run_time_limit < run_time)
-				{
-					run_task = No_run;
-				}
+				rT.MotionFree(&run_time,run_time_limit);
 			break;
 		default:
 				Motor_SetDuty_Left(0);
@@ -37,16 +34,63 @@ void motion_task::motion_inInterrupt(){
 
 void motion_task::motionControll()
 {
-	float Vr,Vl,motor_out_r,motor_out_l;
-	Vr			= Vl			= 0.0;
-	motor_out_r = motor_out_l	= 0.0;
+	float V_r,V_l;
+	int motor_out_r,motor_out_l;
+	V_r			= V_l			= 0.0;
+	motor_out_r = motor_out_l	= 0;
 
-	if(is_controll_enable() )
+	if(is_controll_enable() == True && run_task != motor_free)
+	{
+		float sp_fb_controll = ct.speed_ctrl.Controll(target.velo, mouse.velo, 1.0);
+		float om_fb_controll = ct.omega_ctrl.Controll(target.rad_velo, mouse.rad_velo,  1.0);
+		printf("initerrupt%lf\n",sp_fb_controll);
+		V_r += sp_fb_controll;
+		V_l -= sp_fb_controll;
+
+		//V_r += om_fb_controll;
+		//V_l += om_fb_controll;
+
+
+
+		float duty_r = V_r/4.0;
+		float duty_l = V_l/4.0;
+
+		if(ABS(duty_r) > 1.0){
+			motor_out_r = (int)(SIGN(duty_r) * 4.0f * 250.0f);
+		}else{
+			motor_out_r = (int)(duty_r * 1000.0f);
+		}
+		Motor_SetDuty_Right(motor_out_r);
+
+		if(ABS(duty_l) > 1.0){
+			motor_out_l = (int)(SIGN(duty_l) * 4.0f * 250.0f);
+		}else{
+			motor_out_l = (int)(duty_l * 1000.0f);
+		}
+
+		Motor_SetDuty_Left(motor_out_l);
+	}
+	else if(run_task == motor_free)
 	{
 
 	}
+	else
+	{
+		Motor_SetDuty_Left(0);
+		Motor_SetDuty_Right(0);
+	}
 
 }
+
+void motion_task::motionPostControll()
+{
+	if(rT.is_exe_runTask() == False)
+	{
+		run_task = No_run;
+	}
+
+}
+
 
 t_bool motion_task::is_controll_enable()
 {
