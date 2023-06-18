@@ -41,6 +41,12 @@ typedef enum{
 }t_wall_pos_dir;
 
 typedef enum{
+	Turn_None 	= 0,
+	Turn_R 		= 1,
+	Turn_L		= 2,
+}t_turn_dir;
+
+typedef enum{
 	North 		= 0,
 	NorthEast 	= 1,
 	East		= 2,
@@ -91,10 +97,11 @@ typedef struct{
 	float deccel;
 	float length;
 	float rad_accel;
-	float rad_velo;
+	float rad_deccel;
+	float rad_max_velo;
 	float radian;
-}t_straight_param;
-
+	t_turn_dir turn_d;
+}t_motion_param;
 
 typedef struct{
 	float Kp;

@@ -1,2 +1,3 @@
 motion_plan.cpp:13:6:void motion_plan::free_rotation(motion_task*)	16	static
-motion_plan.cpp:20:6:void motion_plan::search_straight(motion_task*, float, float, float, float)	80	static
+motion_plan.cpp:20:6:void motion_plan::search_straight(motion_task*, float, float, float, float)	88	static
+motion_plan.cpp:40:6:void motion_plan::pivot_turn(motion_task*, float, float, float)	88	static

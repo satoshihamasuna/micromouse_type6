@@ -74,15 +74,15 @@ void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef* hspi){
 }
 
 float read_gyro_x_axis(){
-	return  (float)gyro_data[x_axis]*(1.0f) ;
+	return  (float)gyro_data[x_axis]*(1.0f) *70.0f/1000.0f;
 }
 
 float read_gyro_y_axis(){
-	return  (float)gyro_data[y_axis]*(1.0f) ;
+	return  (float)gyro_data[y_axis]*(1.0f) *70.0f/1000.0f;
 }
 
 float read_gyro_z_axis(){
-	return  (float)gyro_data[z_axis]*(1.0f) ;
+	return  (float)gyro_data[z_axis]*(1.0f) *70.0f/1000.0f;
 }
 
 float read_accel_x_axis(){

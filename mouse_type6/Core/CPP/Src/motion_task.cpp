@@ -15,10 +15,15 @@ void motion_task::motion_inInterrupt(){
 	switch(run_task)
 	{
 		case Search_st_section:
-			rT.search_straight(st_set, &target, &mouse, 1.0);
+			rT.search_straight(mt_set, &target, &mouse, 1.0);
 			break;
 		case Search_st_half:
 			break;
+		case Pivot_turn_L:
+		case Pivot_turn_R:
+			rT.pivotturn(mt_set,&target, &mouse, 1.0);
+			break;
+
 		case Long_turnR90:
 			break;
 		case motor_free:
@@ -43,12 +48,12 @@ void motion_task::motionControll()
 	{
 		float sp_fb_controll = ct.speed_ctrl.Controll(target.velo, mouse.velo, 1.0);
 		float om_fb_controll = ct.omega_ctrl.Controll(target.rad_velo, mouse.rad_velo,  1.0);
-		printf("initerrupt%lf\n",sp_fb_controll);
+		//printf("initerrupt%lf\n",sp_fb_controll);
 		V_r += sp_fb_controll;
 		V_l -= sp_fb_controll;
 
-		//V_r += om_fb_controll;
-		//V_l += om_fb_controll;
+		V_r += om_fb_controll;
+		V_l += om_fb_controll;
 
 
 

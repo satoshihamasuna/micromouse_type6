@@ -1,3 +1,4 @@
-run_task.cpp:14:6:void RunTask::MotionFree(float*, float)	24	static
-run_task.cpp:25:6:void RunTask::search_straight(t_straight_param, t_machine_param*, t_machine_param*, float)	32	static
-run_task.cpp:68:8:t_bool RunTask::is_exe_runTask()	16	static
+run_task.cpp:15:6:void RunTask::MotionFree(float*, float)	24	static
+run_task.cpp:26:6:void RunTask::search_straight(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
+run_task.cpp:72:6:void RunTask::pivotturn(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
+run_task.cpp:126:8:t_bool RunTask::is_exe_runTask()	16	static

@@ -12,6 +12,7 @@
 #include "motion.h"
 #include "interrupt.h"
 #include "controll.h"
+#include "macro.h"
 
 void CPP_Main()
 {
@@ -23,6 +24,7 @@ void CPP_Main()
 	  Interrupt_Initialize();
 	  IMU_read_DMA_Start();
 	  Mode_Init();
+	  motion_plan mp;
 	  while (1)
 	  {
 			  Mode_Change_ENC();
@@ -30,7 +32,7 @@ void CPP_Main()
 			  switch(Mode_State()){
 			  	  case (ENABLE_MODE3|0x00):
 			  			  printf("gyro:%lf\n",read_gyro_z_axis());
-			  	  	  	  printf("length:%lf\n",motion_task::getInstance().target.velo);
+			  	  	  	  printf("length:%lf\n",motion_task::getInstance().mouse.radian);
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
 			  			  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
@@ -44,8 +46,9 @@ void CPP_Main()
 			  			  break;
 			  	  case (ENABLE_MODE3|0x02):
 					  	  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
-					  		  	 motion_plan mp;
+
 					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(1.0, 0.05, 0.0);
+					  		  	 motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.0, 0.00, 0.0);
 					  		  	 mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
 					  		  	 HAL_Delay(2);
 					  		  	 while(motion_task::getInstance().run_task !=No_run)
@@ -57,6 +60,19 @@ void CPP_Main()
 					  		}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x03):
+						if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+
+					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(1.0, 0.05, 0.0);
+					  		     motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.0, 0.0);
+					  		  	 mp.pivot_turn(&motion_task::getInstance(),DEG2RAD(360.0f),40.0f*PI,1.0f * PI);
+					  		  	 //HAL_Delay(100);
+					  		  	 while(motion_task::getInstance().run_task !=No_run)
+							  	 {
+							   		   printf("length:%lf\n",motion_task::getInstance().mouse.radian);
+							    		HAL_Delay(1);
+							  	 }
+							  		    Mode_Disable();
+						  }
 			  			  break;
 			  	  case (ENABLE_MODE3|0x04):
 			  			  break;

@@ -25,7 +25,7 @@ class motion_task:public Singleton<motion_task>
 		RunTask rT;
 		mouse_Controll ct;
 		t_machine_param target,max_set,mouse;
-		t_straight_param st_set;
+		t_motion_param mt_set;
 		void motion_inInterrupt();
 		void motionControll();
 		void motionPostControll();
@@ -40,7 +40,7 @@ class motion_plan
 		//void straight(motion_task *move_task);
 		void free_rotation(motion_task *move_task);
 		void search_straight(motion_task *move_task,float len_target,float acc,float max_sp,float end_sp);
-		void pivot_turn(motion_task *move_task);
+		void pivot_turn(motion_task *move_task,float rad_target,float rad_acc,float rad_velo);
 		void search_slalom(motion_task *move_task);
 		void stop_brake();
 };
