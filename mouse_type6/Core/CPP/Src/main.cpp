@@ -13,6 +13,7 @@
 #include "interrupt.h"
 #include "controll.h"
 #include "macro.h"
+#include "log_data.h"
 
 void CPP_Main()
 {
@@ -47,15 +48,17 @@ void CPP_Main()
 			  	  case (ENABLE_MODE3|0x02):
 					  	  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
 
-					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(1.0, 0.05, 0.0);
+					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.1, 0.0);
 					  		  	 motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.00, 0.0);
 					  		  	 mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
-					  		  	 //HAL_Delay(2);
+					  		  	 LogData::getInstance().data_count = 0;
+					  		  	 LogData::getInstance().log_enable = True;
 					  		  	 while(motion_task::getInstance().run_task !=No_run)
 					  		  	 {
 					  		  		//printf("Kp:%lf,velo:%lf\n",motion_task::getInstance().mouse.velo,motion_task::getInstance().target.velo);
 					  		  		//HAL_Delay(1);
 					  		  	 }
+					  		  	LogData::getInstance().log_enable = False;
 					  		    Mode_Disable();
 					  		}
 			  			  break;
@@ -75,6 +78,10 @@ void CPP_Main()
 						  }
 			  			  break;
 			  	  case (ENABLE_MODE3|0x04):
+						if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+							LogData::getInstance().indicate_data();
+							Mode_Disable();
+				   		}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x05):
 			  			  break;

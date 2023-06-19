@@ -10,7 +10,7 @@
 #include "run_task.h"
 #include "macro.h"
 
-#define BRAKE_TIME_LIMIT (300)
+#define BRAKE_TIME_LIMIT (500)
 
 void RunTask::MotionFree(float *run_time,float run_time_limit)
 {
@@ -47,20 +47,21 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 		if(target_->velo < mt_param.end_velo)
 		{
 			target_->velo = mt_param.end_velo;
+
 		}
 
 	}
 	else
 	{
-		if(target_->velo == 0.0f) target_->velo = 0.0;
-		is_runTask = False;
+		if(mt_param.end_velo == 0.0f)target_->velo = 0.0f;
+		else						is_runTask = False;
 	}
 
 	if(target_->velo == 0.0f)
 	{
 		is_runTask = True;
 		brake_time++;
-		if(brake_time < BRAKE_TIME_LIMIT)
+		if(brake_time > BRAKE_TIME_LIMIT)
 		{
 			is_runTask = False;
 			brake_time = 0;
@@ -112,7 +113,7 @@ void RunTask::pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machi
 	{
 		is_runTask = True;
 		brake_time++;
-		if(brake_time < BRAKE_TIME_LIMIT)
+		if(brake_time > BRAKE_TIME_LIMIT)
 		{
 			is_runTask = False;
 			brake_time = 0;

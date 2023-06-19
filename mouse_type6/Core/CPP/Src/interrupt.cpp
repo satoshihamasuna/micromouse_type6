@@ -12,6 +12,7 @@
 #include "sensing_task.h"
 #include "controll.h"
 #include "macro.h"
+#include "log_data.h"
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -50,6 +51,12 @@ void Interrupt::main()
 void Interrupt::postprocess()
 {
 
+	if(LogData::getInstance().log_enable == True)
+	{
+		LogData::getInstance().data[0][LogData::getInstance().data_count] = motion_task::getInstance().mouse.velo;
+		LogData::getInstance().data[1][LogData::getInstance().data_count] = motion_task::getInstance().target.velo;
+		LogData::getInstance().data_count++;
+	}
 	motion_task::getInstance().motionPostControll();
 	IMU_read_DMA_Start();
 }

@@ -1,4 +1,4 @@
-Core/CPP/Src/main.o: ../Core/CPP/Src/main.cpp \
+Core/CPP/Src/log_data.o: ../Core/CPP/Src/log_data.cpp \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/index.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
@@ -36,16 +36,9 @@ Core/CPP/Src/main.o: ../Core/CPP/Src/main.cpp \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/typedef.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/lsm6dsr_reg.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/macro.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/sensing_task.h \
+ C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/log_data.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/singleton.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/typedef.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/motion.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/run_task.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/controll.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/interrupt.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/controll.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/macro.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/log_data.h
+ C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/typedef.h
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/index.h:
 
@@ -133,22 +126,8 @@ C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Co
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/macro.h:
 
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/sensing_task.h:
+C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/log_data.h:
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/singleton.h:
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/typedef.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/motion.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/run_task.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/controll.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/interrupt.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/controll.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/macro.h:
-
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/log_data.h:

@@ -55,6 +55,10 @@ class RunTask
 		void turn_in();
 		void turn_out();
 		void brake();
+		void reset_brake_time()
+		{
+			brake_time = 0;
+		}
 };
 
 

@@ -1,3 +1,4 @@
+run_task.h:58:8:void RunTask::reset_brake_time()	16	static
 motion_plan.cpp:13:6:void motion_plan::free_rotation(motion_task*)	16	static
 motion_plan.cpp:20:6:void motion_plan::search_straight(motion_task*, float, float, float, float)	88	static
-motion_plan.cpp:40:6:void motion_plan::pivot_turn(motion_task*, float, float, float)	88	static
+motion_plan.cpp:42:6:void motion_plan::pivot_turn(motion_task*, float, float, float)	88	static
