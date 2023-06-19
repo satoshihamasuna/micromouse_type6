@@ -13,5 +13,5 @@
 
 
 float Battery_GetVoltage(){
-	return (BATTRY_REFERENCE * (47.0f+10.0f)/(10.0f) * (float)Sensor_GetBatteryValue())/4096.f;
+	return (BATTRY_REFERENCE * (143.0f+32.0f)/(32.0f) * (float)Sensor_GetBatteryValue())/4096.f;
 }

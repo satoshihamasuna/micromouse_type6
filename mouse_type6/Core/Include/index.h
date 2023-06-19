@@ -72,7 +72,7 @@ int16_t ADC_get_value(int num);
 int16_t Sensor_GetValue(t_sensor_dir dir);
 int16_t Sensor_GetBatteryValue();
 void Sensor_StopADC();
-
+float Battery_GetVoltage();
 //motor
 void Motor_Initialize();
 void Motor_Stop();
