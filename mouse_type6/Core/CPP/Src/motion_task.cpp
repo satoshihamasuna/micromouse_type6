@@ -57,8 +57,8 @@ void motion_task::motionControll()
 
 
 
-		float duty_r = V_r/4.0;
-		float duty_l = V_l/4.0;
+		float duty_r = V_r/Battery_GetVoltage();
+		float duty_l = V_l/Battery_GetVoltage();
 
 		if(ABS(duty_r) > 1.0){
 			motor_out_r = (int)(SIGN(duty_r) * 4.0f * 250.0f);

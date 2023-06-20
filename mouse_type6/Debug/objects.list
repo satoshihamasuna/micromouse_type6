@@ -1,5 +1,6 @@
 "Core/CPP/Src/controll.o"
 "Core/CPP/Src/interrupt.o"
+"Core/CPP/Src/kalman_filter.o"
 "Core/CPP/Src/log_data.o"
 "Core/CPP/Src/main.o"
 "Core/CPP/Src/make_map.o"

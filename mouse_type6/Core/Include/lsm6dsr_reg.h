@@ -35,6 +35,10 @@ extern "C" {
 //gyroscope control register
 #define CTRL2_G  0x11
 
+#define ACCEL_ODR_SET 0x80
+#define ACCEL_8G	  0x0E
+#define ACCEL_4G	  0x08
+
 #define GYRO_ODR_SET 0x80
 #define GYRO_2000_DPS 0x0C
 #define GYRO_4000_DPS 0x01

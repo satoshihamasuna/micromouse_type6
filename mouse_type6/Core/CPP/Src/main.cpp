@@ -14,6 +14,7 @@
 #include "controll.h"
 #include "macro.h"
 #include "log_data.h"
+#include "Kalman_filter.h"
 
 void CPP_Main()
 {
@@ -32,7 +33,7 @@ void CPP_Main()
 			  HAL_Delay(50);
 			  switch(Mode_State()){
 			  	  case (ENABLE_MODE3|0x00):
-			  			  printf("gyro:%lf\n",read_gyro_z_axis());
+			  			  printf("acc:%lf\n",read_accel_y_axis());
 			  	  	  	  printf("length:%lf\n",Battery_GetVoltage());
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
@@ -48,8 +49,9 @@ void CPP_Main()
 			  	  case (ENABLE_MODE3|0x02):
 					  	  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
 
-					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.1, 0.0);
+					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.05, 0.0);
 					  		  	 motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.00, 0.0);
+					  		  	 KalmanFilter::getInstance().filter_init();
 					  		  	 mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
 					  		  	 LogData::getInstance().data_count = 0;
 					  		  	 LogData::getInstance().log_enable = True;
@@ -65,8 +67,9 @@ void CPP_Main()
 			  	  case (ENABLE_MODE3|0x03):
 						if(SensingTask::getInstance().IrSensor_Avg() > 2500){
 
-					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(1.0, 0.05, 0.0);
+					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.05, 0.0);
 					  		     motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.0, 0.0);
+					  		   KalmanFilter::getInstance().filter_init();
 					  		  	 mp.pivot_turn(&motion_task::getInstance(),DEG2RAD(360.0f),40.0f*PI,3.0f * PI);
 					  		  	 //HAL_Delay(100);
 					  		  	 while(motion_task::getInstance().run_task !=No_run)

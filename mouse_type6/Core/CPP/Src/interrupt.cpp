@@ -13,6 +13,7 @@
 #include "controll.h"
 #include "macro.h"
 #include "log_data.h"
+#include "Kalman_filter.h"
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -35,7 +36,8 @@ void Interrupt::preprocess(){
 	Encoder_SetSpeed_Right();
 	t_encoder Renc = Encoder_GetProperty_Right();
 	t_encoder Lenc = Encoder_GetProperty_Left();
-	motion_task::getInstance().mouse.velo 	  = (Renc.wheel_speed - Lenc.wheel_speed)/2.0;
+	float sp = KalmanFilter::getInstance().calc_speed_filter(read_accel_y_axis(), (Renc.wheel_speed - Lenc.wheel_speed)/2.0);
+	motion_task::getInstance().mouse.velo 	  = sp;//(Renc.wheel_speed - Lenc.wheel_speed)/2.0;
 	motion_task::getInstance().mouse.length  += (Renc.wheel_speed - Lenc.wheel_speed)/2.0;
 	motion_task::getInstance().mouse.rad_velo = (-1.0)*read_gyro_z_axis()*PI/180;
 	motion_task::getInstance().mouse.radian  += motion_task::getInstance().mouse.rad_velo/1000.0;

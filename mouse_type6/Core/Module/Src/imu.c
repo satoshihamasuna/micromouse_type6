@@ -44,6 +44,8 @@ void imu_initialize()
 	  HAL_Delay(50);
 	  read_byte(WHO_AM_I);
 	  HAL_Delay(50);
+	  write_byte(CTRL1_XL, ACCEL_ODR_SET|ACCEL_8G);
+	  HAL_Delay(50);
 	  write_byte(CTRL2_G, GYRO_ODR_SET|GYRO_2000_DPS);
 	  HAL_Delay(50);
 }
@@ -86,13 +88,13 @@ float read_gyro_z_axis(){
 }
 
 float read_accel_x_axis(){
-	return  (float)accel_data[x_axis];
+	return  (float)accel_data[x_axis]*0.244/1000.0f*9.8;
 }
 
 float read_accel_y_axis(){
-	return  (float)accel_data[y_axis];
+	return  (float)accel_data[y_axis]*0.244/1000.0f*9.8;
 }
 
 float read_accel_z_axis(){
-	return  (float)accel_data[z_axis] ;
+	return  (float)accel_data[z_axis]*0.244/1000.0f*9.8;
 }
