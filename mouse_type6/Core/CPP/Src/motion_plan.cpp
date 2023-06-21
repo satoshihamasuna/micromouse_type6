@@ -29,14 +29,22 @@ void motion_plan::search_straight(motion_task *move_task,float len_target,float 
 	mt_set_.rad_deccel  	=  0.0f;
 	mt_set_.rad_max_velo    =  0.0f;
 	mt_set_.radian      	=  0.0f;
+
 	mt_set_.turn_d          =  Turn_None;
 	move_task->mt_set 		= mt_set_;
 	move_task->run_task 	= Search_st_section;
 	move_task->ct.speed_ctrl.I_param_reset();
 	move_task->ct.omega_ctrl.I_param_reset();
 	move_task->mouse.length  = 0.0;
+	move_task->mouse.radian  = 0.0;
+	move_task->target.velo = 0.0;
+	move_task->target.accel = 0.0;
+	move_task->target.rad_velo = 0.0;
+	move_task->target.rad_accel = 0.0;
 	move_task->target.length = 0.0;
+	move_task->target.radian = 0.0;
 	move_task->rT.reset_brake_time();
+	move_task->_turn_param = nullptr;
 }
 
 void motion_plan::pivot_turn(motion_task *move_task,float rad_target,float rad_acc,float rad_velo)
@@ -57,6 +65,11 @@ void motion_plan::pivot_turn(motion_task *move_task,float rad_target,float rad_a
 	move_task->ct.omega_ctrl.I_param_reset();
 	move_task->mouse.length  = 0.0;
 	move_task->mouse.radian  = 0.0;
+	move_task->target.velo = 0.0;
+	move_task->target.accel = 0.0;
+	move_task->target.rad_velo = 0.0;
+	move_task->target.rad_accel = 0.0;
+	move_task->_turn_param = nullptr;
 	move_task->target.length = 0.0;
 	move_task->target.radian = 0.0;
 }

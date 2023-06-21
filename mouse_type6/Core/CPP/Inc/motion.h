@@ -26,6 +26,7 @@ class motion_task:public Singleton<motion_task>
 		mouse_Controll ct;
 		t_machine_param target,max_set,mouse;
 		t_motion_param mt_set;
+		const t_param *_turn_param = nullptr;
 		void motion_inInterrupt();
 		void motionControll();
 		void motionPostControll();

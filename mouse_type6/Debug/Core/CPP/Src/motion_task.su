@@ -1,4 +1,4 @@
 motion_task.cpp:14:6:void motion_task::motion_inInterrupt()	72	static
-motion_task.cpp:40:6:void motion_task::motionControll()	48	static
-motion_task.cpp:90:6:void motion_task::motionPostControll()	16	static
-motion_task.cpp:100:8:t_bool motion_task::is_controll_enable()	24	static
+motion_task.cpp:42:6:void motion_task::motionControll()	80	static
+motion_task.cpp:102:6:void motion_task::motionPostControll()	16	static
+motion_task.cpp:112:8:t_bool motion_task::is_controll_enable()	24	static

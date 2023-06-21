@@ -29,8 +29,9 @@ void CPP_Main()
 	  motion_plan mp;
 	  while (1)
 	  {
+		  	  Battery_LimiterVoltage();
 			  Mode_Change_ENC();
-			  HAL_Delay(50);
+			  HAL_Delay(5);
 			  switch(Mode_State()){
 			  	  case (ENABLE_MODE3|0x00):
 			  			  printf("acc:%lf\n",read_accel_y_axis());
@@ -48,38 +49,28 @@ void CPP_Main()
 			  			  break;
 			  	  case (ENABLE_MODE3|0x02):
 					  	  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
-
-					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.05, 0.0);
-					  		  	 motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.00, 0.0);
-					  		  	 KalmanFilter::getInstance().filter_init();
-					  		  	 mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
-					  		  	 LogData::getInstance().data_count = 0;
-					  		  	 LogData::getInstance().log_enable = True;
-					  		  	 while(motion_task::getInstance().run_task !=No_run)
-					  		  	 {
-					  		  		//printf("Kp:%lf,velo:%lf\n",motion_task::getInstance().mouse.velo,motion_task::getInstance().target.velo);
-					  		  		//HAL_Delay(1);
-					  		  	 }
-					  		  	LogData::getInstance().log_enable = False;
-					  		    Mode_Disable();
-					  		}
-			  			  break;
+					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
+					  		  KalmanFilter::getInstance().filter_init();
+					  		  mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
+					  		  LogData::getInstance().data_count = 0;
+					  		  LogData::getInstance().log_enable = True;
+					  		  while(motion_task::getInstance().run_task !=No_run){}
+					  		  LogData::getInstance().log_enable = False;
+					  		  Mode_Disable();
+					  	   }
+			  			   break;
 			  	  case (ENABLE_MODE3|0x03):
 						if(SensingTask::getInstance().IrSensor_Avg() > 2500){
-
-					  		  	 motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.05, 0.0);
-					  		     motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.0, 0.0);
-					  		   KalmanFilter::getInstance().filter_init();
-					  		  	 mp.pivot_turn(&motion_task::getInstance(),DEG2RAD(360.0f),40.0f*PI,3.0f * PI);
-					  		  	 //HAL_Delay(100);
-					  		  	 while(motion_task::getInstance().run_task !=No_run)
-							  	 {
-							   		   //printf("length:%lf\n",motion_task::getInstance().mouse.radian);
-							    		//HAL_Delay(1);
-							  	 }
-							  		    Mode_Disable();
-						  }
-			  			  break;
+							motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.05, 0.0);
+							motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.0, 0.0);
+					  		KalmanFilter::getInstance().filter_init();
+					  		mp.pivot_turn(&motion_task::getInstance(),DEG2RAD(360.0f),40.0f*PI,3.0f * PI);
+					  		//HAL_Delay(100);
+					  		while(motion_task::getInstance().run_task !=No_run){}
+							Mode_Disable();
+						 }
+			  			 break;
 			  	  case (ENABLE_MODE3|0x04):
 						if(SensingTask::getInstance().IrSensor_Avg() > 2500){
 							LogData::getInstance().indicate_data();

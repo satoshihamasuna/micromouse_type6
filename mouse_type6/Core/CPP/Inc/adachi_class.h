@@ -13,14 +13,19 @@
 #include <stdio.h>
 #include <macro.h>
 
-class straight_adachi{
-	public:
-		int32_t priority();
-		int get_next_dir(t_wall wall_property[MAZE_SIZE_X][MAZE_SIZE_Y],uint16_t map_property[MAZE_SIZE_X][MAZE_SIZE_Y]);
-};
 
-class centripetal_adachi{
+class adachi{
+	private:
+		wall_class *wall_property;
+		make_map   *map_property;
 	public:
+		adachi(wall_class *_wall_class,make_map *_make_map_class)
+		{
+			wall_property 	= _wall_class;
+			map_property 	= _make_map_class;
+		}
+		int get_priority(t_position mypos,t_position next_pos);
+		int get_next_dir(t_position mypos,int mask,t_position *glob_next_pos);
 
 };
 

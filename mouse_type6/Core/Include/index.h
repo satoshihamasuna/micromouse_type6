@@ -73,6 +73,7 @@ int16_t Sensor_GetValue(t_sensor_dir dir);
 int16_t Sensor_GetBatteryValue();
 void Sensor_StopADC();
 float Battery_GetVoltage();
+void Battery_LimiterVoltage();
 //motor
 void Motor_Initialize();
 void Motor_Stop();

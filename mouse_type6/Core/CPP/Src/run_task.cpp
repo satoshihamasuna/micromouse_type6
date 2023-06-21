@@ -37,7 +37,9 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 		if(target_->velo > mt_param.max_velo)
 		{
 			target_->velo = mt_param.max_velo;
+			target_->accel = 0.0;
 		}
+
 
 	}
 	else if(mt_param.length > machine_->length)
@@ -47,14 +49,23 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 		if(target_->velo < mt_param.end_velo)
 		{
 			target_->velo = mt_param.end_velo;
+			target_->accel = 0.0;
 
 		}
 
 	}
 	else
 	{
-		if(mt_param.end_velo == 0.0f)target_->velo = 0.0f;
-		else						is_runTask = False;
+		if(mt_param.end_velo == 0.0f)
+		{
+			target_->velo = 0.0f;
+			target_->accel = 0.0;
+		}
+		else
+		{
+			is_runTask = False;
+			target_->accel = 0.0;
+		}
 	}
 
 	if(target_->velo == 0.0f)
