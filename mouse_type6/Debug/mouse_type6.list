@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000402d8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000399cb  00000000  00000000  00040308  2**0
+ 12 .debug_info   00039ac9  00000000  00000000  00040308  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00006c82  00000000  00000000  00079cd3  2**0
+ 13 .debug_abbrev 00006c77  00000000  00000000  00079dd1  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 000015e0  00000000  00000000  00080958  2**3
+ 14 .debug_aranges 000015e8  00000000  00000000  00080a48  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00001350  00000000  00000000  00081f38  2**3
+ 15 .debug_ranges 00001358  00000000  00000000  00082030  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00020537  00000000  00000000  00083288  2**0
+ 16 .debug_macro  00020537  00000000  00000000  00083388  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0001d1bd  00000000  00000000  000a37bf  2**0
+ 17 .debug_line   0001d1dc  00000000  00000000  000a38bf  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    0009be64  00000000  00000000  000c097c  2**0
+ 18 .debug_str    0009beab  00000000  00000000  000c0a9b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  0015c7e0  2**0
+ 19 .comment      0000007b  00000000  00000000  0015c946  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0001a390  00000000  00000000  0015c85c  2**2
+ 20 .debug_frame  0001a3b8  00000000  00000000  0015c9c4  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -4534,11 +4534,11 @@ t_bool RunTask::is_exe_runTask()
  8002df6:	4770      	bx	lr
 
 08002df8 <_Z41__static_initialization_and_destruction_0ii>:
-		case rear:
-			break;
-
+			case rear:
+				break;
+		}
 	}
-
+	return my_position;
 }
  8002df8:	b580      	push	{r7, lr}
  8002dfa:	b082      	sub	sp, #8
@@ -4570,7 +4570,7 @@ t_bool RunTask::is_exe_runTask()
  8002e36:	bf00      	nop
  8002e38:	20006300 	.word	0x20006300
 
-08002e3c <_GLOBAL__sub_I__Z9i_am_goaliiPiS_i>:
+08002e3c <_GLOBAL__sub_I__ZN6Search9i_am_goalEiiiii>:
  8002e3c:	b580      	push	{r7, lr}
  8002e3e:	af00      	add	r7, sp, #0
  8002e40:	f64f 71ff 	movw	r1, #65535	; 0xffff
@@ -4578,7 +4578,7 @@ t_bool RunTask::is_exe_runTask()
  8002e46:	f7ff ffd7 	bl	8002df8 <_Z41__static_initialization_and_destruction_0ii>
  8002e4a:	bd80      	pop	{r7, pc}
 
-08002e4c <_GLOBAL__sub_D__Z9i_am_goaliiPiS_i>:
+08002e4c <_GLOBAL__sub_D__ZN6Search9i_am_goalEiiiii>:
  8002e4c:	b580      	push	{r7, lr}
  8002e4e:	af00      	add	r7, sp, #0
  8002e50:	f64f 71ff 	movw	r1, #65535	; 0xffff
