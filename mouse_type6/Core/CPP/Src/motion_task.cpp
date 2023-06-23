@@ -25,7 +25,7 @@ void motion_task::motion_inInterrupt(){
 			break;
 		case Search_slalom_L:
 		case Search_slalom_R:
-			rT.search_slalom(mt_set,_turn_param,&target, &mouse, 1.0);
+			rT.search_slalom(&mt_set,_turn_param,&target, &mouse, 1.0);
 			break;
 		case Long_turnR90:
 			break;

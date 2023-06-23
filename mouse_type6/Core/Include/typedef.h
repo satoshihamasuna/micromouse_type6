@@ -78,6 +78,7 @@ typedef struct{
 	int16_t cost_h;
 }t_MapNode;
 
+
 typedef struct{
 	float velo;
 	float accel;

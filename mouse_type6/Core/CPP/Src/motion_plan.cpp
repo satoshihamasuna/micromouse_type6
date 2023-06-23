@@ -83,8 +83,8 @@ void motion_plan::search_slalom(motion_task *move_task,const t_param *turn_param
 	mt_set_.rad_accel   	=  0.0;
 	mt_set_.rad_deccel  	=  0.0;
 	mt_set_.rad_max_velo    =  turn_param->param->velo/turn_param->param->r_min*1000.0f;
-	mt_set_.radian      	=  DEG2RAD(turn_param->param->degree);
-	mt_set_.turn_d          =  (turn_param->param->turn_dir == Turn_L) ? Turn_L:Turn_R;
+	mt_set_.radian      	=  0.0;//DEG2RAD(turn_param->param->degree);
+	mt_set_.turn_d          =  Turn_None;//(turn_param->param->turn_dir == Turn_L) ? Turn_L:Turn_R;
 	move_task->mt_set 		=  mt_set_;
 	move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Search_slalom_L:Search_slalom_R;
 	move_task->ct.speed_ctrl.I_param_reset();
