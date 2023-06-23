@@ -21,7 +21,7 @@ class Search
 		make_map   *map_property;
 		motion_plan *motion_planning;
 	public:
-		void search_adachi_1(wall_class *_wall,make_map *_map,motion_plan *_motion);
+		t_position search_adachi_1(t_position start_pos,wall_class *_wall,make_map *_map,motion_plan *_motion);
 
 };
 

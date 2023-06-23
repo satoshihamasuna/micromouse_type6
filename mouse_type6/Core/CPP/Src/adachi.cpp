@@ -122,7 +122,7 @@ int adachi::get_next_dir(t_position mypos,int mask,t_position *glob_next_pos)
 		}
 	}
 
-	return ((int)((8+glob_next_pos->dir - mypos.dir)%8));
+	return ((int)((8+glob_next_pos->dir - mypos.dir)%8)/2);
 }
 
 
