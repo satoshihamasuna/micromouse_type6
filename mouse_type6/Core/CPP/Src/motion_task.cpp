@@ -139,6 +139,8 @@ t_bool motion_task::is_controll_enable()
 		case Search_st_half		:
 		case Pivot_turn_R		:
 		case Pivot_turn_L		:
+		case Search_slalom_L	:
+		case Search_slalom_R	:
 		case run_brake			:
 		case motor_free		:
 			is_controll_enable = True;

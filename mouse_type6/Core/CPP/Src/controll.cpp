@@ -6,6 +6,7 @@
  */
 #include "controll.h"
 #include "typedef.h"
+
 void PID_Controller::Gain_Set(float _Kp,float _Ki,float _Kd)
 {
 	Kp = _Kp;
