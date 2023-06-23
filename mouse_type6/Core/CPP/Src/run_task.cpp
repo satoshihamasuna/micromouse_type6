@@ -102,6 +102,7 @@ void RunTask::pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machi
 	{
 		target_->rad_accel = mt_param.rad_deccel;
 		target_->rad_velo  = target_->rad_velo + target_->rad_accel*delta_t_ms/1000.0;
+
 		if(target_->rad_velo <= 0.0 && mt_param.radian > 0.0)
 		{
 			target_->rad_velo = 0.0 ;
@@ -117,7 +118,7 @@ void RunTask::pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machi
 		target_->rad_velo = 0.0 ;
 		//is_runTask = False;
 	}
-
+	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 
 
 	if(target_->rad_velo == 0.0f)
@@ -133,7 +134,12 @@ void RunTask::pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machi
 
 }
 
-
+void RunTask::search_slalom(t_motion_param mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms)
+{
+	is_runTask = True;
+	target_->velo = turn_param->param->velo;
+	//if()
+}
 
 t_bool RunTask::is_exe_runTask()
 {

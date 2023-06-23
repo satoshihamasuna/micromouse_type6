@@ -34,8 +34,10 @@ typedef enum{
 	Search_st_half		= 20,
 	Pivot_turn_R		= 21,
 	Pivot_turn_L		= 22,
-	run_brake			= 23,
-	motor_free			= 24,
+	Search_slalom_R		= 23,
+	Search_slalom_L		= 24,
+	run_brake			= 25,
+	motor_free			= 26,
 }t_run_pattern;
 
 typedef struct{
@@ -63,7 +65,7 @@ class RunTask
 		t_bool is_exe_runTask();
 		void MotionFree(float *run_time,float run_time_limit);
 		void search_straight(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
-		void search_slalom(const t_param *turn_param,t_machine_param *target_,float delta_t_ms);
+		void search_slalom(t_motion_param mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void straight();
 		void long_turn();

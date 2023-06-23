@@ -23,7 +23,10 @@ void motion_task::motion_inInterrupt(){
 		case Pivot_turn_R:
 			rT.pivotturn(mt_set,&target, &mouse, 1.0);
 			break;
-
+		case Search_slalom_L:
+		case Search_slalom_R:
+			rT.search_slalom(mt_set,_turn_param,&target, &mouse, 1.0);
+			break;
 		case Long_turnR90:
 			break;
 		case motor_free:

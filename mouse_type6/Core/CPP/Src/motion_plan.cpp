@@ -37,7 +37,7 @@ void motion_plan::search_straight(motion_task *move_task,float len_target,float 
 	move_task->ct.omega_ctrl.I_param_reset();
 	move_task->mouse.length  = 0.0;
 	move_task->mouse.radian  = 0.0;
-	move_task->target.velo = 0.0;
+	//move_task->target.velo = 0.0;
 	move_task->target.accel = 0.0;
 	move_task->target.rad_velo = 0.0;
 	move_task->target.rad_accel = 0.0;
@@ -74,3 +74,28 @@ void motion_plan::pivot_turn(motion_task *move_task,float rad_target,float rad_a
 	move_task->target.radian = 0.0;
 }
 
+void motion_plan::search_slalom(motion_task *move_task,const t_param *turn_param)
+{
+	t_motion_param mt_set_;
+	mt_set_.accel 			=  0.0f;
+	mt_set_.deccel 			=  0.0f;
+	mt_set_.max_velo 		=  turn_param->param->velo;
+	mt_set_.rad_accel   	=  0.0;
+	mt_set_.rad_deccel  	=  0.0;
+	mt_set_.rad_max_velo    =  turn_param->param->velo/turn_param->param->r_min*1000.0f;
+	mt_set_.radian      	=  DEG2RAD(turn_param->param->degree);
+	mt_set_.turn_d          =  (turn_param->param->turn_dir == Turn_L) ? Turn_L:Turn_R;
+	move_task->mt_set 		=  mt_set_;
+	move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Search_slalom_L:Search_slalom_R;
+	move_task->ct.speed_ctrl.I_param_reset();
+	move_task->ct.omega_ctrl.I_param_reset();
+	move_task->mouse.length  = 0.0;
+	move_task->mouse.radian  = 0.0;
+	//move_task->target.velo = 0.0;
+	move_task->target.accel = 0.0;
+	move_task->target.rad_velo = 0.0;
+	move_task->target.rad_accel = 0.0;
+	move_task->_turn_param = turn_param;
+	move_task->target.length = 0.0;
+	move_task->target.radian = 0.0;
+}
