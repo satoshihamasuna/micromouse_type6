@@ -35,8 +35,10 @@ void CPP_Main()
 			  HAL_Delay(5);
 			  switch(Mode_State()){
 			  	  case (ENABLE_MODE3|0x00):
-			  			  printf("acc:%lf\n",read_accel_y_axis());
-			  	  	  	  printf("length:%lf\n",Battery_GetVoltage());
+			  			  printf("fr:%4d,fl:%4d,sr:%4d,sl:%4d\n",
+			  					  SensingTask::getInstance().sen_fr.value,SensingTask::getInstance().sen_fl.value
+								 ,SensingTask::getInstance().sen_r.value,SensingTask::getInstance().sen_l.value);
+			  	  	  	  //printf("length:%lf\n",Battery_GetVoltage());
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
 			  			  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
@@ -53,10 +55,12 @@ void CPP_Main()
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
 					  		  KalmanFilter::getInstance().filter_init();
-					  		  LogData::getInstance().data_count = 0;
-					  		  LogData::getInstance().log_enable = True;
+
+					  		  mp.motion_start(&motion_task::getInstance());
 					  		  mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.30);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
+					  		  LogData::getInstance().data_count = 0;
+					  		  LogData::getInstance().log_enable = True;
 					  		  mp.search_slalom(&motion_task::getInstance(), &param_L90_search);
 					  		while(motion_task::getInstance().run_task !=No_run){}
 					  		  mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);

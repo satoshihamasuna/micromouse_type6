@@ -1,3 +1,5 @@
-sensing_task.cpp:14:14:t_wall_state SensingTask::conv_Sensin2Wall(t_sensor_dir)	16	static
-sensing_task.cpp:30:6:void SensingTask::IrSensorSet()	16	static
-sensing_task.cpp:38:9:int16_t SensingTask::IrSensor_Avg()	16	static
+sensing_task.cpp:15:14:t_wall_state SensingTask::conv_Sensin2Wall(t_sensor_dir)	16	static
+sensing_task.cpp:31:6:void SensingTask::IrSensorSet()	16	static
+sensing_task.cpp:40:7:float SensingTask::Sensor_CalcDistance(t_sensor_dir, int16_t)	40	static
+sensing_task.cpp:112:6:void SensingTask::IrSensorDistanceSet()	16	static
+sensing_task.cpp:120:9:int16_t SensingTask::IrSensor_Avg()	16	static

@@ -39,6 +39,7 @@ class motion_plan
 		//float motion_time;
 	public:
 		//void straight(motion_task *move_task);
+		void motion_start(motion_task *move_task);
 		void free_rotation(motion_task *move_task);
 		void search_straight(motion_task *move_task,float len_target,float acc,float max_sp,float end_sp);
 		void pivot_turn(motion_task *move_task,float rad_target,float rad_acc,float rad_velo);

@@ -10,6 +10,20 @@
 #include "index.h"
 #include "controll.h"
 
+void motion_plan::motion_start(motion_task *move_task)
+{
+	move_task->mouse.length  = 0.0;
+	move_task->mouse.radian  = 0.0;
+
+	move_task->target.velo = 0.0;
+	move_task->target.accel = 0.0;
+	move_task->target.rad_velo = 0.0;
+	move_task->target.rad_accel = 0.0;
+	move_task->target.length = 0.0;
+	move_task->target.radian = 0.0;
+	move_task->rT.reset_brake_time();
+}
+
 void motion_plan::free_rotation(motion_task *move_task)
 {
 	move_task->run_time_limit = 1000.0;
@@ -39,8 +53,8 @@ void motion_plan::search_straight(motion_task *move_task,float len_target,float 
 	move_task->mouse.radian  = 0.0;
 	//move_task->target.velo = 0.0;
 	move_task->target.accel = 0.0;
-	move_task->target.rad_velo = 0.0;
-	move_task->target.rad_accel = 0.0;
+	//move_task->target.rad_velo = 0.0;
+	//move_task->target.rad_accel = 0.0;
 	move_task->target.length = 0.0;
 	move_task->target.radian = 0.0;
 	move_task->rT.reset_brake_time();
@@ -94,8 +108,8 @@ void motion_plan::search_slalom(motion_task *move_task,const t_param *turn_param
 	move_task->run_time		 = 0.0;
 	//move_task->target.velo = 0.0;
 	move_task->target.accel = 0.0;
-	move_task->target.rad_velo = 0.0;
-	move_task->target.rad_accel = 0.0;
+	//move_task->target.rad_velo = 0.0;
+	//move_task->target.rad_accel = 0.0;
 	move_task->_turn_param = turn_param;
 	move_task->target.length = 0.0;
 	move_task->target.radian = 0.0;

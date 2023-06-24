@@ -13,10 +13,13 @@
 
 class SensingTask:public Singleton<SensingTask>
 {
+	private:
+		float Sensor_CalcDistance(t_sensor_dir dir,int16_t value);
 	public:
 		t_sensor sen_fr,sen_fl,sen_r,sen_l;
 		t_wall_state conv_Sensin2Wall(t_sensor_dir sens_dir);
 		void IrSensorSet();
+		void IrSensorDistanceSet();
 		int16_t IrSensor_Avg();
 };
 
