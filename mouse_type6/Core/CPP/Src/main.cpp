@@ -15,6 +15,7 @@
 #include "macro.h"
 #include "log_data.h"
 #include "Kalman_filter.h"
+#include "run_param.h"
 
 void CPP_Main()
 {
@@ -52,9 +53,13 @@ void CPP_Main()
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
 					  		  KalmanFilter::getInstance().filter_init();
-					  		  mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
+					  		  mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.30);
+					  		  while(motion_task::getInstance().run_task !=No_run){}
+					  		  mp.search_slalom(&motion_task::getInstance(), &param_L90_search);
+					  		while(motion_task::getInstance().run_task !=No_run){}
+					  		  mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().log_enable = False;
 					  		  Mode_Disable();

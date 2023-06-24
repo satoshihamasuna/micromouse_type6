@@ -91,6 +91,7 @@ void motion_plan::search_slalom(motion_task *move_task,const t_param *turn_param
 	move_task->ct.omega_ctrl.I_param_reset();
 	move_task->mouse.length  = 0.0;
 	move_task->mouse.radian  = 0.0;
+	move_task->run_time		 = 0.0;
 	//move_task->target.velo = 0.0;
 	move_task->target.accel = 0.0;
 	move_task->target.rad_velo = 0.0;

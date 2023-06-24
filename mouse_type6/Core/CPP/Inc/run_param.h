@@ -5,8 +5,8 @@
  *      Author: sato1
  */
 
-#ifndef CPP_INC_RUN_PRAM_H_
-#define CPP_INC_RUN_PRAM_H_
+#ifndef CPP_INC_RUN_PARAM_H_
+#define CPP_INC_RUN_PARAM_H_
 
 
 #include "run_task.h"
@@ -20,4 +20,4 @@ const static t_param param_L90_search = {&slalom_L90_table ,&sp_gain_search_turn
 const static t_param param_R90_search = {&slalom_R90_table, &sp_gain_search_turn,&om_gain_search_turn};
 
 
-#endif /* CPP_INC_RUN_PRAM_H_ */
+#endif /* CPP_INC_RUN_PARAM_H_ */

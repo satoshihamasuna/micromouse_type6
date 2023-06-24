@@ -57,6 +57,8 @@ void Interrupt::postprocess()
 	{
 		LogData::getInstance().data[0][LogData::getInstance().data_count] = motion_task::getInstance().mouse.velo;
 		LogData::getInstance().data[1][LogData::getInstance().data_count] = motion_task::getInstance().target.velo;
+		LogData::getInstance().data[0][LogData::getInstance().data_count] = motion_task::getInstance().mouse.rad_velo;
+		LogData::getInstance().data[1][LogData::getInstance().data_count] = motion_task::getInstance().target.rad_velo;
 		LogData::getInstance().data_count++;
 	}
 	motion_task::getInstance().motionPostControll();
