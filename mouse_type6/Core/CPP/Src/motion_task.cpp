@@ -32,6 +32,9 @@ void motion_task::motion_inInterrupt(){
 		case motor_free:
 				rT.MotionFree(&run_time,run_time_limit);
 			break;
+		case Fix_wall:
+				rT.fix_wall(&target, &run_time, run_time_limit, 1.0);
+				break;
 		default:
 				target.accel = 0.0;
 				target.velo  = 0.0;
@@ -142,7 +145,8 @@ t_bool motion_task::is_controll_enable()
 		case Search_slalom_L	:
 		case Search_slalom_R	:
 		case run_brake			:
-		case motor_free		:
+		case motor_free			:
+		case Fix_wall			:
 			is_controll_enable = True;
 			break;
 		default:

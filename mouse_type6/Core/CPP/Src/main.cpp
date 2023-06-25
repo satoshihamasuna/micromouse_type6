@@ -35,9 +35,9 @@ void CPP_Main()
 			  HAL_Delay(5);
 			  switch(Mode_State()){
 			  	  case (ENABLE_MODE3|0x00):
-			  			  printf("fr:%4d,fl:%4d,sr:%4d,sl:%4d\n",
-			  					  SensingTask::getInstance().sen_fr.value,SensingTask::getInstance().sen_fl.value
-								 ,SensingTask::getInstance().sen_r.value,SensingTask::getInstance().sen_l.value);
+			  			  printf("fr:%f,fl:%f,sr:%f,sl:%f\n",
+			  					  SensingTask::getInstance().sen_fr.distance,SensingTask::getInstance().sen_fl.distance
+								 ,SensingTask::getInstance().sen_r.distance,SensingTask::getInstance().sen_l.distance);
 			  	  	  	  //printf("length:%lf\n",Battery_GetVoltage());
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
@@ -87,6 +87,22 @@ void CPP_Main()
 				   		}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x05):
+						if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+
+									motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+									motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.005, 0.0);
+							  		KalmanFilter::getInstance().filter_init();
+							  		mp.fix_wall(&motion_task::getInstance(), 5000);
+							  		//HAL_Delay(100);
+							  		//FAN_Motor_SetDuty(700);
+							  		while(motion_task::getInstance().run_task !=No_run){
+							  			//printf("%lf\n",motion_task::getInstance().target.accel);
+							  			//HAL_Delay(1);
+							  		}
+							  		//FAN_Motor_SetDuty(0);
+							  		//HAL_Delay(100);
+							  		Mode_Disable();
+						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x06):
 			  			  break;

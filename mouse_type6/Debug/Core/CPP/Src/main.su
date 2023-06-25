@@ -1,4 +1,4 @@
-main.cpp:20:6:void CPP_Main()	40	static
+main.cpp:20:6:void CPP_Main()	64	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static
 run_task.h:60:7:constexpr RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
