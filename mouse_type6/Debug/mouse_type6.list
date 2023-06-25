@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000502d8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00039e44  00000000  00000000  00050308  2**0
+ 12 .debug_info   0003a351  00000000  00000000  00050308  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00006cf8  00000000  00000000  0008a14c  2**0
+ 13 .debug_abbrev 00006dcd  00000000  00000000  0008a659  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00001600  00000000  00000000  00090e48  2**3
+ 14 .debug_aranges 00001618  00000000  00000000  00091428  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00001370  00000000  00000000  00092448  2**3
+ 15 .debug_ranges 00001388  00000000  00000000  00092a40  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0002054b  00000000  00000000  000937b8  2**0
+ 16 .debug_macro  0002055f  00000000  00000000  00093dc8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0001d37c  00000000  00000000  000b3d03  2**0
+ 17 .debug_line   0001d437  00000000  00000000  000b4327  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    0009c036  00000000  00000000  000d107f  2**0
+ 18 .debug_str    0009c0c9  00000000  00000000  000d175e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  0016d0b5  2**0
+ 19 .comment      0000007b  00000000  00000000  0016d827  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0001a42c  00000000  00000000  0016d130  2**2
+ 20 .debug_frame  0001a4a0  00000000  00000000  0016d8a4  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -3978,7 +3978,7 @@ template<std::size_t SIZE,typename T> int ring_queue<SIZE,T>::queue_length()
  8002772:	bd80      	pop	{r7, pc}
 
 08002774 <_ZN7RunTask10MotionFreeEPff>:
-#include "turn_table.h"
+#include "sensing_task.h"
 
 #define BRAKE_TIME_LIMIT (500)
 
@@ -4854,10 +4854,10 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
  8002f2e:	eeb4 7ae7 	vcmpe.f32	s14, s15
  8002f32:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
  8002f36:	dc00      	bgt.n	8002f3a <_ZN7RunTask13search_slalomEP14t_motion_paramPK7t_paramP15t_machine_paramS6_f+0x242>
+			Indicate_LED(0x04);
+		}
 
 	}
-
-
 
 }
  8002f38:	e021      	b.n	8002f7e <_ZN7RunTask13search_slalomEP14t_motion_paramPK7t_paramP15t_machine_paramS6_f+0x286>
@@ -4903,6 +4903,9 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
  8002f98:	0802b1d8 	.word	0x0802b1d8
 
 08002f9c <_ZN7RunTask14is_exe_runTaskEv>:
+			is_runTask = False;
+	}
+}
 
 t_bool RunTask::is_exe_runTask()
 {

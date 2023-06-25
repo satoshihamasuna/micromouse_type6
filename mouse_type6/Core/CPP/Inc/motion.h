@@ -44,6 +44,7 @@ class motion_plan
 		void search_straight(motion_task *move_task,float len_target,float acc,float max_sp,float end_sp);
 		void pivot_turn(motion_task *move_task,float rad_target,float rad_acc,float rad_velo);
 		void search_slalom(motion_task *move_task,const t_param *turn_param);
+		void fix_wall(motion_task *move_task,float set_time);
 		void stop_brake();
 };
 

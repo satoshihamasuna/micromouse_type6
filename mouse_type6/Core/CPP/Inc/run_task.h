@@ -38,6 +38,7 @@ typedef enum{
 	Search_slalom_L		= 24,
 	run_brake			= 25,
 	motor_free			= 26,
+	Fix_wall			= 27,
 }t_run_pattern;
 
 
@@ -69,6 +70,7 @@ class RunTask
 		void search_straight(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void search_slalom(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
+		void fix_wall(t_machine_param *target_,t_machine_param *machine_,float *run_time,float run_time_limit,float delta_t_ms);
 		void straight();
 		void long_turn();
 		void turn_v90();

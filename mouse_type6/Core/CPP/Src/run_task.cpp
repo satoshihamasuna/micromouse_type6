@@ -10,6 +10,7 @@
 #include "run_task.h"
 #include "macro.h"
 #include "turn_table.h"
+#include "sensing_task.h"
 
 #define BRAKE_TIME_LIMIT (500)
 
@@ -196,8 +197,66 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 
 	}
 
+}
 
+void RunTask::fix_wall(t_machine_param *target_,t_machine_param *machine_,float *run_time,float run_time_limit,float delta_t_ms)
+{
+	is_runTask = True;
 
+	if(SensingTask::getInstance().sen_fr.distance < 70.0 && SensingTask::getInstance().sen_fl.distance < 70.0)
+	{
+			float sp_err = ((SensingTask::getInstance().sen_fr.distance - 45.0) + (SensingTask::getInstance().sen_fl.distance - 45.0))/2.0f;
+			float om_err = ((SensingTask::getInstance().sen_fr.distance - 45.0) - (SensingTask::getInstance().sen_fl.distance - 45.0))/2.0f;
+
+			target_->accel = (1.0 * sp_err - 100.0*target_->velo);
+			//target.velo = 0.05 * sp_err;//veloだったら0.05
+			float max_set_velo = 0.3;
+			if(target_->velo >=  max_set_velo)
+			{
+				target_->accel = 0.0;
+				target_->velo = max_set_velo;
+			}
+			else if(target_->velo <= -max_set_velo){
+				target_->accel = 0.0;
+				target_->velo = -max_set_velo;
+			}
+
+			target_->rad_accel = (5.0*om_err - 20.0*target_->rad_velo);
+			//target->rad_velo = 0.1*om_err;////veloだったら0.5
+			float max_set_rad_velo = 10.0;
+			if(target_->rad_velo >= max_set_rad_velo)
+			{
+				target_->rad_accel = 0.0;
+				target_->rad_velo = max_set_rad_velo;
+			}
+			else if(target_->rad_velo <= -max_set_rad_velo)
+			{
+				target_->rad_accel = 0.0;
+				target_->rad_velo = -max_set_rad_velo;
+			}
+
+		}
+		else
+		{
+			target_->accel = 0.0f;
+			target_->velo = 0.0f;
+			//max_set_velo = 0.0f;
+
+			target_->rad_velo = 0.0f;
+			target_->rad_accel = 0.0f;
+			//max_set_rad_velo = 0.0f;
+		}
+
+	*run_time = *run_time + delta_t_ms;
+	if(*run_time > run_time_limit)
+	{
+		target_->accel = 0.0f;
+		target_->velo = 0.0f;
+		target_->rad_velo = 0.0f;
+		target_->rad_accel = 0.0f;
+		if(*run_time > run_time_limit + 100)
+			is_runTask = False;
+	}
 }
 
 t_bool RunTask::is_exe_runTask()
