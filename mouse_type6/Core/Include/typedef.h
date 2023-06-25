@@ -120,7 +120,11 @@ typedef struct{
 typedef struct{
 	int16_t value;
 	t_bool is_wall;
+	t_bool is_controll;
 	float distance;
+	float controll_th;
+	uint16_t controll_cnt;
+	float error;
 }t_sensor;
 
 

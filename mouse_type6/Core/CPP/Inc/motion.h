@@ -31,6 +31,7 @@ class motion_task:public Singleton<motion_task>
 		void motionControll();
 		void motionPostControll();
 		t_bool is_controll_enable();
+
 };
 
 class motion_plan

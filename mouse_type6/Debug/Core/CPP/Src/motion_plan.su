@@ -1,7 +1,7 @@
-run_task.h:80:8:void RunTask::reset_brake_time()	16	static
+run_task.h:81:8:void RunTask::reset_brake_time()	16	static
 motion_plan.cpp:13:6:void motion_plan::motion_start(motion_task*)	16	static
 motion_plan.cpp:27:6:void motion_plan::free_rotation(motion_task*)	16	static
 motion_plan.cpp:34:6:void motion_plan::search_straight(motion_task*, float, float, float, float)	88	static
-motion_plan.cpp:64:6:void motion_plan::pivot_turn(motion_task*, float, float, float)	88	static
-motion_plan.cpp:91:6:void motion_plan::search_slalom(motion_task*, const t_param*)	80	static
-motion_plan.cpp:118:6:void motion_plan::fix_wall(motion_task*, float)	80	static
+motion_plan.cpp:65:6:void motion_plan::pivot_turn(motion_task*, float, float, float)	88	static
+motion_plan.cpp:94:6:void motion_plan::search_slalom(motion_task*, const t_param*)	80	static
+motion_plan.cpp:122:6:void motion_plan::fix_wall(motion_task*, float)	80	static

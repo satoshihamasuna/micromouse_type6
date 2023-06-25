@@ -65,6 +65,7 @@ class RunTask
 		float  run_turn_table_time = 0.0f;
 		//const t_param *turn_param;
 	public:
+		t_bool is_wallControl_Enable = False;
 		t_bool is_exe_runTask();
 		void MotionFree(float *run_time,float run_time_limit);
 		void search_straight(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);

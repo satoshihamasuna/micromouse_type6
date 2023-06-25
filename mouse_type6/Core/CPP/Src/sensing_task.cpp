@@ -35,6 +35,7 @@ void SensingTask::IrSensorSet()
 	sen_l.value  =  Sensor_GetValue(sensor_sl);
 	sen_r.value  =  Sensor_GetValue(sensor_sr);
 	IrSensorDistanceSet();
+	IrSensorWallSet();
 }
 
 float SensingTask::Sensor_CalcDistance(t_sensor_dir dir,int16_t value)
@@ -115,6 +116,47 @@ void SensingTask::IrSensorDistanceSet()
 	sen_fr.distance = Sensor_CalcDistance(sensor_fr,sen_fr.value);
 	sen_l.distance = Sensor_CalcDistance(sensor_sl,sen_l.value);
 	sen_r.distance = Sensor_CalcDistance(sensor_sr,sen_r.value);
+}
+
+void SensingTask::IrSensorWallSet()
+{
+	sen_fr.is_wall 	= (sen_fr.distance <= FRONT_THRESHOLD)? True:False;
+	sen_fl.is_wall 	= (sen_fl.distance <= FRONT_THRESHOLD)? True:False;
+	sen_r.is_wall 	= (sen_r.distance <= SIDE_THRESHOLD)? True:False;
+	sen_l.is_wall 	= (sen_l.distance <= SIDE_THRESHOLD)? True:False;
+
+	sen_fr.controll_cnt = (sen_fr.is_wall == True) ? sen_fr.controll_cnt + 1 : 0;
+	sen_fl.controll_cnt = (sen_fl.is_wall == True) ? sen_fl.controll_cnt + 1 : 0;
+	sen_r.controll_cnt = (sen_r.is_wall == True) ? sen_r.controll_cnt + 1 : 0;
+	sen_l.controll_cnt = (sen_l.is_wall == True) ? sen_l.controll_cnt + 1 : 0;
+
+	sen_fr.controll_th = (sen_fr.controll_cnt > 10) ? FRONT_THRESHOLD : 90.0;
+	sen_fl.controll_th = (sen_fl.controll_cnt > 10) ? FRONT_THRESHOLD : 90.0;
+	sen_r.controll_th = (sen_r.controll_cnt > 10) ? SIDE_THRESHOLD: 45.0;
+	sen_l.controll_th = (sen_l.controll_cnt > 10) ? SIDE_THRESHOLD: 45.0;
+
+	sen_r.is_controll 	= (sen_r.is_wall == True && sen_r.distance <= sen_r.controll_th)? True:False;
+	sen_l.is_controll 	= (sen_l.is_wall == True && sen_l.distance <= sen_l.controll_th)? True:False;
+
+	sen_r.error	= (sen_r.is_controll == True) ? sen_r.distance - 45.0 : 0.0;
+	sen_l.error	= (sen_l.is_controll == True) ? sen_l.distance - 45.0 : 0.0;
+
+}
+
+void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,float delta_tms)
+{
+	float ir_rad_acc_controll = 0.0;
+	if(sen_r.is_controll == True && sen_l.is_controll == True)
+	{
+		ir_rad_acc_controll = (sen_l.error - sen_r.error)/2.0;
+	}
+	else
+	{
+		ir_rad_acc_controll = (sen_l.error - sen_r.error);
+	}
+
+	target_->rad_accel = (3.0)*ir_rad_acc_controll-(target_->rad_velo*30.0);
+	target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
 }
 
 int16_t SensingTask::IrSensor_Avg()

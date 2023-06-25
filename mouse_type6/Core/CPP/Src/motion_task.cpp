@@ -10,12 +10,14 @@
 #include "run_task.h"
 #include "index.h"
 #include "typedef.h"
+#include "sensing_task.h"
 
 void motion_task::motion_inInterrupt(){
 	switch(run_task)
 	{
 		case Search_st_section:
 			rT.search_straight(mt_set, &target, &mouse, 1.0);
+			//SensingTask::getInstance().SetWallControll_RadVelo(&target,1.0);
 			break;
 		case Search_st_half:
 			break;
@@ -41,6 +43,10 @@ void motion_task::motion_inInterrupt(){
 				Motor_SetDuty_Left(0);
 				Motor_SetDuty_Right(0);
 			break;
+	}
+	if(rT.is_wallControl_Enable == True)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&target,1.0);
 	}
 }
 

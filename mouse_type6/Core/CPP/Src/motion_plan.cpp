@@ -59,6 +59,7 @@ void motion_plan::search_straight(motion_task *move_task,float len_target,float 
 	move_task->target.radian = 0.0;
 	move_task->rT.reset_brake_time();
 	move_task->_turn_param = nullptr;
+	move_task->rT.is_wallControl_Enable = True;
 }
 
 void motion_plan::pivot_turn(motion_task *move_task,float rad_target,float rad_acc,float rad_velo)
@@ -86,6 +87,8 @@ void motion_plan::pivot_turn(motion_task *move_task,float rad_target,float rad_a
 	move_task->_turn_param = nullptr;
 	move_task->target.length = 0.0;
 	move_task->target.radian = 0.0;
+	move_task->rT.is_wallControl_Enable = False;
+
 }
 
 void motion_plan::search_slalom(motion_task *move_task,const t_param *turn_param)
@@ -113,6 +116,7 @@ void motion_plan::search_slalom(motion_task *move_task,const t_param *turn_param
 	move_task->_turn_param = turn_param;
 	move_task->target.length = 0.0;
 	move_task->target.radian = 0.0;
+	move_task->rT.is_wallControl_Enable = True;
 }
 
 void motion_plan::fix_wall(motion_task *move_task,float set_time)
@@ -142,4 +146,6 @@ void motion_plan::fix_wall(motion_task *move_task,float set_time)
 	move_task->target.radian = 0.0;
 	move_task->run_time_limit = set_time;
 	move_task->run_time = 0.0;
+	move_task->rT.is_wallControl_Enable = False;
+
 }

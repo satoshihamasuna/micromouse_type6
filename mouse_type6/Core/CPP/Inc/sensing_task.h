@@ -11,6 +11,9 @@
 #include "singleton.h"
 #include "typedef.h"
 
+#define SIDE_THRESHOLD		(65.0)
+#define FRONT_THRESHOLD		(115.0)
+
 class SensingTask:public Singleton<SensingTask>
 {
 	private:
@@ -21,6 +24,8 @@ class SensingTask:public Singleton<SensingTask>
 		void IrSensorSet();
 		void IrSensorDistanceSet();
 		int16_t IrSensor_Avg();
+		void IrSensorWallSet();
+		void SetWallControll_RadVelo(t_machine_param *target_,float delta_tms);
 };
 
 
