@@ -29,7 +29,7 @@ make_map::make_map(wall_class *wall_property_,ring_queue<1024,t_MapNode> *maze_q
 void make_map::init_map(int x, int y,int goal_size){
 	for( int i = 0; i < MAZE_SIZE_X ; i++ ){
 		for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
-			map[i][j] = MAZE_SIZE;
+			map[i][j] = MAZE_SIZE-1;
 		}
 	}
 
@@ -117,3 +117,22 @@ void make_map::make_map_queue(int x, int y,t_position expand_end,int size,int ma
 }
 
 
+void make_map::Display()
+{
+	for( int y = MAZE_SIZE_Y - 1 ; y >= 0 ; y-- ){
+		for(int x = 0; x < MAZE_SIZE_X ; x++ ){
+			if(wall_property->wall[x][y].north == WALL || wall_property->wall[x][y].north == VWALL)	{	printf("+---");	HAL_Delay(10);	}
+			else							{	printf("+   "); HAL_Delay(10);	}
+			//if(x == MAZE_SIZE_X - 1)		{	printf("+\n");	HAL_Delay(5);	}
+		}
+		printf("+\n");	HAL_Delay(10);
+
+		for(int x = 0; x < MAZE_SIZE_X ; x++ ){
+			if(wall_property->wall[x][y].west == WALL || wall_property->wall[x][y].west == VWALL)		{	printf("|%3x",map[x][y]);	HAL_Delay(10);	}
+			else							{	printf(" %3x",map[x][y]);	HAL_Delay(10);	}
+			//if(x == MAZE_SIZE_X - 1)		{	printf("|\n");				HAL_Delay(5);	}
+		}
+		printf("|\n");				HAL_Delay(5);
+	}
+	for(int x = 0; x < MAZE_SIZE_X ; x++)	{	printf("+---"); HAL_Delay(5);	}	printf("+\n");
+}

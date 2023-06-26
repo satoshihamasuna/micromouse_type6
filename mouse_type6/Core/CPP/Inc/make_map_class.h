@@ -22,6 +22,7 @@ class make_map{
 		void init_map(int x, int y,int goal_size);
 		void expand(t_MapNode n,int mask);
 		void make_map_queue(int x, int y,t_position expand_end,int size,int mask);
+		void Display();
 };
 
 

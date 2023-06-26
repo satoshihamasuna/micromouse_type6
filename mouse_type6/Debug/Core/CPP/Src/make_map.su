@@ -4,6 +4,7 @@ make_map.cpp:23:1:make_map::make_map(wall_class*, ring_queue<1024, t_MapNode>*)	
 make_map.cpp:29:6:void make_map::init_map(int, int, int)	40	static
 make_map.cpp:44:6:void make_map::expand(t_MapNode, int)	80	static
 make_map.cpp:97:6:void make_map::make_map_queue(int, int, t_position, int, int)	72	static
-make_map.cpp:117:1:void __static_initialization_and_destruction_0(int, int)	16	static
-make_map.cpp:117:1:cpp)	8	static
-make_map.cpp:117:1:cpp)	8	static
+make_map.cpp:120:6:void make_map::Display()	32	static
+make_map.cpp:138:1:void __static_initialization_and_destruction_0(int, int)	16	static
+make_map.cpp:138:1:cpp)	8	static
+make_map.cpp:138:1:cpp)	8	static

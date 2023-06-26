@@ -12,7 +12,7 @@
 #include "typedef.h"
 
 #define SIDE_THRESHOLD		(65.0)
-#define FRONT_THRESHOLD		(115.0)
+#define FRONT_THRESHOLD		(120.0)
 
 class SensingTask:public Singleton<SensingTask>
 {

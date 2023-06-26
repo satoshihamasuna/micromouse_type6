@@ -38,8 +38,8 @@ void CPP_Main()
 	  motion_plan mp;
 	  Search solve_maze;
 	  wall_class wall_data(&SensingTask::getInstance());
-	  make_map map_data(&wall_data,&maze_q);
 	  wall_data.init_maze();
+	  make_map map_data(&wall_data,&maze_q);
 
 	  q.push(0);
 	  while (1)
@@ -147,6 +147,22 @@ void CPP_Main()
 						}
 						break;
 			  	  case (ENABLE_MODE3|0x07):
+						if(SensingTask::getInstance().IrSensor_Avg() > 2500)
+						{
+							for(int i = 0;i < 10;i++)
+							{
+								(i%2 == 0) ? Indicate_LED(ENABLE_MODE3|0x06):Indicate_LED(0x00|0x00);
+								HAL_Delay(50);
+							}
+							t_position start,goal;
+					  		start.x = start.y = 0;start.dir = North;
+					  		goal.x =0, goal.y = 3;
+							map_data.init_map(goal.x, goal.y, 1);
+							map_data.make_map_queue(goal.x, goal.y, start, 1, 0x01);
+							map_data.Display();
+							Mode_Disable();
+
+						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x08):
 			  			  break;
