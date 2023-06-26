@@ -1,2 +1,3 @@
 wall_class.cpp:13:6:void wall_class::init_maze()	32	static
-wall_class.cpp:37:6:void wall_class::set_wall(t_position)	40	static
+wall_class.cpp:37:8:t_bool wall_class::is_unknown(uint16_t, uint16_t)	16	static
+wall_class.cpp:49:6:void wall_class::set_wall(t_position)	40	static

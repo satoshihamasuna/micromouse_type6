@@ -10,8 +10,10 @@
 #include "make_map_class.h"
 #include "typedef.h"
 #include "index.h"
+#include "Kalman_filter.h"
 #include "search_class.h"
 #include "adachi_class.h"
+#include "run_param.h"
 //#include "glob_var_machine.h"
 t_bool Search::i_am_goal(int x,int y,int gx,int gy,int goal_size){
 	t_bool flag = False;
@@ -42,24 +44,45 @@ t_bool Search::i_am_goal(t_position pos,t_position g_pos,int goal_size)
 }
 
 t_position Search::search_adachi_1(	t_position start_pos,t_position goal_pos,int goal_size,
-									wall_class *_wall,make_map *_map,motion_plan *_motion)
+									wall_class *_wall,make_map *_map,motion_plan *motion_plan)
 {
 	t_position tmp_my_pos = start_pos;
 	t_position my_position = tmp_my_pos;
 
 	adachi search_algolithm(_wall, _map);
 
+	_map->init_map(goal_pos.x, goal_pos.y, goal_size);
+	motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+	motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
+	KalmanFilter::getInstance().filter_init();
+
 	int direction = search_algolithm.get_next_dir(my_position, 0x01, &tmp_my_pos);
 	my_position = tmp_my_pos;
 	switch(direction)
 	{
-		case front:
+		case Front:
+			motion_plan->search_straight(&motion_task::getInstance(), 45.0, 4.0, 0.30f, 0.30f);
+			_map->make_map_queue(goal_pos.x, goal_pos.y, my_position, goal_size, 0x01);
+			while(motion_task::getInstance().run_task !=No_run){}
 			break;
-		case right:
+		case Right:
+			motion_plan->pivot_turn(&motion_task::getInstance(), DEG2RAD(-90.0f), -20.0*PI, -2.0*PI);
+			while(motion_task::getInstance().run_task !=No_run){}
+			motion_plan->search_straight(&motion_task::getInstance(), 45.0, 4.0, 0.30f, 0.30f);
+			//_map->make_map_queue(goal_pos.x, goal_pos.y, my_position, goal_size, 0x01);
+			while(motion_task::getInstance().run_task !=No_run){}
 			break;
-		case left:
+		case Left:
+			motion_plan->pivot_turn(&motion_task::getInstance(), DEG2RAD(90.0f), 20.0*PI, 2.0*PI);
+			while(motion_task::getInstance().run_task !=No_run){}
+			motion_plan->search_straight(&motion_task::getInstance(), 45.0, 4.0, 0.30f, 0.30f);
+			while(motion_task::getInstance().run_task !=No_run){}
 			break;
-		case rear:
+		case Rear:
+			motion_plan->pivot_turn(&motion_task::getInstance(), DEG2RAD(180.0f), 20.0*PI, 2.0*PI);
+			while(motion_task::getInstance().run_task !=No_run){}
+			motion_plan->search_straight(&motion_task::getInstance(), 45.0, 4.0, 0.30f, 0.30f);
+			while(motion_task::getInstance().run_task !=No_run){}
 			break;
 
 	}
@@ -67,22 +90,37 @@ t_position Search::search_adachi_1(	t_position start_pos,t_position goal_pos,int
 	while(i_am_goal(my_position, goal_pos, goal_size) != True)
 	{
 		direction = search_algolithm.get_next_dir(my_position, 0x01, &tmp_my_pos);
-		if(_wall->is_unknown(my_position.x, my_position.y))
+		if(_wall->is_unknown(my_position.x, my_position.y) == True)
 		{
 				_wall->set_wall(my_position);
 		}
 		my_position = tmp_my_pos;
 		switch(direction)
 		{
-			case front:
+			case Front:
+				motion_plan->search_straight(&motion_task::getInstance(), 90.0, 4.0, 0.30f, 0.30f);
+				while(motion_task::getInstance().run_task !=No_run){}
 				break;
-			case right:
+			case Right:
+				motion_plan->searchSlalom(&motion_task::getInstance(),&param_R90_search);
+		  	    while(motion_task::getInstance().run_task !=No_run){}
 				break;
-			case left:
+			case Left:
+				motion_plan->searchSlalom(&motion_task::getInstance(),&param_L90_search);
+		  	    while(motion_task::getInstance().run_task !=No_run){}
 				break;
-			case rear:
+			case Rear:
+				motion_plan->search_straight(&motion_task::getInstance(), 45.0, 4.0, 0.30f, 0.00f);
+				while(motion_task::getInstance().run_task !=No_run){}
+				motion_plan->pivot_turn(&motion_task::getInstance(), DEG2RAD(180.0f), 20.0*PI, 2.0*PI);
+				while(motion_task::getInstance().run_task !=No_run){}
+				motion_plan->search_straight(&motion_task::getInstance(), 45.0, 4.0, 0.30f, 0.30f);
+				while(motion_task::getInstance().run_task !=No_run){}
 				break;
 		}
 	}
+	_wall->set_wall(my_position);
+	motion_plan->search_straight(&motion_task::getInstance(), 45.0, 4.0, 0.30f, 0.0f);
+	while(motion_task::getInstance().run_task !=No_run){}
 	return my_position;
 }

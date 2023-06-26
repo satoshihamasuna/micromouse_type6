@@ -1,8 +1,15 @@
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 adachi_class.h:22:3:adachi::adachi(wall_class*, make_map*)	24	static
-search.cpp:16:8:t_bool Search::i_am_goal(int, int, int, int, int)	32	static
-search.cpp:28:8:t_bool Search::i_am_goal(t_position, t_position, int)	48	static
-search.cpp:44:12:t_position Search::search_adachi_1(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	48	static
-search.cpp:88:1:void __static_initialization_and_destruction_0(int, int)	16	static
-search.cpp:88:1:cpp)	8	static
-search.cpp:88:1:cpp)	8	static
+search.cpp:18:8:t_bool Search::i_am_goal(int, int, int, int, int)	32	static
+search.cpp:30:8:t_bool Search::i_am_goal(t_position, t_position, int)	48	static
+search.cpp:46:12:t_position Search::search_adachi_1(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	56	static
+run_task.h:60:7:constexpr RunTask::RunTask()	16	static
+controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
+controll.h:28:7:constexpr mouse_Controll::mouse_Controll()	16	static
+motion.h:18:7:motion_task::motion_task()	16	static
+singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = motion_task]	8	static
+Kalman_filter.h:14:7:KalmanFilter::KalmanFilter()	16	static
+singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = KalmanFilter]	8	static
+search.cpp:126:1:void __static_initialization_and_destruction_0(int, int)	16	static
+search.cpp:126:1:cpp)	8	static
+search.cpp:126:1:cpp)	8	static

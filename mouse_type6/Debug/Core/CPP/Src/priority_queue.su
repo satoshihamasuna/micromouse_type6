@@ -1,5 +1,16 @@
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 priority_queue.cpp:16:17:bool less_than(T, T) [with T = t_MapNode]	24	static
-priority_queue.cpp:116:1:void __static_initialization_and_destruction_0(int, int)	16	static
-priority_queue.cpp:116:1:cpp)	8	static
-priority_queue.cpp:116:1:cpp)	8	static
+priority_queue.cpp:34:48:uint16_t Priority_queue<SIZE, T>::queue_length() [with unsigned int SIZE = 10; T = int]	16	static
+priority_queue.cpp:79:44:void Priority_queue<SIZE, T>::min_heapify(uint16_t) [with unsigned int SIZE = 10; T = int]	24	static
+priority_queue.cpp:71:44:void Priority_queue<SIZE, T>::swap(T*, T*) [with unsigned int SIZE = 10; T = int]	32	static
+priority_queue.cpp:23:39:Priority_queue<SIZE, T>::Priority_queue() [with unsigned int SIZE = 10; T = int]	16	static
+priority_queue.cpp:57:44:void Priority_queue<SIZE, T>::push(T) [with unsigned int SIZE = 10; T = int]	16	static
+priority_queue.cpp:46:42:T Priority_queue<SIZE, T>::heap_pop() [with unsigned int SIZE = 10; T = int]	24	static
+priority_queue.cpp:63:44:void Priority_queue<SIZE, T>::heap_push(T) [with unsigned int SIZE = 10; T = int]	16	static
+priority_queue.cpp:109:45:void Priority_queue<SIZE, T>::build_heap() [with unsigned int SIZE = 10; T = int]	24	static
+priority_queue.cpp:29:44:void Priority_queue<SIZE, T>::queue_init() [with unsigned int SIZE = 10; T = int]	16	static
+priority_queue.cpp:38:44:bool Priority_queue<SIZE, T>::is_Empty_queue() [with unsigned int SIZE = 10; T = int]	16	static
+priority_queue.cpp:11:27:bool less_than(T, T) [with T = int]	16	static
+priority_queue.cpp:118:1:void __static_initialization_and_destruction_0(int, int)	16	static
+priority_queue.cpp:118:1:cpp)	8	static
+priority_queue.cpp:118:1:cpp)	8	static

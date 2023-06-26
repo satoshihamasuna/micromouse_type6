@@ -1,3 +1,7 @@
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 adachi.cpp:12:12:t_position pos_set(uint8_t, uint8_t, t_direction)	24	static
 adachi.cpp:21:5:int adachi::get_priority(t_position, t_position)	32	static
 adachi.cpp:42:5:int adachi::get_next_dir(t_position, int, t_position*)	56	static
+adachi.cpp:149:1:void __static_initialization_and_destruction_0(int, int)	16	static
+adachi.cpp:149:1:cpp)	8	static
+adachi.cpp:149:1:cpp)	8	static

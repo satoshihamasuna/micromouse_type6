@@ -4,10 +4,10 @@
  *  Created on: 2023/06/10
  *      Author: sato1
  */
-#include <queue_class.h>
+#include <priority_queue.h>
 #include "iostream"
 #include "typedef.h"
-
+#include <stdio.h>
 template<typename T> bool less_than(T a,T b)
 {
      return ((a < b) ? true : false);
@@ -17,6 +17,8 @@ template<> bool less_than(t_MapNode a,t_MapNode b)
 {
      return ((a.cost < b.cost) ? true : false);
 }
+
+template class Priority_queue<10,int>;
 
 template<std::size_t SIZE,typename T> Priority_queue<SIZE,T>::Priority_queue()
 {
@@ -114,3 +116,4 @@ template<std::size_t SIZE,typename T> void  Priority_queue<SIZE,T>::build_heap()
     	}
     }
 }
+

@@ -27,10 +27,10 @@ typedef enum{
 }t_wall_state;
 
 typedef enum{
-	front = 0,
-	right = 1,
-	rear  = 2,
-	left  = 3,
+	Front = 0,
+	Right = 1,
+	Rear  = 2,
+	Left  = 3,
 }t_local_dir;
 
 typedef enum{
@@ -48,12 +48,12 @@ typedef enum{
 
 typedef enum{
 	North 		= 0,
-	NorthEast 	= 1,
-	East		= 2,
-	SouthEast	= 3,
-	South		= 4,
-	SouthWest   = 5,
-	West 		= 6,
+	East		= 1,
+	South		= 2,
+	West 		= 3,
+	NorthEast 	= 4,
+	SouthEast	= 5,
+	SouthWest   = 6,
 	NorthWest 	= 7,
 	Dir_None	= 8,
 }t_direction;

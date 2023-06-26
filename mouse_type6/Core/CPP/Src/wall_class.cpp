@@ -34,6 +34,18 @@ void wall_class::init_maze(){
 
 }
 
+t_bool wall_class::is_unknown(uint16_t x,uint16_t y)
+{
+	if((wall[x][y].north == UNKNOWN) || (wall[x][y].east == UNKNOWN) || (wall[x][y].south == UNKNOWN) || (wall[x][y].west == UNKNOWN))
+	{			//どこかの壁情報が不明のままであれば
+		return True;	//未探索
+	}
+	else
+	{
+		return False;
+	}
+}
+
 void wall_class::set_wall(t_position pos)
 {
 	int n_write,s_write,e_write,w_write;

@@ -91,7 +91,7 @@ void motion_plan::pivot_turn(motion_task *move_task,float rad_target,float rad_a
 
 }
 
-void motion_plan::search_slalom(motion_task *move_task,const t_param *turn_param)
+void motion_plan::searchSlalom(motion_task *move_task,const t_param *turn_param)
 {
 	t_motion_param mt_set_;
 	mt_set_.accel 			=  0.0f;

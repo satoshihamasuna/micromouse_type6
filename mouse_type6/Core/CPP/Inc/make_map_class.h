@@ -10,19 +10,18 @@
 
 #include "typedef.h"
 #include "macro.h"
+#include "queue_class.h"
 #include "wall_class.h"
 
 class make_map{
 	public:
+		make_map(wall_class *wall_property_,ring_queue<1024,t_MapNode> *maze_q_);
 		wall_class *wall_property;
-		make_map(wall_class *wall_property_)
-		{
-			wall_property = wall_property_;
-		}
+		ring_queue<1024,t_MapNode> *maze_q;
 		uint16_t map[MAZE_SIZE_X][MAZE_SIZE_Y];
-		void init_map(int *x, int *y,int goal_size);
+		void init_map(int x, int y,int goal_size);
 		void expand(t_MapNode n,int mask);
-		void make_map_queue(int *x, int *y,t_position expand_end,int size,int mask);
+		void make_map_queue(int x, int y,t_position expand_end,int size,int mask);
 };
 
 

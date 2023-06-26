@@ -16,9 +16,17 @@
 #include "log_data.h"
 #include "Kalman_filter.h"
 #include "run_param.h"
+#include "search_class.h"
+#include "make_map_class.h"
+#include "wall_class.h"
+#include "queue_class.h"
+#include "priority_queue.h"
+
 
 void CPP_Main()
 {
+	  Priority_queue<10,int> q;
+	  ring_queue<1024,t_MapNode> maze_q;
 	  imu_initialize();
 	  Sensor_Initialize();
 	  Motor_Initialize();
@@ -28,8 +36,15 @@ void CPP_Main()
 	  IMU_read_DMA_Start();
 	  Mode_Init();
 	  motion_plan mp;
+	  Search solve_maze;
+	  wall_class wall_data(&SensingTask::getInstance());
+	  make_map map_data(&wall_data,&maze_q);
+	  wall_data.init_maze();
+
+	  q.push(0);
 	  while (1)
 	  {
+
 		  	  Battery_LimiterVoltage();
 			  Mode_Change_ENC();
 			  HAL_Delay(5);
@@ -80,7 +95,7 @@ void CPP_Main()
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
-					  		  mp.search_slalom(&motion_task::getInstance(), &param_R90_search);
+					  		  mp.searchSlalom(&motion_task::getInstance(),&param_R90_search);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
@@ -113,7 +128,24 @@ void CPP_Main()
 						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x06):
-			  			  break;
+						if(SensingTask::getInstance().IrSensor_Avg() > 2500)
+						{
+							for(int i = 0;i < 10;i++)
+							{
+								(i%2 == 0) ? Indicate_LED(ENABLE_MODE3|0x06):Indicate_LED(0x00|0x00);
+								HAL_Delay(50);
+							}
+							Indicate_LED(ENABLE_MODE3|0x06);
+							motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+							motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.005, 0.0);
+					  		KalmanFilter::getInstance().filter_init();
+					  		t_position start,goal;
+					  		start.x = start.y = 0;start.dir = North;
+					  		goal.x =0, goal.y = 3;
+					  		solve_maze.search_adachi_1(start, goal, 1, &wall_data, &map_data,&mp);
+					  		Mode_Disable();
+						}
+						break;
 			  	  case (ENABLE_MODE3|0x07):
 			  			  break;
 			  	  case (ENABLE_MODE3|0x08):

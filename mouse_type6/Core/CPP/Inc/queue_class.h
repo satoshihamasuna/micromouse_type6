@@ -9,26 +9,9 @@
 #define CPP_INC_QUEUE_CLASS_H_
 
 #include <iostream>
-
-
-template<std::size_t SIZE,typename T> class Priority_queue{
-	private:
-		uint16_t queue_length();
-	    void min_heapify(uint16_t parent_pos);
-	    void swap(T *a,T *b);
-	public:
-	    void push(T push_data);
-		T heap_pop();
-		void heap_push(T push_data);
-		void build_heap();
-		void queue_init();
-		bool is_Empty_queue();
-		Priority_queue();
-		int16_t tail;
-	    T buff[SIZE];
-};
-
-template<std::size_t SIZE,typename T> class ring_queue{
+#include "typedef.h"
+template<std::size_t SIZE,typename T>
+class ring_queue{
 	private:
 		T buff[SIZE];
 		int16_t tail;
@@ -36,13 +19,30 @@ template<std::size_t SIZE,typename T> class ring_queue{
 		int16_t length;
 		const uint16_t cap = SIZE;
 	public:
-		//ring_queue();
-		//~ring_queue();
+		ring_queue();
 		T pop();
 		void push(T push_data);
 		int queue_length();
 		void queue_reset();
 };
+
+/*
+class ring_queue{
+	private:
+		t_MapNode buff[1024];
+		int16_t tail;
+		int16_t head;
+		int16_t length;
+		const uint16_t cap = 1024;
+	public:
+		ring_queue();
+		t_MapNode pop();
+		void push(t_MapNode push_data);
+		int queue_length();
+		void queue_reset();
+};
+*/
+//template class ring_queue<1024u,t_MapNode>;
 
 
 #endif /* CPP_INC_QUEUE_CLASS_H_ */

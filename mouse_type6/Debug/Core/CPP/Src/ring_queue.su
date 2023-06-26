@@ -1,4 +1,9 @@
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
-ring_queue.cpp:53:1:void __static_initialization_and_destruction_0(int, int)	16	static
-ring_queue.cpp:53:1:cpp)	8	static
-ring_queue.cpp:53:1:cpp)	8	static
+ring_queue.cpp:15:39:ring_queue<SIZE, T>::ring_queue() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
+ring_queue.cpp:24:41:T ring_queue<SIZE, T>::pop() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
+ring_queue.cpp:35:44:void ring_queue<SIZE, T>::push(T) [with unsigned int SIZE = 1024; T = t_MapNode]	24	static
+ring_queue.cpp:49:43:int ring_queue<SIZE, T>::queue_length() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
+ring_queue.cpp:42:44:void ring_queue<SIZE, T>::queue_reset() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
+ring_queue.cpp:52:1:void __static_initialization_and_destruction_0(int, int)	16	static
+ring_queue.cpp:52:1:cpp)	8	static
+ring_queue.cpp:52:1:cpp)	8	static
