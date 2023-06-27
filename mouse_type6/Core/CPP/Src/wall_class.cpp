@@ -164,3 +164,21 @@ void wall_class::set_wall(t_position pos)
 		wall[pos.x-1][pos.y].east = w_write;	//反対側から見た壁を書き込み
 	}
 }
+
+t_wall_state wall_class::get_WallState(t_position pos)
+{
+	switch(pos.dir)
+	{
+		case North:
+			return (t_wall_state)wall[pos.x][pos.y].north;
+		case East:
+			return (t_wall_state)wall[pos.x][pos.y].east;
+		case South:
+			return (t_wall_state)wall[pos.x][pos.y].south;
+		case West:
+			return (t_wall_state)wall[pos.x][pos.y].west;
+		default:
+			return UNKNOWN;
+
+	}
+}

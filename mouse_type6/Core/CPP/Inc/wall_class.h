@@ -47,7 +47,7 @@ class wall_class
 				wall[gx[1]][gy[2]].south = wall[gx[2]][gy[1]].west = wall[gx[1]][gy[0]].north = wall[gx[0]][gy[1]].east = NOWALL;
 			}
 		}
-
+		t_wall_state get_WallState(t_position pos);
 };
 
 
