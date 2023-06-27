@@ -4093,14 +4093,14 @@ void make_map::init_map(int x, int y,int goal_size){
  8002616:	69bb      	ldr	r3, [r7, #24]
  8002618:	2b1f      	cmp	r3, #31
  800261a:	dc0d      	bgt.n	8002638 <_ZN8make_map8init_mapEiii+0x3e>
-			map[i][j] = MAZE_SIZE-1;
+			map[i][j] = MAZE_SIZE;
  800261c:	68fb      	ldr	r3, [r7, #12]
  800261e:	69fa      	ldr	r2, [r7, #28]
  8002620:	0151      	lsls	r1, r2, #5
  8002622:	69ba      	ldr	r2, [r7, #24]
  8002624:	440a      	add	r2, r1
  8002626:	3204      	adds	r2, #4
- 8002628:	f240 31ff 	movw	r1, #1023	; 0x3ff
+ 8002628:	f44f 6180 	mov.w	r1, #1024	; 0x400
  800262c:	f823 1012 	strh.w	r1, [r3, r2, lsl #1]
 		for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
  8002630:	69bb      	ldr	r3, [r7, #24]

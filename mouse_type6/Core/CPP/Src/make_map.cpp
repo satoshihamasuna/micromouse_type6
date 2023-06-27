@@ -29,7 +29,7 @@ make_map::make_map(wall_class *wall_property_,ring_queue<1024,t_MapNode> *maze_q
 void make_map::init_map(int x, int y,int goal_size){
 	for( int i = 0; i < MAZE_SIZE_X ; i++ ){
 		for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
-			map[i][j] = MAZE_SIZE-1;
+			map[i][j] = MAZE_SIZE;
 		}
 	}
 
