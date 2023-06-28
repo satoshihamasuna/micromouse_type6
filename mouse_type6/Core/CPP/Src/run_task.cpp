@@ -53,6 +53,7 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 		if(target_->velo < mt_param.end_velo)
 		{
 			target_->velo = mt_param.end_velo;
+			if(mt_param.end_velo == 0.0f) target_->velo = 0.15;
 			target_->accel = 0.0;
 
 		}

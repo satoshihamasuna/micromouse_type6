@@ -55,11 +55,12 @@ void Interrupt::postprocess()
 
 	if(LogData::getInstance().log_enable == True)
 	{
-		LogData::getInstance().data[0][LogData::getInstance().data_count] = motion_task::getInstance().mouse.velo;
-		LogData::getInstance().data[1][LogData::getInstance().data_count] = motion_task::getInstance().target.velo;
-		LogData::getInstance().data[2][LogData::getInstance().data_count] = motion_task::getInstance().mouse.rad_velo;
-		LogData::getInstance().data[3][LogData::getInstance().data_count] = motion_task::getInstance().target.rad_velo;
+		LogData::getInstance().data[0][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.velo;
+		LogData::getInstance().data[1][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.velo;
+		LogData::getInstance().data[2][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.rad_velo;
+		LogData::getInstance().data[3][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.rad_velo;
 		LogData::getInstance().data_count++;
+		if(LogData::getInstance().data_count++ >= 1000) LogData::getInstance().data_count = 0;
 	}
 	motion_task::getInstance().motionPostControll();
 	IMU_read_DMA_Start();

@@ -29,7 +29,7 @@ void Battery_LimiterVoltage()
 
 	if( battery_voltage_average < BATTERY_LIMIT ) {
 		while( 1 ) {
-			Indicate_LED(0x3F);
+			Indicate_LED(0x01);
 			HAL_Delay(200);
 			Indicate_LED(0x00);
 			HAL_Delay(200);
