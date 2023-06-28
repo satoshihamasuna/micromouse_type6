@@ -12,7 +12,7 @@
 #include "turn_table.h"
 #include "sensing_task.h"
 
-#define BRAKE_TIME_LIMIT (500)
+#define BRAKE_TIME_LIMIT (200)
 
 void RunTask::MotionFree(float *run_time,float run_time_limit)
 {
@@ -50,10 +50,18 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 	{
 		target_->accel = mt_param.deccel;
 		target_->velo  = target_->velo + target_->accel*delta_t_ms/1000.0;
-		if(target_->velo < mt_param.end_velo)
+
+		if(mt_param.end_velo == 0.0f)
+		{
+			if(target_->velo < 0.15)
+			{
+				target_->velo = 0.15;
+				target_->accel = 0.0;
+			}
+		}
+		else if(target_->velo < mt_param.end_velo)
 		{
 			target_->velo = mt_param.end_velo;
-			if(mt_param.end_velo == 0.0f) target_->velo = 0.15;
 			target_->accel = 0.0;
 
 		}

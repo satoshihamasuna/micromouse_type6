@@ -52,20 +52,23 @@ int adachi::get_next_dir(t_position mypos,int mask,t_position *glob_next_pos)
 		if(map_property->map[mypos.x][mypos.y+1] < little)
 		{
 			little = map_property->map[mypos.x][mypos.y+1];
-			//*glob_next_pos = pos_set(mypos.x,mypos.y+1,North);
+			*glob_next_pos = pos_set(mypos.x,mypos.y+1,North);
+			/*
 			glob_next_pos->x 	= mypos.x;
 			glob_next_pos->y 	= mypos.y+1;
 			glob_next_pos->dir	= North;
+			*/
 			priority = tmp_priority;
 		}
 		else if(map_property->map[mypos.x][mypos.y+1] == little)
 		{
 			if(priority < tmp_priority)
 			{
-				//*glob_next_pos = pos_set(mypos.x,mypos.y+1,North);
+				*glob_next_pos = pos_set(mypos.x,mypos.y+1,North);
+				/*
 				glob_next_pos->x 	= mypos.x;
 				glob_next_pos->y 	= mypos.y+1;
-				glob_next_pos->dir	= North;
+				glob_next_pos->dir	= North;*/
 				priority = tmp_priority;
 			}
 		}
@@ -77,20 +80,24 @@ int adachi::get_next_dir(t_position mypos,int mask,t_position *glob_next_pos)
 		if(map_property->map[mypos.x+1][mypos.y] < little)
 		{
 			little = map_property->map[mypos.x+1][mypos.y];
-			//*glob_next_pos = pos_set(mypos.x+1,mypos.y,East);
+			*glob_next_pos = pos_set(mypos.x+1,mypos.y,East);
+			/*
 			glob_next_pos->x 	= mypos.x+1;
 			glob_next_pos->y 	= mypos.y;
 			glob_next_pos->dir	= East;
+			*/
 			priority = tmp_priority;
 		}
 		else if(map_property->map[mypos.x+1][mypos.y] == little)
 		{
 			if(priority < tmp_priority)
 			{
-				//*glob_next_pos = pos_set(mypos.x+1,mypos.y,East);
+				*glob_next_pos = pos_set(mypos.x+1,mypos.y,East);
+				/*
 				glob_next_pos->x 	= mypos.x+1;
 				glob_next_pos->y 	= mypos.y;
 				glob_next_pos->dir	= East;
+				*/
 				priority = tmp_priority;
 			}
 		}
@@ -102,20 +109,24 @@ int adachi::get_next_dir(t_position mypos,int mask,t_position *glob_next_pos)
 		if(map_property->map[mypos.x][mypos.y-1] < little)
 		{
 			little= map_property->map[mypos.x][mypos.y-1];
-			//*glob_next_pos = pos_set(mypos.x,mypos.y-1,South);
+			*glob_next_pos = pos_set(mypos.x,mypos.y-1,South);
+			/*
 			glob_next_pos->x 	= mypos.x;
 			glob_next_pos->y 	= mypos.y-1;
 			glob_next_pos->dir	= South;
+			*/
 			priority = tmp_priority;
 		}
 		else if(map_property->map[mypos.x][mypos.y-1] == little)
 		{
 			if(priority < tmp_priority)
 			{
-				//*glob_next_pos = pos_set(mypos.x,mypos.y-1,South);
+				*glob_next_pos = pos_set(mypos.x,mypos.y-1,South);
+				/*
 				glob_next_pos->x 	= mypos.x;
 				glob_next_pos->y 	= mypos.y-1;
 				glob_next_pos->dir	= South;
+				*/
 				priority = tmp_priority;
 			}
 		}
@@ -127,19 +138,24 @@ int adachi::get_next_dir(t_position mypos,int mask,t_position *glob_next_pos)
 		if(map_property->map[mypos.x-1][mypos.y] < little)
 		{
 			little = map_property->map[mypos.x-1][mypos.y];
-			//*glob_next_pos = pos_set(mypos.x-1,mypos.y,West);
+			*glob_next_pos = pos_set(mypos.x-1,mypos.y,West);
+			/*
 			glob_next_pos->x 	= mypos.x-1;
 			glob_next_pos->y 	= mypos.y;
 			glob_next_pos->dir	= West;
+			*/
 			priority = tmp_priority;
 		}
 		else if(map_property->map[mypos.x-1][mypos.y] == little)
 		{
 			if(priority < tmp_priority)
 			{
+				*glob_next_pos = pos_set(mypos.x-1,mypos.y,West);
+				/*
 				glob_next_pos->x 	= mypos.x-1;
 				glob_next_pos->y 	= mypos.y;
 				glob_next_pos->dir	= West;
+				*/
 				priority = tmp_priority;
 			}
 		}

@@ -92,7 +92,7 @@ void CPP_Main()
 								  HAL_Delay(50);
 							  }
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
+					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.3, 0.001, 0.0);
 					  		  KalmanFilter::getInstance().filter_init();
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
@@ -153,7 +153,8 @@ void CPP_Main()
 					  		t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
 					  		goal.x =0, goal.y = 3;
-					  		solve_maze.search_adachi_1(start, goal, 1, &wall_data, &map_data,&mp);
+					  		t_position return_pos = solve_maze.search_adachi_1(start, goal, 1, &wall_data, &map_data,&mp);
+					  		solve_maze.search_adachi_1(return_pos, start, 1, &wall_data, &map_data,&mp);
 					  		Mode_Disable();
 						}
 						break;

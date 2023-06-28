@@ -52,6 +52,7 @@ t_position Search::search_adachi_1(	t_position start_pos,t_position goal_pos,int
 	adachi search_algolithm(&(*_wall),&(*_map));
 
 	_map->init_map(goal_pos.x, goal_pos.y, goal_size);
+	_map->make_map_queue(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);
 	motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 	motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
 	KalmanFilter::getInstance().filter_init();
@@ -145,5 +146,6 @@ t_position Search::search_adachi_1(	t_position start_pos,t_position goal_pos,int
 	_wall->set_wall(my_position);
 	motion_plan->search_straight(&motion_task::getInstance(), 45.0, 4.0, 0.30f, 0.0f);
 	while(motion_task::getInstance().run_task !=No_run){}
+	HAL_Delay(100);
 	return my_position;
 }
