@@ -1,7 +1,7 @@
 run_task.cpp:17:6:void RunTask::MotionFree(float*, float)	24	static
 run_task.cpp:29:6:void RunTask::search_straight(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
 run_task.cpp:97:6:void RunTask::pivotturn(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
-run_task.cpp:151:6:void RunTask::search_slalom(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	56	static
-run_task.cpp:216:6:void RunTask::fix_wall(t_machine_param*, float*, float, float)	56	static
-run_task.cpp:279:8:t_bool RunTask::is_exe_runTask()	16	static
+run_task.cpp:151:6:void RunTask::search_slalom(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	80	static
+run_task.cpp:223:6:void RunTask::fix_wall(t_machine_param*, float*, float, float)	56	static
+run_task.cpp:286:8:t_bool RunTask::is_exe_runTask()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static
