@@ -45,7 +45,7 @@ void CPP_Main()
 	  while (1)
 	  {
 
-		  	  //Battery_LimiterVoltage();
+		  	  Battery_LimiterVoltage();
 			  Mode_Change_ENC();
 			  HAL_Delay(5);
 			  switch(Mode_State()){
@@ -67,8 +67,16 @@ void CPP_Main()
 			  			  break;
 			  	  case (ENABLE_MODE3|0x02):
 					  	  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+							  for(int i = 0;i < 11;i++)
+							  {
+								  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
+								  HAL_Delay(50);
+							  }
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
+			  				  HAL_Delay(100);
+			  				  FAN_Motor_SetDuty(700);;
+			  				  HAL_Delay(500);
 					  		  KalmanFilter::getInstance().filter_init();
 
 					  		  mp.motion_start(&motion_task::getInstance());
@@ -78,9 +86,12 @@ void CPP_Main()
 					  		  LogData::getInstance().log_enable = True;
 					  		  //mp.search_slalom(&motion_task::getInstance(), &param_L90_search);
 					  		  //while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.search_straight(&motion_task::getInstance(),180.0,4.0,0.3,0.0);
+					  		  mp.search_straight(&motion_task::getInstance(),90.0*8,15.0,2.5,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().log_enable = False;
+			  				  HAL_Delay(100);
+			  				  FAN_Motor_SetDuty(0);;
+			  				  HAL_Delay(500);
 					  		  Mode_Disable();
 					  	   }
 			  			   break;
