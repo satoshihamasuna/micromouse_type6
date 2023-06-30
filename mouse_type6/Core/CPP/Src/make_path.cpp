@@ -129,6 +129,22 @@ t_bool Dijkstra::is_goal_Dijkstra(t_posDijkstra check_pos,t_position goal_pos,ui
 	return False;
 }
 
+void Dijkstra::set_determine(t_posDijkstra set_pos)
+{
+	switch(set_pos.NodePos)
+	{
+		case N_pos:
+			closure[set_pos.x][set_pos.y].North.determine = True;
+			break;
+		case C_pos:
+			closure[set_pos.x][set_pos.y].Center.determine = True;
+			break;
+		case E_pos:
+			closure[set_pos.x][set_pos.y].East.determine = True;
+			break;
+	}
+}
+
 t_posDijkstra Dijkstra::min_search()
 {
 	t_posDijkstra min_pos;

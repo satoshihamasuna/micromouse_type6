@@ -63,18 +63,27 @@ class calcRunTime
 class Dijkstra
 {
 	private:
-		void straight_expand();
-		void diagonal_expand();
-		void turn_in45_expand();
-		void turn_out45_expand();
-		void turn_in135_expand();
-		void turn_out135_expand();
-		void longturn_90_expand();
-		void longturn_180_expand();
-		void turn_v90_expand();
+		void straight_expand(t_posDijkstra pos,t_direction m_dir);
+		void diagonal_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_inR45_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_inL45_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_outR45_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_outL45_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_inR135_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_inL135_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_outR135_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_outL135_expand(t_posDijkstra pos,t_direction m_dir);
+		void longturn_R90_expand(t_posDijkstra pos,t_direction m_dir);
+		void longturn_L90_expand(t_posDijkstra pos,t_direction m_dir);
+		void longturn_R180_expand(t_posDijkstra pos,t_direction m_dir);
+		void longturn_L180_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_vR90_expand(t_posDijkstra pos,t_direction m_dir);
+		void turn_vL90_expand(t_posDijkstra pos,t_direction m_dir);
 		t_posDijkstra SetNodePos(uint8_t _x,uint8_t _y,t_DijkstraWallPos _dpos);
 		t_element SetNode(t_posDijkstra _parent,	uint16_t _time,		t_direction _dir
 						 ,t_run_pattern _run_pt,		t_bool _determine);
+		void set_determine(t_posDijkstra set_pos);
+		t_element*  get_closure_inf(t_posDijkstra position);
 	public:
 		t_MapNodeWall closure[MAZE_SIZE_X][MAZE_SIZE_Y];
 		wall_class *wall_property;

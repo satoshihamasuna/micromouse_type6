@@ -6,6 +6,7 @@
 "Core/CPP/Src/main.o"
 "Core/CPP/Src/make_map.o"
 "Core/CPP/Src/make_path.o"
+"Core/CPP/Src/make_path_expand.o"
 "Core/CPP/Src/motion_plan.o"
 "Core/CPP/Src/motion_task.o"
 "Core/CPP/Src/priority_queue.o"

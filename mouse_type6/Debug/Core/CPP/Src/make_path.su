@@ -4,7 +4,8 @@ make_path.cpp:50:11:t_element Dijkstra::SetNode(t_posDijkstra, uint16_t, t_direc
 make_path.cpp:62:6:void Dijkstra::init_dijkstra_map()	80	static
 make_path.cpp:87:6:void Dijkstra::start_node_setUp(t_posDijkstra, t_direction)	80	static
 make_path.cpp:103:8:t_bool Dijkstra::is_goal_Dijkstra(t_posDijkstra, t_position, uint8_t)	24	static
-make_path.cpp:132:15:t_posDijkstra Dijkstra::min_search()	40	static
-make_path.cpp:160:15:t_posDijkstra Dijkstra::make_path_Dijkstra(t_position, t_direction, t_position, uint8_t)	40	static
-make_path.cpp:177:6:void Dijkstra::expand(t_posDijkstra)	16	static
-make_path.cpp:182:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t)	24	static
+make_path.cpp:132:6:void Dijkstra::set_determine(t_posDijkstra)	16	static
+make_path.cpp:148:15:t_posDijkstra Dijkstra::min_search()	40	static
+make_path.cpp:176:15:t_posDijkstra Dijkstra::make_path_Dijkstra(t_position, t_direction, t_position, uint8_t)	40	static
+make_path.cpp:193:6:void Dijkstra::expand(t_posDijkstra)	16	static
+make_path.cpp:198:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t)	24	static
