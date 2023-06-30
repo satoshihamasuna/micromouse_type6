@@ -38,7 +38,7 @@ void Interrupt::preprocess(){
 	t_encoder Lenc = Encoder_GetProperty_Left();
 	float sp = KalmanFilter::getInstance().calc_speed_filter(read_accel_y_axis(), (Renc.wheel_speed - Lenc.wheel_speed)/2.0);
 	motion_task::getInstance().mouse.velo 	  = sp;//(Renc.wheel_speed - Lenc.wheel_speed)/2.0;
-	motion_task::getInstance().mouse.length  += (Renc.wheel_speed - Lenc.wheel_speed)/2.0;
+	motion_task::getInstance().mouse.length  += sp;//(Renc.wheel_speed - Lenc.wheel_speed)/2.0;
 	motion_task::getInstance().mouse.rad_velo = (-1.0)*read_gyro_z_axis()*PI/180;
 	motion_task::getInstance().mouse.radian  += motion_task::getInstance().mouse.rad_velo/1000.0;
 
@@ -60,7 +60,7 @@ void Interrupt::postprocess()
 		LogData::getInstance().data[2][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.rad_velo;
 		LogData::getInstance().data[3][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.rad_velo;
 		LogData::getInstance().data_count++;
-		if(LogData::getInstance().data_count++ >= 1000) LogData::getInstance().data_count = 0;
+		if(LogData::getInstance().data_count >= 1000) LogData::getInstance().data_count = 999;
 	}
 	motion_task::getInstance().motionPostControll();
 	IMU_read_DMA_Start();

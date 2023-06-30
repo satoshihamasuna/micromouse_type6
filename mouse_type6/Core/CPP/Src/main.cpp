@@ -72,21 +72,17 @@ void CPP_Main()
 								  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
 								  HAL_Delay(50);
 							  }
-					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.05, 0.0);
 					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
+					  		  mp.fix_wall(&motion_task::getInstance(), 400);
 			  				  HAL_Delay(100);
 			  				  FAN_Motor_SetDuty(700);;
-			  				  HAL_Delay(500);
+			  				  while(motion_task::getInstance().run_task !=No_run){}
 					  		  KalmanFilter::getInstance().filter_init();
-
 					  		  mp.motion_start(&motion_task::getInstance());
-					  		  //mp.search_straight(&motion_task::getInstance(),90.0,4.0,0.3,0.30);
-					  		  //while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
-					  		  //mp.search_slalom(&motion_task::getInstance(), &param_L90_search);
-					  		  //while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.search_straight(&motion_task::getInstance(),90.0*8,15.0,2.5,0.0);
+					  		  mp.search_straight(&motion_task::getInstance(),90.0*8,35.0,5.0,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().log_enable = False;
 			  				  HAL_Delay(100);
@@ -103,7 +99,7 @@ void CPP_Main()
 								  HAL_Delay(50);
 							  }
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.3, 0.001, 0.0);
+					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		  KalmanFilter::getInstance().filter_init();
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
@@ -132,8 +128,8 @@ void CPP_Main()
 								  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
 								  HAL_Delay(50);
 							  }
-							  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-				    		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
+					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					 		  KalmanFilter::getInstance().filter_init();
 					 		  LogData::getInstance().data_count = 0;
 					 		  LogData::getInstance().log_enable = True;
@@ -158,8 +154,8 @@ void CPP_Main()
 								HAL_Delay(50);
 							}
 							Indicate_LED(ENABLE_MODE3|0x06);
-							motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-							motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.005, 0.0);
+					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		KalmanFilter::getInstance().filter_init();
 					  		t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;

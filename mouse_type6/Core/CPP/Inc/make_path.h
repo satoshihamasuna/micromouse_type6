@@ -9,27 +9,29 @@
 #define CPP_INC_MAKE_PATH_H_
 
 #include "typedef.h"
+#include "wall_class.h"
 #include "run_task.h"
 #include "singleton.h"
 
+#define DEBUG_MODE
 
 typedef enum
 {
 	C_pos = 0,
 	N_pos = 1,
 	E_pos = 2,
-}t_DijkstraNodePos;
+}t_DijkstraWallPos;
 
 typedef struct
 {
 	uint8_t x;
 	uint8_t y;
-	t_DijkstraNodePos NodePos;
+	t_DijkstraWallPos NodePos;
 }t_posDijkstra;
 
 typedef struct
 {
-	t_DijkstraNodePos parent_pos;
+	t_posDijkstra parent_pos;
 	uint16_t time;
 	t_direction dir;
 	t_run_pattern run_pt;
@@ -60,11 +62,22 @@ class Dijkstra
 		void longturn_90_expand();
 		void longturn_180_expand();
 		void turn_v90_expand();
+		t_posDijkstra SetNodePos(uint8_t _x,uint8_t _y,t_DijkstraWallPos _dpos);
+		t_element SetNode(t_posDijkstra _parent,	uint16_t _time,		t_direction _dir
+						 ,t_run_pattern _run_pt,		t_bool _determine);
 	public:
-		t_MapNodeWall map[32][32];
-		void init_dijkstra_map();
-		void start_node_setUp();
-
+		t_MapNodeWall closure[MAZE_SIZE_X][MAZE_SIZE_Y];
+		wall_class *wall_property;
+		Dijkstra(wall_class *_wall_property)
+		{
+			wall_property = _wall_property;
+		}
+		void init_dijkstra_map(t_position start_pos);
+		void start_node_setUp(t_position start_pos);
+		t_bool is_goal_Dijkstra(t_position goal_pos,uint8_t goal_size);
+		t_posDijkstra min_search();
+		t_posDijkstra make_path_Dijkstra(t_position start_pos,t_position goal_pos,uint8_t goal_size);
+		void run_Dijkstra(t_position start_pos,t_position goal_pos,uint8_t goal_size);
 };
 
 

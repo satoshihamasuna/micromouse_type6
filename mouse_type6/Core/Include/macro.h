@@ -55,7 +55,7 @@ extern "C" {
 
 #define ENC_RESOLUTION	(1024)
 
-#define DEBUG_MODE	0
+//#define DEBUG_MODE	0
 #define ENABLE_MODE1   0x10
 #define ENABLE_MODE2   0x20
 #define ENABLE_MODE3   0x30
