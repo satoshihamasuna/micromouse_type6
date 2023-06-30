@@ -45,13 +45,13 @@ void Dijkstra::init_dijkstra_map(t_position start_pos)
 				switch(d)
 				{
 					case C_pos:
-						closure[i][j].North = SetNode(SetNodePos(i,j,C_pos), MAP_MAX_VALUE, Dir_None, No_run, False);
+						closure[i][j].Center = SetNode(SetNodePos(i,j,C_pos), MAP_MAX_VALUE, Dir_None, No_run, False);
 						break;
 					case N_pos:
 						closure[i][j].North = SetNode(SetNodePos(i,j,N_pos), MAP_MAX_VALUE, Dir_None, No_run, (wall_property->wall[i][j].north == NOWALL)?False:True);
 						break;
 					case E_pos:
-						closure[i][j].North = SetNode(SetNodePos(i,j,E_pos), MAP_MAX_VALUE, Dir_None, No_run, (wall_property->wall[i][j].east == NOWALL)?False:True);
+						closure[i][j].East = SetNode(SetNodePos(i,j,E_pos), MAP_MAX_VALUE, Dir_None, No_run, (wall_property->wall[i][j].east == NOWALL)?False:True);
 						break;
 				}
 			}

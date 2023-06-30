@@ -1657,7 +1657,7 @@ Discarded input sections
  .text._ZN8Dijkstra7SetNodeE13t_posDijkstrat11t_direction13t_run_pattern6t_bool
                 0x0000000000000000       0x44 Core/CPP/Src/make_path.o
  .text._ZN8Dijkstra17init_dijkstra_mapE10t_position
-                0x0000000000000000      0x1f8 Core/CPP/Src/make_path.o
+                0x0000000000000000      0x1f4 Core/CPP/Src/make_path.o
  .text._ZN8Dijkstra16start_node_setUpE10t_position
                 0x0000000000000000       0x16 Core/CPP/Src/make_path.o
  .text._ZN8Dijkstra16is_goal_DijkstraE10t_positionh
