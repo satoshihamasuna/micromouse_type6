@@ -1652,27 +1652,31 @@ Discarded input sections
  .text          0x0000000000000000        0x0 Core/CPP/Src/make_path.o
  .data          0x0000000000000000        0x0 Core/CPP/Src/make_path.o
  .bss           0x0000000000000000        0x0 Core/CPP/Src/make_path.o
+ .text._ZN8Dijkstra24conv_t_pos2t_posDijkstraE10t_position11t_direction
+                0x0000000000000000      0x104 Core/CPP/Src/make_path.o
  .text._ZN8Dijkstra10SetNodePosEhh17t_DijkstraWallPos
                 0x0000000000000000       0x5a Core/CPP/Src/make_path.o
  .text._ZN8Dijkstra7SetNodeE13t_posDijkstrat11t_direction13t_run_pattern6t_bool
                 0x0000000000000000       0x44 Core/CPP/Src/make_path.o
- .text._ZN8Dijkstra17init_dijkstra_mapE10t_position
-                0x0000000000000000      0x1f4 Core/CPP/Src/make_path.o
- .text._ZN8Dijkstra16start_node_setUpE10t_position
-                0x0000000000000000       0x16 Core/CPP/Src/make_path.o
- .text._ZN8Dijkstra16is_goal_DijkstraE10t_positionh
-                0x0000000000000000       0x1c Core/CPP/Src/make_path.o
+ .text._ZN8Dijkstra17init_dijkstra_mapEv
+                0x0000000000000000      0x1f2 Core/CPP/Src/make_path.o
+ .text._ZN8Dijkstra16start_node_setUpE13t_posDijkstra11t_direction
+                0x0000000000000000      0x172 Core/CPP/Src/make_path.o
+ .text._ZN8Dijkstra16is_goal_DijkstraE13t_posDijkstra10t_positionh
+                0x0000000000000000       0xac Core/CPP/Src/make_path.o
  .text._ZN8Dijkstra10min_searchEv
-                0x0000000000000000       0x3c Core/CPP/Src/make_path.o
- .text._ZN8Dijkstra18make_path_DijkstraE10t_positionS0_h
+                0x0000000000000000      0x210 Core/CPP/Src/make_path.o
+ .text._ZN8Dijkstra18make_path_DijkstraE10t_position11t_directionS0_h
+                0x0000000000000000       0xbe Core/CPP/Src/make_path.o
+ .text._ZN8Dijkstra6expandE13t_posDijkstra
+                0x0000000000000000       0x16 Core/CPP/Src/make_path.o
+ .text._ZN8Dijkstra12run_DijkstraE10t_position11t_directionS0_h
                 0x0000000000000000       0x1c Core/CPP/Src/make_path.o
- .text._ZN8Dijkstra12run_DijkstraE10t_positionS0_h
-                0x0000000000000000       0x1a Core/CPP/Src/make_path.o
- .debug_info    0x0000000000000000     0x15a0 Core/CPP/Src/make_path.o
+ .debug_info    0x0000000000000000     0x170a Core/CPP/Src/make_path.o
  .debug_abbrev  0x0000000000000000      0x35f Core/CPP/Src/make_path.o
  .debug_aranges
-                0x0000000000000000       0x58 Core/CPP/Src/make_path.o
- .debug_ranges  0x0000000000000000       0x48 Core/CPP/Src/make_path.o
+                0x0000000000000000       0x68 Core/CPP/Src/make_path.o
+ .debug_ranges  0x0000000000000000       0x58 Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000      0x1f0 Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000      0xb2c Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000       0x22 Core/CPP/Src/make_path.o
@@ -1706,10 +1710,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x137 Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000      0x18a Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000       0x10 Core/CPP/Src/make_path.o
- .debug_line    0x0000000000000000      0x74b Core/CPP/Src/make_path.o
- .debug_str     0x0000000000000000     0x8df8 Core/CPP/Src/make_path.o
+ .debug_line    0x0000000000000000      0x7f2 Core/CPP/Src/make_path.o
+ .debug_str     0x0000000000000000     0x8ebf Core/CPP/Src/make_path.o
  .comment       0x0000000000000000       0x7c Core/CPP/Src/make_path.o
- .debug_frame   0x0000000000000000      0x154 Core/CPP/Src/make_path.o
+ .debug_frame   0x0000000000000000      0x19c Core/CPP/Src/make_path.o
  .ARM.attributes
                 0x0000000000000000       0x39 Core/CPP/Src/make_path.o
  .group         0x0000000000000000        0x8 Core/CPP/Src/motion_plan.o

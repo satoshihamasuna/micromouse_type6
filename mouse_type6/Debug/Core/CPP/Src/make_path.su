@@ -1,8 +1,10 @@
-make_path.cpp:16:15:t_posDijkstra Dijkstra::SetNodePos(uint8_t, uint8_t, t_DijkstraWallPos)	24	static
-make_path.cpp:25:11:t_element Dijkstra::SetNode(t_posDijkstra, uint16_t, t_direction, t_run_pattern, t_bool)	24	static
-make_path.cpp:37:6:void Dijkstra::init_dijkstra_map(t_position)	80	static
-make_path.cpp:62:6:void Dijkstra::start_node_setUp(t_position)	16	static
-make_path.cpp:67:8:t_bool Dijkstra::is_goal_Dijkstra(t_position, uint8_t)	24	static
-make_path.cpp:72:15:t_posDijkstra Dijkstra::min_search()	24	static
-make_path.cpp:81:15:t_posDijkstra Dijkstra::make_path_Dijkstra(t_position, t_position, uint8_t)	24	static
-make_path.cpp:86:6:void Dijkstra::run_Dijkstra(t_position, t_position, uint8_t)	24	static
+make_path.cpp:16:15:t_posDijkstra Dijkstra::conv_t_pos2t_posDijkstra(t_position, t_direction)	32	static
+make_path.cpp:41:15:t_posDijkstra Dijkstra::SetNodePos(uint8_t, uint8_t, t_DijkstraWallPos)	24	static
+make_path.cpp:50:11:t_element Dijkstra::SetNode(t_posDijkstra, uint16_t, t_direction, t_run_pattern, t_bool)	24	static
+make_path.cpp:62:6:void Dijkstra::init_dijkstra_map()	80	static
+make_path.cpp:87:6:void Dijkstra::start_node_setUp(t_posDijkstra, t_direction)	80	static
+make_path.cpp:103:8:t_bool Dijkstra::is_goal_Dijkstra(t_posDijkstra, t_position, uint8_t)	24	static
+make_path.cpp:132:15:t_posDijkstra Dijkstra::min_search()	40	static
+make_path.cpp:160:15:t_posDijkstra Dijkstra::make_path_Dijkstra(t_position, t_direction, t_position, uint8_t)	40	static
+make_path.cpp:177:6:void Dijkstra::expand(t_posDijkstra)	16	static
+make_path.cpp:182:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t)	24	static

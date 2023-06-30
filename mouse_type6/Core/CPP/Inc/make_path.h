@@ -48,6 +48,16 @@ typedef struct
 class calcRunTime
 {
 
+	public:
+		calcRunTime();
+		float turn_V90_time;
+		float turn_Long90_time;
+		float turn_Long180_time;
+		float turn_in45_time;
+		float turn_in135_time;
+		float turn_out45_time;
+		float turn_out135_time;
+
 };
 
 class Dijkstra
@@ -72,12 +82,14 @@ class Dijkstra
 		{
 			wall_property = _wall_property;
 		}
-		void init_dijkstra_map(t_position start_pos);
-		void start_node_setUp(t_position start_pos);
-		t_bool is_goal_Dijkstra(t_position goal_pos,uint8_t goal_size);
+		void init_dijkstra_map();
+		void start_node_setUp(t_posDijkstra start_pos,t_direction dir);
+		t_bool is_goal_Dijkstra(t_posDijkstra check_pos,t_position goal_pos,uint8_t goal_size);
+		t_posDijkstra conv_t_pos2t_posDijkstra(t_position pos,t_direction wall_pos);
 		t_posDijkstra min_search();
-		t_posDijkstra make_path_Dijkstra(t_position start_pos,t_position goal_pos,uint8_t goal_size);
-		void run_Dijkstra(t_position start_pos,t_position goal_pos,uint8_t goal_size);
+		t_posDijkstra make_path_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
+		void run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
+		void expand(t_posDijkstra min_pos);
 };
 
 
