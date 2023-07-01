@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000502d8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000472f4  00000000  00000000  00050308  2**0
+ 12 .debug_info   000473e2  00000000  00000000  00050308  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 0000844c  00000000  00000000  000975fc  2**0
+ 13 .debug_abbrev 0000844c  00000000  00000000  000976ea  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00001860  00000000  00000000  0009fa48  2**3
+ 14 .debug_aranges 00001868  00000000  00000000  0009fb38  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 000015a0  00000000  00000000  000a12a8  2**3
+ 15 .debug_ranges 000015a8  00000000  00000000  000a13a0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0002369c  00000000  00000000  000a2848  2**0
+ 16 .debug_macro  0002369c  00000000  00000000  000a2948  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   000219c0  00000000  00000000  000c5ee4  2**0
+ 17 .debug_line   00021c86  00000000  00000000  000c5fe4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    0009d2ea  00000000  00000000  000e78a4  2**0
+ 18 .debug_str    0009d3a2  00000000  00000000  000e7c6a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  00184b8e  2**0
+ 19 .comment      0000007b  00000000  00000000  0018500c  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0001ae90  00000000  00000000  00184c0c  2**2
+ 20 .debug_frame  0001aeb8  00000000  00000000  00185088  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -5192,6 +5192,12 @@ void make_map::Display()
  8002f92:	bd80      	pop	{r7, pc}
 
 08002f94 <_Z41__static_initialization_and_destruction_0ii>:
+}
+
+void Dijkstra::turn_vL90_expand(t_posDijkstra pos,t_direction m_dir)
+{
+	t_direction next_dir = (t_direction)DIR_TURN_DIAG_L90((int)m_dir);
+}
  8002f94:	b580      	push	{r7, lr}
  8002f96:	b082      	sub	sp, #8
  8002f98:	af00      	add	r7, sp, #0
@@ -5222,7 +5228,7 @@ void make_map::Display()
  8002fd2:	bf00      	nop
  8002fd4:	20004340 	.word	0x20004340
 
-08002fd8 <_GLOBAL__sub_I__ZN8Dijkstra15get_closure_infE13t_posDijkstra>:
+08002fd8 <_GLOBAL__sub_I__ZN8Dijkstra22LocalPosDir2GlobPosDirE13t_posDijkstra11t_direction11t_local_dirS2_>:
  8002fd8:	b580      	push	{r7, lr}
  8002fda:	af00      	add	r7, sp, #0
  8002fdc:	f64f 71ff 	movw	r1, #65535	; 0xffff
@@ -5230,7 +5236,7 @@ void make_map::Display()
  8002fe2:	f7ff ffd7 	bl	8002f94 <_Z41__static_initialization_and_destruction_0ii>
  8002fe6:	bd80      	pop	{r7, pc}
 
-08002fe8 <_GLOBAL__sub_D__ZN8Dijkstra15get_closure_infE13t_posDijkstra>:
+08002fe8 <_GLOBAL__sub_D__ZN8Dijkstra22LocalPosDir2GlobPosDirE13t_posDijkstra11t_direction11t_local_dirS2_>:
  8002fe8:	b580      	push	{r7, lr}
  8002fea:	af00      	add	r7, sp, #0
  8002fec:	f64f 71ff 	movw	r1, #65535	; 0xffff

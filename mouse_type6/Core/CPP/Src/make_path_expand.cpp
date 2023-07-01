@@ -30,6 +30,70 @@
 #define DIR_TURN_DIAG_L180(x) (DIR_TURN_DIAG_L90((DIR_TURN_DIAG_L90(x))))
 
 
+t_posDijkstra Dijkstra::LocalPosDir2GlobPosDir(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir)
+{
+	t_posDijkstra return_glob_pos = glob_pos;
+	switch(glob_dir)
+	{
+		case North:
+			return_glob_pos.y = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
+								? return_glob_pos.y + 1 : return_glob_pos.y;
+
+			return_glob_pos.y = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
+								? return_glob_pos.y - 1 : return_glob_pos.y;
+
+			return_glob_pos.x = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
+								? return_glob_pos.x + 1 : return_glob_pos.x;
+
+			return_glob_pos.x = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
+								? return_glob_pos.x - 1 : return_glob_pos.x;
+			break;
+		case East:
+			return_glob_pos.x = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
+								? return_glob_pos.x + 1 : return_glob_pos.x;
+
+			return_glob_pos.x = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
+								? return_glob_pos.x - 1 : return_glob_pos.x;
+
+			return_glob_pos.y = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
+								? return_glob_pos.y - 1 : return_glob_pos.y;
+
+			return_glob_pos.y = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
+								? return_glob_pos.y + 1 : return_glob_pos.y;
+			break;
+		case South:
+			return_glob_pos.y = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
+								? return_glob_pos.y - 1 : return_glob_pos.y;
+
+			return_glob_pos.y = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
+								? return_glob_pos.y + 1 : return_glob_pos.y;
+
+			return_glob_pos.x = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
+								? return_glob_pos.x - 1 : return_glob_pos.x;
+
+			return_glob_pos.x = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
+								? return_glob_pos.x + 1 : return_glob_pos.x;
+			break;
+		case West:
+			return_glob_pos.x = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
+								? return_glob_pos.x - 1 : return_glob_pos.x;
+
+			return_glob_pos.x = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
+								? return_glob_pos.x + 1 : return_glob_pos.x;
+
+			return_glob_pos.y = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
+								? return_glob_pos.y + 1 : return_glob_pos.y;
+
+			return_glob_pos.y = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
+								? return_glob_pos.y - 1 : return_glob_pos.y;
+			break;
+		default:
+			break;
+
+	}
+	return return_glob_pos;
+}
+
 t_element* Dijkstra::get_closure_inf(t_posDijkstra position)
 {
 	switch(position.NodePos)
