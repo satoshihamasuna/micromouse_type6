@@ -31,6 +31,10 @@ typedef enum{
 	Right = 1,
 	Rear  = 2,
 	Left  = 3,
+	Right_Front = 4,
+	Right_Rear 	= 5,
+	Left_Rear	= 6,
+	Left_Front	= 7,
 }t_local_dir;
 
 typedef enum{
