@@ -83,7 +83,7 @@ class Dijkstra
 		void turn_vL90_expand(t_posDijkstra pos,t_direction m_dir);
 
 		t_posDijkstra LocalPosDir2GlobWallPos_Center(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir);
-		t_posDijkstra LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir);
+		t_posDijkstra LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalDir);
 		t_posDijkstra SetNodePos(uint8_t _x,uint8_t _y,t_DijkstraWallPos _dpos);
 		t_element SetNode(t_posDijkstra _parent,	uint16_t _time,		t_direction _dir
 						 ,t_run_pattern _run_pt,		t_bool _determine);
