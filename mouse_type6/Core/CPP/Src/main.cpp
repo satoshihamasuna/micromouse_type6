@@ -106,8 +106,10 @@ void CPP_Main()
 					  		  mp.motion_start(&motion_task::getInstance());
 					  		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.30);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.searchSlalom(&motion_task::getInstance(),&param_R90_search);
-					  		  while(motion_task::getInstance().run_task !=No_run){}
+					  		  for(int i = 0;i < 8;i++){
+					  			  mp.searchSlalom(&motion_task::getInstance(),&param_R90_search);
+					  			  while(motion_task::getInstance().run_task !=No_run){}
+					  		  }
 					  		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  HAL_Delay(200);
@@ -136,8 +138,10 @@ void CPP_Main()
 					  		  mp.motion_start(&motion_task::getInstance());
 					 		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.30);
 					 		  while(motion_task::getInstance().run_task !=No_run){}
-					 		  mp.searchSlalom(&motion_task::getInstance(),&param_L90_search);
-					 		  while(motion_task::getInstance().run_task !=No_run){}
+					 		  for(int i = 0;i < 8;i++){
+								  mp.searchSlalom(&motion_task::getInstance(),&param_L90_search);
+								  while(motion_task::getInstance().run_task !=No_run){}
+					 		  }
 							  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.0);
 					 		  while(motion_task::getInstance().run_task !=No_run){}
 					 		  HAL_Delay(200);

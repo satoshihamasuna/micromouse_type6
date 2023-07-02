@@ -138,6 +138,10 @@ void SensingTask::IrSensorWallSet()
 	sen_r.is_controll 	= (sen_r.is_wall == True && sen_r.distance <= sen_r.controll_th)? True:False;
 	sen_l.is_controll 	= (sen_l.is_wall == True && sen_l.distance <= sen_l.controll_th)? True:False;
 
+
+	sen_r.is_controll 	= (sen_fr.distance <= 80.0)? False:sen_r.is_controll;
+	sen_l.is_controll 	= (sen_fl.distance <= 80.0)? False:sen_l.is_controll;
+
 	sen_r.error	= (sen_r.is_controll == True) ? sen_r.distance - 45.0 : 0.0;
 	sen_l.error	= (sen_l.is_controll == True) ? sen_l.distance - 45.0 : 0.0;
 

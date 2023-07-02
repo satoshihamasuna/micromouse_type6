@@ -3,5 +3,5 @@ sensing_task.cpp:31:6:void SensingTask::IrSensorSet()	16	static
 sensing_task.cpp:41:7:float SensingTask::Sensor_CalcDistance(t_sensor_dir, int16_t)	40	static
 sensing_task.cpp:113:6:void SensingTask::IrSensorDistanceSet()	16	static
 sensing_task.cpp:121:6:void SensingTask::IrSensorWallSet()	24	static
-sensing_task.cpp:146:6:void SensingTask::SetWallControll_RadVelo(t_machine_param*, float)	40	static
-sensing_task.cpp:162:9:int16_t SensingTask::IrSensor_Avg()	16	static
+sensing_task.cpp:150:6:void SensingTask::SetWallControll_RadVelo(t_machine_param*, float)	40	static
+sensing_task.cpp:166:9:int16_t SensingTask::IrSensor_Avg()	16	static

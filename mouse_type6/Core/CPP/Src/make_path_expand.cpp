@@ -30,25 +30,96 @@
 #define DIR_TURN_DIAG_L180(x) (DIR_TURN_DIAG_L90((DIR_TURN_DIAG_L90(x))))
 
 
-t_posDijkstra Dijkstra::LocalPosDir2GlobPosDir(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir)
+t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_Center(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir)
 {
 	t_posDijkstra return_glob_pos = glob_pos;
-	switch(glob_dir)
+	t_direction return_glob_dir = glob_dir;
+	if(glob_pos.NodePos == C_pos)
 	{
-		case North:
-			return_glob_pos.y = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
-								? return_glob_pos.y + 1 : return_glob_pos.y;
+		switch((int)glob_dir)
+		{
+			case North:
+				return_glob_pos.y = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
+									? return_glob_pos.y + 1 : return_glob_pos.y;
 
-			return_glob_pos.y = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
-								? return_glob_pos.y - 1 : return_glob_pos.y;
+				return_glob_pos.y = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
+									? return_glob_pos.y - 1 : return_glob_pos.y;
 
-			return_glob_pos.x = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
-								? return_glob_pos.x + 1 : return_glob_pos.x;
+				return_glob_pos.x = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
+									? return_glob_pos.x + 1 : return_glob_pos.x;
 
-			return_glob_pos.x = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
-								? return_glob_pos.x - 1 : return_glob_pos.x;
+				return_glob_pos.x = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
+									? return_glob_pos.x - 1 : return_glob_pos.x;
+				return_glob_dir   = (t_direction)((glob_dir+ (int)LocalDir) % 4);
+				break;
+			case East:
+				return_glob_pos.x = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
+									? return_glob_pos.x + 1 : return_glob_pos.x;
+
+				return_glob_pos.x = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
+									? return_glob_pos.x - 1 : return_glob_pos.x;
+
+				return_glob_pos.y = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
+									? return_glob_pos.y - 1 : return_glob_pos.y;
+
+				return_glob_pos.y = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
+									? return_glob_pos.y + 1 : return_glob_pos.y;
+				return_glob_dir   = (t_direction)((glob_dir+ (int)LocalDir) % 4);
+				break;
+			case South:
+				return_glob_pos.y = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
+									? return_glob_pos.y - 1 : return_glob_pos.y;
+
+				return_glob_pos.y = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
+									? return_glob_pos.y + 1 : return_glob_pos.y;
+
+				return_glob_pos.x = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
+									? return_glob_pos.x - 1 : return_glob_pos.x;
+
+				return_glob_pos.x = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
+									? return_glob_pos.x + 1 : return_glob_pos.x;
+				return_glob_dir   = (t_direction)((glob_dir+ (int)LocalDir) % 4);
+				break;
+			case West:
+				return_glob_pos.x = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
+									? return_glob_pos.x - 1 : return_glob_pos.x;
+
+				return_glob_pos.x = (LocalPos == Rear  || LocalPos == Right_Rear  || LocalPos == Left_Rear)
+									? return_glob_pos.x + 1 : return_glob_pos.x;
+
+				return_glob_pos.y = (LocalPos == Right || LocalPos == Right_Front || LocalPos == Right_Rear)
+									? return_glob_pos.y + 1 : return_glob_pos.y;
+
+				return_glob_pos.y = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
+									? return_glob_pos.y - 1 : return_glob_pos.y;
+				return_glob_dir   = (t_direction)((glob_dir+ (int)LocalDir) % 4);
+				break;
+			default:
+				break;
+
+		}
+		return_glob_pos = conv_t_pos2t_posDijkstra(return_glob_pos.x,return_glob_pos.y, return_glob_dir);
+	}
+	return return_glob_pos;
+}
+
+t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir)
+{
+	t_posDijkstra return_glob_pos = glob_pos;
+	t_direction return_glob_dir = glob_dir;
+	switch((int)glob_dir)
+	{
+		case NorthEast:
+			if(glob_pos.NodePos == N_pos)
+			{
+				//return_glob_pos.x = (LocalPos == Front)
+			}
+			else if(glob_pos.NodePos == E_pos)
+			{
+
+			}
 			break;
-		case East:
+		case SouthEast:
 			return_glob_pos.x = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
 								? return_glob_pos.x + 1 : return_glob_pos.x;
 
@@ -60,8 +131,10 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobPosDir(t_posDijkstra glob_pos,t_directio
 
 			return_glob_pos.y = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
 								? return_glob_pos.y + 1 : return_glob_pos.y;
+
+			return_glob_dir   = (t_direction)((glob_dir+ (int)LocalDir) % 4);
 			break;
-		case South:
+		case SouthWest:
 			return_glob_pos.y = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
 								? return_glob_pos.y - 1 : return_glob_pos.y;
 
@@ -73,8 +146,10 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobPosDir(t_posDijkstra glob_pos,t_directio
 
 			return_glob_pos.x = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
 								? return_glob_pos.x + 1 : return_glob_pos.x;
+
+			return_glob_dir   = (t_direction)((glob_dir+ (int)LocalDir) % 4);
 			break;
-		case West:
+		case NorthWest:
 			return_glob_pos.x = (LocalPos == Front || LocalPos == Right_Front || LocalPos == Left_Front)
 								? return_glob_pos.x - 1 : return_glob_pos.x;
 
@@ -86,11 +161,15 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobPosDir(t_posDijkstra glob_pos,t_directio
 
 			return_glob_pos.y = (LocalPos == Left  || LocalPos == Left_Front  || LocalPos == Left_Rear)
 								? return_glob_pos.y - 1 : return_glob_pos.y;
+
+			return_glob_dir   = (t_direction)((glob_dir+ (int)LocalDir) % 4);
 			break;
 		default:
 			break;
 
 	}
+	return_glob_pos = conv_t_pos2t_posDijkstra(return_glob_pos.x,return_glob_pos.y, return_glob_dir);
+
 	return return_glob_pos;
 }
 

@@ -82,7 +82,8 @@ class Dijkstra
 		void turn_vR90_expand(t_posDijkstra pos,t_direction m_dir);
 		void turn_vL90_expand(t_posDijkstra pos,t_direction m_dir);
 
-		t_posDijkstra LocalPosDir2GlobPosDir(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir);
+		t_posDijkstra LocalPosDir2GlobWallPos_Center(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir);
+		t_posDijkstra LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir);
 		t_posDijkstra SetNodePos(uint8_t _x,uint8_t _y,t_DijkstraWallPos _dpos);
 		t_element SetNode(t_posDijkstra _parent,	uint16_t _time,		t_direction _dir
 						 ,t_run_pattern _run_pt,		t_bool _determine);
@@ -100,6 +101,7 @@ class Dijkstra
 		void start_node_setUp(t_posDijkstra start_pos,t_direction dir);
 		t_bool is_goal_Dijkstra(t_posDijkstra check_pos,t_position goal_pos,uint8_t goal_size);
 		t_posDijkstra conv_t_pos2t_posDijkstra(t_position pos,t_direction wall_pos);
+		t_posDijkstra conv_t_pos2t_posDijkstra(int _x,int _y,t_direction wall_pos);
 		t_posDijkstra min_search();
 		t_posDijkstra make_path_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
 		void run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);

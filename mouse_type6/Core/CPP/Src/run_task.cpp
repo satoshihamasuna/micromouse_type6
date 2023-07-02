@@ -160,11 +160,14 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 		{
 			target_->velo = turn_param->param->velo;
 
+
 			if(SensingTask::getInstance().sen_fr.is_wall == True && SensingTask::getInstance().sen_fl.is_wall == True)
 			{
-				float len_sens = 90.0-(SensingTask::getInstance().sen_fr.distance + SensingTask::getInstance().sen_fl.distance)/2.0;
-				if(len_sens > 0.0)  machine_->length = len_sens;
+				float len_sens = 90.0-(SensingTask::getInstance().sen_fr.distance + SensingTask::getInstance().sen_fl.distance)/2.0 + 10.0;
+				if(len_sens > 0.0)  						machine_->length = len_sens;
+				else if(len_sens < 0.0)						machine_->length = 0.2*len_sens + 0.8*machine_->length;
 			}
+
 
 		}
 		else

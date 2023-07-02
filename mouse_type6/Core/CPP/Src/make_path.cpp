@@ -38,6 +38,32 @@ t_posDijkstra Dijkstra::conv_t_pos2t_posDijkstra(t_position pos,t_direction wall
 	return position;
 }
 
+
+t_posDijkstra Dijkstra::conv_t_pos2t_posDijkstra(int _x,int _y,t_direction wall_pos)
+{
+	t_posDijkstra position;
+	switch(wall_pos)
+	{
+		case North:
+			position = SetNodePos(_x,_y,N_pos);
+			break;
+		case East:
+			position = SetNodePos(_x,_y,E_pos);
+			break;
+		case South:
+			position = SetNodePos(_x,_y-1,N_pos);
+			break;
+		case West :
+			position = SetNodePos(_x-1,_y,E_pos);
+			break;
+		case Dir_None:
+		default:
+			position = SetNodePos(_x,_y,C_pos);
+			break;
+	}
+	return position;
+}
+
 t_posDijkstra Dijkstra::SetNodePos(uint8_t _x,uint8_t _y,t_DijkstraWallPos _dpos)
 {
 	t_posDijkstra pos;
