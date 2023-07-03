@@ -1673,15 +1673,15 @@ Discarded input sections
  .text._ZN8Dijkstra18make_path_DijkstraE10t_position11t_directionS0_h
                 0x0000000000000000       0xbe Core/CPP/Src/make_path.o
  .text._ZN8Dijkstra6expandE13t_posDijkstra
-                0x0000000000000000       0x16 Core/CPP/Src/make_path.o
+                0x0000000000000000      0x10a Core/CPP/Src/make_path.o
  .text._ZN8Dijkstra12run_DijkstraE10t_position11t_directionS0_h
                 0x0000000000000000       0x1c Core/CPP/Src/make_path.o
- .debug_info    0x0000000000000000     0x1a0e Core/CPP/Src/make_path.o
+ .debug_info    0x0000000000000000     0x1a3e Core/CPP/Src/make_path.o
  .debug_abbrev  0x0000000000000000      0x35f Core/CPP/Src/make_path.o
  .debug_aranges
                 0x0000000000000000       0x78 Core/CPP/Src/make_path.o
  .debug_ranges  0x0000000000000000       0x68 Core/CPP/Src/make_path.o
- .debug_macro   0x0000000000000000      0x1f0 Core/CPP/Src/make_path.o
+ .debug_macro   0x0000000000000000      0x1ea Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000      0xb2c Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000       0x22 Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000       0x40 Core/CPP/Src/make_path.o
@@ -1714,10 +1714,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x137 Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000      0x18a Core/CPP/Src/make_path.o
  .debug_macro   0x0000000000000000       0x10 Core/CPP/Src/make_path.o
- .debug_line    0x0000000000000000      0x86b Core/CPP/Src/make_path.o
- .debug_str     0x0000000000000000     0x9411 Core/CPP/Src/make_path.o
+ .debug_line    0x0000000000000000      0x881 Core/CPP/Src/make_path.o
+ .debug_str     0x0000000000000000     0x9445 Core/CPP/Src/make_path.o
  .comment       0x0000000000000000       0x7c Core/CPP/Src/make_path.o
- .debug_frame   0x0000000000000000      0x1e8 Core/CPP/Src/make_path.o
+ .debug_frame   0x0000000000000000      0x1e4 Core/CPP/Src/make_path.o
  .ARM.attributes
                 0x0000000000000000       0x39 Core/CPP/Src/make_path.o
  .group         0x0000000000000000        0xc Core/CPP/Src/make_path_expand.o

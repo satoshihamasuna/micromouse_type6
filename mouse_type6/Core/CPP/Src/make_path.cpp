@@ -216,9 +216,35 @@ t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_direction star
 	return min_pos;
 }
 
-void Dijkstra::expand(t_posDijkstra min_pos)
+void Dijkstra::expand(t_posDijkstra pos)
 {
-
+	t_direction pos_dir = get_closure_inf(pos)->dir;
+	switch(pos.NodePos)
+	{
+		case N_pos:
+		case E_pos:
+			diagonal_expand(pos,pos_dir);
+			turn_outR45_expand(pos,pos_dir);
+			turn_outL45_expand(pos,pos_dir);
+			turn_outR135_expand(pos,pos_dir);
+			turn_outL135_expand(pos,pos_dir);
+			turn_vR90_expand(pos,pos_dir);
+			turn_vL90_expand(pos,pos_dir);
+			break;
+		case C_pos:
+			straight_expand(pos, pos_dir);
+			turn_inR45_expand(pos, pos_dir);
+			turn_inL45_expand(pos, pos_dir);
+			turn_inR45_expand(pos, pos_dir);
+			turn_inL45_expand(pos, pos_dir);
+			turn_inR135_expand(pos, pos_dir);
+			turn_inL135_expand(pos, pos_dir);
+			longturn_R90_expand(pos, pos_dir);
+			longturn_L90_expand(pos, pos_dir);
+			longturn_R180_expand(pos, pos_dir);
+			longturn_L180_expand(pos, pos_dir);
+			break;
+	}
 }
 
 void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size)

@@ -8,5 +8,5 @@ make_path.cpp:129:8:t_bool Dijkstra::is_goal_Dijkstra(t_posDijkstra, t_position,
 make_path.cpp:158:6:void Dijkstra::set_determine(t_posDijkstra)	16	static
 make_path.cpp:174:15:t_posDijkstra Dijkstra::min_search()	40	static
 make_path.cpp:202:15:t_posDijkstra Dijkstra::make_path_Dijkstra(t_position, t_direction, t_position, uint8_t)	40	static
-make_path.cpp:219:6:void Dijkstra::expand(t_posDijkstra)	16	static
-make_path.cpp:224:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t)	24	static
+make_path.cpp:219:6:void Dijkstra::expand(t_posDijkstra)	24	static
+make_path.cpp:250:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t)	24	static

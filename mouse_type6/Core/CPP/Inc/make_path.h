@@ -106,7 +106,7 @@ class Dijkstra
 		t_posDijkstra min_search();
 		t_posDijkstra make_path_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
 		void run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
-		void expand(t_posDijkstra min_pos);
+		void expand(t_posDijkstra pos);
 };
 
 
