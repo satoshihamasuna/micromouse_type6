@@ -1,0 +1,98 @@
+/*
+ * make_path.h
+ *
+ *  Created on: 2023/06/26
+ *      Author: sato1
+ */
+
+#ifndef CPP_INC_MAKE_PATH_H_
+#define CPP_INC_MAKE_PATH_H_
+
+#include "typedef.h"
+#include "wall_class.h"
+#include "run_task.h"
+#include "singleton.h"
+
+#define DEBUG_MODE
+
+typedef enum
+{
+	C_pos = 0,
+	N_pos = 1,
+	E_pos = 2,
+}t_DijkstraWallPos;
+
+typedef struct
+{
+	uint8_t x;
+	uint8_t y;
+	t_DijkstraWallPos NodePos;
+}t_posDijkstra;
+
+typedef struct
+{
+	t_posDijkstra parent_pos;
+	uint16_t time;
+	t_direction dir;
+	t_run_pattern run_pt;
+	t_bool determine;
+}t_element;
+
+typedef struct
+{
+	t_element Center;
+	t_element North;
+	t_element East;
+}t_MapNodeWall;
+
+class calcRunTime
+{
+
+	public:
+		calcRunTime();
+		float turn_V90_time;
+		float turn_Long90_time;
+		float turn_Long180_time;
+		float turn_in45_time;
+		float turn_in135_time;
+		float turn_out45_time;
+		float turn_out135_time;
+
+};
+
+class Dijkstra
+{
+	private:
+		void straight_expand();
+		void diagonal_expand();
+		void turn_in45_expand();
+		void turn_out45_expand();
+		void turn_in135_expand();
+		void turn_out135_expand();
+		void longturn_90_expand();
+		void longturn_180_expand();
+		void turn_v90_expand();
+		t_posDijkstra SetNodePos(uint8_t _x,uint8_t _y,t_DijkstraWallPos _dpos);
+		t_element SetNode(t_posDijkstra _parent,	uint16_t _time,		t_direction _dir
+						 ,t_run_pattern _run_pt,		t_bool _determine);
+	public:
+		t_MapNodeWall closure[MAZE_SIZE_X][MAZE_SIZE_Y];
+		wall_class *wall_property;
+		Dijkstra(wall_class *_wall_property)
+		{
+			wall_property = _wall_property;
+		}
+		void init_dijkstra_map();
+		void start_node_setUp(t_posDijkstra start_pos,t_direction dir);
+		t_bool is_goal_Dijkstra(t_posDijkstra check_pos,t_position goal_pos,uint8_t goal_size);
+		t_posDijkstra conv_t_pos2t_posDijkstra(t_position pos,t_direction wall_pos);
+		t_posDijkstra min_search();
+		t_posDijkstra make_path_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
+		void run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
+		void expand(t_posDijkstra min_pos);
+};
+
+
+
+
+#endif /* CPP_INC_MAKE_PATH_H_ */

@@ -10,6 +10,7 @@
 #include "make_path.h"
 #include "typedef.h"
 #include "index.h"
+#include "macro.h"
 
 #define DIR_TURN_NEWS_R90(x) ((x + 1 + 4) % 4)
 #define DIR_TURN_NEWS_L90(x) ((x - 1 + 4) % 4)
@@ -513,6 +514,38 @@ t_element* Dijkstra::get_closure_inf(t_posDijkstra position)
 	return nullptr;
 }
 
+uint8_t Dijkstra::get_wall_inf(t_posDijkstra position)
+{
+	int return_wall_inf = WALL;
+	switch(position.NodePos)
+	{
+		case N_pos:
+			if((0 <= position.y && position.y < (MAZE_SIZE_Y - 1) )
+			&& (0 <= position.x && position.x < (MAZE_SIZE_X    ) ) )
+			{
+				if(wall_property->wall[position.x][position.y].north == NOWALL)
+				{
+					return_wall_inf = NOWALL;
+				}
+			}
+			break;
+		case E_pos:
+			if((0 <= position.y && position.y < (MAZE_SIZE_Y     ) )
+			&& (0 <= position.x && position.x < (MAZE_SIZE_X - 1 ) ))
+			{
+				if(wall_property->wall[position.x][position.y].east == NOWALL)
+				{
+					return_wall_inf = NOWALL;
+				}
+			}
+			break;
+			break;
+		case C_pos:
+			break;
+	}
+	return return_wall_inf;
+}
+
 void Dijkstra::straight_expand(t_posDijkstra pos,t_direction m_dir)
 {
 
@@ -526,71 +559,333 @@ void Dijkstra::diagonal_expand(t_posDijkstra pos,t_direction m_dir)
 void Dijkstra::turn_inR45_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_NEWS_R45((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Right);
+	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Right_Front, Front);
+	t_posDijkstra next_pos = pos2;
+	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_in_R45, False);
+		}
+	}
 
 }
 
 void Dijkstra::turn_inL45_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_NEWS_L45((int)m_dir);
-
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Left);
+	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Left_Front, Front);
+	t_posDijkstra next_pos = pos2;
+	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_in_L45, False);
+		}
+	}
 }
 
 void Dijkstra::turn_outR45_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_DIAG_R45((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Front);
+	t_posDijkstra next_pos = SetNodePos(pos.x, pos.y, C_pos);
+	switch(m_dir)
+	{
+		//Epos
+		case NorthWest:
+			next_pos.x = pos.x + 0;
+			next_pos.y = pos.y + 1;
+			break;
+		case SouthEast:
+			next_pos.x = pos.x + 1;
+			next_pos.y = pos.y - 1;
+			break;
+		//Npos
+		case NorthEast:
+			next_pos.y = pos.y + 1;
+			next_pos.x = pos.x + 1;
+			break;
+		case SouthWest:
+			next_pos.y = pos.y + 0;
+			next_pos.x = pos.x - 1 ;
+			break;
+		default:
+			break;
+	}
+ 	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
+	if(get_wall_inf(pos1) == NOWALL )
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_out_R45, False);
+		}
+	}
 }
 
 void Dijkstra::turn_outL45_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_DIAG_L45((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Front);
+	t_posDijkstra next_pos = SetNodePos(pos.x, pos.y, C_pos);
+	switch(m_dir)
+	{
+		//N_pos
+		case NorthWest:
+			next_pos.x = pos.x - 1;
+			next_pos.y = pos.y + 1;
+			break;
+		case SouthEast:
+			next_pos.x = pos.x + 1;
+			next_pos.y = pos.y + 0;
+			break;
+		//E_pos
+		case NorthEast:
+			next_pos.y = pos.y + 1;
+			next_pos.x = pos.x + 1;
+			break;
+		case SouthWest:
+			next_pos.y = pos.y - 1;
+			next_pos.x = pos.x + 0;
+			break;
+		default:
+			break;
+	}
+ 	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
+	if(get_wall_inf(pos1) == NOWALL )
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_out_L45, False);
+		}
+	}
 }
 
 void Dijkstra::turn_inR135_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_NEWS_R135((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Right);
+	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Right_Front, Rear);
+	t_posDijkstra pos4 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Right, Right);
+	t_posDijkstra next_pos = pos3;
+	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL && get_wall_inf(pos4) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_in_R135, False);
+		}
+	}
 }
 
 void Dijkstra::turn_inL135_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_NEWS_L135((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Left);
+	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Left_Front, Rear);
+	t_posDijkstra pos4 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Left, Left);
+	t_posDijkstra next_pos = pos3;
+	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL && get_wall_inf(pos4) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_in_L135, False);
+		}
+	}
 }
 
 void Dijkstra::turn_outR135_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_DIAG_R135((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Front);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Right_Front);
+	t_posDijkstra next_pos = SetNodePos(pos.x, pos.y, C_pos);
+	switch(m_dir)
+	{
+		//Epos
+		case NorthWest:
+			next_pos.x = pos.x - 1;
+			next_pos.y = pos.y + 1;
+			break;
+		case SouthEast:
+			next_pos.x = pos.x + 0;
+			next_pos.y = pos.y - 1;
+			break;
+		//Npos
+		case NorthEast:
+			next_pos.y = pos.y + 0;
+			next_pos.x = pos.x + 0;
+			break;
+		case SouthWest:
+			next_pos.y = pos.y + 1;
+			next_pos.x = pos.x - 1 ;
+			break;
+		default:
+			break;
+	}
+ 	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
+	if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_out_R135, False);
+		}
+	}
+
 }
 
 void Dijkstra::turn_outL135_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_DIAG_L135((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Front);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Left_Front);
+	t_posDijkstra next_pos = SetNodePos(pos.x, pos.y, C_pos);
+	switch(m_dir)
+	{
+		//N_pos
+		case NorthWest:
+			next_pos.x = pos.x - 1;
+			next_pos.y = pos.y + 0;
+			break;
+		case SouthEast:
+			next_pos.x = pos.x + 1;
+			next_pos.y = pos.y + 1;
+			break;
+		//E_pos
+		case NorthEast:
+			next_pos.y = pos.y + 1;
+			next_pos.x = pos.x + 0;
+			break;
+		case SouthWest:
+			next_pos.y = pos.y - 1;
+			next_pos.x = pos.x + 1;
+			break;
+		default:
+			break;
+	}
+ 	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
+	if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL )
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_out_L135, False);
+		}
+	}
 }
 
 void Dijkstra::longturn_R90_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_NEWS_R90((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Right);
+	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Right_Front, Right);
+	t_posDijkstra next_pos = SetNodePos(pos3.x,pos3.y,C_pos);
+	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Long_turnR90, False);
+		}
+	}
 }
 
 void Dijkstra::longturn_L90_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_NEWS_L90((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Left);
+	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Left_Front, Left);
+	t_posDijkstra next_pos = SetNodePos(pos3.x,pos3.y,C_pos);
+	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Long_turnL90, False);
+		}
+	}
 }
 
 void Dijkstra::longturn_R180_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_NEWS_R180((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Right);
+	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Right_Front, Rear);
+	t_posDijkstra pos4 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Right, Rear);
+	t_posDijkstra next_pos = SetNodePos(pos4.x,pos4.y,C_pos);
+	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Long_turnR180, False);
+		}
+	}
 }
 
 void Dijkstra::longturn_L180_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_NEWS_L180((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Left);
+	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Left_Front, Rear);
+	t_posDijkstra pos4 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Left, Rear);
+	t_posDijkstra next_pos = SetNodePos(pos4.x,pos4.y,C_pos);
+	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Long_turnL180, False);
+		}
+	}
 }
 
 void Dijkstra::turn_vR90_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_DIAG_R90((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Front);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Right_Front);
+	t_posDijkstra next_pos = pos2;
+	t_posDijkstra pos3 =  LocalPosDir2GlobWallPos_WPos(next_pos,next_dir,Front);
+	if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_RV90, False);
+		}
+	}
 }
 
 void Dijkstra::turn_vL90_expand(t_posDijkstra pos,t_direction m_dir)
 {
 	t_direction next_dir = (t_direction)DIR_TURN_DIAG_L90((int)m_dir);
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Front);
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Left_Front);
+	t_posDijkstra next_pos = pos2;
+	t_posDijkstra pos3 =  LocalPosDir2GlobWallPos_WPos(next_pos,next_dir,Front);
+	if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
+	{
+		int time = 2 + get_closure_inf(pos)->time;
+		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		{
+			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_LV90, False);
+		}
+	}
 }

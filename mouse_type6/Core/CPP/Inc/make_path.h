@@ -90,6 +90,7 @@ class Dijkstra
 		void set_determine(t_posDijkstra set_pos);
 
 		t_element*  get_closure_inf(t_posDijkstra position);
+		uint8_t get_wall_inf(t_posDijkstra position);
 	public:
 		t_MapNodeWall closure[MAZE_SIZE_X][MAZE_SIZE_Y];
 		wall_class *wall_property;

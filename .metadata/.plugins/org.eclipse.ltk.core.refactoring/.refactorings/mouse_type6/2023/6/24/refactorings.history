@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;mouse_type6/Core/CPP/Inc/Singlton.h&apos; to &apos;Singleton.h&apos;" description="Rename resource &apos;Singlton.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/CPP/Inc/Singlton.h" name="Singleton.h" stamp="1686642086975" updateReferences="true"/>
+</session>

@@ -1,0 +1,102 @@
+/*
+ * make_path_expand.cpp
+ *
+ *  Created on: 2023/06/30
+ *      Author: sato1
+ */
+
+#include "queue_class.h"
+#include "make_map_class.h"
+#include "make_path.h"
+#include "typedef.h"
+#include "index.h"
+
+#define DIR_TURN_NEWS_R90(x) ((x + 1 + 4) % 4)
+#define DIR_TURN_NEWS_L90(x) ((x - 1 + 4) % 4)
+#define DIR_TURN_NEWS_R45(x) (((x + 4)%4 + 8) % 8)
+#define DIR_TURN_NEWS_L45(x) (((x + 3)%4 + 4) % 8)
+
+
+#define DIR_TURN_DIAG_R90(x) ((x + 1 + 8) % 8)
+#define DIR_TURN_DIAG_L90(x) ((x - 1 + 8) % 8)
+
+
+void Dijkstra::straight_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::diagonal_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_inR45_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_inL45_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_outR45_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_outL45_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_inR135_expand(t_posDijkstra pos,t_direction m_dir)
+{
+	t_direction  next_dir = (((m_dir + 1) % 4) + 4)%8;
+}
+
+void Dijkstra::turn_inL135_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_outR135_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_outL135_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::longturn_R90_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::longturn_L90_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::longturn_R180_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::longturn_L180_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_vR90_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}
+
+void Dijkstra::turn_vL90_expand(t_posDijkstra pos,t_direction m_dir)
+{
+
+}

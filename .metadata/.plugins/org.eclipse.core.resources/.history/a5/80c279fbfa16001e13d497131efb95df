@@ -1,0 +1,101 @@
+/*
+ * make_path.cpp
+ *
+ *  Created on: 2023/06/26
+ *      Author: sato1
+ */
+
+
+#include "typedef.h"
+#include "macro.h"
+#include "make_path.h"
+#include "run_task.h"
+
+#define DIJKSTRA_MAX_TIME (UINT16_MAX-1)
+
+t_posDijkstra Dijkstra::SetNodePos(uint8_t _x,uint8_t _y,t_DijkstraWallPos _dpos)
+{
+	t_posDijkstra pos;
+	pos.x = _x;
+	pos.y = _y;
+	pos.NodePos = _dpos;
+	return pos;
+}
+
+t_element Dijkstra::SetNode(t_posDijkstra _parent,	uint16_t _time,		t_direction _dir
+				 ,t_run_pattern _run_pt,		t_bool _determine)
+{
+	t_element node;
+	node.parent_pos = _parent;
+	node.time		= _time;
+	node.dir		= _dir;
+	node.run_pt		= _run_pt;
+	node.determine  = _determine;
+	return node;
+}
+
+void Dijkstra::init_dijkstra_map()
+{
+	for(int i = 0;i < MAZE_SIZE_X;i++)
+	{
+		for(int j = 0;j < MAZE_SIZE_Y;j++)
+		{
+			for(int d = 0; d < 3;d++)
+			{
+				switch(d)
+				{
+					case C_pos:
+						closure[i][j].Center = SetNode(SetNodePos(i,j,C_pos), MAP_MAX_VALUE, Dir_None, No_run, False);
+						break;
+					case N_pos:
+						closure[i][j].North = SetNode(SetNodePos(i,j,N_pos), MAP_MAX_VALUE, Dir_None, No_run, (wall_property->wall[i][j].north == NOWALL)?False:True);
+						break;
+					case E_pos:
+						closure[i][j].East = SetNode(SetNodePos(i,j,E_pos), MAP_MAX_VALUE, Dir_None, No_run, (wall_property->wall[i][j].east == NOWALL)?False:True);
+						break;
+				}
+			}
+		}
+	}
+}
+
+void Dijkstra::start_node_setUp(t_posDijkstra start_pos,t_direction dir)
+{
+	switch(start_pos.NodePos)
+	{
+		case C_pos:
+			closure[start_pos.x][start_pos.y].Center = SetNode(SetNodePos(start_pos.x,start_pos.y,C_pos), 0, dir, No_run, False);
+			break;
+		case N_pos:
+			closure[start_pos.x][start_pos.y].North  = SetNode(SetNodePos(start_pos.x,start_pos.y,N_pos), 0, dir, No_run, False);
+			break;
+		case E_pos:
+			closure[start_pos.x][start_pos.y].East  = SetNode(SetNodePos(start_pos.x,start_pos.y,E_pos), 0, dir, No_run, False);
+			break;
+	}
+}
+
+t_bool Dijkstra::is_goal_Dijkstra(t_position goal_pos,uint8_t goal_size)
+{
+
+}
+
+t_posDijkstra Dijkstra::min_search()
+{
+	t_posDijkstra min_pos;
+
+	return min_pos;
+}
+
+
+
+t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_position goal_pos,uint8_t goal_size)
+{
+
+}
+
+void Dijkstra::run_Dijkstra(t_position start_pos,t_position goal_pos,uint8_t goal_size)
+{
+
+}
+

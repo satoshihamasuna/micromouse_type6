@@ -1,0 +1,52 @@
+/*
+ * make_path.h
+ *
+ *  Created on: 2023/06/26
+ *      Author: sato1
+ */
+
+#ifndef CPP_INC_MAKE_PATH_H_
+#define CPP_INC_MAKE_PATH_H_
+
+#include "typedef.h"
+#include "singleton.h"
+
+typedef struct
+{
+	uint16_t time;
+	t_direction dir;
+	t_bool determine;
+}t_element;
+
+typedef struct
+{
+	t_element Center;
+	t_element North;
+	t_element East;
+}t_MapNodeWall;
+
+class calcRunTime
+{
+
+};
+
+class Dijkstra:public Singleton<Dijkstra>
+{
+	private:
+		void straight_expand();
+		void diagonal_expand();
+		void turn_in45_expand();
+		void turn_out45_expand();
+		void turn_in135_expand();
+		void turn_out135_expand();
+		void longturn_90_expand();
+		void longturn_180_expand();
+		void turn_v90_expand();
+	public:
+		t_MapNodeWall map[32][32];
+
+};
+
+
+
+#endif /* CPP_INC_MAKE_PATH_H_ */
