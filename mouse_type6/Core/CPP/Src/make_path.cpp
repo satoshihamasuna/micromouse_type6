@@ -207,6 +207,8 @@ t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_direction star
 	{
 		min_pos = min_search();
 		//set_determine
+		set_determine(min_pos);
+
 		if(is_goal_Dijkstra(min_pos, goal_pos, goal_size))
 		{
 			break;

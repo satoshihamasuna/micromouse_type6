@@ -21,7 +21,8 @@
 #include "wall_class.h"
 #include "queue_class.h"
 #include "priority_queue.h"
-
+#include "wall_class.h"
+#include "flash.h"
 
 void CPP_Main()
 {
@@ -152,30 +153,32 @@ void CPP_Main()
 			  	  case (ENABLE_MODE3|0x06):
 						if(SensingTask::getInstance().IrSensor_Avg() > 2500)
 						{
-							for(int i = 0;i < 10;i++)
+							for(int i = 0;i < 11;i++)
 							{
-								(i%2 == 0) ? Indicate_LED(ENABLE_MODE3|0x06):Indicate_LED(0x00|0x00);
-								HAL_Delay(50);
+							  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
 							}
 							Indicate_LED(ENABLE_MODE3|0x06);
-					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
+					  		motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+					  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		KalmanFilter::getInstance().filter_init();
 					  		t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
-					  		goal.x =0, goal.y = 3;
-					  		t_position return_pos = solve_maze.search_adachi_1(start, goal, 1, &wall_data, &map_data,&mp);
+					  		goal.x =0, goal.y = 2;
+					  		t_position return_pos = solve_maze.search_adachi_1(start, goal, 2, &wall_data, &map_data,&mp);
+					  		write_save_data(&wall_data);
 					  		solve_maze.search_adachi_1(return_pos, start, 1, &wall_data, &map_data,&mp);
+					  		write_save_data(&wall_data);
 					  		Mode_Disable();
 						}
 						break;
 			  	  case (ENABLE_MODE3|0x07):
 						if(SensingTask::getInstance().IrSensor_Avg() > 2500)
 						{
-							for(int i = 0;i < 10;i++)
+							for(int i = 0;i < 11;i++)
 							{
-								(i%2 == 0) ? Indicate_LED(ENABLE_MODE3|0x06):Indicate_LED(0x00|0x00);
-								HAL_Delay(50);
+							  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
 							}
 							t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
@@ -188,6 +191,16 @@ void CPP_Main()
 						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x08):
+						if(SensingTask::getInstance().IrSensor_Avg() > 2500)
+						{
+							for(int i = 0;i < 11;i++)
+							{
+								(i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
+								HAL_Delay(50);
+							}
+							read_save_data(&wall_data);
+							Mode_Disable();
+						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x09):
 			  			  break;

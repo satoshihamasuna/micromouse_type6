@@ -6,6 +6,7 @@
 CPP_SRCS += \
 ../Core/CPP/Src/adachi.cpp \
 ../Core/CPP/Src/controll.cpp \
+../Core/CPP/Src/flash.cpp \
 ../Core/CPP/Src/interrupt.cpp \
 ../Core/CPP/Src/kalman_filter.cpp \
 ../Core/CPP/Src/log_data.cpp \
@@ -25,6 +26,7 @@ CPP_SRCS += \
 OBJS += \
 ./Core/CPP/Src/adachi.o \
 ./Core/CPP/Src/controll.o \
+./Core/CPP/Src/flash.o \
 ./Core/CPP/Src/interrupt.o \
 ./Core/CPP/Src/kalman_filter.o \
 ./Core/CPP/Src/log_data.o \
@@ -44,6 +46,7 @@ OBJS += \
 CPP_DEPS += \
 ./Core/CPP/Src/adachi.d \
 ./Core/CPP/Src/controll.d \
+./Core/CPP/Src/flash.d \
 ./Core/CPP/Src/interrupt.d \
 ./Core/CPP/Src/kalman_filter.d \
 ./Core/CPP/Src/log_data.d \
@@ -66,6 +69,8 @@ Core/CPP/Src/adachi.o: ../Core/CPP/Src/adachi.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/adachi.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/CPP/Src/controll.o: ../Core/CPP/Src/controll.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/controll.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Core/CPP/Src/flash.o: ../Core/CPP/Src/flash.cpp
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/flash.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/CPP/Src/interrupt.o: ../Core/CPP/Src/interrupt.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/interrupt.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/CPP/Src/kalman_filter.o: ../Core/CPP/Src/kalman_filter.cpp

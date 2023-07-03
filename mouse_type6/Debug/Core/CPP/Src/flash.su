@@ -1,0 +1,8 @@
+flash.cpp:33:6:void eraseALL()	8	static
+flash.cpp:39:6:void write_save_data(wall_class*)	16	static
+flash.cpp:46:6:void read_save_data(wall_class*)	16	static
+flash.cpp:51:6:void read_wall_flash(wall_class*)	32	static
+flash.cpp:65:6:void write_wall_flash(wall_class*)	32	static
+flash.cpp:76:6:void eraseFlash()	32	static
+flash.cpp:95:6:void writeFlash(uint32_t, uint16_t*)	24	static
+flash.cpp:110:6:void loadFlash(uint32_t, uint16_t*, uint32_t)	24	static
