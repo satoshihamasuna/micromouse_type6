@@ -13,7 +13,7 @@
 #include "run_task.h"
 #include "singleton.h"
 
-#define DEBUG_MODE
+//#define DEBUG_MODE
 
 typedef enum
 {

@@ -5175,3 +5175,44 @@ Finished building: mouse_type6.bin
  
 Finished building: mouse_type6.list
  
+18:20:24 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path_expand.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path_expand.d" -MT"Core/CPP/Src/make_path_expand.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path_expand.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 209892	    812	  25072	 235776	  39900	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+18:21:07 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path_expand.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path_expand.d" -MT"Core/CPP/Src/make_path_expand.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path_expand.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 209892	    812	  25072	 235776	  39900	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+19:17:17 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 209892	    812	  25072	 235776	  39900	mouse_type6.elf
+Finished building: default.size.stdout
+ 
