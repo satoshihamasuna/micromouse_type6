@@ -116,42 +116,42 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_di
 				switch(LocalDir)
 				{
 					case Front:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = East;
 						break;
 					case Right_Front:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Right:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = East;
 						break;
 					case Right_Rear:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Rear:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = West;
 						break;
 					case Left_Rear:
 						return_glob_pos.x = return_glob_pos.x - 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Left:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = West;
 						break;
 					case Left_Front:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = North;
 						break;
@@ -163,41 +163,41 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_di
 				{
 					case Front:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Right_Front:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = East;
 						break;
 					case Right:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Right_Rear:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y - 1;
 						return_glob_dir = East;
 						break;
 					case Rear:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Left_Rear:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = West;
 						break;
 					case Left:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Left_Front:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = East;
 						break;
@@ -211,43 +211,43 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_di
 				switch(LocalDir)
 				{
 					case Front:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = East;
 						break;
 					case Right_Front:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Right:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = West;
 						break;
 					case Right_Rear:
 						return_glob_pos.x = return_glob_pos.x - 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Rear:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = West;
 						break;
 					case Left_Rear:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = North;
 						break;
 					case Left:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = East;
 						break;
 					case Left_Front:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 				}
@@ -258,42 +258,42 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_di
 				{
 					case Front:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Right_Front:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y - 1;
 						return_glob_dir = East;
 						break;
 					case Right:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Right_Rear:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = West;
 						break;
 					case Rear:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Left_Rear:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = East;
 						break;
 					case Left:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Left_Front:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = East;
 						break;
 				}
@@ -307,43 +307,43 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_di
 				switch(LocalDir)
 				{
 					case Front:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = West;
 						break;
 					case Right_Front:
 						return_glob_pos.x = return_glob_pos.x - 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Right:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = West;
 						break;
 					case Right_Rear:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = North;
 						break;
 					case Rear:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = East;
 						break;
 					case Left_Rear:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Left:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = East;
 						break;
 					case Left_Front:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 				}
@@ -353,42 +353,42 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_di
 				switch(LocalDir)
 				{
 					case Front:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Right_Front:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = West;
 						break;
 					case Right:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Right_Rear:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = East;
 						break;
 					case Rear:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Left_Rear:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = East;
 						break;
 					case Left:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Left_Front:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y - 1;
 						return_glob_dir = East;
 						break;
@@ -402,43 +402,43 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_di
 				switch(LocalDir)
 				{
 					case Front:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = West;
 						break;
 					case Right_Front:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = North;
 						break;
 					case Right:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = East;
 						break;
 					case Right_Rear:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Rear:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = East;
 						break;
 					case Left_Rear:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Left:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = West;
 						break;
 					case Left_Front:
 						return_glob_pos.x = return_glob_pos.x - 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 				}
@@ -448,43 +448,43 @@ t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_di
 				switch(LocalDir)
 				{
 					case Front:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Right_Front:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y + 1;
 						return_glob_dir = East;
 						break;
 					case Right:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = North;
 						break;
 					case Right_Rear:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = East;
 						break;
 					case Rear:
 						return_glob_pos.x = return_glob_pos.x + 1;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Left_Rear:
-						return_glob_pos.x = return_glob_pos.x;
+						return_glob_pos.x = return_glob_pos.x + 0;
 						return_glob_pos.y = return_glob_pos.y - 1;
 						return_glob_dir = East;
 						break;
 					case Left:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = South;
 						break;
 					case Left_Front:
-						return_glob_pos.x = return_glob_pos.x;
-						return_glob_pos.y = return_glob_pos.y;
+						return_glob_pos.x = return_glob_pos.x + 0;
+						return_glob_pos.y = return_glob_pos.y + 0;
 						return_glob_dir = West;
 						break;
 				}
@@ -548,12 +548,53 @@ uint8_t Dijkstra::get_wall_inf(t_posDijkstra position)
 
 void Dijkstra::straight_expand(t_posDijkstra pos,t_direction m_dir)
 {
+	t_direction next_dir = m_dir;
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+	t_posDijkstra next_pos = SetNodePos(pos1.x, pos1.y, C_pos);
+	for(int i = 1;; i++)
+	{
+		int time  = get_closure_inf(pos)->time + 1 * i;
+		if(get_wall_inf(pos1) == NOWALL)
+		{
+				if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+				{
+					(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Straight, False);
+				}
+		}
+		else
+		{
+			break;
+		}
+		pos1 = LocalPosDir2GlobWallPos_Center(next_pos, m_dir, Front, Rear);
+		next_pos = SetNodePos(pos1.x, pos1.y, C_pos);
+	}
 
 }
 
 void Dijkstra::diagonal_expand(t_posDijkstra pos,t_direction m_dir)
 {
-
+	t_direction next_dir = m_dir;
+	t_posDijkstra pos1 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Front);
+	t_posDijkstra next_pos= pos1;
+	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_WPos(next_pos, next_dir, Front);
+	for(int i = 1;; i++)
+	{
+		int time = get_closure_inf(pos)->time + i*2;
+		if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL)
+		{
+			if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+			{
+				(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Diagonal, False);
+			}
+		}
+		else
+		{
+			break;
+		}
+		pos1 = pos2;
+		next_pos = pos1;
+		pos2 = LocalPosDir2GlobWallPos_WPos(next_pos, next_dir, Front);
+	}
 }
 
 void Dijkstra::turn_inR45_expand(t_posDijkstra pos,t_direction m_dir)
