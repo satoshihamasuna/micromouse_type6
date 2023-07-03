@@ -75,19 +75,20 @@ void CPP_Main()
 							  }
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.05, 0.0);
 					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
-					  		  mp.fix_wall(&motion_task::getInstance(), 400);
-			  				  HAL_Delay(100);
-			  				  FAN_Motor_SetDuty(700);;
-			  				  while(motion_task::getInstance().run_task !=No_run){}
+					  		  //mp.fix_wall(&motion_task::getInstance(), 400);
+			  				  //HAL_Delay(100);
+			  				  //FAN_Motor_SetDuty(700);;
+			  				  //while(motion_task::getInstance().run_task !=No_run){}
 					  		  KalmanFilter::getInstance().filter_init();
 					  		  mp.motion_start(&motion_task::getInstance());
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
-					  		  mp.search_straight(&motion_task::getInstance(),90.0*8,35.0,5.0,0.0);
+					  		  //mp.search_straight(&motion_task::getInstance(),90.0*8,35.0,5.0,0.0);
+					  		  mp.pivot_turn(&motion_task::getInstance(), DEG2RAD(270.0), 20.0*PI, 4.0*PI);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().log_enable = False;
-			  				  HAL_Delay(100);
-			  				  FAN_Motor_SetDuty(0);;
+			  				  //HAL_Delay(100);
+			  				  //FAN_Motor_SetDuty(0);;
 			  				  HAL_Delay(500);
 					  		  Mode_Disable();
 					  	   }
