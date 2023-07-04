@@ -1,5 +1,5 @@
 motion_task.cpp:15:6:void motion_task::motion_inInterrupt()	72	static
-motion_task.cpp:54:6:void motion_task::motionControll()	80	static
-motion_task.cpp:114:6:void motion_task::motionPostControll()	16	static
-motion_task.cpp:124:8:t_bool motion_task::is_controll_enable()	24	static
+motion_task.cpp:74:6:void motion_task::motionControll()	80	static
+motion_task.cpp:134:6:void motion_task::motionPostControll()	16	static
+motion_task.cpp:144:8:t_bool motion_task::is_controll_enable()	24	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static

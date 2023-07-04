@@ -127,28 +127,28 @@ void CPP_Main()
 			  			  break;
 			  	  case (ENABLE_MODE3|0x05):
 						if(SensingTask::getInstance().IrSensor_Avg() > 2500){
-							  for(int i = 0;i < 11;i++)
-							  {
-								  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
-								  HAL_Delay(50);
-							  }
-					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
-					 		  KalmanFilter::getInstance().filter_init();
-					 		  LogData::getInstance().data_count = 0;
-					 		  LogData::getInstance().log_enable = True;
-					  		  mp.motion_start(&motion_task::getInstance());
-					 		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.30);
-					 		  while(motion_task::getInstance().run_task !=No_run){}
-					 		  for(int i = 0;i < 8;i++){
-								  mp.searchSlalom(&motion_task::getInstance(),&param_L90_search);
-								  while(motion_task::getInstance().run_task !=No_run){}
-					 		  }
-							  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.0);
-					 		  while(motion_task::getInstance().run_task !=No_run){}
-					 		  HAL_Delay(200);
-							  LogData::getInstance().log_enable = False;
-							  Mode_Disable();
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+				  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+				  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
+				 		  KalmanFilter::getInstance().filter_init();
+				 		  LogData::getInstance().data_count = 0;
+				 		  LogData::getInstance().log_enable = True;
+				  		  mp.motion_start(&motion_task::getInstance());
+				 		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.30);
+				 		  while(motion_task::getInstance().run_task !=No_run){}
+				 		  for(int i = 0;i < 8;i++){
+							  mp.searchSlalom(&motion_task::getInstance(),&param_L90_search);
+							  while(motion_task::getInstance().run_task !=No_run){}
+				 		  }
+						  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.0);
+				 		  while(motion_task::getInstance().run_task !=No_run){}
+				 		  HAL_Delay(200);
+						  LogData::getInstance().log_enable = False;
+						  Mode_Disable();
 						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x06):

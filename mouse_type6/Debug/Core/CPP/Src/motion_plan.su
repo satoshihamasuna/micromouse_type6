@@ -4,4 +4,8 @@ motion_plan.cpp:27:6:void motion_plan::free_rotation(motion_task*)	16	static
 motion_plan.cpp:34:6:void motion_plan::search_straight(motion_task*, float, float, float, float)	88	static
 motion_plan.cpp:65:6:void motion_plan::pivot_turn(motion_task*, float, float, float)	88	static
 motion_plan.cpp:94:6:void motion_plan::searchSlalom(motion_task*, const t_param*)	80	static
-motion_plan.cpp:122:6:void motion_plan::fix_wall(motion_task*, float)	80	static
+motion_plan.cpp:122:6:void motion_plan::turn_in(motion_task*, const t_param*)	80	static
+motion_plan.cpp:152:6:void motion_plan::turn_out(motion_task*, const t_param*)	80	static
+motion_plan.cpp:182:6:void motion_plan::long_turn(motion_task*, const t_param*)	80	static
+motion_plan.cpp:212:6:void motion_plan::turn_v90(motion_task*, const t_param*)	80	static
+motion_plan.cpp:240:6:void motion_plan::fix_wall(motion_task*, float)	80	static

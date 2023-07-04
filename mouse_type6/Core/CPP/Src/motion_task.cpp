@@ -29,7 +29,27 @@ void motion_task::motion_inInterrupt(){
 		case Search_slalom_R:
 			rT.search_slalom(&mt_set,_turn_param,&target, &mouse, 1.0);
 			break;
+		case Long_turnR180:
+		case Long_turnL180:
 		case Long_turnR90:
+		case Long_turnL90:
+			rT.long_turn(&mt_set,_turn_param,&target, &mouse, 1.0);
+			break;
+		case Turn_in_R45:
+		case Turn_in_L45:
+		case Turn_in_R135:
+		case Turn_in_L135:
+			rT.turn_in(&mt_set,_turn_param,&target, &mouse, 1.0);
+			break;
+		case Turn_out_R45:
+		case Turn_out_L45:
+		case Turn_out_R135:
+		case Turn_out_L135:
+			rT.turn_out(&mt_set,_turn_param,&target, &mouse, 1.0);
+			break;
+		case Turn_LV90:
+		case Turn_RV90:
+			rT.turn_v90(&mt_set,_turn_param,&target, &mouse, 1.0);
 			break;
 		case motor_free:
 				rT.MotionFree(&run_time,run_time_limit);

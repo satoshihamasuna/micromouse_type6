@@ -73,10 +73,10 @@ class RunTask
 		void pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void fix_wall(t_machine_param *target_,float *run_time,float run_time_limit,float delta_t_ms);
 		void straight();
-		void long_turn();
-		void turn_v90();
-		void turn_in();
-		void turn_out();
+		void long_turn(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
+		void turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
+		void turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
+		void turn_out(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void brake();
 		void reset_brake_time()
 		{
