@@ -204,12 +204,12 @@ t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_direction star
 	t_posDijkstra min_pos;
 	init_dijkstra_map();
 	start_node_setUp(conv_t_pos2t_posDijkstra(start_pos, start_wallPos), start_pos.dir);
-	for(int i = 0; i < 100;i++)
+	for(int i = 0; i < 1000;i++)
 	{
 		min_pos = min_search();
 		//set_determine
 		#ifdef DEBUG_MODE
-		printf("%d,%d\n,",min_pos.x,min_pos.y);
+		printf("minimamu->%d,%d,%d\n",min_pos.x,min_pos.y,min_pos.NodePos);
 		#endif
 		set_determine(min_pos);
 
