@@ -23,6 +23,7 @@
 #include "priority_queue.h"
 #include "wall_class.h"
 #include "flash.h"
+#include "make_path.h"
 
 void CPP_Main()
 {
@@ -41,7 +42,7 @@ void CPP_Main()
 	  wall_class wall_data(&SensingTask::getInstance());
 	  wall_data.init_maze();
 	  make_map map_data(&wall_data,&maze_q);
-
+	  Dijkstra run_path(&wall_data);
 	  q.push(0);
 	  while (1)
 	  {
@@ -204,6 +205,19 @@ void CPP_Main()
 						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x09):
+					   if(SensingTask::getInstance().IrSensor_Avg() > 2500)
+					   {
+							for(int i = 0;i < 11;i++)
+							{
+								(i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
+								HAL_Delay(50);
+							}
+							t_position start,goal;
+					  		start.x = start.y = 0;start.dir = North;
+					  		goal.x =0, goal.y = 3;
+							run_path.make_path_Dijkstra(start, Dir_None, goal, 2);
+							Mode_Disable();
+						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x0A):
 			  			  break;

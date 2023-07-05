@@ -4,21 +4,21 @@ make_path_expand.cpp:107:15:t_posDijkstra Dijkstra::LocalPosDir2GlobWallPos_WPos
 make_path_expand.cpp:503:12:t_element* Dijkstra::get_closure_inf(t_posDijkstra)	16	static
 make_path_expand.cpp:517:9:uint8_t Dijkstra::get_wall_inf(t_posDijkstra)	24	static
 make_path_expand.cpp:549:6:void Dijkstra::straight_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:577:6:void Dijkstra::diagonal_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:606:6:void Dijkstra::turn_inR45_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:627:6:void Dijkstra::turn_inL45_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:647:6:void Dijkstra::turn_outR45_expand(t_posDijkstra, t_direction)	80	static
-make_path_expand.cpp:689:6:void Dijkstra::turn_outL45_expand(t_posDijkstra, t_direction)	80	static
-make_path_expand.cpp:731:6:void Dijkstra::turn_inR135_expand(t_posDijkstra, t_direction)	96	static
-make_path_expand.cpp:752:6:void Dijkstra::turn_inL135_expand(t_posDijkstra, t_direction)	96	static
-make_path_expand.cpp:773:6:void Dijkstra::turn_outR135_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:817:6:void Dijkstra::turn_outL135_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:860:6:void Dijkstra::longturn_R90_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:880:6:void Dijkstra::longturn_L90_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:900:6:void Dijkstra::longturn_R180_expand(t_posDijkstra, t_direction)	96	static
-make_path_expand.cpp:921:6:void Dijkstra::longturn_L180_expand(t_posDijkstra, t_direction)	96	static
-make_path_expand.cpp:939:6:void Dijkstra::turn_vR90_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:959:6:void Dijkstra::turn_vL90_expand(t_posDijkstra, t_direction)	88	static
-make_path_expand.cpp:977:1:void __static_initialization_and_destruction_0(int, int)	16	static
-make_path_expand.cpp:977:1:cpp)	8	static
-make_path_expand.cpp:977:1:cpp)	8	static
+make_path_expand.cpp:578:6:void Dijkstra::diagonal_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:608:6:void Dijkstra::turn_inR45_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:630:6:void Dijkstra::turn_inL45_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:651:6:void Dijkstra::turn_outR45_expand(t_posDijkstra, t_direction)	80	static
+make_path_expand.cpp:694:6:void Dijkstra::turn_outL45_expand(t_posDijkstra, t_direction)	80	static
+make_path_expand.cpp:737:6:void Dijkstra::turn_inR135_expand(t_posDijkstra, t_direction)	96	static
+make_path_expand.cpp:759:6:void Dijkstra::turn_inL135_expand(t_posDijkstra, t_direction)	96	static
+make_path_expand.cpp:781:6:void Dijkstra::turn_outR135_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:826:6:void Dijkstra::turn_outL135_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:870:6:void Dijkstra::longturn_R90_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:891:6:void Dijkstra::longturn_L90_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:912:6:void Dijkstra::longturn_R180_expand(t_posDijkstra, t_direction)	96	static
+make_path_expand.cpp:934:6:void Dijkstra::longturn_L180_expand(t_posDijkstra, t_direction)	96	static
+make_path_expand.cpp:956:6:void Dijkstra::turn_vR90_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:977:6:void Dijkstra::turn_vL90_expand(t_posDijkstra, t_direction)	88	static
+make_path_expand.cpp:996:1:void __static_initialization_and_destruction_0(int, int)	16	static
+make_path_expand.cpp:996:1:cpp)	8	static
+make_path_expand.cpp:996:1:cpp)	8	static

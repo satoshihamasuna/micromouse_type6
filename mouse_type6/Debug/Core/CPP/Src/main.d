@@ -59,7 +59,8 @@ Core/CPP/Src/main.o: ../Core/CPP/Src/main.cpp \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/wall_class.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/queue_class.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/priority_queue.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/flash.h
+ C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/flash.h \
+ C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/Include/index.h:
 
@@ -194,3 +195,5 @@ C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Co
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/priority_queue.h:
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/flash.h:
+
+C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:
