@@ -96,13 +96,13 @@ void Dijkstra::init_dijkstra_map()
 				switch(d)
 				{
 					case C_pos:
-						closure[i][j].Center = SetNode(SetNodePos(i,j,C_pos), MAP_MAX_VALUE, Dir_None, No_run, False);
+						closure[i][j].Center = SetNode(SetNodePos(i,j,C_pos), DIJKSTRA_MAX_TIME, Dir_None, No_run, False);
 						break;
 					case N_pos:
-						closure[i][j].North = SetNode(SetNodePos(i,j,N_pos), MAP_MAX_VALUE, Dir_None, No_run, (wall_property->wall[i][j].north == NOWALL)?False:True);
+						closure[i][j].North = SetNode(SetNodePos(i,j,N_pos), DIJKSTRA_MAX_TIME, Dir_None, No_run, False);
 						break;
 					case E_pos:
-						closure[i][j].East = SetNode(SetNodePos(i,j,E_pos), MAP_MAX_VALUE, Dir_None, No_run, (wall_property->wall[i][j].east == NOWALL)?False:True);
+						closure[i][j].East = SetNode(SetNodePos(i,j,E_pos), DIJKSTRA_MAX_TIME, Dir_None, No_run, False);
 						break;
 				}
 			}
@@ -173,7 +173,7 @@ void Dijkstra::set_determine(t_posDijkstra set_pos)
 
 t_posDijkstra Dijkstra::min_search()
 {
-	t_posDijkstra min_pos;
+	t_posDijkstra min_pos = SetNodePos(0, 0, C_pos);
 	uint16_t min_time = DIJKSTRA_MAX_TIME;
 	for(int i = 0;i < MAZE_SIZE_X;i++)
 	{
@@ -202,11 +202,15 @@ t_posDijkstra Dijkstra::min_search()
 t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size)
 {
 	t_posDijkstra min_pos;
+	init_dijkstra_map();
 	start_node_setUp(conv_t_pos2t_posDijkstra(start_pos, start_wallPos), start_pos.dir);
-	for(int i = 0; i < 1000;i++)
+	for(int i = 0; i < 100;i++)
 	{
 		min_pos = min_search();
 		//set_determine
+		#ifdef DEBUG_MODE
+		printf("%d,%d\n,",min_pos.x,min_pos.y);
+		#endif
 		set_determine(min_pos);
 
 		if(is_goal_Dijkstra(min_pos, goal_pos, goal_size))
@@ -220,7 +224,7 @@ t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_direction star
 
 void Dijkstra::expand(t_posDijkstra pos)
 {
-	t_direction pos_dir = get_closure_inf(pos)->dir;
+	t_direction pos_dir = (*get_closure_inf(pos)).dir;
 	switch(pos.NodePos)
 	{
 		case N_pos:
@@ -235,12 +239,12 @@ void Dijkstra::expand(t_posDijkstra pos)
 			break;
 		case C_pos:
 			straight_expand(pos, pos_dir);
-			turn_inR45_expand(pos, pos_dir);
-			turn_inL45_expand(pos, pos_dir);
-			turn_inR45_expand(pos, pos_dir);
-			turn_inL45_expand(pos, pos_dir);
 			turn_inR135_expand(pos, pos_dir);
 			turn_inL135_expand(pos, pos_dir);
+			turn_inR45_expand(pos, pos_dir);
+			turn_inL45_expand(pos, pos_dir);
+			turn_inR45_expand(pos, pos_dir);
+			turn_inL45_expand(pos, pos_dir);
 			longturn_R90_expand(pos, pos_dir);
 			longturn_L90_expand(pos, pos_dir);
 			longturn_R180_expand(pos, pos_dir);

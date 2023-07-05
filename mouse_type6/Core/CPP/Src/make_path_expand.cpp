@@ -553,10 +553,10 @@ void Dijkstra::straight_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = SetNodePos(pos1.x, pos1.y, C_pos);
 	for(int i = 1;; i++)
 	{
-		int time  = get_closure_inf(pos)->time + 1 * i;
+		int time  = (*get_closure_inf(pos)) .time + 1 * i;
 		if(get_wall_inf(pos1) == NOWALL)
 		{
-				if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+				if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 				{
 					(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Straight, False);
 					#ifdef DEBUG_MODE
@@ -583,10 +583,10 @@ void Dijkstra::diagonal_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_WPos(next_pos, next_dir, Front);
 	for(int i = 1;; i++)
 	{
-		int time = get_closure_inf(pos)->time + i*2;
+		int time = (*get_closure_inf(pos)) .time + i*2;
 		if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL)
 		{
-			if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+			if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 			{
 				(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Diagonal, False);
 				#ifdef DEBUG_MODE
@@ -614,8 +614,8 @@ void Dijkstra::turn_inR45_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = pos2;
 	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_in_R45, False);
 			#ifdef DEBUG_MODE
@@ -636,8 +636,8 @@ void Dijkstra::turn_inL45_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = pos2;
 	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_in_L45, False);
 			#ifdef DEBUG_MODE
@@ -679,8 +679,8 @@ void Dijkstra::turn_outR45_expand(t_posDijkstra pos,t_direction m_dir)
  	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
 	if(get_wall_inf(pos1) == NOWALL )
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_out_R45, False);
 			#ifdef DEBUG_MODE
@@ -722,8 +722,8 @@ void Dijkstra::turn_outL45_expand(t_posDijkstra pos,t_direction m_dir)
  	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
 	if(get_wall_inf(pos1) == NOWALL )
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_out_L45, False);
 			#ifdef DEBUG_MODE
@@ -742,11 +742,27 @@ void Dijkstra::turn_inR135_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra pos3 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Right_Front, Rear);
 	t_posDijkstra pos4 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Right, Right);
 	t_posDijkstra next_pos = pos3;
+	#ifdef DEBUG_MODE
+	printf("turn_inR135_expand_check->x:%2d,y:%2d,d:%2d\n",next_pos.x,next_pos.y,next_pos.NodePos);
+	printf("turn_inR135_expand_check->1:%2d,2:%2d,3:%2d\n",get_wall_inf(pos1),get_wall_inf(pos2),get_wall_inf(pos3));
+	HAL_Delay(10);
+	#endif
 	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL && get_wall_inf(pos4) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		#ifdef DEBUG_MODE
+		printf("turn_inR135_expand->wallOK\n");
+		HAL_Delay(10);
+		#endif
+		uint16_t time = 2 + (*get_closure_inf(pos)).time;
+		#ifdef DEBUG_MODE
+		printf("time:%d,next_det:%d,nex_time:%d\n",time,(int)((*get_closure_inf(pos)) .determine),(int)((*get_closure_inf(pos)) .time));
+		printf("time:%d,next_det:%d,nex_time:%d\n",time,(int)((*get_closure_inf(next_pos)).determine),(int)((*get_closure_inf(next_pos)) .time));
+		printf("time:%d,next_det:%d,nex_time:%d\n",time,(int)(closure[1][0].North.determine),(int)(closure[1][0].North.time));
+		HAL_Delay(10);
+		#endif
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
+
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_in_R135, False);
 			#ifdef DEBUG_MODE
 			printf("turn_inR135_expand_Set->x:%2d,y:%2d,d:%2d\n",next_pos.x,next_pos.y,next_pos.NodePos);
@@ -766,8 +782,8 @@ void Dijkstra::turn_inL135_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = pos3;
 	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL && get_wall_inf(pos4) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_in_L135, False);
 			#ifdef DEBUG_MODE
@@ -810,8 +826,8 @@ void Dijkstra::turn_outR135_expand(t_posDijkstra pos,t_direction m_dir)
  	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
 	if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_out_R135, False);
 			#ifdef DEBUG_MODE
@@ -855,8 +871,8 @@ void Dijkstra::turn_outL135_expand(t_posDijkstra pos,t_direction m_dir)
  	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
 	if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL )
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_out_L135, False);
 			#ifdef DEBUG_MODE
@@ -876,8 +892,8 @@ void Dijkstra::longturn_R90_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = SetNodePos(pos3.x,pos3.y,C_pos);
 	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Long_turnR90, False);
 			#ifdef DEBUG_MODE
@@ -897,8 +913,8 @@ void Dijkstra::longturn_L90_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = SetNodePos(pos3.x,pos3.y,C_pos);
 	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Long_turnL90, False);
 			#ifdef DEBUG_MODE
@@ -919,8 +935,8 @@ void Dijkstra::longturn_R180_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = SetNodePos(pos4.x,pos4.y,C_pos);
 	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Long_turnR180, False);
 			#ifdef DEBUG_MODE
@@ -941,8 +957,8 @@ void Dijkstra::longturn_L180_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = SetNodePos(pos4.x,pos4.y,C_pos);
 	if(get_wall_inf(pos1) == NOWALL  && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Long_turnL180, False);
 			#ifdef DEBUG_MODE
@@ -962,8 +978,8 @@ void Dijkstra::turn_vR90_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra pos3 =  LocalPosDir2GlobWallPos_WPos(next_pos,next_dir,Front);
 	if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_RV90, False);
 			#ifdef DEBUG_MODE
@@ -983,8 +999,8 @@ void Dijkstra::turn_vL90_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra pos3 =  LocalPosDir2GlobWallPos_WPos(next_pos,next_dir,Front);
 	if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL && get_wall_inf(pos3) == NOWALL)
 	{
-		int time = 2 + get_closure_inf(pos)->time;
-		if(get_closure_inf(next_pos)->determine == False && get_closure_inf(next_pos)->time >= time)
+		int time = 2 + (*get_closure_inf(pos)) .time;
+		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
 		{
 			(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Turn_LV90, False);
 			#ifdef DEBUG_MODE
