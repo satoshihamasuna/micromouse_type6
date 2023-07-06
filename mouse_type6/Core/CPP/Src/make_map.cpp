@@ -38,8 +38,8 @@ void make_map::init_map(int x, int y,int goal_size){
 			map[x+i][y+j] = 0;
 		}
 	}
-
 }
+
 
 void make_map::expand(t_MapNode n,int mask){
 
@@ -92,6 +92,39 @@ void make_map::expand(t_MapNode n,int mask){
 		}
 	}
 
+}
+
+void make_map::make_map_queue_zenmen(int x, int y,t_position expand_end,int size,int mask)
+{
+	//queueの初期化
+		maze_q->queue_reset();
+
+		for( int i = 0; i < MAZE_SIZE_X ; i++ ){
+			for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
+				if(wall_property->is_unknown(i, j) == True)
+				{
+					map[i][j] = 0;
+					maze_q->push(node_set(i,j,0,0));
+				}
+				else
+				{
+					map[i][j] = MAZE_SIZE;
+				}
+			}
+		}
+
+	    t_MapNode n;
+		while(maze_q->queue_length() != 0){
+			n = maze_q->pop();
+			expand(n,mask);
+			if(expand_end.x == n.st_x && expand_end.y == n.st_y)
+				break;
+		}
+
+		if(map[expand_end.x][expand_end.y] == MAZE_SIZE)
+		{
+			make_map_queue(x, y, expand_end, size, mask);
+		}
 }
 
 void make_map::make_map_queue(int x, int y,t_position expand_end,int size,int mask)

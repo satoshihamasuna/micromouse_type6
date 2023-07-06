@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000502d8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0004d24e  00000000  00000000  00050308  2**0
+ 12 .debug_info   0004d325  00000000  00000000  00050308  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 0000907a  00000000  00000000  0009d556  2**0
+ 13 .debug_abbrev 0000907a  00000000  00000000  0009d62d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00001b00  00000000  00000000  000a65d0  2**3
+ 14 .debug_aranges 00001b08  00000000  00000000  000a66a8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00001890  00000000  00000000  000a80d0  2**3
+ 15 .debug_ranges 00001898  00000000  00000000  000a81b0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00024502  00000000  00000000  000a9960  2**0
+ 16 .debug_macro  00024502  00000000  00000000  000a9a48  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00024c41  00000000  00000000  000cde62  2**0
+ 17 .debug_line   00024c55  00000000  00000000  000cdf4a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    0009df34  00000000  00000000  000f2aa3  2**0
+ 18 .debug_str    0009df7f  00000000  00000000  000f2b9f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  001909d7  2**0
+ 19 .comment      0000007b  00000000  00000000  00190b1e  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0001b998  00000000  00000000  00190a54  2**2
+ 20 .debug_frame  0001b9c0  00000000  00000000  00190b9c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -4341,6 +4341,12 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002dfa:	bd80      	pop	{r7, pc}
 
 08002dfc <_Z8node_setssss>:
+#include "typedef.h"
+#include "index.h"
+
+
+
+t_MapNode node_set(int16_t st_x,int16_t st_y,int16_t cost,int16_t cost_h){
  8002dfc:	b480      	push	{r7}
  8002dfe:	b085      	sub	sp, #20
  8002e00:	af00      	add	r7, sp, #0
@@ -4354,19 +4360,24 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002e10:	813b      	strh	r3, [r7, #8]
  8002e12:	4613      	mov	r3, r2
  8002e14:	80fb      	strh	r3, [r7, #6]
+	t_MapNode n;
+	n.st_x = st_x;		n.st_y = st_y;
  8002e16:	68fb      	ldr	r3, [r7, #12]
  8002e18:	897a      	ldrh	r2, [r7, #10]
  8002e1a:	801a      	strh	r2, [r3, #0]
  8002e1c:	68fb      	ldr	r3, [r7, #12]
  8002e1e:	893a      	ldrh	r2, [r7, #8]
  8002e20:	805a      	strh	r2, [r3, #2]
+	n.cost = cost;		n.cost_h = cost_h;
  8002e22:	68fb      	ldr	r3, [r7, #12]
  8002e24:	88fa      	ldrh	r2, [r7, #6]
  8002e26:	809a      	strh	r2, [r3, #4]
  8002e28:	68fb      	ldr	r3, [r7, #12]
  8002e2a:	8b3a      	ldrh	r2, [r7, #24]
  8002e2c:	80da      	strh	r2, [r3, #6]
+	return n;
  8002e2e:	bf00      	nop
+}
  8002e30:	68f8      	ldr	r0, [r7, #12]
  8002e32:	3714      	adds	r7, #20
  8002e34:	46bd      	mov	sp, r7
@@ -4374,18 +4385,24 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002e3a:	4770      	bx	lr
 
 08002e3c <_ZN8make_mapC1EP10wall_classP10ring_queueILj1024E9t_MapNodeE>:
+
+make_map::make_map(wall_class *wall_property_,ring_queue<1024,t_MapNode> *maze_q_)
  8002e3c:	b480      	push	{r7}
  8002e3e:	b085      	sub	sp, #20
  8002e40:	af00      	add	r7, sp, #0
  8002e42:	60f8      	str	r0, [r7, #12]
  8002e44:	60b9      	str	r1, [r7, #8]
  8002e46:	607a      	str	r2, [r7, #4]
+{
+	wall_property = wall_property_;
  8002e48:	68fb      	ldr	r3, [r7, #12]
  8002e4a:	68ba      	ldr	r2, [r7, #8]
  8002e4c:	601a      	str	r2, [r3, #0]
+	maze_q = maze_q_;
  8002e4e:	68fb      	ldr	r3, [r7, #12]
  8002e50:	687a      	ldr	r2, [r7, #4]
  8002e52:	605a      	str	r2, [r3, #4]
+}
  8002e54:	68fb      	ldr	r3, [r7, #12]
  8002e56:	4618      	mov	r0, r3
  8002e58:	3714      	adds	r7, #20
@@ -4394,6 +4411,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002e60:	4770      	bx	lr
 
 08002e62 <_ZN8make_map8init_mapEiii>:
+
+void make_map::init_map(int x, int y,int goal_size){
  8002e62:	b480      	push	{r7}
  8002e64:	b089      	sub	sp, #36	; 0x24
  8002e66:	af00      	add	r7, sp, #0
@@ -4401,16 +4420,19 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002e6a:	60b9      	str	r1, [r7, #8]
  8002e6c:	607a      	str	r2, [r7, #4]
  8002e6e:	603b      	str	r3, [r7, #0]
+	for( int i = 0; i < MAZE_SIZE_X ; i++ ){
  8002e70:	2300      	movs	r3, #0
  8002e72:	61fb      	str	r3, [r7, #28]
  8002e74:	69fb      	ldr	r3, [r7, #28]
  8002e76:	2b1f      	cmp	r3, #31
  8002e78:	dc16      	bgt.n	8002ea8 <_ZN8make_map8init_mapEiii+0x46>
+		for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
  8002e7a:	2300      	movs	r3, #0
  8002e7c:	61bb      	str	r3, [r7, #24]
  8002e7e:	69bb      	ldr	r3, [r7, #24]
  8002e80:	2b1f      	cmp	r3, #31
  8002e82:	dc0d      	bgt.n	8002ea0 <_ZN8make_map8init_mapEiii+0x3e>
+			map[i][j] = MAZE_SIZE;
  8002e84:	68fb      	ldr	r3, [r7, #12]
  8002e86:	69fa      	ldr	r2, [r7, #28]
  8002e88:	0151      	lsls	r1, r2, #5
@@ -4419,26 +4441,34 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002e8e:	3204      	adds	r2, #4
  8002e90:	f44f 6180 	mov.w	r1, #1024	; 0x400
  8002e94:	f823 1012 	strh.w	r1, [r3, r2, lsl #1]
+		for( int j = 0 ; j < MAZE_SIZE_Y ; j++ ){
  8002e98:	69bb      	ldr	r3, [r7, #24]
  8002e9a:	3301      	adds	r3, #1
  8002e9c:	61bb      	str	r3, [r7, #24]
  8002e9e:	e7ee      	b.n	8002e7e <_ZN8make_map8init_mapEiii+0x1c>
+	for( int i = 0; i < MAZE_SIZE_X ; i++ ){
  8002ea0:	69fb      	ldr	r3, [r7, #28]
  8002ea2:	3301      	adds	r3, #1
  8002ea4:	61fb      	str	r3, [r7, #28]
  8002ea6:	e7e5      	b.n	8002e74 <_ZN8make_map8init_mapEiii+0x12>
+		}
+	}
+
+	for(int i = 0;i < goal_size;i++){
  8002ea8:	2300      	movs	r3, #0
  8002eaa:	617b      	str	r3, [r7, #20]
  8002eac:	697a      	ldr	r2, [r7, #20]
  8002eae:	683b      	ldr	r3, [r7, #0]
  8002eb0:	429a      	cmp	r2, r3
  8002eb2:	da1a      	bge.n	8002eea <_ZN8make_map8init_mapEiii+0x88>
+		for(int j = 0;j < goal_size;j++){
  8002eb4:	2300      	movs	r3, #0
  8002eb6:	613b      	str	r3, [r7, #16]
  8002eb8:	693a      	ldr	r2, [r7, #16]
  8002eba:	683b      	ldr	r3, [r7, #0]
  8002ebc:	429a      	cmp	r2, r3
  8002ebe:	da10      	bge.n	8002ee2 <_ZN8make_map8init_mapEiii+0x80>
+			map[x+i][y+j] = 0;
  8002ec0:	68ba      	ldr	r2, [r7, #8]
  8002ec2:	697b      	ldr	r3, [r7, #20]
  8002ec4:	18d1      	adds	r1, r2, r3
@@ -4451,14 +4481,19 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002ed2:	3204      	adds	r2, #4
  8002ed4:	2100      	movs	r1, #0
  8002ed6:	f823 1012 	strh.w	r1, [r3, r2, lsl #1]
+		for(int j = 0;j < goal_size;j++){
  8002eda:	693b      	ldr	r3, [r7, #16]
  8002edc:	3301      	adds	r3, #1
  8002ede:	613b      	str	r3, [r7, #16]
  8002ee0:	e7ea      	b.n	8002eb8 <_ZN8make_map8init_mapEiii+0x56>
+	for(int i = 0;i < goal_size;i++){
  8002ee2:	697b      	ldr	r3, [r7, #20]
  8002ee4:	3301      	adds	r3, #1
  8002ee6:	617b      	str	r3, [r7, #20]
  8002ee8:	e7e0      	b.n	8002eac <_ZN8make_map8init_mapEiii+0x4a>
+		}
+	}
+}
  8002eea:	bf00      	nop
  8002eec:	3724      	adds	r7, #36	; 0x24
  8002eee:	46bd      	mov	sp, r7
@@ -4466,6 +4501,9 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002ef4:	4770      	bx	lr
 
 08002ef6 <_ZN8make_map6expandE9t_MapNodei>:
+
+
+void make_map::expand(t_MapNode n,int mask){
  8002ef6:	b5f0      	push	{r4, r5, r6, r7, lr}
  8002ef8:	b08f      	sub	sp, #60	; 0x3c
  8002efa:	af02      	add	r7, sp, #8
@@ -4473,9 +4511,13 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002efe:	1d38      	adds	r0, r7, #4
  8002f00:	e880 0006 	stmia.w	r0, {r1, r2}
  8002f04:	603b      	str	r3, [r7, #0]
+
+	if(n.st_y < MAZE_SIZE_Y-1)					//範囲チェック
  8002f06:	f9b7 3006 	ldrsh.w	r3, [r7, #6]
  8002f0a:	2b1e      	cmp	r3, #30
  8002f0c:	dc59      	bgt.n	8002fc2 <_ZN8make_map6expandE9t_MapNodei+0xcc>
+	{
+		if( (wall_property->wall[n.st_x][n.st_y].north & mask) == NOWALL)	//壁がなければ(maskの意味はstatic_parametersを参照)
  8002f0e:	68fb      	ldr	r3, [r7, #12]
  8002f10:	681a      	ldr	r2, [r3, #0]
  8002f12:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
@@ -4491,6 +4533,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002f2c:	4013      	ands	r3, r2
  8002f2e:	2b00      	cmp	r3, #0
  8002f30:	d147      	bne.n	8002fc2 <_ZN8make_map6expandE9t_MapNodei+0xcc>
+		{
+			if(map[n.st_x][n.st_y+1] == MAZE_SIZE)			//まだ値が入っていなければ
  8002f32:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
  8002f36:	4619      	mov	r1, r3
  8002f38:	f9b7 3006 	ldrsh.w	r3, [r7, #6]
@@ -4502,6 +4546,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002f46:	f833 3012 	ldrh.w	r3, [r3, r2, lsl #1]
  8002f4a:	f5b3 6f80 	cmp.w	r3, #1024	; 0x400
  8002f4e:	d138      	bne.n	8002fc2 <_ZN8make_map6expandE9t_MapNodei+0xcc>
+			{
+				map[n.st_x][n.st_y+1] = n.cost + 1;	//値を代入
  8002f50:	f9b7 3008 	ldrsh.w	r3, [r7, #8]
  8002f54:	b29b      	uxth	r3, r3
  8002f56:	f9b7 2004 	ldrsh.w	r2, [r7, #4]
@@ -4516,6 +4562,7 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002f6c:	3204      	adds	r2, #4
  8002f6e:	4601      	mov	r1, r0
  8002f70:	f823 1012 	strh.w	r1, [r3, r2, lsl #1]
+				maze_q->push(node_set(n.st_x,n.st_y+1,map[n.st_x][n.st_y+1],0));
  8002f74:	68fb      	ldr	r3, [r7, #12]
  8002f76:	685c      	ldr	r4, [r3, #4]
  8002f78:	f9b7 5004 	ldrsh.w	r5, [r7, #4]
@@ -4545,9 +4592,16 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002fb8:	e893 0006 	ldmia.w	r3, {r1, r2}
  8002fbc:	4620      	mov	r0, r4
  8002fbe:	f004 fac3 	bl	8007548 <_ZN10ring_queueILj1024E9t_MapNodeE4pushES0_>
+			}
+		}
+	}
+
+	if(n.st_x < MAZE_SIZE_X-1)					//範囲チェック
  8002fc2:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
  8002fc6:	2b1e      	cmp	r3, #30
  8002fc8:	dc57      	bgt.n	800307a <_ZN8make_map6expandE9t_MapNodei+0x184>
+	{
+		if( (wall_property->wall[n.st_x][n.st_y].east & mask) == NOWALL)		//壁がなければ
  8002fca:	68fb      	ldr	r3, [r7, #12]
  8002fcc:	681a      	ldr	r2, [r3, #0]
  8002fce:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
@@ -4563,6 +4617,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8002fe8:	4013      	ands	r3, r2
  8002fea:	2b00      	cmp	r3, #0
  8002fec:	d145      	bne.n	800307a <_ZN8make_map6expandE9t_MapNodei+0x184>
+		{
+			if(map[n.st_x+1][n.st_y] == MAZE_SIZE)			//値が入っていなければ
  8002fee:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
  8002ff2:	1c5a      	adds	r2, r3, #1
  8002ff4:	f9b7 3006 	ldrsh.w	r3, [r7, #6]
@@ -4574,6 +4630,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8003002:	f833 3012 	ldrh.w	r3, [r3, r2, lsl #1]
  8003006:	f5b3 6f80 	cmp.w	r3, #1024	; 0x400
  800300a:	d136      	bne.n	800307a <_ZN8make_map6expandE9t_MapNodei+0x184>
+			{
+				map[n.st_x+1][n.st_y] = n.cost + 1;	//値を代入
  800300c:	f9b7 3008 	ldrsh.w	r3, [r7, #8]
  8003010:	b29b      	uxth	r3, r3
  8003012:	f9b7 2004 	ldrsh.w	r2, [r7, #4]
@@ -4587,6 +4645,7 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8003026:	4402      	add	r2, r0
  8003028:	3204      	adds	r2, #4
  800302a:	f823 1012 	strh.w	r1, [r3, r2, lsl #1]
+				maze_q->push(node_set(n.st_x+1,n.st_y,map[n.st_x+1][n.st_y],0));
  800302e:	68fb      	ldr	r3, [r7, #12]
  8003030:	685c      	ldr	r4, [r3, #4]
  8003032:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
@@ -4615,9 +4674,16 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8003070:	e893 0006 	ldmia.w	r3, {r1, r2}
  8003074:	4620      	mov	r0, r4
  8003076:	f004 fa67 	bl	8007548 <_ZN10ring_queueILj1024E9t_MapNodeE4pushES0_>
+			}
+		}
+	}
+
+	if(n.st_y > 0)						//範囲チェック
  800307a:	f9b7 3006 	ldrsh.w	r3, [r7, #6]
  800307e:	2b00      	cmp	r3, #0
  8003080:	dd59      	ble.n	8003136 <_ZN8make_map6expandE9t_MapNodei+0x240>
+	{
+		if( (wall_property->wall[n.st_x][n.st_y].south & mask) == NOWALL)	//壁がなければ
  8003082:	68fb      	ldr	r3, [r7, #12]
  8003084:	681a      	ldr	r2, [r3, #0]
  8003086:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
@@ -4633,6 +4699,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80030a0:	4013      	ands	r3, r2
  80030a2:	2b00      	cmp	r3, #0
  80030a4:	d147      	bne.n	8003136 <_ZN8make_map6expandE9t_MapNodei+0x240>
+		{
+			if(map[n.st_x][n.st_y-1] == MAZE_SIZE)			//値が入っていなければ
  80030a6:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
  80030aa:	4619      	mov	r1, r3
  80030ac:	f9b7 3006 	ldrsh.w	r3, [r7, #6]
@@ -4644,6 +4712,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80030ba:	f833 3012 	ldrh.w	r3, [r3, r2, lsl #1]
  80030be:	f5b3 6f80 	cmp.w	r3, #1024	; 0x400
  80030c2:	d138      	bne.n	8003136 <_ZN8make_map6expandE9t_MapNodei+0x240>
+			{
+				map[n.st_x][n.st_y-1] = n.cost + 1;	//値を代入
  80030c4:	f9b7 3008 	ldrsh.w	r3, [r7, #8]
  80030c8:	b29b      	uxth	r3, r3
  80030ca:	f9b7 2004 	ldrsh.w	r2, [r7, #4]
@@ -4658,6 +4728,7 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80030e0:	3204      	adds	r2, #4
  80030e2:	4601      	mov	r1, r0
  80030e4:	f823 1012 	strh.w	r1, [r3, r2, lsl #1]
+				maze_q->push(node_set(n.st_x,n.st_y-1,map[n.st_x][n.st_y-1],0));
  80030e8:	68fb      	ldr	r3, [r7, #12]
  80030ea:	685c      	ldr	r4, [r3, #4]
  80030ec:	f9b7 5004 	ldrsh.w	r5, [r7, #4]
@@ -4687,9 +4758,16 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  800312c:	e893 0006 	ldmia.w	r3, {r1, r2}
  8003130:	4620      	mov	r0, r4
  8003132:	f004 fa09 	bl	8007548 <_ZN10ring_queueILj1024E9t_MapNodeE4pushES0_>
+			}
+		}
+	}
+
+	if(n.st_x > 0)						//範囲チェック
  8003136:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
  800313a:	2b00      	cmp	r3, #0
  800313c:	dd57      	ble.n	80031ee <_ZN8make_map6expandE9t_MapNodei+0x2f8>
+	{
+		if( (wall_property->wall[n.st_x][n.st_y].west & mask) == NOWALL)		//壁がなければ
  800313e:	68fb      	ldr	r3, [r7, #12]
  8003140:	681a      	ldr	r2, [r3, #0]
  8003142:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
@@ -4705,6 +4783,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  800315c:	4013      	ands	r3, r2
  800315e:	2b00      	cmp	r3, #0
  8003160:	d145      	bne.n	80031ee <_ZN8make_map6expandE9t_MapNodei+0x2f8>
+		{
+			if(map[n.st_x-1][n.st_y] == MAZE_SIZE)			//値が入っていなければ
  8003162:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
  8003166:	1e5a      	subs	r2, r3, #1
  8003168:	f9b7 3006 	ldrsh.w	r3, [r7, #6]
@@ -4716,6 +4796,8 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8003176:	f833 3012 	ldrh.w	r3, [r3, r2, lsl #1]
  800317a:	f5b3 6f80 	cmp.w	r3, #1024	; 0x400
  800317e:	d136      	bne.n	80031ee <_ZN8make_map6expandE9t_MapNodei+0x2f8>
+			{
+				map[n.st_x-1][n.st_y] = n.cost + 1;	//値を代入
  8003180:	f9b7 3008 	ldrsh.w	r3, [r7, #8]
  8003184:	b29b      	uxth	r3, r3
  8003186:	f9b7 2004 	ldrsh.w	r2, [r7, #4]
@@ -4729,6 +4811,7 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  800319a:	4402      	add	r2, r0
  800319c:	3204      	adds	r2, #4
  800319e:	f823 1012 	strh.w	r1, [r3, r2, lsl #1]
+				maze_q->push(node_set(n.st_x-1,n.st_y,map[n.st_x-1][n.st_y],0));
  80031a2:	68fb      	ldr	r3, [r7, #12]
  80031a4:	685c      	ldr	r4, [r3, #4]
  80031a6:	f9b7 3004 	ldrsh.w	r3, [r7, #4]
@@ -4757,12 +4840,24 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80031e4:	e893 0006 	ldmia.w	r3, {r1, r2}
  80031e8:	4620      	mov	r0, r4
  80031ea:	f004 f9ad 	bl	8007548 <_ZN10ring_queueILj1024E9t_MapNodeE4pushES0_>
+			}
+
+		}
+	}
+
+}
  80031ee:	bf00      	nop
  80031f0:	3734      	adds	r7, #52	; 0x34
  80031f2:	46bd      	mov	sp, r7
  80031f4:	bdf0      	pop	{r4, r5, r6, r7, pc}
 
 080031f6 <_ZN8make_map14make_map_queueEii10t_positionii>:
+			make_map_queue(x, y, expand_end, size, mask);
+		}
+}
+
+void make_map::make_map_queue(int x, int y,t_position expand_end,int size,int mask)
+{
  80031f6:	b590      	push	{r4, r7, lr}
  80031f8:	b08f      	sub	sp, #60	; 0x3c
  80031fa:	af02      	add	r7, sp, #8
@@ -4770,27 +4865,35 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80031fe:	6139      	str	r1, [r7, #16]
  8003200:	60fa      	str	r2, [r7, #12]
  8003202:	60bb      	str	r3, [r7, #8]
+	//mapの初期化
+		init_map(x,y,size);
  8003204:	6c3b      	ldr	r3, [r7, #64]	; 0x40
  8003206:	68fa      	ldr	r2, [r7, #12]
  8003208:	6939      	ldr	r1, [r7, #16]
  800320a:	6978      	ldr	r0, [r7, #20]
  800320c:	f7ff fe29 	bl	8002e62 <_ZN8make_map8init_mapEiii>
+	//queueの初期化
+		maze_q->queue_reset();
  8003210:	697b      	ldr	r3, [r7, #20]
  8003212:	685b      	ldr	r3, [r3, #4]
  8003214:	4618      	mov	r0, r3
  8003216:	f004 f9ef 	bl	80075f8 <_ZN10ring_queueILj1024E9t_MapNodeE11queue_resetEv>
+
+		for(int i = 0;i < size;i++){
  800321a:	2300      	movs	r3, #0
  800321c:	62fb      	str	r3, [r7, #44]	; 0x2c
  800321e:	6afa      	ldr	r2, [r7, #44]	; 0x2c
  8003220:	6c3b      	ldr	r3, [r7, #64]	; 0x40
  8003222:	429a      	cmp	r2, r3
  8003224:	da2b      	bge.n	800327e <_ZN8make_map14make_map_queueEii10t_positionii+0x88>
+			for(int j = 0;j < size;j++){
  8003226:	2300      	movs	r3, #0
  8003228:	62bb      	str	r3, [r7, #40]	; 0x28
  800322a:	6aba      	ldr	r2, [r7, #40]	; 0x28
  800322c:	6c3b      	ldr	r3, [r7, #64]	; 0x40
  800322e:	429a      	cmp	r2, r3
  8003230:	da21      	bge.n	8003276 <_ZN8make_map14make_map_queueEii10t_positionii+0x80>
+				maze_q->push(node_set(x+i,y+j,0,0));
  8003232:	697b      	ldr	r3, [r7, #20]
  8003234:	685c      	ldr	r4, [r3, #4]
  8003236:	693b      	ldr	r3, [r7, #16]
@@ -4816,14 +4919,20 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8003264:	e893 0006 	ldmia.w	r3, {r1, r2}
  8003268:	4620      	mov	r0, r4
  800326a:	f004 f96d 	bl	8007548 <_ZN10ring_queueILj1024E9t_MapNodeE4pushES0_>
+			for(int j = 0;j < size;j++){
  800326e:	6abb      	ldr	r3, [r7, #40]	; 0x28
  8003270:	3301      	adds	r3, #1
  8003272:	62bb      	str	r3, [r7, #40]	; 0x28
  8003274:	e7d9      	b.n	800322a <_ZN8make_map14make_map_queueEii10t_positionii+0x34>
+		for(int i = 0;i < size;i++){
  8003276:	6afb      	ldr	r3, [r7, #44]	; 0x2c
  8003278:	3301      	adds	r3, #1
  800327a:	62fb      	str	r3, [r7, #44]	; 0x2c
  800327c:	e7cf      	b.n	800321e <_ZN8make_map14make_map_queueEii10t_positionii+0x28>
+			}
+		}
+	    t_MapNode n;
+		while(maze_q->queue_length() != 0){
  800327e:	697b      	ldr	r3, [r7, #20]
  8003280:	685b      	ldr	r3, [r3, #4]
  8003282:	4618      	mov	r0, r3
@@ -4836,6 +4945,7 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8003292:	b2db      	uxtb	r3, r3
  8003294:	2b00      	cmp	r3, #0
  8003296:	d021      	beq.n	80032dc <_ZN8make_map14make_map_queueEii10t_positionii+0xe6>
+			n = maze_q->pop();
  8003298:	697b      	ldr	r3, [r7, #20]
  800329a:	685a      	ldr	r2, [r3, #4]
  800329c:	463b      	mov	r3, r7
@@ -4847,11 +4957,13 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80032ac:	6810      	ldr	r0, [r2, #0]
  80032ae:	6851      	ldr	r1, [r2, #4]
  80032b0:	c303      	stmia	r3!, {r0, r1}
+			expand(n,mask);
  80032b2:	6c7b      	ldr	r3, [r7, #68]	; 0x44
  80032b4:	f107 0218 	add.w	r2, r7, #24
  80032b8:	ca06      	ldmia	r2, {r1, r2}
  80032ba:	6978      	ldr	r0, [r7, #20]
  80032bc:	f7ff fe1b 	bl	8002ef6 <_ZN8make_map6expandE9t_MapNodei>
+			if(expand_end.x == n.st_x && expand_end.y == n.st_y)
  80032c0:	7a3b      	ldrb	r3, [r7, #8]
  80032c2:	461a      	mov	r2, r3
  80032c4:	f9b7 3018 	ldrsh.w	r3, [r7, #24]
@@ -4862,28 +4974,40 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80032d0:	f9b7 301a 	ldrsh.w	r3, [r7, #26]
  80032d4:	429a      	cmp	r2, r3
  80032d6:	d000      	beq.n	80032da <_ZN8make_map14make_map_queueEii10t_positionii+0xe4>
+		while(maze_q->queue_length() != 0){
  80032d8:	e7d1      	b.n	800327e <_ZN8make_map14make_map_queueEii10t_positionii+0x88>
+				break;
  80032da:	bf00      	nop
+
+		}
+}
  80032dc:	bf00      	nop
  80032de:	3734      	adds	r7, #52	; 0x34
  80032e0:	46bd      	mov	sp, r7
  80032e2:	bd90      	pop	{r4, r7, pc}
 
 080032e4 <_ZN8make_map7DisplayEv>:
+
+
+void make_map::Display()
+{
  80032e4:	b580      	push	{r7, lr}
  80032e6:	b086      	sub	sp, #24
  80032e8:	af00      	add	r7, sp, #0
  80032ea:	6078      	str	r0, [r7, #4]
+	for( int y = MAZE_SIZE_Y - 1 ; y >= 0 ; y-- ){
  80032ec:	231f      	movs	r3, #31
  80032ee:	617b      	str	r3, [r7, #20]
  80032f0:	697b      	ldr	r3, [r7, #20]
  80032f2:	2b00      	cmp	r3, #0
  80032f4:	f2c0 8082 	blt.w	80033fc <_ZN8make_map7DisplayEv+0x118>
+		for(int x = 0; x < MAZE_SIZE_X ; x++ ){
  80032f8:	2300      	movs	r3, #0
  80032fa:	613b      	str	r3, [r7, #16]
  80032fc:	693b      	ldr	r3, [r7, #16]
  80032fe:	2b1f      	cmp	r3, #31
  8003300:	dc2a      	bgt.n	8003358 <_ZN8make_map7DisplayEv+0x74>
+			if(wall_property->wall[x][y].north == WALL || wall_property->wall[x][y].north == VWALL)	{	printf("+---");	HAL_Delay(10);	}
  8003302:	687b      	ldr	r3, [r7, #4]
  8003304:	681a      	ldr	r2, [r3, #0]
  8003306:	693b      	ldr	r3, [r7, #16]
@@ -4913,23 +5037,31 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  800333c:	200a      	movs	r0, #10
  800333e:	f009 f973 	bl	800c628 <HAL_Delay>
  8003342:	e005      	b.n	8003350 <_ZN8make_map7DisplayEv+0x6c>
+			else							{	printf("+   "); HAL_Delay(10);	}
  8003344:	4839      	ldr	r0, [pc, #228]	; (800342c <_ZN8make_map7DisplayEv+0x148>)
  8003346:	f028 f82b 	bl	802b3a0 <iprintf>
  800334a:	200a      	movs	r0, #10
  800334c:	f009 f96c 	bl	800c628 <HAL_Delay>
+		for(int x = 0; x < MAZE_SIZE_X ; x++ ){
  8003350:	693b      	ldr	r3, [r7, #16]
  8003352:	3301      	adds	r3, #1
  8003354:	613b      	str	r3, [r7, #16]
  8003356:	e7d1      	b.n	80032fc <_ZN8make_map7DisplayEv+0x18>
+			//if(x == MAZE_SIZE_X - 1)		{	printf("+\n");	HAL_Delay(5);	}
+		}
+		printf("+\n");	HAL_Delay(10);
  8003358:	4835      	ldr	r0, [pc, #212]	; (8003430 <_ZN8make_map7DisplayEv+0x14c>)
  800335a:	f028 f8d3 	bl	802b504 <puts>
  800335e:	200a      	movs	r0, #10
  8003360:	f009 f962 	bl	800c628 <HAL_Delay>
+
+		for(int x = 0; x < MAZE_SIZE_X ; x++ ){
  8003364:	2300      	movs	r3, #0
  8003366:	60fb      	str	r3, [r7, #12]
  8003368:	68fb      	ldr	r3, [r7, #12]
  800336a:	2b1f      	cmp	r3, #31
  800336c:	dc3c      	bgt.n	80033e8 <_ZN8make_map7DisplayEv+0x104>
+			if(wall_property->wall[x][y].west == WALL || wall_property->wall[x][y].west == VWALL)		{	printf("|%3x",map[x][y]);	HAL_Delay(10);	}
  800336e:	687b      	ldr	r3, [r7, #4]
  8003370:	681a      	ldr	r2, [r3, #0]
  8003372:	68fb      	ldr	r3, [r7, #12]
@@ -4967,6 +5099,7 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80033ba:	200a      	movs	r0, #10
  80033bc:	f009 f934 	bl	800c628 <HAL_Delay>
  80033c0:	e00e      	b.n	80033e0 <_ZN8make_map7DisplayEv+0xfc>
+			else							{	printf(" %3x",map[x][y]);	HAL_Delay(10);	}
  80033c2:	687b      	ldr	r3, [r7, #4]
  80033c4:	68fa      	ldr	r2, [r7, #12]
  80033c6:	0151      	lsls	r1, r2, #5
@@ -4979,18 +5112,25 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  80033d6:	f027 ffe3 	bl	802b3a0 <iprintf>
  80033da:	200a      	movs	r0, #10
  80033dc:	f009 f924 	bl	800c628 <HAL_Delay>
+		for(int x = 0; x < MAZE_SIZE_X ; x++ ){
  80033e0:	68fb      	ldr	r3, [r7, #12]
  80033e2:	3301      	adds	r3, #1
  80033e4:	60fb      	str	r3, [r7, #12]
  80033e6:	e7bf      	b.n	8003368 <_ZN8make_map7DisplayEv+0x84>
+			//if(x == MAZE_SIZE_X - 1)		{	printf("|\n");				HAL_Delay(5);	}
+		}
+		printf("|\n");				HAL_Delay(5);
  80033e8:	4814      	ldr	r0, [pc, #80]	; (800343c <_ZN8make_map7DisplayEv+0x158>)
  80033ea:	f028 f88b 	bl	802b504 <puts>
  80033ee:	2005      	movs	r0, #5
  80033f0:	f009 f91a 	bl	800c628 <HAL_Delay>
+	for( int y = MAZE_SIZE_Y - 1 ; y >= 0 ; y-- ){
  80033f4:	697b      	ldr	r3, [r7, #20]
  80033f6:	3b01      	subs	r3, #1
  80033f8:	617b      	str	r3, [r7, #20]
  80033fa:	e779      	b.n	80032f0 <_ZN8make_map7DisplayEv+0xc>
+	}
+	for(int x = 0; x < MAZE_SIZE_X ; x++)	{	printf("+---"); HAL_Delay(5);	}	printf("+\n");
  80033fc:	2300      	movs	r3, #0
  80033fe:	60bb      	str	r3, [r7, #8]
  8003400:	68bb      	ldr	r3, [r7, #8]
@@ -5006,6 +5146,7 @@ float PID_Controller::Controll(float _target,float _output,float dt)
  8003418:	e7f2      	b.n	8003400 <_ZN8make_map7DisplayEv+0x11c>
  800341a:	4805      	ldr	r0, [pc, #20]	; (8003430 <_ZN8make_map7DisplayEv+0x14c>)
  800341c:	f028 f872 	bl	802b504 <puts>
+}
  8003420:	bf00      	nop
  8003422:	3718      	adds	r7, #24
  8003424:	46bd      	mov	sp, r7
