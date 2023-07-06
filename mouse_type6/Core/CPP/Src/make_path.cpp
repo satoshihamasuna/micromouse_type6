@@ -209,7 +209,7 @@ t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_direction star
 		min_pos = min_search();
 		//set_determine
 		#ifdef DEBUG_MODE
-		printf("minimamu->%d,%d,%d\n",min_pos.x,min_pos.y,min_pos.NodePos);
+		printf("minimum->%d,%d,%d\n",min_pos.x,min_pos.y,min_pos.NodePos);
 		#endif
 		set_determine(min_pos);
 
@@ -274,7 +274,8 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 	t_posDijkstra last_pos = make_path_Dijkstra(start_pos, start_wallPos, goal_pos, goal_size);
 	t_posDijkstra tmp_pos = last_pos;
 	t_posDijkstra start = conv_t_pos2t_posDijkstra(start_pos, start_wallPos);
-	for(;;)
+	int tail = 0;;
+	for(int i = 0;;i++)
 	{
 		#ifdef DEBUG_MODE
 			printf("x:%2d,y:%2d,d:%2d->",tmp_pos.x,tmp_pos.y,tmp_pos.NodePos);
@@ -282,41 +283,43 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 		switch((*get_closure_inf(tmp_pos)).run_pt)
 		{
 			#ifdef DEBUG_MODE
-			case No_run: printf("No_run\n"); break;
-			case Straight: printf("Straight\n"); break;
-			case Diagonal: printf("Diagonal\n"); break;
-			case Long_turnR90: printf("Long_turnR90\n"); break;
-			case Long_turnL90: printf("Long_turnL90\n"); break;
-			case Long_turnR180: printf("Long_turnR180\n"); break;
-			case Long_turnL180: printf("Long_turnL180\n"); break;
-			case Turn_in_R45: printf("Turn_in_R45\n"); break;
-			case Turn_in_L45: printf("Turn_in_L45\n"); break;
-			case Turn_out_R45: printf("Turn_out_R45\n"); break;
-			case Turn_out_L45: printf("Turn_out_L45\n"); break;
-			case Turn_in_R135: printf("Turn_in_R135\n"); break;
-			case Turn_in_L135: printf("Turn_in_L135\n"); break;
-			case Turn_out_R135: printf("Turn_out_R135\n"); break;
-			case Turn_out_L135: printf("Turn_out_L135\n"); break;
-			case Turn_RV90: printf("Turn_RV90\n"); break;
-			case Turn_LV90: printf("Turn_LV90\n"); break;
-			case Diagonal_R: printf("Diagonal_R\n"); break;
-			case Diagonal_L: printf("Diagonal_L\n"); break;
-			case Search_st_section: printf("Search_st_section\n"); break;
-			case Search_st_half: printf("Search_st_half\n"); break;
-			case Pivot_turn_R: printf("Pivot_turn_R\n"); break;
-			case Pivot_turn_L: printf("Pivot_turn_L\n"); break;
-			case Search_slalom_R: printf("Search_slalom_R\n"); break;
-			case Search_slalom_L: printf("Search_slalom_L\n"); break;
-			case run_brake: printf("run_brake\n"); break;
-			case motor_free: printf("motor_free\n"); break;
-			case Fix_wall: printf("Fix_wall\n"); break;
+			case No_run: 			printf("No_run\n"); 			break;
+			case Straight:	 		printf("Straight\n"); 			break;
+			case Diagonal: 			printf("Diagonal\n"); 			break;
+			case Long_turnR90: 		printf("Long_turnR90\n"); 		break;
+			case Long_turnL90: 		printf("Long_turnL90\n"); 		break;
+			case Long_turnR180: 	printf("Long_turnR180\n"); 		break;
+			case Long_turnL180: 	printf("Long_turnL180\n"); 		break;
+			case Turn_in_R45: 		printf("Turn_in_R45\n"); 		break;
+			case Turn_in_L45: 		printf("Turn_in_L45\n"); 		break;
+			case Turn_out_R45: 		printf("Turn_out_R45\n"); 		break;
+			case Turn_out_L45: 		printf("Turn_out_L45\n"); 		break;
+			case Turn_in_R135: 		printf("Turn_in_R135\n"); 		break;
+			case Turn_in_L135: 		printf("Turn_in_L135\n"); 		break;
+			case Turn_out_R135: 	printf("Turn_out_R135\n"); 		break;
+			case Turn_out_L135: 	printf("Turn_out_L135\n"); 		break;
+			case Turn_RV90: 		printf("Turn_RV90\n"); 			break;
+			case Turn_LV90: 		printf("Turn_LV90\n"); 			break;
+			case Diagonal_R: 		printf("Diagonal_R\n"); 		break;
+			case Diagonal_L: 		printf("Diagonal_L\n"); 		break;
+			case Search_st_section: printf("Search_st_section\n"); 	break;
+			case Search_st_half: 	printf("Search_st_half\n"); 	break;
+			case Pivot_turn_R: 		printf("Pivot_turn_R\n"); 		break;
+			case Pivot_turn_L: 		printf("Pivot_turn_L\n"); 		break;
+			case Search_slalom_R: 	printf("Search_slalom_R\n"); 	break;
+			case Search_slalom_L: 	printf("Search_slalom_L\n"); 	break;
+			case run_brake: 		printf("run_brake\n"); 			break;
+			case motor_free: 		printf("motor_free\n"); 		break;
+			case Fix_wall: 			printf("Fix_wall\n"); 			break;
 			#endif
 			default :
 				break;
 		}
+		run_pos_buff[i] = tmp_pos;
 		tmp_pos = (*get_closure_inf(tmp_pos)).parent_pos;
 		if(tmp_pos.x == start.x && tmp_pos.y == start.y && tmp_pos.NodePos == start.NodePos)
 		{
+			tail = i;
 			break;
 		}
 	}

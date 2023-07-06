@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000502d8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0004d325  00000000  00000000  00050308  2**0
+ 12 .debug_info   0004d36a  00000000  00000000  00050308  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 0000907a  00000000  00000000  0009d62d  2**0
+ 13 .debug_abbrev 00009092  00000000  00000000  0009d672  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00001b08  00000000  00000000  000a66a8  2**3
+ 14 .debug_aranges 00001b08  00000000  00000000  000a6708  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00001898  00000000  00000000  000a81b0  2**3
+ 15 .debug_ranges 00001898  00000000  00000000  000a8210  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00024502  00000000  00000000  000a9a48  2**0
+ 16 .debug_macro  00024502  00000000  00000000  000a9aa8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00024c55  00000000  00000000  000cdf4a  2**0
+ 17 .debug_line   00024c5a  00000000  00000000  000cdfaa  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    0009df7f  00000000  00000000  000f2b9f  2**0
+ 18 .debug_str    0009df87  00000000  00000000  000f2c04  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  00190b1e  2**0
+ 19 .comment      0000007b  00000000  00000000  00190b8b  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0001b9c0  00000000  00000000  00190b9c  2**2
+ 20 .debug_frame  0001b9c0  00000000  00000000  00190c08  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -6533,7 +6533,7 @@ t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_direction star
  8003e4e:	75bb      	strb	r3, [r7, #22]
 		//set_determine
 		#ifdef DEBUG_MODE
-		printf("minimamu->%d,%d,%d\n",min_pos.x,min_pos.y,min_pos.NodePos);
+		printf("minimum->%d,%d,%d\n",min_pos.x,min_pos.y,min_pos.NodePos);
  8003e50:	7d3b      	ldrb	r3, [r7, #20]
  8003e52:	4619      	mov	r1, r3
  8003e54:	7d7b      	ldrb	r3, [r7, #21]
