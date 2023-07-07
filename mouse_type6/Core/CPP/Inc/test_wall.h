@@ -10,6 +10,13 @@
 #include "typedef.h"
 #include "macro.h"
 #include "index.h"
+#include "wall_class.h"
+
+#define TEST_GOAL_X 17
+#define TEST_GOAL_Y 13
+#define TEST_GOAL_SIZE 3
+
+
 const t_bool test_wall[MAZE_SIZE*4] = {
 	False,True,True,True,False,True,True,True,False,False,True,True,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,False,False,True,False,False,True,True,False,False,False,True,True,False,True,True,False,
 	False,True,False,True,False,False,False,True,True,False,False,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,False,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,False,True,True,False,False,True,False,True,False,False,False,True,False,True,False,False,False,True,False,True,
@@ -44,6 +51,21 @@ const t_bool test_wall[MAZE_SIZE*4] = {
 	False,False,False,True,False,True,True,False,True,False,False,True,True,False,True,False,True,False,True,False,True,True,False,False,True,False,False,True,True,True,False,False,False,True,False,True,False,True,False,True,True,True,False,True,True,True,False,True,True,True,False,True,True,True,False,True,True,True,False,True,True,True,False,True,True,False,False,True,True,False,False,False,True,False,False,False,True,False,False,False,True,True,False,False,True,True,False,True,True,False,True,True,True,False,False,False,True,False,True,False,True,False,False,False,True,False,True,False,True,True,False,False,True,True,False,True,False,True,True,True,False,True,False,True,False,True,False,True,
 	True,True,False,True,True,False,False,True,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,True,False,False,True,False,False,True,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,True,False,False,False,True,False,False,False,True,True,False,False,
 };
+
+
+void test_wall_set(wall_class *wall_property)
+{
+	for(uint8_t j = 0;j < MAZE_SIZE_Y;j++)
+	{
+		for(uint8_t i = 0; i < MAZE_SIZE_X;i++)
+		{
+			wall_property->wall[i][j].north = (uint8_t)test_wall[ j * MAZE_SIZE_Y*4 + i * 4 + 0 ];
+			wall_property->wall[i][j].east  = (uint8_t)test_wall[ j * MAZE_SIZE_Y*4 + i * 4 + 1 ];
+			wall_property->wall[i][j].south = (uint8_t)test_wall[ j * MAZE_SIZE_Y*4 + i * 4 + 2 ];
+			wall_property->wall[i][j].west  = (uint8_t)test_wall[ j * MAZE_SIZE_Y*4 + i * 4 + 3 ];
+		}
+	}
+}
 
 
 #endif /* CPP_INC_TEST_WALL_H_ */

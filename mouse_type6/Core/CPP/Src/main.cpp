@@ -24,7 +24,7 @@
 #include "wall_class.h"
 #include "flash.h"
 #include "make_path.h"
-
+#include "test_wall.h"
 void CPP_Main()
 {
 	  Priority_queue<10,int> q;
@@ -182,11 +182,12 @@ void CPP_Main()
 							  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
 							  HAL_Delay(50);
 							}
+							test_wall_set(&wall_data);
 							t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
-					  		goal.x =0, goal.y = 3;
-							map_data.init_map(goal.x, goal.y, 1);
-							map_data.make_map_queue(goal.x, goal.y, start, 1, 0x01);
+					  		goal.x =TEST_GOAL_X, goal.y = TEST_GOAL_Y;
+							map_data.init_map(goal.x, goal.y, 3);
+							map_data.make_map_queue(goal.x, goal.y, start, 3, 0x01);
 							map_data.Display();
 							Mode_Disable();
 
@@ -214,8 +215,8 @@ void CPP_Main()
 							}
 							t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
-					  		goal.x =0, goal.y = 3;
-							run_path.make_path_Dijkstra(start, Dir_None, goal, 2);
+					  		goal.x =TEST_GOAL_X, goal.y = TEST_GOAL_Y;
+							run_path.make_path_Dijkstra(start, Dir_None, goal,3);
 							Mode_Disable();
 						}
 			  			  break;
