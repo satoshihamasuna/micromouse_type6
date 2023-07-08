@@ -215,8 +215,8 @@ void CPP_Main()
 							}
 							t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
-					  		goal.x =TEST_GOAL_X, goal.y = TEST_GOAL_Y;
-							run_path.make_path_Dijkstra(start, Dir_None, goal,3);
+					  		goal.x =0, goal.y = 2;
+							run_path.run_Dijkstra(start, Dir_None, goal,2);
 							Mode_Disable();
 						}
 			  			  break;
