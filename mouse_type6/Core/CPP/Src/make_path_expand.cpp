@@ -569,7 +569,7 @@ void Dijkstra::straight_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra next_pos = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, None);
 	for(int i = 1;; i++)
 	{
-		int time  = (*get_closure_inf(pos)) .time + 1 * i;
+		int time  = (*get_closure_inf(pos)) .time + straight_time_set(SECTION*i);
 		if(get_wall_inf(pos1) == NOWALL)
 		{
 				if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)
@@ -599,7 +599,7 @@ void Dijkstra::diagonal_expand(t_posDijkstra pos,t_direction m_dir)
 	t_posDijkstra pos2 = LocalPosDir2GlobWallPos_WPos(next_pos, next_dir, Front);
 	for(int i = 1;; i++)
 	{
-		int time = (*get_closure_inf(pos)) .time + i*2;
+		int time = (*get_closure_inf(pos)) .time + diagonal_time_set(DIAG_SECTION*i);
 		if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL)
 		{
 			if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)

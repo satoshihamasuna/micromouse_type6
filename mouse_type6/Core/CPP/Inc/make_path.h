@@ -67,6 +67,8 @@ class calcRunTime
 		uint16_t return_turn_time(t_run_pattern run_pt);
 		uint16_t straight_time_set(float length);
 		t_straight_param calc_end_straight_max_velo(float length);
+		uint16_t diagonal_time_set(float length);
+		t_straight_param calc_end_diagonal_max_velo(float length);
 		calcRunTime()
 		{
 			turn_V90_time		= 2.0f;

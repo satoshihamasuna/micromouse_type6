@@ -137,6 +137,61 @@ t_straight_param calcRunTime::calc_end_straight_max_velo(float length)
 	}
 	return return_param;
 }
+
+uint16_t calcRunTime::diagonal_time_set(float length)
+{
+	uint16_t time = 65535;
+	float start_velo 	= di_set_mode[0]->param->max_velo;
+	float end_velo 		= di_set_mode[0]->param->max_velo;
+	float acc_time = 0.0;	float deacc_time = 0.0;
+	float acc_length = 0.0; float deacc_length = 0.0;
+	for(int i = di_mode_size-1; i >= 0;i--){
+		float max_velo	= di_set_mode[i]->param->max_velo;
+		float accel		= di_set_mode[i]->param->acc;
+        acc_length		= ((max_velo*1000.0)*(max_velo*1000.0)-(start_velo*1000.0)*(start_velo*1000.0))/(2*accel*1000.0);
+        deacc_length    = ((max_velo*1000.0)*(max_velo*1000.0)-(end_velo*1000.0)*(end_velo*1000.0))/(2*accel*1000.0);
+        if(length-OFF_SET_LENGTH-(acc_length+deacc_length) >= 0.0)
+        {
+        	acc_time = (max_velo - start_velo)/accel * 1000.0;
+        	deacc_time = (max_velo - end_velo)/accel * 1000.0;
+        	time = (uint16_t)OFF_SET_LENGTH/di_set_mode[0]->param->max_velo+(uint16_t)((length-(acc_length+deacc_length))/max_velo) + (uint16_t)acc_time + (uint16_t)deacc_time;
+        	break;
+        }
+	}
+	return time;
+}
+
+t_straight_param calcRunTime::calc_end_diagonal_max_velo(float length)
+{
+	t_straight_param return_param;
+
+	//uint16_t time = 65535;
+	float start_velo 	= di_set_mode[0]->param->max_velo;
+	float end_velo 		= 0.0;
+	return_param.param = di_set_mode[0]->param;
+	return_param.sp_gain		  = di_set_mode[0]->sp_gain;
+	return_param.om_gain		  = di_set_mode[0]->om_gain;
+	//float acc_time = 0.0;	float deacc_time = 0.0;
+	float acc_length = 0.0; float deacc_length = 0.0;
+	for(int i = di_mode_size-1; i >= 0;i--){
+		float max_velo	= di_set_mode[i]->param->max_velo;
+		float accel		= di_set_mode[i]->param->acc;
+        acc_length		= ((max_velo*1000.0)*(max_velo*1000.0)-(start_velo*1000.0)*(start_velo*1000.0))/(2*accel*1000.0);
+        deacc_length    = ((max_velo*1000.0)*(max_velo*1000.0)-(end_velo*1000.0)*(end_velo*1000.0))/(2*accel*1000.0);
+        if(length-OFF_SET_LENGTH-(acc_length+deacc_length) >= 0.0)
+        {
+        	return_param.param 			  =	di_set_mode[i]->param;
+        	return_param.sp_gain		  = di_set_mode[i]->sp_gain;
+        	return_param.om_gain		  = di_set_mode[i]->om_gain;
+        	//acc_time = (max_velo - start_velo)/accel * 1000.0;
+        	//deacc_time = (max_velo - end_velo)/accel * 1000.0;
+        	//time = (uint16_t)OFF_SET_LENGTH/mode[0]->param->max_velo+(uint16_t)((length-OFF_SET_LENGTH-(acc_length+deacc_length))/max_velo) + (uint16_t)acc_time + (uint16_t)deacc_time;
+        	break;
+        }
+	}
+	return return_param;
+}
+
 void calcRunTime::st_param_set(const t_straight_param *const *mode,uint16_t mode_size)
 {
 	st_set_mode = mode;
