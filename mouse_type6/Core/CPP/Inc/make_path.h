@@ -12,7 +12,7 @@
 #include "wall_class.h"
 #include "run_task.h"
 #include "singleton.h"
-
+#include "run_param.h"
 #define DEBUG_MODE
 
 typedef enum
@@ -49,11 +49,7 @@ typedef struct
 
 class calcRunTime
 {
-
-	public:
-		calcRunTime();
-		uint16_t turn_time_set(const t_param *const *mode);
-		uint16_t straight_time_set(const t_straight_param *const *mode,uint16_t mode_size,float length);
+	private:
 		float turn_V90_time;
 		float turn_Long90_time;
 		float turn_Long180_time;
@@ -61,10 +57,34 @@ class calcRunTime
 		float turn_in135_time;
 		float turn_out45_time;
 		float turn_out135_time;
+		const t_straight_param *const *st_set_mode;
+		const t_straight_param *const *di_set_mode;
+		uint16_t st_mode_size = 1;uint16_t di_mode_size = 1;
+	public:
+		void turn_time_set(const t_param *const *mode);
+		void st_param_set(const t_straight_param *const *mode,uint16_t mode_size);
+		void di_param_set(const t_straight_param *const *mode,uint16_t mode_size);
+		uint16_t return_turn_time(t_run_pattern run_pt);
+		uint16_t straight_time_set(float length);
+		t_straight_param calc_end_straight_max_velo(float length);
+		calcRunTime()
+		{
+			turn_V90_time		= 2.0f;
+			turn_Long90_time	= 2.0f;
+			turn_Long180_time	= 2.0f;
+			turn_in45_time		= 2.0f;
+			turn_in135_time		= 2.0f;
+			turn_out45_time		= 2.0f;
+			turn_out135_time	= 2.0f;
+			st_set_mode = st_mode_300_v0;
+			di_set_mode = di_mode_300_v0;
+			st_mode_size = 1;
+			di_mode_size = 1;
 
+		}
 };
 
-class Dijkstra
+class Dijkstra:calcRunTime
 {
 	private:
 		void straight_expand(t_posDijkstra pos,t_direction m_dir);
