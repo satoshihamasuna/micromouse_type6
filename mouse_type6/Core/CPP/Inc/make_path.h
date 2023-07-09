@@ -13,7 +13,7 @@
 #include "run_task.h"
 #include "singleton.h"
 #include "run_param.h"
-#define DEBUG_MODE
+//#define DEBUG_MODE
 
 typedef enum
 {
@@ -86,7 +86,7 @@ class calcRunTime
 		}
 };
 
-class Dijkstra:calcRunTime
+class Dijkstra:public calcRunTime
 {
 	private:
 		void straight_expand(t_posDijkstra pos,t_direction m_dir);
@@ -105,6 +105,7 @@ class Dijkstra:calcRunTime
 		void longturn_L180_expand(t_posDijkstra pos,t_direction m_dir);
 		void turn_vR90_expand(t_posDijkstra pos,t_direction m_dir);
 		void turn_vL90_expand(t_posDijkstra pos,t_direction m_dir);
+
 
 		t_posDijkstra LocalPosDir2GlobWallPos_Center(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalPos,t_local_dir LocalDir);
 		t_posDijkstra LocalPosDir2GlobWallPos_WPos(t_posDijkstra glob_pos,t_direction glob_dir,t_local_dir LocalDir);
@@ -130,9 +131,15 @@ class Dijkstra:calcRunTime
 		t_posDijkstra conv_t_pos2t_posDijkstra(int _x,int _y,t_direction wall_pos);
 		t_posDijkstra min_search();
 		t_posDijkstra make_path_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
-		void run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
+		void check_run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
+		void run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size,
+						  const t_straight_param *const *st_mode,uint16_t size_st_mode,
+						  const t_straight_param *const *di_mode,uint16_t size_di_mode,
+						  const t_param *const *turn_mode);
 		void expand(t_posDijkstra pos);
-		t_posDijkstra last_expand(t_posDijkstra pos,t_position goal_pos,uint8_t goal_size);
+		t_posDijkstra last_expand(t_posDijkstra pos,t_direction m_dir,t_position goal_pos,uint8_t goal_size);
+		uint16_t straight_section_num(t_posDijkstra s_pos,t_posDijkstra e_pos,t_direction dir);
+		uint16_t diagonal_section_num(t_posDijkstra s_pos,t_posDijkstra e_pos,t_direction dir);
 };
 
 

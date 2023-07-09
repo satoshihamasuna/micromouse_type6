@@ -109,10 +109,9 @@ void CPP_Main()
 					  		  mp.motion_start(&motion_task::getInstance());
 					  		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.30);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
-					  		  for(int i = 0;i < 8;i++){
-					  			  mp.searchSlalom(&motion_task::getInstance(),&param_R90_search);
-					  			  while(motion_task::getInstance().run_task !=No_run){}
-					  		  }
+
+					  		  mp.long_turn(&motion_task::getInstance(),&param_L180_300);
+					  	      while(motion_task::getInstance().run_task !=No_run){}
 					  		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  HAL_Delay(200);
@@ -166,7 +165,7 @@ void CPP_Main()
 					  		KalmanFilter::getInstance().filter_init();
 					  		t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
-					  		goal.x =0, goal.y = 2;
+					  		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
 					  		t_position return_pos = solve_maze.search_adachi_1(start, goal, 2, &wall_data, &map_data,&mp);
 					  		write_save_data(&wall_data);
 					  		solve_maze.search_adachi_1(return_pos, start, 1, &wall_data, &map_data,&mp);
@@ -215,8 +214,9 @@ void CPP_Main()
 							}
 							t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
-					  		goal.x =0, goal.y = 2;
-							run_path.run_Dijkstra(start, Dir_None, goal,2);
+					  		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
+					  		run_path.turn_time_set(mode_300);
+							run_path.check_run_Dijkstra(start, Dir_None, goal,2);
 							Mode_Disable();
 						}
 			  			  break;

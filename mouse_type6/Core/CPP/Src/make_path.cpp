@@ -216,7 +216,8 @@ t_posDijkstra Dijkstra::make_path_Dijkstra(t_position start_pos,t_direction star
 		if(is_goal_Dijkstra(min_pos, goal_pos, goal_size))
 		{
 			//last_expand(min_pos,goal_pos,(int)goal_size);
-			last_expand(min_pos, goal_pos, goal_size);
+			t_direction pos_dir = (*get_closure_inf(min_pos)).dir;
+			min_pos = last_expand(min_pos,pos_dir ,goal_pos, goal_size);
 			break;
 		}
 		expand(min_pos);
@@ -255,21 +256,122 @@ void Dijkstra::expand(t_posDijkstra pos)
 	}
 }
 
-t_posDijkstra Dijkstra::last_expand(t_posDijkstra pos,t_position goal_pos,uint8_t goal_size)
+t_posDijkstra Dijkstra::last_expand(t_posDijkstra pos,t_direction m_dir,t_position goal_pos,uint8_t goal_size)
 {
 	t_posDijkstra  last_pos = pos;
+	t_direction next_dir = m_dir;
+	t_posDijkstra pos1 = pos;
+	t_posDijkstra pos2 = pos;
+	t_posDijkstra next_pos = pos;
 	switch(last_pos.NodePos)
 	{
 		case N_pos:
 		case E_pos:
+			pos1 = LocalPosDir2GlobWallPos_WPos(pos, m_dir, Front);
+			next_pos= pos1;
+			pos2 = LocalPosDir2GlobWallPos_WPos(next_pos, next_dir, Front);
+			for(int i = 1;; i++)
+			{
+				int time = (*get_closure_inf(pos)) .time + diagonal_time_set(DIAG_SECTION*i);
+				if(get_wall_inf(pos1) == NOWALL && get_wall_inf(pos2) == NOWALL && is_goal_Dijkstra(next_pos, goal_pos, goal_size) == True)
+				{
+					if((*get_closure_inf(next_pos)) .determine == False )//&& (*get_closure_inf(next_pos)) .time >= time)
+					{
+						(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Diagonal, False);
+						#ifdef DEBUG_MODE
+						printf("Diagonal_expand_Set->x:%2d,y:%2d,d:%2d\n",next_pos.x,next_pos.y,next_pos.NodePos);
+						HAL_Delay(10);
+						#endif
+					}
+				}
+				else
+				{
+					break;
+				}
+				last_pos = next_pos;
+				pos1 = pos2;
+				next_pos = pos1;
+				pos2 = LocalPosDir2GlobWallPos_WPos(next_pos, next_dir, Front);
+			}
 			break;
 		case C_pos:
+			pos1 = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, Rear);
+			next_pos = LocalPosDir2GlobWallPos_Center(pos, m_dir, Front, None);
+			for(int i = 1;; i++)
+			{
+				int time  = (*get_closure_inf(pos)) .time + straight_time_set(SECTION*i);
+				if(get_wall_inf(pos1) == NOWALL && is_goal_Dijkstra(next_pos, goal_pos, goal_size) == True)
+				{
+						if((*get_closure_inf(next_pos)) .determine == False )
+						{
+							/*
+							if((*get_closure_inf(pos)).run_pt == Straight)
+							{
+								parent = (*get_closure_inf(pos)).parent_pos;
+							}
+							*/
+							(*get_closure_inf(next_pos)) = SetNode(pos, time, next_dir, Straight, False);
+							#ifdef DEBUG_MODE
+							printf("Straight_expand_Set->x:%2d,y:%2d,d:%2d\n",next_pos.x,next_pos.y,next_pos.NodePos);
+							HAL_Delay(10);
+							#endif
+						}
+				}
+				else
+				{
+					break;
+				}
+				last_pos = next_pos;
+				pos1 = LocalPosDir2GlobWallPos_Center(next_pos, m_dir, Front, Rear);
+				next_pos = LocalPosDir2GlobWallPos_Center(next_pos, m_dir, Front, None);
+			}
 			break;
 	}
 	return last_pos;
 }
 
-void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size)
+uint16_t Dijkstra::straight_section_num(t_posDijkstra s_pos,t_posDijkstra e_pos,t_direction dir)
+{
+	switch(dir)
+	{
+		case North:
+		case South:
+			return ABS(s_pos.y - e_pos.y);
+		case East:
+		case West:
+			return ABS(s_pos.x - e_pos.x);
+		default:
+			return 0;
+	}
+	return 0;
+}
+
+uint16_t Dijkstra::diagonal_section_num(t_posDijkstra s_pos,t_posDijkstra e_pos,t_direction dir)
+{
+	uint16_t count = 0;
+	t_posDijkstra pos = s_pos;
+	switch(dir)
+	{
+		case NorthWest:
+		case NorthEast:
+		case SouthEast:
+		case SouthWest:
+			for(count = 1;;count++)
+			{
+				pos = LocalPosDir2GlobWallPos_WPos(pos, dir, Front);
+				if(pos.x == e_pos.x && pos.y == e_pos.y && pos.NodePos == e_pos.NodePos)
+				{
+					break;
+				}
+			}
+			return count;
+		default:
+			return 0;
+	}
+	return count;
+}
+
+void Dijkstra::check_run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size)
 {
 	t_posDijkstra last_pos = make_path_Dijkstra(start_pos, start_wallPos, goal_pos, goal_size);
 	t_posDijkstra tmp_pos = last_pos;
@@ -330,15 +432,19 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 
 	for(int i = tail ; i >= 0;i--)
 	{
-		#ifdef DEBUG_MODE
+		//#ifdef DEBUG_MODE
 			printf("x:%2d,y:%2d,d:%2d,time:%d->",run_pos_buff[i].x,run_pos_buff[i].y,run_pos_buff[i].NodePos,(*get_closure_inf(run_pos_buff[i])).time);
-		#endif
+		//#endif
 		switch((*get_closure_inf(run_pos_buff[i])).run_pt)
 		{
-			#ifdef DEBUG_MODE
+			//#ifdef DEBUG_MODE
 			case No_run: 			printf("No_run\n"); 			break;
-			case Straight:	 		printf("Straight\n"); 			break;
-			case Diagonal: 			printf("Diagonal\n"); 			break;
+			case Straight:
+				printf("count->%2d",straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir));
+				printf("Straight\n"); 			break;
+			case Diagonal:
+				printf("count->%2d",diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir));
+				printf("Diagonal\n"); 			break;
 			case Long_turnR90: 		printf("Long_turnR90\n"); 		break;
 			case Long_turnL90: 		printf("Long_turnL90\n"); 		break;
 			case Long_turnR180: 	printf("Long_turnR180\n"); 		break;
@@ -364,7 +470,7 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 			case run_brake: 		printf("run_brake\n"); 			break;
 			case motor_free: 		printf("motor_free\n"); 		break;
 			case Fix_wall: 			printf("Fix_wall\n"); 			break;
-			#endif
+			//#endif
 			default :
 				break;
 		}
