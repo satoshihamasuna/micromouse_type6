@@ -57,6 +57,18 @@ typedef struct{
 	t_pid_gain const* om_gain;
 }t_param;
 
+typedef struct{
+	//float base_velo;
+	float max_velo;
+	float acc;
+}t_velo_param;
+
+typedef struct{
+	t_velo_param const* param;
+	t_pid_gain const* sp_gain;
+	t_pid_gain const* om_gain;
+}t_straight_param;
+
 class RunTask
 {
 	private:

@@ -52,6 +52,8 @@ class calcRunTime
 
 	public:
 		calcRunTime();
+		uint16_t turn_time_set(const t_param *const *mode);
+		uint16_t straight_time_set(const t_straight_param *const *mode,uint16_t mode_size,float length);
 		float turn_V90_time;
 		float turn_Long90_time;
 		float turn_Long180_time;

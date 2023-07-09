@@ -3,7 +3,7 @@ adachi_class.h:22:3:adachi::adachi(wall_class*, make_map*)	24	static
 search.cpp:18:8:t_bool Search::i_am_goal(int, int, int, int, int)	32	static
 search.cpp:30:8:t_bool Search::i_am_goal(t_position, t_position, int)	48	static
 search.cpp:46:12:t_position Search::search_adachi_1(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	56	static
-run_task.h:60:7:constexpr RunTask::RunTask()	16	static
+run_task.h:72:7:constexpr RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
 controll.h:28:7:constexpr mouse_Controll::mouse_Controll()	16	static
 motion.h:18:7:motion_task::motion_task()	16	static
