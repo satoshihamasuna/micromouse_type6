@@ -5216,3 +5216,608 @@ arm-none-eabi-size   mouse_type6.elf
  209892	    812	  25072	 235776	  39900	mouse_type6.elf
 Finished building: default.size.stdout
  
+12:08:34 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_map.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_map.d" -MT"Core/CPP/Src/make_map.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_map.o"
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+In file included from ../Core/CPP/Src/make_path.cpp:11:0:
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:138:41: error: 'motion_plan' has not been declared
+         const t_param *const *turn_mode,motion_plan *motionPlan);
+                                         ^~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp: In function 'void run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)':
+../Core/CPP/Src/make_path.cpp:486:27: error: 'make_path_Dijkstra' was not declared in this scope
+  t_posDijkstra last_pos = make_path_Dijkstra(start_pos, start_wallPos, goal_pos, goal_size);
+                           ^~~~~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:486:27: note: suggested alternative: 't_posDijkstra'
+  t_posDijkstra last_pos = make_path_Dijkstra(start_pos, start_wallPos, goal_pos, goal_size);
+                           ^~~~~~~~~~~~~~~~~~
+                           t_posDijkstra
+../Core/CPP/Src/make_path.cpp:488:24: error: 'conv_t_pos2t_posDijkstra' was not declared in this scope
+  t_posDijkstra start = conv_t_pos2t_posDijkstra(start_pos, start_wallPos);
+                        ^~~~~~~~~~~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:488:24: note: suggested alternative: 't_posDijkstra'
+  t_posDijkstra start = conv_t_pos2t_posDijkstra(start_pos, start_wallPos);
+                        ^~~~~~~~~~~~~~~~~~~~~~~~
+                        t_posDijkstra
+../Core/CPP/Src/make_path.cpp:492:3: error: 'run_pos_buff' was not declared in this scope
+   run_pos_buff[i] = tmp_pos;
+   ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:493:15: error: 'get_closure_inf' was not declared in this scope
+   tmp_pos = (*get_closure_inf(tmp_pos)).parent_pos;
+               ^~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:503:40: error: 'run_pos_buff' was not declared in this scope
+   printf("x:%2d,y:%2d,d:%2d,time:%d->",run_pos_buff[i].x,run_pos_buff[i].y,run_pos_buff[i].NodePos,(*get_closure_inf(run_pos_buff[i])).time);
+                                        ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:503:102: error: 'get_closure_inf' was not declared in this scope
+   printf("x:%2d,y:%2d,d:%2d,time:%d->",run_pos_buff[i].x,run_pos_buff[i].y,run_pos_buff[i].NodePos,(*get_closure_inf(run_pos_buff[i])).time);
+                                                                                                      ^~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:509:25: error: 'straight_section_num' was not declared in this scope
+     printf("count->%2d",straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir));
+                         ^~~~~~~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:512:25: error: 'diagonal_section_num' was not declared in this scope
+     printf("count->%2d",diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir));
+                         ^~~~~~~~~~~~~~~~~~~~
+make: *** [Core/CPP/Src/subdir.mk:90: Core/CPP/Src/make_path.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+12:09:42 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+../Core/CPP/Src/make_path.cpp: In function 'void run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)':
+../Core/CPP/Src/make_path.cpp:486:27: error: 'make_path_Dijkstra' was not declared in this scope
+  t_posDijkstra last_pos = make_path_Dijkstra(start_pos, start_wallPos, goal_pos, goal_size);
+                           ^~~~~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:486:27: note: suggested alternative: 't_posDijkstra'
+  t_posDijkstra last_pos = make_path_Dijkstra(start_pos, start_wallPos, goal_pos, goal_size);
+                           ^~~~~~~~~~~~~~~~~~
+                           t_posDijkstra
+../Core/CPP/Src/make_path.cpp:488:24: error: 'conv_t_pos2t_posDijkstra' was not declared in this scope
+  t_posDijkstra start = conv_t_pos2t_posDijkstra(start_pos, start_wallPos);
+                        ^~~~~~~~~~~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:488:24: note: suggested alternative: 't_posDijkstra'
+  t_posDijkstra start = conv_t_pos2t_posDijkstra(start_pos, start_wallPos);
+                        ^~~~~~~~~~~~~~~~~~~~~~~~
+                        t_posDijkstra
+../Core/CPP/Src/make_path.cpp:492:3: error: 'run_pos_buff' was not declared in this scope
+   run_pos_buff[i] = tmp_pos;
+   ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:493:15: error: 'get_closure_inf' was not declared in this scope
+   tmp_pos = (*get_closure_inf(tmp_pos)).parent_pos;
+               ^~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:503:40: error: 'run_pos_buff' was not declared in this scope
+   printf("x:%2d,y:%2d,d:%2d,time:%d->",run_pos_buff[i].x,run_pos_buff[i].y,run_pos_buff[i].NodePos,(*get_closure_inf(run_pos_buff[i])).time);
+                                        ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:503:102: error: 'get_closure_inf' was not declared in this scope
+   printf("x:%2d,y:%2d,d:%2d,time:%d->",run_pos_buff[i].x,run_pos_buff[i].y,run_pos_buff[i].NodePos,(*get_closure_inf(run_pos_buff[i])).time);
+                                                                                                      ^~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:509:25: error: 'straight_section_num' was not declared in this scope
+     printf("count->%2d",straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir));
+                         ^~~~~~~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:512:25: error: 'diagonal_section_num' was not declared in this scope
+     printf("count->%2d",diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir));
+                         ^~~~~~~~~~~~~~~~~~~~
+make: *** [Core/CPP/Src/subdir.mk:90: Core/CPP/Src/make_path.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+12:10:48 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+Finished building: mouse_type6.bin
+ 
+ 
+Finished building: mouse_type6.list
+ 
+12:11:28 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+12:22:36 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+../Core/CPP/Src/make_path.cpp: In member function 'void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)':
+../Core/CPP/Src/make_path.cpp:504:11: warning: variable 'section_count' set but not used [-Wunused-but-set-variable]
+  uint16_t section_count = 0;
+           ^~~~~~~~~~~~~
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+12:29:08 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+In file included from ../Core/CPP/Src/make_path.cpp:11:0:
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:77:20: error: 't_straight_param calcRunTime::calc_end_straight_base_velo()' cannot be overloaded
+   t_straight_param calc_end_straight_base_velo()
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:71:20: error: with 't_straight_param calcRunTime::calc_end_straight_base_velo()'
+   t_straight_param calc_end_straight_base_velo()
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h: In member function 't_straight_param calcRunTime::calc_end_straight_base_velo()':
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:73:24: error: could not convert '*((calcRunTime*)this)->calcRunTime::st_set_mode' from 'const t_straight_param* const' to 't_straight_param'
+    return st_set_mode[0];
+           ~~~~~~~~~~~~~^
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h: In member function 't_straight_param calcRunTime::calc_end_straight_base_velo()':
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:79:24: error: could not convert '*((calcRunTime*)this)->calcRunTime::di_set_mode' from 'const t_straight_param* const' to 't_straight_param'
+    return di_set_mode[0];
+           ~~~~~~~~~~~~~^
+../Core/CPP/Src/make_path.cpp: In member function 'void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)':
+../Core/CPP/Src/make_path.cpp:517:9: error: jump to case label [-fpermissive]
+    case Diagonal:
+         ^~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:522:9: error: jump to case label [-fpermissive]
+    case Long_turnR90:
+         ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:525:9: error: jump to case label [-fpermissive]
+    case Long_turnL90:   break;
+         ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:526:9: error: jump to case label [-fpermissive]
+    case Long_turnR180:  break;
+         ^~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:527:9: error: jump to case label [-fpermissive]
+    case Long_turnL180:  break;
+         ^~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:528:9: error: jump to case label [-fpermissive]
+    case Turn_in_R45:   break;
+         ^~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:529:9: error: jump to case label [-fpermissive]
+    case Turn_in_L45:   break;
+         ^~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:530:9: error: jump to case label [-fpermissive]
+    case Turn_out_R45:   break;
+         ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:531:9: error: jump to case label [-fpermissive]
+    case Turn_out_L45:   break;
+         ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:532:9: error: jump to case label [-fpermissive]
+    case Turn_in_R135:   break;
+         ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:533:9: error: jump to case label [-fpermissive]
+    case Turn_in_L135:   break;
+         ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:534:9: error: jump to case label [-fpermissive]
+    case Turn_out_R135:  break;
+         ^~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:535:9: error: jump to case label [-fpermissive]
+    case Turn_out_L135:  break;
+         ^~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:536:9: error: jump to case label [-fpermissive]
+    case Turn_RV90:   break;
+         ^~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:537:9: error: jump to case label [-fpermissive]
+    case Turn_LV90:   break;
+         ^~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:538:9: error: jump to case label [-fpermissive]
+    case Diagonal_R:   break;
+         ^~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:539:9: error: jump to case label [-fpermissive]
+    case Diagonal_L:   break;
+         ^~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:540:9: error: jump to case label [-fpermissive]
+    case Search_st_section: break;
+         ^~~~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:541:9: error: jump to case label [-fpermissive]
+    case Search_st_half:  break;
+         ^~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:542:9: error: jump to case label [-fpermissive]
+    case Pivot_turn_R:   break;
+         ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:543:9: error: jump to case label [-fpermissive]
+    case Pivot_turn_L:   break;
+         ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:544:9: error: jump to case label [-fpermissive]
+    case Search_slalom_R:  break;
+         ^~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:545:9: error: jump to case label [-fpermissive]
+    case Search_slalom_L:  break;
+         ^~~~~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:546:9: error: jump to case label [-fpermissive]
+    case run_brake:   break;
+         ^~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:547:9: error: jump to case label [-fpermissive]
+    case motor_free:   break;
+         ^~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:548:9: error: jump to case label [-fpermissive]
+    case Fix_wall:    break;
+         ^~~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:550:4: error: jump to case label [-fpermissive]
+    default :
+    ^~~~~~~
+../Core/CPP/Src/make_path.cpp:514:22: note:   crosses initialization of 't_straight_param st_parameter'
+     t_straight_param st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+                      ^~~~~~~~~~~~
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Diagonal' not handled in switch [-Wswitch]
+   switch((*get_closure_inf(run_pos_buff[i])).run_pt)
+         ^
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Long_turnR90' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Long_turnL90' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Long_turnR180' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Long_turnL180' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_in_R45' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_in_L45' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_out_R45' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_out_L45' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_in_R135' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_in_L135' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_out_R135' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_out_L135' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_RV90' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Turn_LV90' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Diagonal_R' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Diagonal_L' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Search_st_section' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Search_st_half' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Pivot_turn_R' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Pivot_turn_L' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Search_slalom_R' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Search_slalom_L' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'run_brake' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'motor_free' not handled in switch [-Wswitch]
+../Core/CPP/Src/make_path.cpp:508:9: warning: enumeration value 'Fix_wall' not handled in switch [-Wswitch]
+make: *** [Core/CPP/Src/subdir.mk:90: Core/CPP/Src/make_path.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+12:30:32 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+In file included from ../Core/CPP/Src/make_path.cpp:11:0:
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:77:20: error: 't_straight_param calcRunTime::calc_end_straight_base_velo()' cannot be overloaded
+   t_straight_param calc_end_straight_base_velo()
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:71:20: error: with 't_straight_param calcRunTime::calc_end_straight_base_velo()'
+   t_straight_param calc_end_straight_base_velo()
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h: In member function 't_straight_param calcRunTime::calc_end_straight_base_velo()':
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:73:24: error: could not convert '*((calcRunTime*)this)->calcRunTime::st_set_mode' from 'const t_straight_param* const' to 't_straight_param'
+    return st_set_mode[0];
+           ~~~~~~~~~~~~~^
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h: In member function 't_straight_param calcRunTime::calc_end_straight_base_velo()':
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:79:24: error: could not convert '*((calcRunTime*)this)->calcRunTime::di_set_mode' from 'const t_straight_param* const' to 't_straight_param'
+    return di_set_mode[0];
+           ~~~~~~~~~~~~~^
+make: *** [Core/CPP/Src/subdir.mk:90: Core/CPP/Src/make_path.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+12:32:39 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+In file included from ../Core/CPP/Src/make_path.cpp:11:0:
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:81:20: error: 't_straight_param calcRunTime::calc_end_straight_base_velo()' cannot be overloaded
+   t_straight_param calc_end_straight_base_velo()
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/make_path.h:71:20: error: with 't_straight_param calcRunTime::calc_end_straight_base_velo()'
+   t_straight_param calc_end_straight_base_velo()
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/CPP/Src/subdir.mk:90: Core/CPP/Src/make_path.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+12:33:09 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+12:35:25 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+Command canceled
+12:35:28 **** Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+13:16:26 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+13:19:17 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+13:25:21 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+13:31:44 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+13:34:04 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+14:38:58 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+14:39:36 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/main.d" -MT"Core/CPP/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/main.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+14:42:23 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+15:15:40 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/main.d" -MT"Core/CPP/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/main.o"
+arm-none-eabi-g++ "../Core/CPP/Src/search.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/search.d" -MT"Core/CPP/Src/search.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/search.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+15:17:22 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/search.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/search.d" -MT"Core/CPP/Src/search.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/search.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
+15:21:08 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+15:23:45 **** Incremental Build of configuration Debug for project mouse_type6 ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/CPP/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/main.d" -MT"Core/CPP/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/main.o"
+arm-none-eabi-g++ "../Core/CPP/Src/make_path.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/make_path.d" -MT"Core/CPP/Src/make_path.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/make_path.o"
+arm-none-eabi-g++ "../Core/CPP/Src/run_task.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/run_task.d" -MT"Core/CPP/Src/run_task.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/run_task.o"
+arm-none-eabi-g++ "../Core/CPP/Src/search.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F411xE -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/Include" -I"C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc" -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/CPP/Src/search.d" -MT"Core/CPP/Src/search.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/CPP/Src/search.o"
+arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\sato1\Desktop\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: mouse_type6.elf
+ 
+arm-none-eabi-objdump -h -S  mouse_type6.elf  > "mouse_type6.list"
+arm-none-eabi-objcopy  -O binary  mouse_type6.elf  "mouse_type6.bin"
+arm-none-eabi-size   mouse_type6.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 240220	    812	  25104	 266136	  40f98	mouse_type6.elf
+Finished building: default.size.stdout
+ 
+Finished building: mouse_type6.bin
+ 
+Finished building: mouse_type6.list
+ 
