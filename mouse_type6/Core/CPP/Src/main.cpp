@@ -53,8 +53,8 @@ void CPP_Main()
 			  switch(Mode_State()){
 			  	  case (ENABLE_MODE3|0x00):
 			  			  printf("fr:%f,fl:%f,sr:%f,sl:%f\n",
-			  					  SensingTask::getInstance().sen_fr.distance,SensingTask::getInstance().sen_fl.distance
-								 ,SensingTask::getInstance().sen_r.distance,SensingTask::getInstance().sen_l.distance);
+			  			  SensingTask::getInstance().sen_fr.distance,SensingTask::getInstance().sen_fl.distance
+						  ,SensingTask::getInstance().sen_r.distance,SensingTask::getInstance().sen_l.distance);
 			  	  	  	  //printf("length:%lf\n",Battery_GetVoltage());
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):

@@ -94,6 +94,74 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 
 }
 
+void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms)
+{
+
+	is_wallControl_Enable = True;
+	is_runTask = True;
+	float deccel_length = 1000*(mt_param.max_velo*mt_param.max_velo
+								-mt_param.end_velo*mt_param.end_velo)
+								/(2.0*ABS(mt_param.deccel));
+	if(deccel_length < ( mt_param.length - machine_->length ))
+	{
+		target_->accel = mt_param.accel;
+		target_->velo  = target_->velo + target_->accel*delta_t_ms/1000.0;
+		if(target_->velo > mt_param.max_velo)
+		{
+			target_->velo = mt_param.max_velo;
+			target_->accel = 0.0;
+		}
+
+
+	}
+	else if(mt_param.length > machine_->length)
+	{
+		target_->accel = mt_param.deccel;
+		target_->velo  = target_->velo + target_->accel*delta_t_ms/1000.0;
+
+		if(mt_param.end_velo == 0.0f)
+		{
+			if(target_->velo < 0.15)
+			{
+				target_->velo = 0.15;
+				target_->accel = 0.0;
+			}
+		}
+		else if(target_->velo < mt_param.end_velo)
+		{
+			target_->velo = mt_param.end_velo;
+			target_->accel = 0.0;
+
+		}
+
+	}
+	else
+	{
+		if(mt_param.end_velo == 0.0f)
+		{
+			target_->velo = 0.0f;
+			target_->accel = 0.0;
+		}
+		else
+		{
+			is_runTask = False;
+			target_->accel = 0.0;
+		}
+	}
+
+	if(target_->velo == 0.0f)
+	{
+		is_runTask = True;
+		brake_time++;
+		if(brake_time > BRAKE_TIME_LIMIT)
+		{
+			is_runTask = False;
+			brake_time = 0;
+		}
+	}
+
+}
+
 void RunTask::pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms)
 {
 
