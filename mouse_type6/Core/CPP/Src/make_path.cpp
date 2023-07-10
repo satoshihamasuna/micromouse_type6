@@ -504,6 +504,8 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 		}
 	}
 
+	motionPlan->search_straight(&motion_task::getInstance(), 15.0, straight_base_velo().param->acc, straight_base_velo().param->max_velo, straight_base_velo().param->max_velo);
+	while(motion_task::getInstance().run_task !=No_run);
 	uint16_t section_count = 0;
 	for(int i = tail ; i >= 0;i--)
 	{

@@ -107,12 +107,12 @@ void CPP_Main()
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
 					  		  mp.motion_start(&motion_task::getInstance());
-					  		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.30);
+					  		  mp.search_straight(&motion_task::getInstance(),45.0,6.0,0.5,0.50);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 
-					  		  mp.long_turn(&motion_task::getInstance(),&param_R180_300);
+					  		  mp.long_turn(&motion_task::getInstance(),&param_R180_500);
 					  	      while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.0);
+					  		  mp.search_straight(&motion_task::getInstance(),45.0,6.0,0.5,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  HAL_Delay(200);
 					  		  LogData::getInstance().log_enable = False;
@@ -168,7 +168,7 @@ void CPP_Main()
 					  		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
 					  		t_position return_pos = solve_maze.search_adachi_1(start, goal, 2, &wall_data, &map_data,&mp);
 					  		write_save_data(&wall_data);
-					  		solve_maze.search_adachi_1(return_pos, start, 1, &wall_data, &map_data,&mp);
+					  		solve_maze.search_adachi_2(return_pos, start, 1, &wall_data, &map_data,&mp);
 					  		write_save_data(&wall_data);
 					  		Mode_Disable();
 						}
@@ -218,8 +218,8 @@ void CPP_Main()
 					  		motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 					  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		KalmanFilter::getInstance().filter_init();
-					  		run_path.turn_time_set(mode_300);
-							run_path.run_Dijkstra(start, Dir_None, goal, 2, st_mode_300_v0, 1, di_mode_300_v0, 1, mode_300,&mp);
+					  		run_path.turn_time_set(mode_500);
+							run_path.run_Dijkstra(start, Dir_None, goal, 2, st_mode_500_v0, 3, di_mode_500_v0, 3, mode_500,&mp);
 
 							Mode_Disable();
 						}
@@ -235,8 +235,9 @@ void CPP_Main()
 									t_position start,goal;
 							  		start.x = start.y = 0;start.dir = North;
 							  		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
-							  		run_path.di_param_set(di_mode_300_v0, 1);
-							  		run_path.turn_time_set(mode_300);
+							  		run_path.di_param_set(di_mode_500_v0, 3);
+							  		run_path.di_param_set(di_mode_500_v0, 3);
+							  		run_path.turn_time_set(mode_500);
 									run_path.check_run_Dijkstra(start, Dir_None, goal, 2);
 
 									Mode_Disable();

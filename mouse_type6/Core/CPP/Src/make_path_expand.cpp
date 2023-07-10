@@ -533,13 +533,14 @@ t_element* Dijkstra::get_closure_inf(t_posDijkstra position)
 uint8_t Dijkstra::get_wall_inf(t_posDijkstra position)
 {
 	int return_wall_inf = WALL;
+	int mask = 0x03;
 	switch(position.NodePos)
 	{
 		case N_pos:
 			if((0 <= position.y && position.y < (MAZE_SIZE_Y - 1) )
 			&& (0 <= position.x && position.x < (MAZE_SIZE_X    ) ) )
 			{
-				if(wall_property->wall[position.x][position.y].north == NOWALL)
+				if((wall_property->wall[position.x][position.y].north & mask) == NOWALL)
 				{
 					return_wall_inf = NOWALL;
 				}
@@ -549,7 +550,7 @@ uint8_t Dijkstra::get_wall_inf(t_posDijkstra position)
 			if((0 <= position.y && position.y < (MAZE_SIZE_Y     ) )
 			&& (0 <= position.x && position.x < (MAZE_SIZE_X - 1 ) ))
 			{
-				if(wall_property->wall[position.x][position.y].east == NOWALL)
+				if((wall_property->wall[position.x][position.y].east & mask) == NOWALL)
 				{
 					return_wall_inf = NOWALL;
 				}
