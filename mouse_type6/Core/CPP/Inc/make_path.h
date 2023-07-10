@@ -13,6 +13,7 @@
 #include "run_task.h"
 #include "singleton.h"
 #include "run_param.h"
+#include "motion.h"
 //#define DEBUG_MODE
 
 typedef enum
@@ -67,8 +68,24 @@ class calcRunTime
 		uint16_t return_turn_time(t_run_pattern run_pt);
 		uint16_t straight_time_set(float length);
 		t_straight_param calc_end_straight_max_velo(float length);
+		t_straight_param straight_base_velo()
+		{
+			t_straight_param return_param;
+        	return_param.param 			  =	st_set_mode[0]->param;
+        	return_param.sp_gain		  = st_set_mode[0]->sp_gain;
+        	return_param.om_gain		  = st_set_mode[0]->om_gain;
+			return return_param;
+		}
 		uint16_t diagonal_time_set(float length);
 		t_straight_param calc_end_diagonal_max_velo(float length);
+		t_straight_param diagonal_base_velo()
+		{
+			t_straight_param return_param;
+        	return_param.param 			  =	di_set_mode[0]->param;
+        	return_param.sp_gain		  = di_set_mode[0]->sp_gain;
+        	return_param.om_gain		  = di_set_mode[0]->om_gain;
+			return return_param;
+		}
 		calcRunTime()
 		{
 			turn_V90_time		= 2.0f;
@@ -135,7 +152,7 @@ class Dijkstra:public calcRunTime
 		void run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size,
 						  const t_straight_param *const *st_mode,uint16_t size_st_mode,
 						  const t_straight_param *const *di_mode,uint16_t size_di_mode,
-						  const t_param *const *turn_mode);
+						  const t_param *const *turn_mode,motion_plan *motionPlan);
 		void expand(t_posDijkstra pos);
 		t_posDijkstra last_expand(t_posDijkstra pos,t_direction m_dir,t_position goal_pos,uint8_t goal_size);
 		uint16_t straight_section_num(t_posDijkstra s_pos,t_posDijkstra e_pos,t_direction dir);

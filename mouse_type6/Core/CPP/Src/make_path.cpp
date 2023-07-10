@@ -10,6 +10,7 @@
 #include "macro.h"
 #include "make_path.h"
 #include "run_task.h"
+#include "motion.h"
 
 #define DIJKSTRA_MAX_TIME (65535-1)
 
@@ -474,6 +475,116 @@ void Dijkstra::check_run_Dijkstra(t_position start_pos,t_direction start_wallPos
 			default :
 				break;
 		}
+	}
+}
+
+void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size,
+				  const t_straight_param *const *st_mode,uint16_t size_st_mode,
+				  const t_straight_param *const *di_mode,uint16_t size_di_mode,
+				  const t_param *const *turn_mode , motion_plan *motionPlan)
+{
+	turn_time_set(turn_mode);
+	st_param_set(st_mode, size_st_mode);
+	di_param_set(di_mode, size_di_mode);
+
+	t_posDijkstra last_pos = make_path_Dijkstra(start_pos, start_wallPos, goal_pos, goal_size);
+	t_posDijkstra tmp_pos = last_pos;
+	t_posDijkstra start = conv_t_pos2t_posDijkstra(start_pos, start_wallPos);
+	t_straight_param st_parameter ;
+
+	int tail = 0;
+	for(int i = 0;;i++)
+	{
+		run_pos_buff[i] = tmp_pos;
+		tmp_pos = (*get_closure_inf(tmp_pos)).parent_pos;
+		if(tmp_pos.x == start.x && tmp_pos.y == start.y && tmp_pos.NodePos == start.NodePos)
+		{
+			tail = i;
+			break;
+		}
+	}
+
+	uint16_t section_count = 0;
+	for(int i = tail ; i >= 0;i--)
+	{
+		switch((*get_closure_inf(run_pos_buff[i])).run_pt)
+		{
+			//#ifdef DEBUG_MODE
+			case No_run: 	break;
+			case Straight:
+				section_count = straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
+				st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+				if(i == 0)
+					motionPlan->search_straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+				else
+					motionPlan->search_straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo);
+				break;
+			case Diagonal:
+				section_count = diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
+				st_parameter =  calc_end_diagonal_max_velo(DIAG_SECTION * section_count);
+				if(i == 0)
+					motionPlan->search_straight(&motion_task::getInstance(), DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+				else
+					motionPlan->search_straight(&motion_task::getInstance(), DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, diagonal_base_velo().param->max_velo);
+				break;
+			case Long_turnR90:
+				motionPlan->long_turn(&motion_task::getInstance(), turn_mode[Long_turnR90]);
+				break;
+			case Long_turnL90:
+				motionPlan->long_turn(&motion_task::getInstance(), turn_mode[Long_turnL90]);
+				break;
+			case Long_turnR180:
+				motionPlan->long_turn(&motion_task::getInstance(), turn_mode[Long_turnR180]);
+				break;
+			case Long_turnL180:
+				motionPlan->long_turn(&motion_task::getInstance(), turn_mode[Long_turnL180]);
+				break;
+			case Turn_in_R45:
+				motionPlan->turn_in(&motion_task::getInstance(), turn_mode[Turn_in_R45]);
+				break;
+			case Turn_in_L45:
+				motionPlan->turn_in(&motion_task::getInstance(), turn_mode[Turn_in_L45]);
+				break;
+			case Turn_out_R45:
+				motionPlan->turn_out(&motion_task::getInstance(), turn_mode[Turn_out_R45]);
+				break;
+			case Turn_out_L45:
+				motionPlan->turn_out(&motion_task::getInstance(), turn_mode[Turn_out_L45]);
+				break;
+			case Turn_in_R135:
+				motionPlan->turn_in(&motion_task::getInstance(), turn_mode[Turn_in_R135]);
+				break;
+			case Turn_in_L135:
+				motionPlan->turn_in(&motion_task::getInstance(), turn_mode[Turn_in_L135]);
+				break;
+			case Turn_out_R135:
+				motionPlan->turn_out(&motion_task::getInstance(), turn_mode[Turn_out_R135]);
+				break;
+			case Turn_out_L135:
+				motionPlan->turn_out(&motion_task::getInstance(), turn_mode[Turn_out_L135]);
+				break;
+			case Turn_RV90:
+				motionPlan->turn_v90(&motion_task::getInstance(), turn_mode[Turn_RV90]);
+				break;
+			case Turn_LV90:
+				motionPlan->turn_v90(&motion_task::getInstance(), turn_mode[Turn_LV90]);
+				break;
+			case Diagonal_R: 		break;
+			case Diagonal_L: 		break;
+			case Search_st_section: break;
+			case Search_st_half: 	break;
+			case Pivot_turn_R: 		break;
+			case Pivot_turn_L: 		break;
+			case Search_slalom_R: 	break;
+			case Search_slalom_L: 	break;
+			case run_brake: 		break;
+			case motor_free: 		break;
+			case Fix_wall: 			break;
+			//#endif
+			default :
+				break;
+		}
+		while(motion_task::getInstance().run_task !=No_run);
 	}
 }
 
