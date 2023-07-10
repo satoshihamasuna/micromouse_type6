@@ -154,14 +154,16 @@ void make_map::Display()
 {
 	for( int y = MAZE_SIZE_Y - 1 ; y >= 0 ; y-- ){
 		for(int x = 0; x < MAZE_SIZE_X ; x++ ){
-			if(wall_property->wall[x][y].north == WALL || wall_property->wall[x][y].north == VWALL)	{	printf("+---");	HAL_Delay(10);	}
+			if(wall_property->wall[x][y].north == WALL)// || wall_property->wall[x][y].north == VWALL)
+			{	printf("+---");	HAL_Delay(10);	}
 			else							{	printf("+   "); HAL_Delay(10);	}
 			//if(x == MAZE_SIZE_X - 1)		{	printf("+\n");	HAL_Delay(5);	}
 		}
 		printf("+\n");	HAL_Delay(10);
 
 		for(int x = 0; x < MAZE_SIZE_X ; x++ ){
-			if(wall_property->wall[x][y].west == WALL || wall_property->wall[x][y].west == VWALL)		{	printf("|%3x",map[x][y]);	HAL_Delay(10);	}
+			if(wall_property->wall[x][y].west == WALL) //|| wall_property->wall[x][y].west == VWALL)
+			{	printf("|%3x",map[x][y]);	HAL_Delay(10);	}
 			else							{	printf(" %3x",map[x][y]);	HAL_Delay(10);	}
 			//if(x == MAZE_SIZE_X - 1)		{	printf("|\n");				HAL_Delay(5);	}
 		}

@@ -54,10 +54,12 @@ void read_wall_flash(wall_class *wall_property){
 			uint32_t address = WALL_START_ADDRESS + (x << 8) + y;
 			uint16_t data = 0;
 			loadFlash(address,&data,2);
-			wall_property->wall[x][y].north = (data >> 6) & 0x03;
-			wall_property->wall[x][y].east  = (data >> 4) & 0x03;
-			wall_property->wall[x][y].south = (data >> 2) & 0x03;
-			wall_property->wall[x][y].west  = (data >> 0) & 0x03;
+
+			wall_property->wall[x][y].north = (data >> 6) & 0x0003;
+			wall_property->wall[x][y].east  = (data >> 4) & 0x0003;
+			wall_property->wall[x][y].south = (data >> 2) & 0x0003;
+			wall_property->wall[x][y].west  = (data >> 0) & 0x0003;
+
 		}
 	}
 }

@@ -131,9 +131,9 @@ void motion_plan::turn_in(motion_task *move_task,const t_param *turn_param)
 	mt_set_.radian      	=  0.0;//DEG2RAD(turn_param->param->degree);
 	mt_set_.turn_d          =  Turn_None;//(turn_param->param->turn_dir == Turn_L) ? Turn_L:Turn_R;
 	move_task->mt_set 		=  mt_set_;
-	if(turn_param->param->degree == 45.0f)
+	if(ABS(turn_param->param->degree) == 45.0f)
 		move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Turn_in_L45:Turn_in_R45;
-	else if(turn_param->param->degree == 135.0f)
+	else if(ABS(turn_param->param->degree) == 135.0f)
 		move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Turn_in_L135:Turn_in_R135;
 	move_task->ct.speed_ctrl.I_param_reset();
 	move_task->ct.omega_ctrl.I_param_reset();
@@ -161,9 +161,9 @@ void motion_plan::turn_out(motion_task *move_task,const t_param *turn_param)
 	mt_set_.radian      	=  0.0;//DEG2RAD(turn_param->param->degree);
 	mt_set_.turn_d          =  Turn_None;//(turn_param->param->turn_dir == Turn_L) ? Turn_L:Turn_R;
 	move_task->mt_set 		=  mt_set_;
-	if(turn_param->param->degree == 45.0f)
+	if(ABS(turn_param->param->degree) == 45.0f)
 		move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Turn_out_L45:Turn_out_R45;
-	else if(turn_param->param->degree == 135.0f)
+	else if(ABS(turn_param->param->degree) == 135.0f)
 		move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Turn_out_L135:Turn_out_R135;
 	move_task->ct.speed_ctrl.I_param_reset();
 	move_task->ct.omega_ctrl.I_param_reset();
@@ -191,9 +191,9 @@ void motion_plan::long_turn(motion_task *move_task,const t_param *turn_param)
 	mt_set_.radian      	=  0.0;//DEG2RAD(turn_param->param->degree);
 	mt_set_.turn_d          =  Turn_None;//(turn_param->param->turn_dir == Turn_L) ? Turn_L:Turn_R;
 	move_task->mt_set 		=  mt_set_;
-	if(turn_param->param->degree == 90.0f)
+	if(ABS(turn_param->param->degree) == 90.0f)
 		move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Long_turnL90:Long_turnR90;
-	else if(turn_param->param->degree == 180.0f)
+	else if(ABS(turn_param->param->degree) == 180.0f)
 		move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Long_turnL180:Long_turnR180;
 	move_task->ct.speed_ctrl.I_param_reset();
 	move_task->ct.omega_ctrl.I_param_reset();

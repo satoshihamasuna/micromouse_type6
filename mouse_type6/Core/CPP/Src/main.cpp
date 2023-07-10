@@ -110,7 +110,7 @@ void CPP_Main()
 					  		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.30);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 
-					  		  mp.long_turn(&motion_task::getInstance(),&param_L180_300);
+					  		  mp.long_turn(&motion_task::getInstance(),&param_R180_300);
 					  	      while(motion_task::getInstance().run_task !=No_run){}
 					  		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
@@ -181,12 +181,12 @@ void CPP_Main()
 							  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
 							  HAL_Delay(50);
 							}
-							test_wall_set(&wall_data);
+							//test_wall_set(&wall_data);
 							t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
-					  		goal.x =TEST_GOAL_X, goal.y = TEST_GOAL_Y;
-							map_data.init_map(goal.x, goal.y, 3);
-							map_data.make_map_queue(goal.x, goal.y, start, 3, 0x01);
+						  	goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
+							map_data.init_map(goal.x, goal.y, 2);
+							map_data.make_map_queue(goal.x, goal.y, start, 2, 0x01);
 							map_data.Display();
 							Mode_Disable();
 
@@ -215,12 +215,32 @@ void CPP_Main()
 							t_position start,goal;
 					  		start.x = start.y = 0;start.dir = North;
 					  		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
+					  		motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+					  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
+					  		KalmanFilter::getInstance().filter_init();
 					  		run_path.turn_time_set(mode_300);
-							run_path.check_run_Dijkstra(start, Dir_None, goal,2);
+							run_path.run_Dijkstra(start, Dir_None, goal, 2, st_mode_300_v0, 1, di_mode_300_v0, 1, mode_300,&mp);
+
 							Mode_Disable();
 						}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x0A):
+							   if(SensingTask::getInstance().IrSensor_Avg() > 2500)
+							   {
+									for(int i = 0;i < 11;i++)
+									{
+										(i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
+										HAL_Delay(50);
+									}
+									t_position start,goal;
+							  		start.x = start.y = 0;start.dir = North;
+							  		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
+							  		run_path.di_param_set(di_mode_300_v0, 1);
+							  		run_path.turn_time_set(mode_300);
+									run_path.check_run_Dijkstra(start, Dir_None, goal, 2);
+
+									Mode_Disable();
+								}
 			  			  break;
 			  	  case (ENABLE_MODE3|0x0B):
 			  			  break;
