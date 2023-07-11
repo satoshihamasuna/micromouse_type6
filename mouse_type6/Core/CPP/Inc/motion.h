@@ -45,10 +45,10 @@ class motion_plan
 		void search_straight(motion_task *move_task,float len_target,float acc,float max_sp,float end_sp);
 		void pivot_turn(motion_task *move_task,float rad_target,float rad_acc,float rad_velo);
 		void searchSlalom(motion_task *move_task,const t_param *turn_param);
-		void turn_in(motion_task *move_task,const t_param *turn_param);
-		void turn_out(motion_task *move_task,const t_param *turn_param);
-		void long_turn(motion_task *move_task,const t_param *turn_param);
-		void turn_v90(motion_task *move_task,const t_param *turn_param);
+		void turn_in(motion_task *move_task,const t_param *turn_param,t_run_pattern run_pt);
+		void turn_out(motion_task *move_task,const t_param *turn_param,t_run_pattern run_pt);
+		void long_turn(motion_task *move_task,const t_param *turn_param,t_run_pattern run_pt);
+		void turn_v90(motion_task *move_task,const t_param *turn_param,t_run_pattern run_pt);
 		void fix_wall(motion_task *move_task,float set_time);
 		void stop_brake();
 };

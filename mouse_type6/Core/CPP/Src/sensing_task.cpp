@@ -11,6 +11,7 @@
 #include "sens_table.h"
 #include "typedef.h"
 #include "index.h"
+#include "motion.h"
 
 t_wall_state SensingTask::conv_Sensin2Wall(t_sensor_dir sens_dir)
 {
@@ -132,18 +133,35 @@ void SensingTask::IrSensorWallSet()
 
 	sen_fr.controll_th = (sen_fr.controll_cnt > 10) ? FRONT_THRESHOLD : 90.0;
 	sen_fl.controll_th = (sen_fl.controll_cnt > 10) ? FRONT_THRESHOLD : 90.0;
-	sen_r.controll_th = (sen_r.controll_cnt > 10) ? SIDE_THRESHOLD: 45.0;
-	sen_l.controll_th = (sen_l.controll_cnt > 10) ? SIDE_THRESHOLD: 45.0;
+	if(motion_task::getInstance().run_task != Diagonal)
+	{
+		sen_r.controll_th = (sen_r.controll_cnt > 10) ? SIDE_THRESHOLD: 45.0;
+		sen_l.controll_th = (sen_l.controll_cnt > 10) ? SIDE_THRESHOLD: 45.0;
 
-	sen_r.is_controll 	= (sen_r.is_wall == True && sen_r.distance <= sen_r.controll_th)? True:False;
-	sen_l.is_controll 	= (sen_l.is_wall == True && sen_l.distance <= sen_l.controll_th)? True:False;
+		sen_r.is_controll 	= (sen_r.is_wall == True && sen_r.distance <= sen_r.controll_th)? True:False;
+		sen_l.is_controll 	= (sen_l.is_wall == True && sen_l.distance <= sen_l.controll_th)? True:False;
 
+		sen_r.is_controll 	= (sen_fr.distance <= 80.0)? False:sen_r.is_controll;
+		sen_l.is_controll 	= (sen_fl.distance <= 80.0)? False:sen_l.is_controll;
 
-	sen_r.is_controll 	= (sen_fr.distance <= 80.0)? False:sen_r.is_controll;
-	sen_l.is_controll 	= (sen_fl.distance <= 80.0)? False:sen_l.is_controll;
+		sen_r.error	= (sen_r.is_controll == True) ? sen_r.distance - 45.0 : 0.0;
+		sen_l.error	= (sen_l.is_controll == True) ? sen_l.distance - 45.0 : 0.0;
+	}
+	else
+	{
+		sen_r.controll_th = (sen_r.controll_cnt > 10) ? 32.0: 32.0;
+		sen_l.controll_th = (sen_l.controll_cnt > 10) ? 32.0: 32.0;
 
-	sen_r.error	= (sen_r.is_controll == True) ? sen_r.distance - 45.0 : 0.0;
-	sen_l.error	= (sen_l.is_controll == True) ? sen_l.distance - 45.0 : 0.0;
+		sen_r.is_controll 	= (sen_r.is_wall == True && sen_r.distance <= sen_r.controll_th)? True:False;
+		sen_l.is_controll 	= (sen_l.is_wall == True && sen_l.distance <= sen_l.controll_th)? True:False;
+
+		sen_r.is_controll 	= (sen_fr.distance <= 80.0)? False:sen_r.is_controll;
+		sen_l.is_controll 	= (sen_fl.distance <= 80.0)? False:sen_l.is_controll;
+
+		sen_r.error	= (sen_r.is_controll == True) ? sen_r.distance - 32.0 : 0.0;
+		sen_l.error	= (sen_l.is_controll == True) ? sen_l.distance - 32.0 : 0.0;
+
+	}
 
 }
 

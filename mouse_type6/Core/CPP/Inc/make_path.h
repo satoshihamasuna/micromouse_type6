@@ -153,6 +153,10 @@ class Dijkstra:public calcRunTime
 						  const t_straight_param *const *st_mode,uint16_t size_st_mode,
 						  const t_straight_param *const *di_mode,uint16_t size_di_mode,
 						  const t_param *const *turn_mode,motion_plan *motionPlan);
+		void run_Dijkstra_suction(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size,int suction,
+								  const t_straight_param *const *st_mode,uint16_t size_st_mode,
+								  const t_straight_param *const *di_mode,uint16_t size_di_mode,
+								  const t_param *const *turn_mode , motion_plan *motionPlan);
 		void expand(t_posDijkstra pos);
 		t_posDijkstra last_expand(t_posDijkstra pos,t_direction m_dir,t_position goal_pos,uint8_t goal_size);
 		uint16_t straight_section_num(t_posDijkstra s_pos,t_posDijkstra e_pos,t_direction dir);

@@ -107,13 +107,22 @@ void CPP_Main()
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
 					  		  mp.motion_start(&motion_task::getInstance());
-					  		  mp.search_straight(&motion_task::getInstance(),45.0,6.0,0.5,0.50);
+					  		  mp.fix_wall(&motion_task::getInstance(), 400);
+			  				  for(int i = 50; i <= 500; i = i + 50)
+			  				  {
+			  					  FAN_Motor_SetDuty(i);;
+								  HAL_Delay(5);
+							  }
+			  				  while(motion_task::getInstance().run_task !=No_run){}
+					  		  mp.search_straight(&motion_task::getInstance(),90.0,9.0,1.0,1.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 
-					  		  mp.long_turn(&motion_task::getInstance(),&param_R180_500);
+					  		  mp.long_turn(&motion_task::getInstance(),&param_inR135_1000,Turn_in_R135);
 					  	      while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.search_straight(&motion_task::getInstance(),45.0,6.0,0.5,0.0);
+					  		  mp.search_straight(&motion_task::getInstance(),90.0,9.0,1.0,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
+					  		  HAL_Delay(200);
+					  		  FAN_Motor_SetDuty(0);;
 					  		  HAL_Delay(200);
 					  		  LogData::getInstance().log_enable = False;
 					  		  Mode_Disable();
@@ -218,8 +227,8 @@ void CPP_Main()
 					  		motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 					  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		KalmanFilter::getInstance().filter_init();
-					  		run_path.turn_time_set(mode_500);
-							run_path.run_Dijkstra(start, Dir_None, goal, 2, st_mode_500_v0, 3, di_mode_500_v0, 3, mode_500,&mp);
+					  		run_path.turn_time_set(mode_1000);
+							run_path.run_Dijkstra_suction(start, Dir_None, goal, 2,700, st_mode_1000_v0, 1, di_mode_1000_v0, 1, mode_1000,&mp);
 
 							Mode_Disable();
 						}
