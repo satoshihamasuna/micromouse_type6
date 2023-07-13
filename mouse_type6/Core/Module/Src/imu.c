@@ -46,7 +46,7 @@ void imu_initialize()
 	  HAL_Delay(50);
 	  write_byte(CTRL1_XL, ACCEL_ODR_SET|ACCEL_8G);
 	  HAL_Delay(50);
-	  write_byte(CTRL2_G, GYRO_ODR_SET|GYRO_2000_DPS);
+	  write_byte(CTRL2_G, GYRO_ODR_SET|GYRO_4000_DPS);
 	  HAL_Delay(50);
 }
 
@@ -76,15 +76,15 @@ void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef* hspi){
 }
 
 float read_gyro_x_axis(){
-	return  (float)gyro_data[x_axis]*(1.0f) *70.0f/1000.0f;
+	return  (float)gyro_data[x_axis]*(1.0f) *140.0f/1000.0f;
 }
 
 float read_gyro_y_axis(){
-	return  (float)gyro_data[y_axis]*(1.0f) *70.0f/1000.0f;
+	return  (float)gyro_data[y_axis]*(1.0f) *140.0f/1000.0f;
 }
 
 float read_gyro_z_axis(){
-	return  (float)gyro_data[z_axis]*(1.0f) *70.0f/1000.0f;
+	return  (float)gyro_data[z_axis]*(1.0f) *140.0f/1000.0f;
 }
 
 float read_accel_x_axis(){

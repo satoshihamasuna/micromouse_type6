@@ -69,6 +69,13 @@ typedef struct{
 	t_pid_gain const* om_gain;
 }t_straight_param;
 
+typedef enum
+{
+	Non_controll = 0,
+	Enable_st = 1,
+	Enable_di = 2,
+}t_wall_controll;
+
 class RunTask
 {
 	private:
@@ -77,7 +84,7 @@ class RunTask
 		float  run_turn_table_time = 0.0f;
 		//const t_param *turn_param;
 	public:
-		t_bool is_wallControl_Enable = False;
+		t_wall_controll is_wallControl_Enable = Non_controll;
 		t_bool is_exe_runTask();
 		void MotionFree(float *run_time,float run_time_limit);
 		void search_straight(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
@@ -85,6 +92,7 @@ class RunTask
 		void pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void fix_wall(t_machine_param *target_,float *run_time,float run_time_limit,float delta_t_ms);
 		void straight(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
+		void diagonal(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void long_turn(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);

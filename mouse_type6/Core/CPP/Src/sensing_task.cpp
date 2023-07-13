@@ -126,6 +126,7 @@ void SensingTask::IrSensorWallSet()
 	sen_r.is_wall 	= (sen_r.distance <= SIDE_THRESHOLD)? True:False;
 	sen_l.is_wall 	= (sen_l.distance <= SIDE_THRESHOLD)? True:False;
 
+
 	sen_fr.controll_cnt = (sen_fr.is_wall == True) ? sen_fr.controll_cnt + 1 : 0;
 	sen_fl.controll_cnt = (sen_fl.is_wall == True) ? sen_fl.controll_cnt + 1 : 0;
 	sen_r.controll_cnt = (sen_r.is_wall == True) ? sen_r.controll_cnt + 1 : 0;
@@ -133,7 +134,7 @@ void SensingTask::IrSensorWallSet()
 
 	sen_fr.controll_th = (sen_fr.controll_cnt > 10) ? FRONT_THRESHOLD : 90.0;
 	sen_fl.controll_th = (sen_fl.controll_cnt > 10) ? FRONT_THRESHOLD : 90.0;
-	if(motion_task::getInstance().run_task != Diagonal)
+	if(motion_task::getInstance().rT.is_wallControl_Enable== Enable_st)
 	{
 		sen_r.controll_th = (sen_r.controll_cnt > 10) ? SIDE_THRESHOLD: 45.0;
 		sen_l.controll_th = (sen_l.controll_cnt > 10) ? SIDE_THRESHOLD: 45.0;
@@ -141,13 +142,13 @@ void SensingTask::IrSensorWallSet()
 		sen_r.is_controll 	= (sen_r.is_wall == True && sen_r.distance <= sen_r.controll_th)? True:False;
 		sen_l.is_controll 	= (sen_l.is_wall == True && sen_l.distance <= sen_l.controll_th)? True:False;
 
-		sen_r.is_controll 	= (sen_fr.distance <= 80.0)? False:sen_r.is_controll;
-		sen_l.is_controll 	= (sen_fl.distance <= 80.0)? False:sen_l.is_controll;
+		sen_r.is_controll 	= (sen_fr.distance <= SIDE_THRESHOLD)? False:sen_r.is_controll;
+		sen_l.is_controll 	= (sen_fl.distance <= SIDE_THRESHOLD)? False:sen_l.is_controll;
 
 		sen_r.error	= (sen_r.is_controll == True) ? sen_r.distance - 45.0 : 0.0;
 		sen_l.error	= (sen_l.is_controll == True) ? sen_l.distance - 45.0 : 0.0;
 	}
-	else
+	else if(motion_task::getInstance().rT.is_wallControl_Enable == Enable_di)
 	{
 		sen_r.controll_th = (sen_r.controll_cnt > 10) ? 32.0: 32.0;
 		sen_l.controll_th = (sen_l.controll_cnt > 10) ? 32.0: 32.0;
@@ -178,6 +179,7 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,float delta_t
 	}
 
 	target_->rad_accel = (3.0)*ir_rad_acc_controll-(target_->rad_velo*30.0);
+	target_->rad_accel = target_->rad_accel-(target_->velo*target_->radian*100.00);
 	target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
 }
 

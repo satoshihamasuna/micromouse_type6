@@ -19,6 +19,9 @@ void motion_task::motion_inInterrupt(){
 			rT.search_straight(mt_set, &target, &mouse, 1.0);
 			//SensingTask::getInstance().SetWallControll_RadVelo(&target,1.0);
 			break;
+		case Diagonal:
+			rT.diagonal(mt_set, &target, &mouse, 1.0);
+			break;
 		case Search_st_half:
 			break;
 		case Pivot_turn_L:
@@ -64,7 +67,7 @@ void motion_task::motion_inInterrupt(){
 				Motor_SetDuty_Right(0);
 			break;
 	}
-	if(rT.is_wallControl_Enable == True)
+	if(rT.is_wallControl_Enable != Non_controll)
 	{
 		SensingTask::getInstance().SetWallControll_RadVelo(&target,1.0);
 	}

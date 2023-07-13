@@ -55,7 +55,7 @@ void CPP_Main()
 			  			  printf("fr:%f,fl:%f,sr:%f,sl:%f\n",
 			  			  SensingTask::getInstance().sen_fr.distance,SensingTask::getInstance().sen_fl.distance
 						  ,SensingTask::getInstance().sen_r.distance,SensingTask::getInstance().sen_l.distance);
-			  	  	  	  //printf("length:%lf\n",Battery_GetVoltage());
+			  	  	  	  printf("fr:%4d,fl:%4d\n",SensingTask::getInstance().sen_r.value,SensingTask::getInstance().sen_l.value);
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
 			  			  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
@@ -74,8 +74,8 @@ void CPP_Main()
 								  (i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
 								  HAL_Delay(50);
 							  }
-					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(4.0, 0.05, 0.0);
-					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.2, 0.001, 0.0);
+					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		  //mp.fix_wall(&motion_task::getInstance(), 400);
 			  				  //HAL_Delay(100);
 			  				  //FAN_Motor_SetDuty(700);;
@@ -84,8 +84,17 @@ void CPP_Main()
 					  		  mp.motion_start(&motion_task::getInstance());
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
-					  		  //mp.search_straight(&motion_task::getInstance(),90.0*8,35.0,5.0,0.0);
-					  		  mp.pivot_turn(&motion_task::getInstance(), DEG2RAD(270.0), 20.0*PI, 4.0*PI);
+
+					  		  mp.search_straight(&motion_task::getInstance(),SECTION,6.0,0.3,0.3);
+					  		  while(motion_task::getInstance().run_task !=No_run){}
+					  		  LogData::getInstance().data_count = 0;
+					  		  LogData::getInstance().log_enable = True;
+					  		  for(int i = 0; i < 1;i++)
+					  		  {
+					  			  mp.searchSlalom(&motion_task::getInstance(), &param_R90_search);
+								  while(motion_task::getInstance().run_task !=No_run){}
+					  		  }
+					  		  mp.search_straight(&motion_task::getInstance(),SECTION,6.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().log_enable = False;
 			  				  //HAL_Delay(100);
@@ -104,8 +113,6 @@ void CPP_Main()
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		  KalmanFilter::getInstance().filter_init();
-					  		  LogData::getInstance().data_count = 0;
-					  		  LogData::getInstance().log_enable = True;
 					  		  mp.motion_start(&motion_task::getInstance());
 					  		  mp.fix_wall(&motion_task::getInstance(), 400);
 			  				  for(int i = 50; i <= 500; i = i + 50)
@@ -114,12 +121,16 @@ void CPP_Main()
 								  HAL_Delay(5);
 							  }
 			  				  while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.search_straight(&motion_task::getInstance(),90.0,9.0,1.0,1.0);
+					  		  mp.search_straight(&motion_task::getInstance(),SECTION,9.0,1.0,1.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
-
-					  		  mp.long_turn(&motion_task::getInstance(),&param_inR135_1000,Turn_in_R135);
-					  	      while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.search_straight(&motion_task::getInstance(),90.0,9.0,1.0,0.0);
+					  		  LogData::getInstance().data_count = 0;
+					  		  LogData::getInstance().log_enable = True;
+					  		  for(int i = 0; i < 8;i++)
+					  		  {
+								  mp.long_turn(&motion_task::getInstance(),&param_R180_1000,Long_turnR180);
+								  while(motion_task::getInstance().run_task !=No_run){}
+					  		  }
+					  		  mp.search_straight(&motion_task::getInstance(),SECTION,9.0,1.0,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  HAL_Delay(200);
 					  		  FAN_Motor_SetDuty(0);;
