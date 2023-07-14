@@ -43,7 +43,11 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 			target_->velo = mt_param.max_velo;
 			target_->accel = 0.0;
 		}
-
+		if(SensingTask::getInstance().Division_Wall_Correction() == True)
+		{
+			machine_->length = (machine_->length + 45.0)/2.0f;
+			Indicate_LED(0xff);
+		}
 
 	}
 	else if(mt_param.length > machine_->length)
@@ -377,6 +381,11 @@ void RunTask::turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machi
 		if(machine_->length < turn_param->param->Lstart)
 		{
 			target_->velo = turn_param->param->velo;
+			if(SensingTask::getInstance().Division_Wall_Correction() == True)
+			{
+				//machine_->length = (0.2*machine_->length + 0.8*(0.0));
+				Indicate_LED(0xff);
+			}
 		}
 		else
 		{
@@ -460,6 +469,11 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 		if(machine_->length < turn_param->param->Lend)
 		{
 			target_->velo = turn_param->param->velo;
+			if(SensingTask::getInstance().Division_Wall_Correction() == True)
+			{
+				//machine_->length = (machine_->length + turn_param->param->Lend)/2.0f;
+				Indicate_LED(0xff);
+			}
 		}
 		else
 		{
@@ -512,6 +526,12 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 		if(machine_->length < turn_param->param->Lstart)
 		{
 			target_->velo = turn_param->param->velo;
+
+			if(SensingTask::getInstance().Division_Wall_Correction() == True)
+			{
+				//machine_->length = (0.2*machine_->length + 0.8*(0.0));
+				Indicate_LED(0xff);
+			}
 		}
 		else
 		{
@@ -527,6 +547,11 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 		if(machine_->length < turn_param->param->Lend)
 		{
 			target_->velo = turn_param->param->velo;
+			if(SensingTask::getInstance().Division_Wall_Correction() == True)
+			{
+				//machine_->length = (machine_->length + turn_param->param->Lend)/2.0f;
+				Indicate_LED(0xff);
+			}
 		}
 		else
 		{
@@ -645,7 +670,7 @@ void RunTask::fix_wall(t_machine_param *target_,float *run_time,float run_time_l
 		float sp_err = ((SensingTask::getInstance().sen_fr.distance - 45.0) + (SensingTask::getInstance().sen_fl.distance - 45.0))/2.0f;
 		float om_err = ((SensingTask::getInstance().sen_fr.distance - 45.0) - (SensingTask::getInstance().sen_fl.distance - 45.0))/2.0f;
 
-		target_->accel = (2.0 * sp_err - 100.0*target_->velo);
+		target_->accel = (1.0 * sp_err - 100.0*target_->velo);
 		target_->velo = target_->velo + target_->accel/1000.0f;
 			//target.velo = 0.05 * sp_err;//veloだったら0.05
 		float max_set_velo = 0.3;

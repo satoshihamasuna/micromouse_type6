@@ -20,12 +20,35 @@ class SensingTask:public Singleton<SensingTask>
 		float Sensor_CalcDistance(t_sensor_dir dir,int16_t value);
 	public:
 		t_sensor sen_fr,sen_fl,sen_r,sen_l;
+		t_bool r_check,l_check,wall_correction;
+
 		t_wall_state conv_Sensin2Wall(t_sensor_dir sens_dir);
 		void IrSensorSet();
 		void IrSensorDistanceSet();
 		int16_t IrSensor_Avg();
 		void IrSensorWallSet();
 		void SetWallControll_RadVelo(t_machine_param *target_,float delta_tms);
+		t_bool Division_Wall_Correction()
+		{
+			t_bool flag = False;
+			if(sen_r.is_wall == False && r_check == True && wall_correction == False)
+			{
+				flag = True;
+				wall_correction = True;
+			}
+			if(sen_l.is_wall == False && l_check == True && wall_correction == False)
+			{
+				flag = True;
+				wall_correction = True;
+			}
+
+			r_check = sen_r.is_wall;l_check = sen_l.is_wall;
+			return flag;
+		}
+		void Division_Wall_Correction_Reset()
+		{
+			wall_correction = False;
+		}
 };
 
 

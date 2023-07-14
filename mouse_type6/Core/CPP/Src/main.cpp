@@ -32,6 +32,7 @@ void CPP_Main()
 	  imu_initialize();
 	  Sensor_Initialize();
 	  Motor_Initialize();
+	  //Motor_Stop();
 	  FAN_Motor_Initialize();
 	  Encoder_Initialize();
 	  Interrupt_Initialize();
@@ -229,7 +230,13 @@ void CPP_Main()
 					  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		KalmanFilter::getInstance().filter_init();
 					  		run_path.turn_time_set(mode_1000);
-							run_path.run_Dijkstra_suction(start, Dir_None, goal, 2,700, st_mode_1000_v0, 1, di_mode_1000_v0, 1, mode_1000,&mp);
+					  		const t_straight_param *const *st_set_mode;
+					  		const t_straight_param *const *di_set_mode;
+					  		st_set_mode = st_mode_1000_v1;
+					  		di_set_mode = di_mode_1000_v1;
+							run_path.run_Dijkstra_suction(		start, Dir_None, goal, 2,900,
+																st_mode_1000_v1, (int)(sizeof(st_mode_1000_v1)/sizeof(t_straight_param *const)),
+																di_mode_1000_v1, (int)(sizeof(di_mode_1000_v1)/sizeof(t_straight_param *const)), mode_1000,&mp);
 
 							Mode_Disable();
 						}

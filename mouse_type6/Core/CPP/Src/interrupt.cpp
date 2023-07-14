@@ -52,31 +52,37 @@ void Interrupt::main()
 
 void Interrupt::postprocess()
 {
-	static int cnt = 0;
-	if(motion_task::getInstance().is_controll_enable() == True)
+	static int cnt;
+	static float z_acc;
+	z_acc = 0.8*z_acc + 0.2*read_accel_z_axis();
+	t_encoder Renc = Encoder_GetProperty_Right();
+	t_encoder Lenc = Encoder_GetProperty_Left();
+	if(motion_task::getInstance().is_controll_enable() == True && motion_task::getInstance().run_task != Fix_wall)
 	{
 		if(motion_task::getInstance().target.velo != 0.0f)
 		{
-			if(ABS((motion_task::getInstance().mouse.velo - motion_task::getInstance().target.velo)/motion_task::getInstance().target.velo) >= 0.5)
+			if(ABS((motion_task::getInstance().mouse.velo - motion_task::getInstance().target.velo)/motion_task::getInstance().target.velo) >= 0.2)
 			{
-				cnt++;
+				cnt = cnt + 10;
+			}
+			else if(ABS(z_acc) >= 30.0)
+			{
+				cnt = cnt + 200;
+			}
+			else if(ABS(Renc.wheel_speed) > 8.0 ||  ABS(Lenc.wheel_speed) > 8.0 )
+			{
+				cnt = cnt + 500;
+			}
+			else
+			{
+				cnt = cnt - 2;
+				if(cnt < 0) cnt = 0;
 			}
 		}
 		else
 		{
 			cnt = 0;
 		}
-
-		/*
-		if(motion_task::getInstance().target.rad_velo != 0.0f)
-		{
-			if(ABS((motion_task::getInstance().mouse.rad_velo - motion_task::getInstance().target.rad_velo)/motion_task::getInstance().target.rad_velo) >= 0.5)
-			{
-				cnt++;
-			}
-		}
-		*/
-
 		if(cnt >= 1000)
 		{
 			Motor_Stop();FAN_Motor_Stop();

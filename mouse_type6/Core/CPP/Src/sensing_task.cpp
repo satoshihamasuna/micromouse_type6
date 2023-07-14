@@ -183,6 +183,8 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,float delta_t
 	target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
 }
 
+
+
 int16_t SensingTask::IrSensor_Avg()
 {
 	return (sen_fl.value + sen_fr.value + sen_l.value + sen_r.value)/4 ;
