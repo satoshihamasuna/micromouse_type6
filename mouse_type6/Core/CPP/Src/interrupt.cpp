@@ -52,6 +52,63 @@ void Interrupt::main()
 
 void Interrupt::postprocess()
 {
+	static int cnt = 0;
+	if(motion_task::getInstance().is_controll_enable() == True)
+	{
+		if(motion_task::getInstance().target.velo != 0.0f)
+		{
+			if(ABS((motion_task::getInstance().mouse.velo - motion_task::getInstance().target.velo)/motion_task::getInstance().target.velo) >= 0.5)
+			{
+				cnt++;
+			}
+		}
+		else
+		{
+			cnt = 0;
+		}
+
+		/*
+		if(motion_task::getInstance().target.rad_velo != 0.0f)
+		{
+			if(ABS((motion_task::getInstance().mouse.rad_velo - motion_task::getInstance().target.rad_velo)/motion_task::getInstance().target.rad_velo) >= 0.5)
+			{
+				cnt++;
+			}
+		}
+		*/
+
+		if(cnt >= 1000)
+		{
+			Motor_Stop();FAN_Motor_Stop();
+			NVIC_SystemReset();
+
+		}
+	}
+	else
+	{
+		cnt = 0;
+	}
+
+	if(motion_task::getInstance().is_controll_enable() == True)
+	{
+		if(SensingTask::getInstance().sen_l.is_wall == True)
+		{
+			Indicate_LED(Return_LED_Status()|(0x01 << 5));
+		}
+		else
+		{
+			Indicate_LED(Return_LED_Status()&(0xff - (0x01 << 5)));
+		}
+
+		if(SensingTask::getInstance().sen_r.is_wall == True)
+		{
+			Indicate_LED(Return_LED_Status()|(0x01 << 6));
+		}
+		else
+		{
+			Indicate_LED(Return_LED_Status()&(0xff - (0x01 << 6)));
+		}
+	}
 
 	if(LogData::getInstance().log_enable == True)
 	{
@@ -63,6 +120,7 @@ void Interrupt::postprocess()
 		if(LogData::getInstance().data_count >= 1000) LogData::getInstance().data_count = 999;
 	}
 	motion_task::getInstance().motionPostControll();
+
 	IMU_read_DMA_Start();
 }
 

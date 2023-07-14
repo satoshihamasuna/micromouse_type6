@@ -266,6 +266,10 @@ void RunTask::pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machi
 	else
 	{
 		target_->rad_velo = 0.0 ;
+		target_->accel = 0.0f;
+		target_->velo = 0.0f;
+		target_->rad_accel = 0.0f;
+		target_->radian = 0.0f;
 		//is_runTask = False;
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
@@ -352,6 +356,7 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 			machine_->length = 0.0;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
+			target_->radian = 0.0f;
 			Indicate_LED(0x04);
 		}
 
@@ -419,6 +424,7 @@ void RunTask::turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machi
 			machine_->length = 0.0;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
+			target_->radian = 0.0f;
 			Indicate_LED(0x04);
 		}
 
@@ -486,6 +492,7 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 			machine_->length = 0.0;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
+			target_->radian = 0.0f;
 			Indicate_LED(0x04);
 		}
 
@@ -552,6 +559,7 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 			machine_->length = 0.0;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
+			target_->radian = 0.0f;
 			Indicate_LED(0x04);
 		}
 
@@ -619,6 +627,7 @@ void RunTask::turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_mach
 			machine_->length = 0.0;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
+			target_->radian = 0.0f;
 			Indicate_LED(0x04);
 		}
 
@@ -636,7 +645,7 @@ void RunTask::fix_wall(t_machine_param *target_,float *run_time,float run_time_l
 		float sp_err = ((SensingTask::getInstance().sen_fr.distance - 45.0) + (SensingTask::getInstance().sen_fl.distance - 45.0))/2.0f;
 		float om_err = ((SensingTask::getInstance().sen_fr.distance - 45.0) - (SensingTask::getInstance().sen_fl.distance - 45.0))/2.0f;
 
-		target_->accel = (1.0 * sp_err - 100.0*target_->velo);
+		target_->accel = (2.0 * sp_err - 100.0*target_->velo);
 		target_->velo = target_->velo + target_->accel/1000.0f;
 			//target.velo = 0.05 * sp_err;//veloだったら0.05
 		float max_set_velo = 0.3;
@@ -650,7 +659,7 @@ void RunTask::fix_wall(t_machine_param *target_,float *run_time,float run_time_l
 			target_->velo = -max_set_velo;
 		}
 
-		target_->rad_accel = (5.0*om_err - 20.0*target_->rad_velo);
+		target_->rad_accel = (10.0*om_err - 20.0*target_->rad_velo);
 		target_->rad_velo  = target_->rad_velo + target_->rad_accel*delta_t_ms/1000.0;
 			//target->rad_velo = 0.1*om_err;////veloだったら0.5
 		float max_set_rad_velo = 10.0;
@@ -685,6 +694,7 @@ void RunTask::fix_wall(t_machine_param *target_,float *run_time,float run_time_l
 		target_->velo = 0.0f;
 		target_->rad_velo = 0.0f;
 		target_->rad_accel = 0.0f;
+		target_->radian = 0.0f;
 		if(*run_time > run_time_limit + 100)
 			is_runTask = False;
 	}

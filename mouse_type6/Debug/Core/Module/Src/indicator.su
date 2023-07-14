@@ -1,1 +1,2 @@
-indicator.c:10:6:Indicate_LED	16	static
+indicator.c:12:6:Indicate_LED	16	static
+indicator.c:23:9:Return_LED_Status	4	static

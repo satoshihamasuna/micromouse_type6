@@ -830,7 +830,7 @@ void Dijkstra::turn_outR135_expand(t_posDijkstra pos,t_direction m_dir)
 	{
 		//Epos
 		case NorthWest:
-			next_pos.x = pos.x - 1;
+			next_pos.x = pos.x + 1;
 			next_pos.y = pos.y + 1;
 			if(pos.NodePos != E_pos) return;
 			break;
@@ -842,7 +842,7 @@ void Dijkstra::turn_outR135_expand(t_posDijkstra pos,t_direction m_dir)
 		//Npos
 		case NorthEast:
 			next_pos.y = pos.y + 0;
-			next_pos.x = pos.x + 0;
+			next_pos.x = pos.x + 1;
 			if(pos.NodePos != N_pos) return;
 			break;
 		case SouthWest:

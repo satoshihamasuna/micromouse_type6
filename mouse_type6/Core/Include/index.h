@@ -31,6 +31,7 @@ extern "C" {
 void CPP_Main();
 
 void Indicate_LED(uint8_t led_num);
+uint8_t Return_LED_Status();
 //interface
 void Mode_Change_ENC();
 void Mode_Init();
@@ -82,6 +83,7 @@ void Motor_SetDuty_Right( int16_t duty_r );
 void Motor_SetDuty_Left( int16_t duty_l );
 void FAN_Motor_Initialize();
 void FAN_Motor_SetDuty(int16_t duty_f);
+void FAN_Motor_Stop();
 //interrupt
 void Interrupt_Initialize();
 

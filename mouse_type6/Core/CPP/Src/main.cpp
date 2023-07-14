@@ -55,7 +55,7 @@ void CPP_Main()
 			  			  printf("fr:%f,fl:%f,sr:%f,sl:%f\n",
 			  			  SensingTask::getInstance().sen_fr.distance,SensingTask::getInstance().sen_fl.distance
 						  ,SensingTask::getInstance().sen_r.distance,SensingTask::getInstance().sen_l.distance);
-			  	  	  	  printf("fr:%4d,fl:%4d\n",SensingTask::getInstance().sen_r.value,SensingTask::getInstance().sen_l.value);
+			  	  	  	  printf("fr:%4d,fl:%4d\n",SensingTask::getInstance().sen_fr.value,SensingTask::getInstance().sen_fl.value);
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
 			  			  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
@@ -84,17 +84,7 @@ void CPP_Main()
 					  		  mp.motion_start(&motion_task::getInstance());
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
-
-					  		  mp.search_straight(&motion_task::getInstance(),SECTION,6.0,0.3,0.3);
-					  		  while(motion_task::getInstance().run_task !=No_run){}
-					  		  LogData::getInstance().data_count = 0;
-					  		  LogData::getInstance().log_enable = True;
-					  		  for(int i = 0; i < 1;i++)
-					  		  {
-					  			  mp.searchSlalom(&motion_task::getInstance(), &param_R90_search);
-								  while(motion_task::getInstance().run_task !=No_run){}
-					  		  }
-					  		  mp.search_straight(&motion_task::getInstance(),SECTION,6.0,0.3,0.0);
+					  		  mp.search_straight(&motion_task::getInstance(),SECTION*4,6.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().log_enable = False;
 			  				  //HAL_Delay(100);
@@ -255,9 +245,9 @@ void CPP_Main()
 									t_position start,goal;
 							  		start.x = start.y = 0;start.dir = North;
 							  		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
-							  		run_path.di_param_set(di_mode_500_v0, 3);
-							  		run_path.di_param_set(di_mode_500_v0, 3);
-							  		run_path.turn_time_set(mode_500);
+							  		run_path.di_param_set(di_mode_1000_v0, 1);
+							  		run_path.di_param_set(di_mode_1000_v0, 1);
+							  		run_path.turn_time_set(mode_1000);
 									run_path.check_run_Dijkstra(start, Dir_None, goal, 2);
 
 									Mode_Disable();

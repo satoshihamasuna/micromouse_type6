@@ -19,6 +19,10 @@ void motion_task::motion_inInterrupt(){
 			rT.search_straight(mt_set, &target, &mouse, 1.0);
 			//SensingTask::getInstance().SetWallControll_RadVelo(&target,1.0);
 			break;
+		case Straight:
+			rT.straight(mt_set, &target, &mouse, 1.0);
+			//SensingTask::getInstance().SetWallControll_RadVelo(&target,1.0);
+			break;
 		case Diagonal:
 			rT.diagonal(mt_set, &target, &mouse, 1.0);
 			break;

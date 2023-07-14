@@ -517,17 +517,17 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 				section_count = straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
 				st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
 				if(i == 0)
-					motionPlan->search_straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+					motionPlan->straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
 				else
-					motionPlan->search_straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo);
+					motionPlan->straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo);
 				break;
 			case Diagonal:
 				section_count = diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
 				st_parameter =  calc_end_diagonal_max_velo(DIAG_SECTION * section_count);
 				if(i == 0)
-					motionPlan->search_straight(&motion_task::getInstance(), DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+					motionPlan->diagonal(&motion_task::getInstance(), DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
 				else
-					motionPlan->search_straight(&motion_task::getInstance(), DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, diagonal_base_velo().param->max_velo);
+					motionPlan->diagonal(&motion_task::getInstance(), DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, diagonal_base_velo().param->max_velo);
 				break;
 			case Long_turnR90:
 				motionPlan->long_turn(&motion_task::getInstance(), turn_mode[Long_turnR90],(*get_closure_inf(run_pos_buff[i])).run_pt);
@@ -637,9 +637,9 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 				section_count = straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
 				st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
 				if(i == 0)
-					motionPlan->search_straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+					motionPlan->straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
 				else
-					motionPlan->search_straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo);
+					motionPlan->straight(&motion_task::getInstance(), SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo);
 				break;
 			case Diagonal:
 				section_count = diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
