@@ -47,7 +47,7 @@ class SensingTask:public Singleton<SensingTask>
 		}
 		void Division_Wall_Correction_Reset()
 		{
-			wall_correction = False;
+			r_check = l_check = wall_correction = False;
 		}
 };
 

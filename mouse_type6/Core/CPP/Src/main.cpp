@@ -53,10 +53,14 @@ void CPP_Main()
 			  HAL_Delay(5);
 			  switch(Mode_State()){
 			  	  case (ENABLE_MODE3|0x00):
-			  			  printf("fr:%f,fl:%f,sr:%f,sl:%f\n",
-			  			  SensingTask::getInstance().sen_fr.distance,SensingTask::getInstance().sen_fl.distance
-						  ,SensingTask::getInstance().sen_r.distance,SensingTask::getInstance().sen_l.distance);
-			  	  	  	  printf("fr:%4d,fl:%4d\n",SensingTask::getInstance().sen_fr.value,SensingTask::getInstance().sen_fl.value);
+			  			  float fr,fl,sr,sl;
+			  	  	  	  int16_t int_fr,int_fl,int_sr,int_sl;
+			  	  	  	  fr = SensingTask::getInstance().sen_fr.distance;	fl = SensingTask::getInstance().sen_fl.distance;
+			  	  	  	  sr = SensingTask::getInstance().sen_r.distance;	sl = SensingTask::getInstance().sen_l.distance;
+			  	  	  	  int_fr = SensingTask::getInstance().sen_fr.value;	int_fl = SensingTask::getInstance().sen_fl.value;
+			  	  	  	  int_sr = SensingTask::getInstance().sen_r.value;	int_sl = SensingTask::getInstance().sen_l.value;
+			  	  	  	  printf("fr:%f,fl:%f,sr:%f,sl:%f\n",fr,fl,sr,sl);
+			  	  	  	  printf("fr:%4d,fl:%4d,sr:%4d,sl:%4d\n",int_fr,int_fl,int_sr,int_sl);
 			  			  break;
 			  	  case (ENABLE_MODE3|0x01):
 			  			  if(SensingTask::getInstance().IrSensor_Avg() > 2500){
@@ -85,7 +89,11 @@ void CPP_Main()
 					  		  mp.motion_start(&motion_task::getInstance());
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
-					  		  mp.search_straight(&motion_task::getInstance(),SECTION*4,6.0,0.3,0.0);
+					  		  mp.search_straight(&motion_task::getInstance(),45.0,6.0,0.3,0.3);
+					  		  while(motion_task::getInstance().run_task !=No_run){}
+					  		  mp.searchSlalom(&motion_task::getInstance(), &param_R90_search);
+					  		  while(motion_task::getInstance().run_task !=No_run){}
+					  		  mp.search_straight(&motion_task::getInstance(),45.0,6.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().log_enable = False;
 			  				  //HAL_Delay(100);
