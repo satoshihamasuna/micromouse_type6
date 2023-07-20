@@ -9,7 +9,7 @@
 #define CPP_INC_SENSING_TASK_H_
 
 #include "singleton.h"
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 
 #define SIDE_THRESHOLD		(65.0)
 #define FRONT_THRESHOLD		(120.0)

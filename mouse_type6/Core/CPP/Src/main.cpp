@@ -6,13 +6,13 @@
  */
 
 
-#include "index.h"
+#include "../../Module/Include/index.h"
 #include "stdio.h"
 #include "sensing_task.h"
 #include "motion.h"
 #include "interrupt.h"
 #include "controll.h"
-#include "macro.h"
+#include "../../Module/Include/macro.h"
 #include "log_data.h"
 #include "Kalman_filter.h"
 #include "run_param.h"
@@ -38,7 +38,7 @@ void CPP_Main()
 	  Interrupt_Initialize();
 	  IMU_read_DMA_Start();
 	  Mode_Init();
-	  motion_plan mp;
+	  motion_plan mp(&motion_task::getInstance());
 	  Search solve_maze;
 	  wall_class wall_data(&SensingTask::getInstance());
 	  wall_data.init_maze();
@@ -80,20 +80,20 @@ void CPP_Main()
 								  HAL_Delay(50);
 							  }
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
-					  		  //mp.fix_wall(&motion_task::getInstance(), 400);
+					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
+					  		  //mp.fix_wall( 400);
 			  				  //HAL_Delay(100);
 			  				  //FAN_Motor_SetDuty(700);;
 			  				  //while(motion_task::getInstance().run_task !=No_run){}
 					  		  KalmanFilter::getInstance().filter_init();
-					  		  mp.motion_start(&motion_task::getInstance());
+					  		  mp.motion_start();
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
-					  		  mp.search_straight(&motion_task::getInstance(),45.0,6.0,0.3,0.3);
+					  		  mp.straight( 45.0,6.0,0.3,0.3);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.searchSlalom(&motion_task::getInstance(), &param_R90_search);
+					  		  mp.searchSlalom( &param_L90_search);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.search_straight(&motion_task::getInstance(),45.0,6.0,0.3,0.0);
+					  		  mp.straight(45.0,6.0,0.3,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().log_enable = False;
 			  				  //HAL_Delay(100);
@@ -112,24 +112,24 @@ void CPP_Main()
 					  		  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 					  		  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 					  		  KalmanFilter::getInstance().filter_init();
-					  		  mp.motion_start(&motion_task::getInstance());
-					  		  mp.fix_wall(&motion_task::getInstance(), 400);
+					  		  mp.motion_start( );
+					  		  mp.fix_wall( 400);
 			  				  for(int i = 50; i <= 500; i = i + 50)
 			  				  {
 			  					  FAN_Motor_SetDuty(i);;
 								  HAL_Delay(5);
 							  }
 			  				  while(motion_task::getInstance().run_task !=No_run){}
-					  		  mp.search_straight(&motion_task::getInstance(),SECTION,9.0,1.0,1.0);
+					  		  mp.search_straight(SECTION,9.0,1.0,1.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  LogData::getInstance().data_count = 0;
 					  		  LogData::getInstance().log_enable = True;
 					  		  for(int i = 0; i < 8;i++)
 					  		  {
-								  mp.long_turn(&motion_task::getInstance(),&param_R180_1000,Long_turnR180);
+								  mp.long_turn( &param_R180_1000,Long_turnR180);
 								  while(motion_task::getInstance().run_task !=No_run){}
 					  		  }
-					  		  mp.search_straight(&motion_task::getInstance(),SECTION,9.0,1.0,0.0);
+					  		  mp.search_straight( SECTION,9.0,1.0,0.0);
 					  		  while(motion_task::getInstance().run_task !=No_run){}
 					  		  HAL_Delay(200);
 					  		  FAN_Motor_SetDuty(0);;
@@ -156,14 +156,14 @@ void CPP_Main()
 				 		  KalmanFilter::getInstance().filter_init();
 				 		  LogData::getInstance().data_count = 0;
 				 		  LogData::getInstance().log_enable = True;
-				  		  mp.motion_start(&motion_task::getInstance());
-				 		  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.30);
+				  		  mp.motion_start();
+				 		  mp.search_straight( 45.0,4.0,0.3,0.30);
 				 		  while(motion_task::getInstance().run_task !=No_run){}
 				 		  for(int i = 0;i < 8;i++){
-							  mp.searchSlalom(&motion_task::getInstance(),&param_L90_search);
+							  mp.searchSlalom( &param_L90_search);
 							  while(motion_task::getInstance().run_task !=No_run){}
 				 		  }
-						  mp.search_straight(&motion_task::getInstance(),45.0,4.0,0.3,0.0);
+						  mp.search_straight( 45.0,4.0,0.3,0.0);
 				 		  while(motion_task::getInstance().run_task !=No_run){}
 				 		  HAL_Delay(200);
 						  LogData::getInstance().log_enable = False;

@@ -14,21 +14,15 @@ extern "C" {
 
 #include<stdio.h>
 
-#define SECTION				(90.0)
-#define HALF_SECTION		(SECTION/2.0)
-#define DIAG_SECTION		(63.6396)
-#define DIAG_HALF_SECTION	(DIAG_SECTION/2.0)
-#define SEARCH_HOSEI		(48.0)
-
-#define RIGHT	0
-#define LEFT	1
-#define FRONT	2
-#define REAR	3
+//#define RIGHT	0
+//#define LEFT	1
+//#define FRONT	2
+//#define REAR	3
 
 #define MASK_SEARCH	0x01
 #define MASK_SECOND	0x03
 
-#define CONV_SEN2WALL(w)	((w)?WALL:NOWALL)
+//#define CONV_SEN2WALL(w)	((w)?WALL:NOWALL)
 
 #define STRAIGHT_MODE	(1)
 #define TURN_MODE		(2)
@@ -90,8 +84,8 @@ extern "C" {
 #define MAZE_SIZE  1024
 
 #define MAZE_GOAL_X  3
-#define MAZE_GOAL_Y  3
-#define MAZE_GOAL_SIZE  3
+#define MAZE_GOAL_Y  0
+#define MAZE_GOAL_SIZE  1
 #define MAP_MAX_VALUE 1024
 
 #ifdef __cplusplus

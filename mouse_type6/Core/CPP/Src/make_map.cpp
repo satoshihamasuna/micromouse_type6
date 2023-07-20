@@ -8,8 +8,8 @@
 
 #include "queue_class.h"
 #include "make_map_class.h"
-#include "typedef.h"
-#include "index.h"
+#include "../../Module/Include/typedef.h"
+#include "../../Module/Include/index.h"
 
 
 

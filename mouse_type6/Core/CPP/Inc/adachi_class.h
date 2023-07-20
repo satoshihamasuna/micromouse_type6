@@ -11,7 +11,7 @@
 #include "make_map_class.h"
 #include "wall_class.h"
 #include <stdio.h>
-#include <macro.h>
+#include <../../Module/Include/macro.h>
 
 
 class adachi{

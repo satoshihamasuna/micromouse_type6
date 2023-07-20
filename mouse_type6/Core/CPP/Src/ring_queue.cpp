@@ -8,7 +8,7 @@
 
 #include "iostream"
 #include "queue_class.h"
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 
 template class ring_queue<1024u,t_MapNode>;
 

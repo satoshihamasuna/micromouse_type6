@@ -9,7 +9,7 @@
 #define CPP_INC_LOG_DATA_H_
 
 #include "singleton.h"
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 
 class LogData:public Singleton<LogData>
 {

@@ -1,8 +1,0 @@
-interrupt.c:11:6:HAL_TIM_PeriodElapsedCallback	16	static
-interrupt.c:21:6:Interrupt_Initialize	8	static
-interrupt.c:25:6:Interrupt_PreProcess	8	static
-interrupt.c:32:6:Interrupt_Main	4	static
-interrupt.c:37:6:Interrupt_PostProcess	8	static
-interrupt.c:42:6:Interrupt_Get_Irsensor	4	static
-interrupt.c:47:6:Interrupt_Get_Speed	8	static
-interrupt.c:55:6:Interrupt_Set_Target_Speed	4	static

@@ -9,7 +9,7 @@
 #define CPP_INC_MOTION_H_
 
 #include <stdio.h>
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 #include "singleton.h"
 #include "run_task.h"
 #include "controll.h"
@@ -40,18 +40,23 @@ class motion_plan
 		//float motion_time;
 	public:
 		//void straight(motion_task *move_task);
-		void motion_start(motion_task *move_task);
-		void free_rotation(motion_task *move_task);
-		void search_straight(motion_task *move_task,float len_target,float acc,float max_sp,float end_sp);
-		void straight(motion_task *move_task,float len_target,float acc,float max_sp,float end_sp);
-		void diagonal(motion_task *move_task,float len_target,float acc,float max_sp,float end_sp);
-		void pivot_turn(motion_task *move_task,float rad_target,float rad_acc,float rad_velo);
-		void searchSlalom(motion_task *move_task,const t_param *turn_param);
-		void turn_in(motion_task *move_task,const t_param *turn_param,t_run_pattern run_pt);
-		void turn_out(motion_task *move_task,const t_param *turn_param,t_run_pattern run_pt);
-		void long_turn(motion_task *move_task,const t_param *turn_param,t_run_pattern run_pt);
-		void turn_v90(motion_task *move_task,const t_param *turn_param,t_run_pattern run_pt);
-		void fix_wall(motion_task *move_task,float set_time);
+		motion_task *move_task;
+		motion_plan(motion_task *_move_task)
+		{
+			move_task = _move_task;
+		}
+		void motion_start();
+		void free_rotation();
+		void search_straight(float len_target,float acc,float max_sp,float end_sp);
+		void straight(float len_target,float acc,float max_sp,float end_sp);
+		void diagonal(float len_target,float acc,float max_sp,float end_sp);
+		void pivot_turn(float rad_target,float rad_acc,float rad_velo);
+		void searchSlalom(const t_param *turn_param);
+		void turn_in(const t_param *turn_param,t_run_pattern run_pt);
+		void turn_out(const t_param *turn_param,t_run_pattern run_pt);
+		void long_turn(const t_param *turn_param,t_run_pattern run_pt);
+		void turn_v90(const t_param *turn_param,t_run_pattern run_pt);
+		void fix_wall(float set_time);
 		void stop_brake();
 };
 

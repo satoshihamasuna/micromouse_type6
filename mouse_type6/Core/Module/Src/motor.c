@@ -6,9 +6,9 @@
  */
 
 
-#include "index.h"
-#include "Macro.h"
-#include "typedef.h"
+#include "../Include/index.h"
+#include "../Include/Macro.h"
+#include "../Include/typedef.h"
 
 #define PCLK1			(50000000)//(HAL_RCC_GetPCLK1Freq())//25,000,000
 #define PCLK2			(50000000)//(HAL_RCC_GetPCLK2Freq())//50,000,000

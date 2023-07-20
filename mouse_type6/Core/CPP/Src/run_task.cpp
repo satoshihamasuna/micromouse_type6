@@ -5,10 +5,10 @@
  *      Author: sato1
  */
 
-#include "index.h"
-#include "typedef.h"
+#include "../../Module/Include/index.h"
+#include "../../Module/Include/typedef.h"
 #include "run_task.h"
-#include "macro.h"
+#include "../../Module/Include/macro.h"
 #include "turn_table.h"
 #include "sensing_task.h"
 
@@ -308,8 +308,8 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 			if(SensingTask::getInstance().sen_fr.is_wall == True && SensingTask::getInstance().sen_fl.is_wall == True)
 			{
 				float len_sens = 90.0-(SensingTask::getInstance().sen_fr.distance + SensingTask::getInstance().sen_fl.distance)/2.0 + 0.0;
-				if(len_sens > 0.0)  						machine_->length = len_sens;
-				else if(len_sens < 0.0)						machine_->length = 0.5*len_sens + 0.5*machine_->length;
+				//if(len_sens > 0.0)  						machine_->length = len_sens;
+				//else if(len_sens < 0.0)						machine_->length = 0.5*len_sens + 0.5*machine_->length;
 			}
 
 
@@ -318,7 +318,7 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 		{
 			mt_param->turn_d =  turn_param->param->turn_dir;
 		}
-		Indicate_LED(0x01);
+		Indicate_LED(0xff);
 	}
 
 	if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)

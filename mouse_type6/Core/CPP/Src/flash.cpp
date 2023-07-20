@@ -8,8 +8,8 @@
 
 #include "stm32f4xx_hal.h"
 
-#include "index.h"
-#include "macro.h"
+#include "../../Module/Include/index.h"
+#include "../../Module/Include/macro.h"
 #include "wall_class.h"
 
 #include <string.h>

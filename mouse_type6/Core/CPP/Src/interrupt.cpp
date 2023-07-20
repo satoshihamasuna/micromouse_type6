@@ -7,11 +7,11 @@
 
 
 #include <motion.h>
-#include "index.h"
+#include "../../Module/Include/index.h"
 #include "interrupt.h"
 #include "sensing_task.h"
 #include "controll.h"
-#include "macro.h"
+#include "../../Module/Include/macro.h"
 #include "log_data.h"
 #include "Kalman_filter.h"
 
@@ -85,7 +85,7 @@ void Interrupt::postprocess()
 		}
 		if(cnt >= 1000)
 		{
-			Motor_Stop();FAN_Motor_Stop();
+			//Motor_Stop();FAN_Motor_Stop();
 			NVIC_SystemReset();
 
 		}

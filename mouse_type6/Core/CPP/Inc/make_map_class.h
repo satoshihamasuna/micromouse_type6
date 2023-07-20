@@ -8,8 +8,8 @@
 #ifndef CPP_INC_MAKE_MAP_CLASS_H_
 #define CPP_INC_MAKE_MAP_CLASS_H_
 
-#include "typedef.h"
-#include "macro.h"
+#include "../../Module/Include/typedef.h"
+#include "../../Module/Include/macro.h"
 #include "queue_class.h"
 #include "wall_class.h"
 

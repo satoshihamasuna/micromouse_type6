@@ -6,7 +6,7 @@
  */
 #include <priority_queue.h>
 #include "iostream"
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 #include <stdio.h>
 template<typename T> bool less_than(T a,T b)
 {

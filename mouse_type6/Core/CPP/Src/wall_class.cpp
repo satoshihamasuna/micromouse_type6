@@ -8,7 +8,7 @@
 
 
 #include "wall_class.h"
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 
 void wall_class::init_maze(){
 	for( int i = 0 ; i < MAZE_SIZE_X ; i++ ){

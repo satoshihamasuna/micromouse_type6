@@ -5,7 +5,7 @@
  *      Author: sato1
  */
 
-#include "index.h"
+#include "../Include/index.h"
 
 const uint16_t  MAX_MODE_NUM =  0x0f;
 uint16_t mouse_mode;

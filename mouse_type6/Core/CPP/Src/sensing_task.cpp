@@ -9,8 +9,8 @@
 
 #include "sensing_task.h"
 #include "sens_table.h"
-#include "typedef.h"
-#include "index.h"
+#include "../../Module/Include/typedef.h"
+#include "../../Module/Include/index.h"
 #include "motion.h"
 
 t_wall_state SensingTask::conv_Sensin2Wall(t_sensor_dir sens_dir)
@@ -142,8 +142,8 @@ void SensingTask::IrSensorWallSet()
 		sen_r.is_controll 	= (sen_r.is_wall == True && sen_r.distance <= sen_r.controll_th)? True:False;
 		sen_l.is_controll 	= (sen_l.is_wall == True && sen_l.distance <= sen_l.controll_th)? True:False;
 
-		sen_r.is_controll 	= (sen_fr.distance <= SIDE_THRESHOLD)? False:sen_r.is_controll;
-		sen_l.is_controll 	= (sen_fl.distance <= SIDE_THRESHOLD)? False:sen_l.is_controll;
+		sen_r.is_controll 	= (sen_fr.distance > SIDE_THRESHOLD + 10.0)? sen_r.is_controll:False;
+		sen_l.is_controll 	= (sen_fl.distance > SIDE_THRESHOLD + 10.0)? sen_l.is_controll:False;
 
 		sen_r.error	= (sen_r.is_controll == True) ? sen_r.distance - 45.0 : 0.0;
 		sen_l.error	= (sen_l.is_controll == True) ? sen_l.distance - 45.0 : 0.0;
@@ -177,10 +177,19 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,float delta_t
 	{
 		ir_rad_acc_controll = (sen_l.error - sen_r.error);
 	}
+	if(sen_r.is_controll == True || sen_l.is_controll == True)
+	{
+		target_->rad_accel = (3.0)*ir_rad_acc_controll-(target_->rad_velo*30.0);
+		target_->rad_accel = target_->rad_accel-(target_->velo*target_->radian*100.00);
+		target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
+	}
+	else
+	{
+		target_->rad_accel = 0.0f;
+		target_->rad_velo = 0.0f;
+	}
 
-	target_->rad_accel = (3.0)*ir_rad_acc_controll-(target_->rad_velo*30.0);
-	target_->rad_accel = target_->rad_accel-(target_->velo*target_->radian*100.00);
-	target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
+
 }
 
 

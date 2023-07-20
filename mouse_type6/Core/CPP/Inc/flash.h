@@ -9,7 +9,7 @@
 #define CPP_INC_FLASH_H_
 
 #include "wall_class.h"
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 
 void write_save_data(wall_class *wall_property);
 

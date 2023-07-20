@@ -7,7 +7,7 @@
 
 
 #include "make_path.h"
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 #include "wall_class.h"
 #include "run_task.h"
 #include "turn_table.h"

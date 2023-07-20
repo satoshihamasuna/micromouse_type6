@@ -8,8 +8,8 @@
 
 #include "motion.h"
 #include "run_task.h"
-#include "index.h"
-#include "typedef.h"
+#include "../../Module/Include/index.h"
+#include "../../Module/Include/typedef.h"
 #include "sensing_task.h"
 
 void motion_task::motion_inInterrupt(){
@@ -87,8 +87,8 @@ void motion_task::motionControll()
 
 	if(is_controll_enable() == True && run_task != motor_free)
 	{
-		float motor_r_rpm = (1.0f)*RAD_2_RPM*GEAR_N*(target.velo*1000/TIRE_RADIUS);
-		float motor_l_rpm = (1.0f)*RAD_2_RPM*GEAR_N*(target.velo*1000/TIRE_RADIUS);
+		float motor_r_rpm = (1.0f)*RAD_2_RPM*GEAR_N*(target.velo*1000/TIRE_RADIUS + 1.0f*TREAD_WIDTH*target.rad_velo/(2*TIRE_RADIUS));
+		float motor_l_rpm = (1.0f)*RAD_2_RPM*GEAR_N*(target.velo*1000/TIRE_RADIUS - 1.0f*TREAD_WIDTH*target.rad_velo/(2*TIRE_RADIUS));
 		float motor_r_ampere = 1/(MOTOR_K_TR*GEAR_N)*(WEIGHT*target.accel/1000*TIRE_RADIUS/2) + MOTOR_BR*motor_r_rpm/MOTOR_K_TR;
 		float motor_l_ampere = 1/(MOTOR_K_TR*GEAR_N)*(WEIGHT*target.accel/1000*TIRE_RADIUS/2) + MOTOR_BR*motor_l_rpm/MOTOR_K_TR;
 		float sp_FF_controll_r =  MOTOR_R*motor_r_ampere + MOTOR_K_ER*motor_r_rpm/1000;

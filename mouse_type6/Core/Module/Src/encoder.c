@@ -6,9 +6,9 @@
  */
 
 
-#include "index.h"
-#include "typedef.h"
-#include "macro.h"
+#include "../Include/index.h"
+#include "../Include/typedef.h"
+#include "../Include/macro.h"
 
 #define ENC_CNT_L 		(TIM2 -> CNT)
 #define ENC_CNT_R 		(TIM3 -> CNT)

@@ -5,7 +5,7 @@
  *      Author: sato1
  */
 #include "controll.h"
-#include "typedef.h"
+#include "../../Module/Include/typedef.h"
 
 void PID_Controller::Gain_Set(float _Kp,float _Ki,float _Kd)
 {
