@@ -71,10 +71,6 @@ void motion_task::motion_inInterrupt(){
 				Motor_SetDuty_Right(0);
 			break;
 	}
-	if(rT.is_wallControl_Enable != Non_controll)
-	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&target,1.0);
-	}
 }
 
 
@@ -140,6 +136,63 @@ void motion_task::motionControll()
 
 void motion_task::motionPostControll()
 {
+
+	z_acc = 0.8*z_acc + 0.2*read_accel_z_axis();
+
+	if(is_controll_enable() == True && run_task != Fix_wall)
+	{
+		if(target.velo != 0.0f)
+		{
+			if(ABS((mouse.velo - target.velo)/target.velo) >= 0.2)
+			{
+				//error_cnt = error_cnt + 10;
+			}
+			else if(ABS(z_acc) >= 30.0)
+			{
+				error_cnt = error_cnt +	100;
+			}
+			else
+			{
+				error_cnt = error_cnt - 2;
+				if(error_cnt < 0) error_cnt = 0;
+			}
+		}
+		else
+		{
+			error_cnt = 0;
+		}
+		if(error_cnt >= 1000)
+		{
+			Motor_Stop();FAN_Motor_Stop();
+			NVIC_SystemReset();
+		}
+	}
+	else
+	{
+		error_cnt = 0;
+	}
+
+	if(motion_task::getInstance().is_controll_enable() == True)
+	{
+		if(SensingTask::getInstance().sen_l.is_wall == True)
+		{
+			Indicate_LED(Return_LED_Status()|(0x01 << 5));
+		}
+		else
+		{
+			Indicate_LED(Return_LED_Status()&(0xff - (0x01 << 5)));
+		}
+
+		if(SensingTask::getInstance().sen_r.is_wall == True)
+		{
+			Indicate_LED(Return_LED_Status()|(0x01 << 6));
+		}
+		else
+		{
+			Indicate_LED(Return_LED_Status()&(0xff - (0x01 << 6)));
+		}
+	}
+
 	if(rT.is_exe_runTask() == False)
 	{
 		run_task = No_run;

@@ -14,21 +14,8 @@ extern "C" {
 
 #include<stdio.h>
 
-//#define RIGHT	0
-//#define LEFT	1
-//#define FRONT	2
-//#define REAR	3
-
 #define MASK_SEARCH	0x01
 #define MASK_SECOND	0x03
-
-//#define CONV_SEN2WALL(w)	((w)?WALL:NOWALL)
-
-#define STRAIGHT_MODE	(1)
-#define TURN_MODE		(2)
-#define TURN_MODE_TABLE (4)
-#define DIAG_MODE		(3)
-#define NON_CON_MODE	(0)
 
 #define TIRE_DIAMETER	(14.0f)							//mm
 #define TIRE_RADIUS		(TIRE_DIAMETER/2.0f)			//mm

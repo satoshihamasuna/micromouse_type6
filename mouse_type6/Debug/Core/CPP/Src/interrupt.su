@@ -1,9 +1,8 @@
-core_cm4.h:1939:34:void __NVIC_SystemReset()	4	static,ignoring_inline_asm
 interrupt.cpp:18:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	16	static
 interrupt.cpp:27:6:void Interrupt_Initialize()	8	static
 interrupt.cpp:31:6:void Interrupt::preprocess()	80	static
 interrupt.cpp:47:6:void Interrupt::main()	16	static
-interrupt.cpp:53:6:void Interrupt::postprocess()	64	static
+interrupt.cpp:53:6:void Interrupt::postprocess()	24	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = Interrupt]	4	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static
 Kalman_filter.h:14:7:KalmanFilter::KalmanFilter()	16	static

@@ -17,6 +17,9 @@
 
 class motion_task:public Singleton<motion_task>
 {
+	private:
+		int error_cnt;
+		float z_acc;
 	public:
 		float delta_t;
 		float run_time;
@@ -24,7 +27,7 @@ class motion_task:public Singleton<motion_task>
 		t_run_pattern	run_task = No_run;
 		RunTask rT;
 		mouse_Controll ct;
-		t_machine_param target,max_set,mouse;
+		t_machine_param target,mouse;
 		t_motion_param mt_set;
 		const t_param *_turn_param = nullptr;
 		void motion_inInterrupt();

@@ -95,6 +95,11 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 			brake_time = 0;
 		}
 	}
+
+	if(is_wallControl_Enable != Non_controll)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
 
@@ -163,6 +168,11 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 			brake_time = 0;
 		}
 	}
+
+	if(is_wallControl_Enable != Non_controll)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
 
@@ -230,6 +240,11 @@ void RunTask::diagonal(t_motion_param mt_param,t_machine_param *target_,t_machin
 			is_runTask = False;
 			brake_time = 0;
 		}
+	}
+
+	if(is_wallControl_Enable != Non_controll)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
@@ -309,7 +324,8 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 			{
 				float len_sens = 90.0-(SensingTask::getInstance().sen_fr.distance + SensingTask::getInstance().sen_fl.distance)/2.0 + 0.0;
 				//if(len_sens > 0.0)  						machine_->length = len_sens;
-				//else if(len_sens < 0.0)						machine_->length = 0.5*len_sens + 0.5*machine_->length;
+				//else if(len_sens < 0.0)
+					machine_->length = 0.5*len_sens + 0.5*machine_->length;
 			}
 
 
@@ -364,6 +380,10 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 			Indicate_LED(0x04);
 		}
 
+	}
+	if(is_wallControl_Enable != Non_controll)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 
@@ -438,6 +458,10 @@ void RunTask::turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machi
 		}
 
 	}
+	if(is_wallControl_Enable != Non_controll)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 
 }
@@ -511,7 +535,10 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 		}
 
 	}
-
+	if(is_wallControl_Enable != Non_controll)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
 
@@ -589,6 +616,10 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 		}
 
 	}
+	if(is_wallControl_Enable != Non_controll)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 
 }
@@ -658,6 +689,10 @@ void RunTask::turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_mach
 
 	}
 
+	if(is_wallControl_Enable != Non_controll)
+	{
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
 
@@ -702,13 +737,8 @@ void RunTask::fix_wall(t_machine_param *target_,float *run_time,float run_time_l
 	}
 	else
 	{
-		target_->accel = 0.0f;
-		target_->velo = 0.0f;
-			//max_set_velo = 0.0f;
-
-		target_->rad_velo = 0.0f;
-		target_->rad_accel = 0.0f;
-			//max_set_rad_velo = 0.0f;
+		target_->accel = 0.0f;		target_->velo = 0.0f;
+		target_->rad_accel = 0.0f;	target_->rad_velo = 0.0f;
 	}
 
 
