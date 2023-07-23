@@ -41,7 +41,7 @@ uint8_t Mode_State();
 //imu
 uint8_t read_byte(uint8_t reg);
 void write_byte(uint8_t reg, uint8_t data);
-void imu_initialize();
+void IMU_initialize();
 void IMU_read_DMA_Start();
 float read_gyro_x_axis();
 float read_gyro_y_axis();

@@ -37,7 +37,7 @@ void write_byte(uint8_t reg, uint8_t data){
 	HAL_GPIO_WritePin(NSS_GPIO_Port, NSS_Pin,GPIO_PIN_SET);
 }
 
-void imu_initialize()
+void IMU_initialize()
 {
 	  HAL_Delay(50);
 	  HAL_GPIO_WritePin(NSS_GPIO_Port, NSS_Pin,GPIO_PIN_SET);

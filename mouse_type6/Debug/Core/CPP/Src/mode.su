@@ -1,0 +1,4 @@
+mode.cpp:18:10:uint8_t Mode::Select(uint8_t, uint8_t, t_encoder)	24	static
+mode.cpp:33:7:void Mode::Demo()	64	static
+mode.cpp:85:7:void Mode::Debug()	72	static
+mode.cpp:140:7:void Mode::Select_Mode()	64	static

@@ -6,6 +6,10 @@ make_map.cpp:44:6:void make_map::expand(t_MapNode, int)	80	static
 make_map.cpp:97:6:void make_map::make_map_queue_zenmen(int, int, t_position, int, int)	72	static
 make_map.cpp:130:6:void make_map::make_map_queue(int, int, t_position, int, int)	72	static
 make_map.cpp:153:6:void make_map::Display()	32	static
+queue_class.h:35:8:void ring_queue<SIZE, T>::push(T) [with unsigned int SIZE = 1024; T = t_MapNode]	24	static
+queue_class.h:45:8:void ring_queue<SIZE, T>::queue_reset() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
+queue_class.h:41:7:int ring_queue<SIZE, T>::queue_length() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
+queue_class.h:28:5:T ring_queue<SIZE, T>::pop() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
 make_map.cpp:173:1:void __static_initialization_and_destruction_0(int, int)	16	static
 make_map.cpp:173:1:cpp)	8	static
 make_map.cpp:173:1:cpp)	8	static

@@ -1,6 +1,6 @@
 imu.c:18:9:read_byte	32	static
 imu.c:32:6:write_byte	16	static
-imu.c:40:6:imu_initialize	8	static
+imu.c:40:6:IMU_initialize	8	static
 imu.c:54:6:IMU_read_DMA_Start	8	static
 imu.c:59:6:IMU_read_DMA_Stop	8	static
 imu.c:65:6:HAL_SPI_TxRxCpltCallback	16	static

@@ -19,12 +19,37 @@ class ring_queue{
 		int16_t length;
 		const uint16_t cap = SIZE;
 	public:
-		ring_queue();
-		T pop();
-		void push(T push_data);
-		int queue_length();
-		void queue_reset();
+		ring_queue()
+		{
+			tail = -1;
+			head = 0;
+			length = 0;
+		}
+		T pop()
+		{
+			T pop_data = buff[head];
+			head = (head + 1)%cap;
+			length = length - 1;
+			return pop_data;
+		}
+		void push(T push_data)
+		{
+			buff[(tail + 1)%cap] = push_data;
+			tail = (tail + 1)%cap;
+			length = length + 1;
+		}
+		int queue_length()
+		{
+			return length;
+		}
+		void queue_reset()
+		{
+			tail = -1;
+			head = (tail + 1)%cap;
+			length = 0;
+		}
 };
+
 
 /*
 class ring_queue{

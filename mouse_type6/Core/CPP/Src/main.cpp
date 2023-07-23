@@ -5,6 +5,7 @@
  *      Author: sato1
  */
 
+#include <iostream>
 
 #include "../../Module/Include/index.h"
 #include "stdio.h"
@@ -25,26 +26,37 @@
 #include "flash.h"
 #include "make_path.h"
 #include "test_wall.h"
-void CPP_Main()
+#include "mode.h"
+
+
+
+void Module_Initialize()
 {
-	  Priority_queue<10,int> q;
-	  ring_queue<1024,t_MapNode> maze_q;
-	  imu_initialize();
+	  IMU_initialize();
 	  Sensor_Initialize();
 	  Motor_Initialize();
-	  //Motor_Stop();
 	  FAN_Motor_Initialize();
 	  Encoder_Initialize();
 	  Interrupt_Initialize();
 	  IMU_read_DMA_Start();
-	  Mode_Init();
+}
+
+void CPP_Main()
+{
+	  Module_Initialize();
+	 // Mode_Init();
+	  ring_queue<1024,t_MapNode> maze_q;
 	  motion_plan mp(&motion_task::getInstance());
 	  Search solve_maze;
 	  wall_class wall_data(&SensingTask::getInstance());
 	  wall_data.init_maze();
 	  make_map map_data(&wall_data,&maze_q);
 	  Dijkstra run_path(&wall_data);
-	  q.push(0);
+
+	  Mode::Select_Mode();
+
+
+	  /*
 	  while (1)
 	  {
 
@@ -276,4 +288,5 @@ void CPP_Main()
 			  			  break;
 			  }
 		  }
+		  */
 }

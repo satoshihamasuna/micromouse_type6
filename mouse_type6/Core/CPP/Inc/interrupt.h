@@ -12,11 +12,17 @@
 
 class Interrupt:public Singleton<Interrupt>
 {
+	private:
+		uint32_t time_count;
 	public:
 		void setTask();
 		void preprocess();
 		void main();
 		void postprocess();
+		uint32_t return_time_count()
+		{
+			return time_count;
+		}
 };
 
 

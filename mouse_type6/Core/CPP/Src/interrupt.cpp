@@ -63,7 +63,7 @@ void Interrupt::postprocess()
 		if(LogData::getInstance().data_count >= 1000) LogData::getInstance().data_count = 999;
 	}
 	motion_task::getInstance().motionPostControll();
-
+	time_count = time_count + 1;
 	IMU_read_DMA_Start();
 }
 
