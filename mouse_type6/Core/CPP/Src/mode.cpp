@@ -5,10 +5,27 @@
  *      Author: sato1
  */
 
-#include "mode.h"
-#include "interrupt.h"
 #include "../../Module/Include/index.h"
-#include "../../Module/Include/typedef.h"
+#include "../../Module/Include/macro.h"
+
+#include "stdio.h"
+#include "sensing_task.h"
+#include "motion.h"
+#include "interrupt.h"
+#include "controll.h"
+#include "log_data.h"
+#include "Kalman_filter.h"
+#include "run_param.h"
+#include "search_class.h"
+#include "make_map_class.h"
+#include "wall_class.h"
+#include "queue_class.h"
+#include "priority_queue.h"
+#include "wall_class.h"
+#include "flash.h"
+#include "make_path.h"
+#include "test_wall.h"
+#include "mode.h"
 
 #define ENABLE (0x01 << 4)
 
@@ -74,7 +91,14 @@ namespace Mode
 				case ENABLE|0x0E:
 					break;
 				case ENABLE|0x0F:
-					demo_end = True;
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						for(int i = 0;i < 11;i++)
+						{
+						  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+						  HAL_Delay(50);
+						}
+						demo_end = True;
+					}
 					break;
 				default:
 					break;
@@ -90,6 +114,15 @@ namespace Mode
 		uint8_t Indicate_param = param;
 		uint8_t enable = 0x00;
 		uint32_t observe_time = 0;
+
+		ring_queue<1024,t_MapNode> maze_q;
+		motion_plan mp(&motion_task::getInstance());
+		Search solve_maze;
+		wall_class wall_data(&SensingTask::getInstance());
+		wall_data.init_maze();
+		make_map map_data(&wall_data,&maze_q);
+		Dijkstra run_path(&wall_data);
+
 		while(debug_end == False)
 		{
 			enable = Mode::Select(enable,0x01,Encoder_GetProperty_Left());
@@ -98,22 +131,290 @@ namespace Mode
 			switch((enable<<4)|param)
 			{
 				case ENABLE|0x00:
-					break;
+			  	   if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start();
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.straight( 45.0,6.0,0.3,0.3);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.searchSlalom( &param_L90_search);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.straight(45.0,6.0,0.3,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().log_enable = False;
+						  enable = 0x00;
+						  HAL_Delay(500);
+			  	    }
+			  	    break;
 				case ENABLE|0x01:
+			  	   if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start();
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.straight( 45.0,6.0,0.3,0.3);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.searchSlalom( &param_R90_search);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.straight(45.0,6.0,0.3,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().log_enable = False;
+						  enable = 0x00;
+						  HAL_Delay(500);
+			  	    }
 					break;
 				case ENABLE|0x02:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start( );
+						  mp.fix_wall( 400);
+						  for(int i = 50; i <= 500; i = i + 50)
+						  {
+							  FAN_Motor_SetDuty(i);;
+							  HAL_Delay(5);
+						  }
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.search_straight(SECTION,9.0,1.0,1.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.long_turn( &param_R180_1000,Long_turnR180);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.search_straight( SECTION,9.0,1.0,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  HAL_Delay(200);
+						  FAN_Motor_SetDuty(0);;
+						  HAL_Delay(200);
+						  LogData::getInstance().log_enable = False;
+				  		  enable = 0x00;
+				  		  HAL_Delay(500);
+					}
 					break;
 				case ENABLE|0x03:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start( );
+						  mp.fix_wall( 400);
+						  for(int i = 50; i <= 500; i = i + 50)
+						  {
+							  FAN_Motor_SetDuty(i);;
+							  HAL_Delay(5);
+						  }
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.straight(SECTION,9.0,1.0,1.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.long_turn( &param_R90_1000,Long_turnR90);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.straight( SECTION,9.0,1.0,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  HAL_Delay(200);
+						  FAN_Motor_SetDuty(0);;
+						  HAL_Delay(200);
+						  LogData::getInstance().log_enable = False;
+						  enable = 0x00;
+						  HAL_Delay(500);
+					}
 					break;
 				case ENABLE|0x04:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start( );
+						  mp.fix_wall( 400);
+						  for(int i = 50; i <= 500; i = i + 50)
+						  {
+							  FAN_Motor_SetDuty(i);;
+							  HAL_Delay(5);
+						  }
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.straight(SECTION,9.0,1.0,1.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.long_turn( &param_inR45_1000,Turn_in_R45);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.diagonal( DIAG_SECTION,9.0,1.0,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  HAL_Delay(200);
+						  FAN_Motor_SetDuty(0);;
+						  HAL_Delay(200);
+						  LogData::getInstance().log_enable = False;
+						  enable = 0x00;
+						  HAL_Delay(500);
+					}
 					break;
 				case ENABLE|0x05:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start( );
+						  mp.fix_wall( 400);
+						  for(int i = 50; i <= 500; i = i + 50)
+						  {
+							  FAN_Motor_SetDuty(i);;
+							  HAL_Delay(5);
+						  }
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.straight(SECTION,9.0,1.0,1.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.long_turn( &param_inR135_1000,Turn_in_R135);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.diagonal( DIAG_SECTION,9.0,1.0,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  HAL_Delay(200);
+						  FAN_Motor_SetDuty(0);;
+						  HAL_Delay(200);
+						  LogData::getInstance().log_enable = False;
+						  enable = 0x00;
+						  HAL_Delay(500);
+					}
 					break;
 				case ENABLE|0x06:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start( );
+						  mp.fix_wall( 400);
+						  for(int i = 50; i <= 500; i = i + 50)
+						  {
+							  FAN_Motor_SetDuty(i);;
+							  HAL_Delay(5);
+						  }
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.diagonal(DIAG_SECTION,9.0,1.0,1.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.long_turn( &param_outR45_1000,Turn_out_R45);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.straight( SECTION,9.0,1.0,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  HAL_Delay(200);
+						  FAN_Motor_SetDuty(0);;
+						  HAL_Delay(200);
+						  LogData::getInstance().log_enable = False;
+						  enable = 0x00;
+						  HAL_Delay(500);
+					}
 					break;
 				case ENABLE|0x07:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start( );
+						  mp.fix_wall( 400);
+						  for(int i = 50; i <= 500; i = i + 50)
+						  {
+							  FAN_Motor_SetDuty(i);;
+							  HAL_Delay(5);
+						  }
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.diagonal(DIAG_SECTION,9.0,1.0,1.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.long_turn( &param_outR135_1000,Turn_out_R135);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.straight( SECTION,9.0,1.0,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  HAL_Delay(200);
+						  FAN_Motor_SetDuty(0);;
+						  HAL_Delay(200);
+						  LogData::getInstance().log_enable = False;
+						  enable = 0x00;
+						  HAL_Delay(500);
+					}
 					break;
 				case ENABLE|0x08:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						  for(int i = 0;i < 11;i++)
+						  {
+							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							  HAL_Delay(50);
+						  }
+						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						  KalmanFilter::getInstance().filter_init();
+						  mp.motion_start( );
+						  mp.fix_wall( 400);
+						  for(int i = 50; i <= 500; i = i + 50)
+						  {
+							  FAN_Motor_SetDuty(i);;
+							  HAL_Delay(5);
+						  }
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.diagonal(DIAG_SECTION,9.0,1.0,1.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  LogData::getInstance().data_count = 0;
+						  LogData::getInstance().log_enable = True;
+						  mp.long_turn( &param_RV90_1000,Turn_RV90);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  mp.diagonal( SECTION,10.0,1.0,0.0);
+						  while(motion_task::getInstance().run_task !=No_run){}
+						  HAL_Delay(200);
+						  FAN_Motor_SetDuty(0);;
+						  HAL_Delay(200);
+						  LogData::getInstance().log_enable = False;
+						  enable = 0x00;
+						  HAL_Delay(500);
+					}
 					break;
 				case ENABLE|0x09:
 					break;
@@ -126,9 +427,25 @@ namespace Mode
 				case ENABLE|0x0D:
 					break;
 				case ENABLE|0x0E:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+					    for(int i = 0;i < 11;i++)
+					    {
+						  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+						  HAL_Delay(50);
+						}
+						LogData::getInstance().indicate_data();
+						enable = 0x00;
+					}
 					break;
 				case ENABLE|0x0F:
-					debug_end = True;
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						for(int i = 0;i < 11;i++)
+						{
+						  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+						  HAL_Delay(50);
+						}
+						debug_end = True;
+					}
 					break;
 				default:
 					break;

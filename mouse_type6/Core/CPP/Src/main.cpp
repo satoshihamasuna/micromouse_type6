@@ -25,7 +25,6 @@
 #include "wall_class.h"
 #include "flash.h"
 #include "make_path.h"
-#include "test_wall.h"
 #include "mode.h"
 
 
@@ -44,15 +43,6 @@ void Module_Initialize()
 void CPP_Main()
 {
 	  Module_Initialize();
-	 // Mode_Init();
-	  ring_queue<1024,t_MapNode> maze_q;
-	  motion_plan mp(&motion_task::getInstance());
-	  Search solve_maze;
-	  wall_class wall_data(&SensingTask::getInstance());
-	  wall_data.init_maze();
-	  make_map map_data(&wall_data,&maze_q);
-	  Dijkstra run_path(&wall_data);
-
 	  Mode::Select_Mode();
 
 
