@@ -474,7 +474,7 @@ namespace Mode
 							  HAL_Delay(50);
 						  }
 						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 						  KalmanFilter::getInstance().filter_init();
 						  mp.motion_start( );
 						  mp.fix_wall( 400);

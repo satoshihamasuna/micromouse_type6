@@ -102,10 +102,11 @@ void motion_task::motionControll()
 		V_r += om_fb_controll;
 		V_l += om_fb_controll;
 
+		float battery = Battery_GetVoltage();
+		if(battery < 3.30f) battery = 3.30f;
 
-
-		float duty_r = V_r/Battery_GetVoltage();
-		float duty_l = V_l/Battery_GetVoltage();
+		float duty_r = V_r/battery;
+		float duty_l = V_l/battery;
 
 		if(ABS(duty_r) > 1.0){
 			motor_out_r = (int)(SIGN(duty_r) * 4.0f * 250.0f);
@@ -149,7 +150,7 @@ void motion_task::motionPostControll()
 			}
 			else if(ABS(z_acc) >= 30.0)
 			{
-				error_cnt = error_cnt +	100;
+				//error_cnt = error_cnt +	100;
 			}
 			else
 			{
@@ -163,8 +164,8 @@ void motion_task::motionPostControll()
 		}
 		if(error_cnt >= 1000)
 		{
-			Motor_Stop();FAN_Motor_Stop();
-			NVIC_SystemReset();
+			//Motor_Stop();FAN_Motor_Stop();
+			//NVIC_SystemReset();
 		}
 	}
 	else
