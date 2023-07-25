@@ -37,6 +37,7 @@ Core/CPP/Src/mode.o: ../Core/CPP/Src/mode.cpp \
  ../Core/CPP/Src/../../Module/Include/lsm6dsr_reg.h \
  ../Core/CPP/Src/../../Module/Include/macro.h \
  ../Core/CPP/Src/../../Module/Include/macro.h \
+ ../Core/CPP/Src/../../Module/Include/typedef.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/sensing_task.h \
  C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/singleton.h \
  c:\users\sato1\documents\git\mouse_type6_program\micromouse_type6\mouse_type6\core\module\include\typedef.h \
@@ -155,6 +156,8 @@ Core/CPP/Src/mode.o: ../Core/CPP/Src/mode.cpp \
 ../Core/CPP/Src/../../Module/Include/macro.h:
 
 ../Core/CPP/Src/../../Module/Include/macro.h:
+
+../Core/CPP/Src/../../Module/Include/typedef.h:
 
 C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/sensing_task.h:
 

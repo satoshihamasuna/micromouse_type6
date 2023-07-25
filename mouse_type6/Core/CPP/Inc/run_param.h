@@ -234,8 +234,8 @@ const static t_param param_R90_1000 = {&slalom_R90_1000_table,&sp_gain_turn90_10
 
 const static t_pid_gain sp_gain_turn180_1000 = {12.0,0.1,0.0};
 const static t_pid_gain om_gain_turn180_1000 = {1.0f, 0.0f, 1.0f};
-const static t_turn_param_table slalom_L180_1000_table = {1.00f, 44.5f,18.64,27.86, 180.0f,Turn_L};
-const static t_turn_param_table slalom_R180_1000_table = {1.00f,-44.5f,18.64,27.86,-180.0f,Turn_R};
+const static t_turn_param_table slalom_L180_1000_table = {1.00f, 45.0f,18.54,28.49, 180.0f,Turn_L};
+const static t_turn_param_table slalom_R180_1000_table = {1.00f,-45.0f,18.54,28.49,-180.0f,Turn_R};
 const static t_param param_L180_1000 = {&slalom_L180_1000_table,&sp_gain_turn180_1000,&om_gain_turn180_1000};
 const static t_param param_R180_1000 = {&slalom_R180_1000_table,&sp_gain_turn180_1000,&om_gain_turn180_1000};
 
