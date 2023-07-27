@@ -64,6 +64,11 @@ namespace Mode
 		make_map map_data(&wall_data,&maze_q);
 		Dijkstra run_path(&wall_data);
 
+		t_position start,goal;
+		start.x = start.y = 0;start.dir = North;
+		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
+		uint8_t goal_size = MAZE_GOAL_SIZE;
+
 		while(demo_end == False)
 		{
 			enable = Mode::Select(enable,0x01,Encoder_GetProperty_Left());
@@ -91,23 +96,38 @@ namespace Mode
 							HAL_Delay(50);
 						}
 
-						Indicate_LED(ENABLE_MODE3|0x06);
+						Indicate_LED(mode|param);
 						motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 						motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
 						KalmanFilter::getInstance().filter_init();
-						t_position start,goal;
-						start.x = start.y = 0;start.dir = North;
-						goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
-						t_position return_pos = solve_maze.search_adachi_1(start, goal, 2, &wall_data, &map_data,&mp);
+						t_position return_pos = solve_maze.search_adachi_1(start, goal, goal_size, &wall_data, &map_data,&mp);
 						write_save_data(&wall_data);
 						solve_maze.search_adachi_2(return_pos, start, 1, &wall_data, &map_data,&mp);
 						write_save_data(&wall_data);
-						demo_end = True;
+						enable = 0x00;
 					}
 					break;
 				case ENABLE|0x01:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						for(int i = 0;i < 11;i++)
+						{
+							(i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							HAL_Delay(50);
+						}
+
+						Indicate_LED(mode|param);
+						motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
+						KalmanFilter::getInstance().filter_init();
+						t_position return_pos = solve_maze.search_adachi_1(start, goal, goal_size, &wall_data, &map_data,&mp);
+						write_save_data(&wall_data);
+						solve_maze.search_adachi_1(return_pos, start, 1, &wall_data, &map_data,&mp);
+						write_save_data(&wall_data);
+						enable = 0x00;
+					}
 					break;
 				case ENABLE|0x02:
+
 					break;
 				case ENABLE|0x03:
 					break;
@@ -120,6 +140,23 @@ namespace Mode
 				case ENABLE|0x07:
 					break;
 				case ENABLE|0x08:
+				   if(SensingTask::getInstance().IrSensor_Avg() > 2500)
+				   {
+						for(int i = 0;i < 11;i++)
+						{
+							(i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							HAL_Delay(50);
+						}
+				  		motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+				  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
+				  		KalmanFilter::getInstance().filter_init();
+				  		run_path.turn_time_set(mode_1000);
+						run_path.run_Dijkstra_suction(		start, Dir_None, goal, 2,900,
+															st_mode_1000_v1, (int)(sizeof(st_mode_1000_v1)/sizeof(t_straight_param *const)),
+															di_mode_1000_v1, (int)(sizeof(di_mode_1000_v1)/sizeof(t_straight_param *const)), mode_1000,&mp);
+
+						enable = 0x00;
+					}
 					break;
 				case ENABLE|0x09:
 					break;
@@ -201,12 +238,14 @@ namespace Mode
 						  mp.motion_start();
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
-						  mp.straight( 45.0,6.0,0.3,0.3);
+						  mp.straight( 90.0*3.0,6.0,0.3,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
+						  /*
 						  mp.searchSlalom( &param_L90_search);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  mp.straight(45.0,6.0,0.3,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
+						  */
 						  LogData::getInstance().log_enable = False;
 						  enable = 0x00;
 						  HAL_Delay(500);

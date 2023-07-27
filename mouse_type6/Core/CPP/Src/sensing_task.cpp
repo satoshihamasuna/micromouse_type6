@@ -13,6 +13,7 @@
 #include "../../Module/Include/index.h"
 #include "motion.h"
 
+float filtering_z_radvelo = 0.0;
 t_wall_state SensingTask::conv_Sensin2Wall(t_sensor_dir sens_dir)
 {
 	switch(sens_dir){
@@ -37,6 +38,7 @@ void SensingTask::IrSensorSet()
 	sen_r.value  =  Sensor_GetValue(sensor_sr);
 	IrSensorDistanceSet();
 	IrSensorWallSet();
+	filtering_z_radvelo = 0.9*filtering_z_radvelo + 0.1*motion_task::getInstance().mouse.rad_velo;
 }
 
 float SensingTask::Sensor_CalcDistance(t_sensor_dir dir,int16_t value)
@@ -166,9 +168,13 @@ void SensingTask::IrSensorWallSet()
 
 }
 
-void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,float delta_tms)
+void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,t_machine_param *machine_,float delta_tms)
 {
 	float ir_rad_acc_controll = 0.0;
+	const float k1 = 1.0;
+	const float k2 = 20.0;
+	//sensor_output = k1*ydiff/1000.0 + k2/1000.0*theta;
+
 	if(sen_r.is_controll == True && sen_l.is_controll == True)
 	{
 		ir_rad_acc_controll = (sen_l.error - sen_r.error)/2.0;
@@ -179,9 +185,17 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,float delta_t
 	}
 	if(sen_r.is_controll == True || sen_l.is_controll == True)
 	{
+		/*
 		target_->rad_accel = (3.0)*ir_rad_acc_controll-(target_->rad_velo*30.0);
 		target_->rad_accel = target_->rad_accel-(target_->velo*target_->radian*100.00);
 		target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
+		*/
+		float s = ir_rad_acc_controll;
+		float s_dot = k1*machine_->velo*1000.0*machine_->radian + k2*filtering_z_radvelo;
+		target_->rad_accel = 100.0*s/k2 - 20.0*1.0/k2*s_dot
+							-k1/k2*(target_->accel*1000.0*machine_->radian + machine_->velo*filtering_z_radvelo*1000.0);
+		target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
+
 	}
 	else
 	{

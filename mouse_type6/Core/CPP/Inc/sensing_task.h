@@ -27,7 +27,7 @@ class SensingTask:public Singleton<SensingTask>
 		void IrSensorDistanceSet();
 		int16_t IrSensor_Avg();
 		void IrSensorWallSet();
-		void SetWallControll_RadVelo(t_machine_param *target_,float delta_tms);
+		void SetWallControll_RadVelo(t_machine_param *target_,t_machine_param *machine_,float delta_tms);
 		t_bool Division_Wall_Correction()
 		{
 			t_bool flag = False;

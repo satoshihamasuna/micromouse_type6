@@ -98,7 +98,7 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 
 	if(is_wallControl_Enable != Non_controll)
 	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
@@ -171,7 +171,7 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 
 	if(is_wallControl_Enable != Non_controll)
 	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
@@ -244,7 +244,7 @@ void RunTask::diagonal(t_motion_param mt_param,t_machine_param *target_,t_machin
 
 	if(is_wallControl_Enable != Non_controll)
 	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
@@ -377,13 +377,14 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
+			machine_->radian = 0.0f;
 			Indicate_LED(0x04);
 		}
 
 	}
 	if(is_wallControl_Enable != Non_controll)
 	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 
@@ -454,13 +455,14 @@ void RunTask::turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machi
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
+			machine_->radian = 0.0f;
 			Indicate_LED(0x04);
 		}
 
 	}
 	if(is_wallControl_Enable != Non_controll)
 	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 
@@ -528,6 +530,7 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 			mt_param->radian =  DEG2RAD(turn_param->param->degree);
 			mt_param->turn_d = Turn_None;
 			machine_->length = 0.0;
+			machine_->radian = 0.0f;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
@@ -537,7 +540,7 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 	}
 	if(is_wallControl_Enable != Non_controll)
 	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
@@ -609,6 +612,7 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 			mt_param->radian =  DEG2RAD(turn_param->param->degree);
 			mt_param->turn_d = Turn_None;
 			machine_->length = 0.0;
+			machine_->radian = 0.0f;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
@@ -618,7 +622,7 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 	}
 	if(is_wallControl_Enable != Non_controll)
 	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 
@@ -681,6 +685,7 @@ void RunTask::turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_mach
 			mt_param->radian =  DEG2RAD(turn_param->param->degree);
 			mt_param->turn_d = Turn_None;
 			machine_->length = 0.0;
+			machine_->radian = 0.0f;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
@@ -691,7 +696,7 @@ void RunTask::turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_mach
 
 	if(is_wallControl_Enable != Non_controll)
 	{
-		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),1.0);
+		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
 	target_->radian = target_->radian + target_->rad_velo*delta_t_ms/1000.0f;
 }
