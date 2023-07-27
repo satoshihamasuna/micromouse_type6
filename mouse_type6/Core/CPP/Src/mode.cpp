@@ -54,14 +54,56 @@ namespace Mode
 		uint8_t mode = Return_LED_Status() & 0x30;
 		uint8_t param = 0x00;
 		uint8_t enable = 0x00;
+		uint32_t time = Interrupt::getInstance().return_time_count();
+
+		ring_queue<1024,t_MapNode> maze_q;
+		motion_plan mp(&motion_task::getInstance());
+		Search solve_maze;
+		wall_class wall_data(&SensingTask::getInstance());
+		wall_data.init_maze();
+		make_map map_data(&wall_data,&maze_q);
+		Dijkstra run_path(&wall_data);
+
 		while(demo_end == False)
 		{
 			enable = Mode::Select(enable,0x01,Encoder_GetProperty_Left());
 			param = (enable == 0x00) ? Mode::Select(param,0x0f,Encoder_GetProperty_Right()) : param;
-			Indicate_LED(mode|param);
+			Battery_LimiterVoltage();
+			if(enable == 0x01)
+			{
+				if((Interrupt::getInstance().return_time_count() - time) > 400)
+				{
+					time = Interrupt::getInstance().return_time_count();
+					Indicate_LED((Return_LED_Status() != (mode|param)) ?  mode|param : 0x00);
+				}
+			}
+			else
+			{
+				Indicate_LED(mode|param);
+			}
 			switch((enable<<4)|param)
 			{
 				case ENABLE|0x00:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						for(int i = 0;i < 11;i++)
+						{
+							(i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							HAL_Delay(50);
+						}
+
+						Indicate_LED(ENABLE_MODE3|0x06);
+						motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.005, 0.0);
+						KalmanFilter::getInstance().filter_init();
+						t_position start,goal;
+						start.x = start.y = 0;start.dir = North;
+						goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
+						t_position return_pos = solve_maze.search_adachi_1(start, goal, 2, &wall_data, &map_data,&mp);
+						write_save_data(&wall_data);
+						solve_maze.search_adachi_2(return_pos, start, 1, &wall_data, &map_data,&mp);
+						write_save_data(&wall_data);
+						demo_end = True;
+					}
 					break;
 				case ENABLE|0x01:
 					break;
