@@ -3,8 +3,8 @@ sensing_task.cpp:33:6:void SensingTask::IrSensorSet()	24	static
 sensing_task.cpp:44:7:float SensingTask::Sensor_CalcDistance(t_sensor_dir, int16_t)	40	static
 sensing_task.cpp:116:6:void SensingTask::IrSensorDistanceSet()	16	static
 sensing_task.cpp:124:6:void SensingTask::IrSensorWallSet()	24	static
-sensing_task.cpp:171:6:void SensingTask::SetWallControll_RadVelo(t_machine_param*, t_machine_param*, float)	64	static
-sensing_task.cpp:211:9:int16_t SensingTask::IrSensor_Avg()	16	static
+sensing_task.cpp:171:6:void SensingTask::SetWallControll_RadVelo(t_machine_param*, t_machine_param*, float)	72	static
+sensing_task.cpp:225:9:int16_t SensingTask::IrSensor_Avg()	16	static
 run_task.h:79:7:constexpr RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
 controll.h:28:7:constexpr mouse_Controll::mouse_Controll()	16	static

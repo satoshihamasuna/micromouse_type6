@@ -59,8 +59,11 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 		{
 			if(target_->velo < 0.15)
 			{
+				is_wallControl_Enable = Non_controll;
 				target_->velo = 0.15;
 				target_->accel = 0.0;
+				target_->rad_velo = 0.0;
+				target_->rad_accel = 0.0;
 			}
 		}
 		else if(target_->velo < mt_param.end_velo)
@@ -77,6 +80,9 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 		{
 			target_->velo = 0.0f;
 			target_->accel = 0.0;
+			target_->rad_velo = 0.0;
+			target_->rad_accel = 0.0;
+			is_wallControl_Enable = Non_controll;
 		}
 		else
 		{
@@ -87,6 +93,7 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 
 	if(target_->velo == 0.0f)
 	{
+		is_wallControl_Enable = Non_controll;
 		is_runTask = True;
 		brake_time++;
 		if(brake_time > BRAKE_TIME_LIMIT)
@@ -110,7 +117,7 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 	is_runTask = True;
 	float deccel_length = 1000*(mt_param.max_velo*mt_param.max_velo
 								-mt_param.end_velo*mt_param.end_velo)
-								/(2.0*ABS(mt_param.deccel));
+								/(2.0*ABS(mt_param.deccel)) + 20.0;
 	if(deccel_length < ( mt_param.length - machine_->length ))
 	{
 		target_->accel = mt_param.accel;
@@ -132,8 +139,11 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 		{
 			if(target_->velo < 0.15)
 			{
+				is_wallControl_Enable = Non_controll;
 				target_->velo = 0.15;
 				target_->accel = 0.0;
+				target_->rad_velo = 0.0;
+				target_->rad_accel = 0.0;
 			}
 		}
 		else if(target_->velo < mt_param.end_velo)
@@ -148,8 +158,11 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 	{
 		if(mt_param.end_velo == 0.0f)
 		{
+			is_wallControl_Enable = Non_controll;
 			target_->velo = 0.0f;
 			target_->accel = 0.0;
+			target_->rad_velo = 0.0;
+			target_->rad_accel = 0.0;
 		}
 		else
 		{
@@ -160,6 +173,9 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 
 	if(target_->velo == 0.0f)
 	{
+		is_wallControl_Enable = Non_controll;
+		target_->rad_velo = 0.0;
+		target_->rad_accel = 0.0;
 		is_runTask = True;
 		brake_time++;
 		if(brake_time > BRAKE_TIME_LIMIT)
@@ -223,6 +239,8 @@ void RunTask::diagonal(t_motion_param mt_param,t_machine_param *target_,t_machin
 		{
 			target_->velo = 0.0f;
 			target_->accel = 0.0;
+			target_->rad_velo = 0.0;
+			target_->rad_accel = 0.0;
 		}
 		else
 		{
@@ -235,6 +253,8 @@ void RunTask::diagonal(t_motion_param mt_param,t_machine_param *target_,t_machin
 	{
 		is_runTask = True;
 		brake_time++;
+		target_->rad_velo = 0.0;
+		target_->rad_accel = 0.0;
 		if(brake_time > BRAKE_TIME_LIMIT)
 		{
 			is_runTask = False;

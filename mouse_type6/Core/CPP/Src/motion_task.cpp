@@ -92,6 +92,7 @@ void motion_task::motionControll()
 
 		float sp_fb_controll = ct.speed_ctrl.Controll(target.velo, mouse.velo, 1.0);
 		float om_fb_controll = ct.omega_ctrl.Controll(target.rad_velo, mouse.rad_velo,  1.0);
+
 		//printf("initerrupt%lf\n",sp_fb_controll);
 		V_r += sp_FF_controll_r;
 		V_l -= sp_FF_controll_l;
@@ -101,6 +102,7 @@ void motion_task::motionControll()
 
 		V_r += om_fb_controll;
 		V_l += om_fb_controll;
+
 
 		float battery = Battery_GetVoltage();
 		if(battery < 3.30f) battery = 3.30f;

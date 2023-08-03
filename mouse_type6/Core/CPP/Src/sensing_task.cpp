@@ -38,7 +38,7 @@ void SensingTask::IrSensorSet()
 	sen_r.value  =  Sensor_GetValue(sensor_sr);
 	IrSensorDistanceSet();
 	IrSensorWallSet();
-	filtering_z_radvelo = 0.9*filtering_z_radvelo + 0.1*motion_task::getInstance().mouse.rad_velo;
+	filtering_z_radvelo = 0.95*filtering_z_radvelo + 0.05*motion_task::getInstance().mouse.rad_velo;
 }
 
 float SensingTask::Sensor_CalcDistance(t_sensor_dir dir,int16_t value)
@@ -183,6 +183,7 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,t_machine_par
 	{
 		ir_rad_acc_controll = (sen_l.error - sen_r.error);
 	}
+
 	if(sen_r.is_controll == True || sen_l.is_controll == True)
 	{
 		/*
@@ -190,17 +191,30 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,t_machine_par
 		target_->rad_accel = target_->rad_accel-(target_->velo*target_->radian*100.00);
 		target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
 		*/
+		/*
 		float s = ir_rad_acc_controll;
-		float s_dot = k1*machine_->velo*1000.0*machine_->radian + k2*filtering_z_radvelo;
-		target_->rad_accel = 100.0*s/k2 - 20.0*1.0/k2*s_dot
-							-k1/k2*(target_->accel*1000.0*machine_->radian + machine_->velo*filtering_z_radvelo*1000.0);
+		float s_dot = k1*machine_->velo*1000.0*machine_->radian*1.0 + k2*filtering_z_radvelo;
+		target_->rad_accel = 60.0*s/k2 - 15.0*1.0/k2*s_dot
+							-k1/k2*(target_->accel*1000.0*machine_->radian*1.0 + machine_->velo*filtering_z_radvelo*1000.0);
 		target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
-
+		*/
+		float s = ir_rad_acc_controll;
+		float s_dot = k1*target_->velo*1000.0*target_->radian*1.0 + k2*target_->rad_velo;
+		target_->rad_accel = 300.0*s/k2 - 60.0*1.0/k2*s_dot
+							-k1/k2*(target_->accel*1000.0*machine_->radian*1.0 + target_->velo*target_->rad_velo*1000.0);
+		target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
 	}
 	else
 	{
+		/*
 		target_->rad_accel = 0.0f;
 		target_->rad_velo = 0.0f;
+		 */
+		float s = k2*machine_->radian;
+		float s_dot = k1*target_->velo*1000.0*target_->radian*1.0 + k2*target_->rad_velo;
+		target_->rad_accel = 300.0*s/k2 - 60.0*1.0/k2*s_dot
+							-k1/k2*(target_->accel*1000.0*machine_->radian*1.0 + target_->velo*target_->rad_velo*1000.0);
+		target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
 	}
 
 

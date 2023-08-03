@@ -16,6 +16,7 @@ namespace Mode
 {
 	void Demo();
 	void Debug();
+	void Debug2();
 	uint8_t Select(uint8_t _param,uint8_t max,t_encoder enc);
 	void Select_Mode();
 	void LED_Toggle(uint8_t led_num,uint32_t period_time);

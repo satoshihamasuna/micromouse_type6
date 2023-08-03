@@ -18,7 +18,7 @@ class LogData:public Singleton<LogData>
 	    t_bool log_enable = False;
 		const int data_size = 1000;
 		int data_count = 0;
-		float data[4][1000];
+		float data[8][1000];
 		void indicate_data();
 };
 

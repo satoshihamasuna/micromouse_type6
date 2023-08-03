@@ -59,6 +59,10 @@ void Interrupt::postprocess()
 		LogData::getInstance().data[1][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.velo;
 		LogData::getInstance().data[2][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.rad_velo;
 		LogData::getInstance().data[3][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.rad_velo;
+		LogData::getInstance().data[4][LogData::getInstance().data_count%1000] = read_accel_x_axis();
+		LogData::getInstance().data[5][LogData::getInstance().data_count%1000] = read_accel_y_axis();
+		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = read_gyro_x_axis();
+		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = read_gyro_y_axis();
 		LogData::getInstance().data_count++;
 		if(LogData::getInstance().data_count >= 1000) LogData::getInstance().data_count = 999;
 	}
