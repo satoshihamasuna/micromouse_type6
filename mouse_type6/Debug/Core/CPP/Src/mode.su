@@ -1,5 +1,5 @@
 motion.h:47:3:motion_plan::motion_plan(motion_task*)	16	static
-interrupt.h:22:12:uint32_t Interrupt::return_time_count()	16	static
+interrupt.h:30:12:uint32_t Interrupt::return_time_count()	16	static
 wall_class.h:20:3:wall_class::wall_class(SensingTask*)	16	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 make_path.h:89:3:calcRunTime::calcRunTime()	16	static
@@ -9,7 +9,7 @@ mode.cpp:36:10:uint8_t Mode::Select(uint8_t, uint8_t, t_encoder)	24	static
 mode.cpp:51:7:void Mode::Demo()	45288	static
 mode.cpp:250:7:void Mode::Debug()	45320	static
 mode.cpp:776:7:void Mode::Debug2()	45320	static
-mode.cpp:1312:7:void Mode::Select_Mode()	64	static
+mode.cpp:1303:7:void Mode::Select_Mode()	64	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = Interrupt]	4	static
 queue_class.h:22:3:ring_queue<SIZE, T>::ring_queue() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
 run_task.h:79:7:constexpr RunTask::RunTask()	16	static
@@ -22,6 +22,6 @@ Kalman_filter.h:14:7:KalmanFilter::KalmanFilter()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = KalmanFilter]	8	static
 log_data.h:14:7:LogData::LogData()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = LogData]	8	static
-mode.cpp:1342:1:void __static_initialization_and_destruction_0(int, int)	16	static
-mode.cpp:1342:1:cpp)	8	static
-mode.cpp:1342:1:cpp)	8	static
+mode.cpp:1333:1:void __static_initialization_and_destruction_0(int, int)	16	static
+mode.cpp:1333:1:cpp)	8	static
+mode.cpp:1333:1:cpp)	8	static

@@ -10,10 +10,18 @@
 
 #include "singleton.h"
 
+#define ACC_BUFF_SIZE (10)
+
 class Interrupt:public Singleton<Interrupt>
 {
 	private:
 		uint32_t time_count;
+		uint32_t acc_time_cnt;
+		float acc_buff[ACC_BUFF_SIZE];
+		float acc_sum;
+		float velo_buff[ACC_BUFF_SIZE];
+		float velo_sum;
+
 	public:
 		void setTask();
 		void preprocess();

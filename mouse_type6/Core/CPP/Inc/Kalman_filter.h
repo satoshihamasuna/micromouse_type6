@@ -15,7 +15,7 @@ class KalmanFilter:public Singleton<KalmanFilter>
 {
 	private:
 		float Q_acc = 0.01;
-		float Q_vel = 0.0008;
+		float Q_vel = 0.001;//0.0008;
 		float k_w;
 		float k_v;
 		float P[2][2];

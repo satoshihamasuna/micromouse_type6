@@ -832,7 +832,7 @@ namespace Mode
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
-						  mp.straight( 90.0*8.0,15.0,3.0,0.0);
+						  mp.straight( 90.0*8.0,13.0,2.8,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  /*
 						  mp.searchSlalom( &param_L90_search);
@@ -855,21 +855,12 @@ namespace Mode
 							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
 							  HAL_Delay(50);
 						  }
-						  motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
-						  motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
-						  KalmanFilter::getInstance().filter_init();
-						  mp.motion_start();
-						  LogData::getInstance().data_count = 0;
-						  LogData::getInstance().log_enable = True;
-						  mp.straight( 45.0,6.0,0.3,0.3);
-						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.searchSlalom( &param_R90_search);
-						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.straight(45.0,6.0,0.3,0.0);
-						  while(motion_task::getInstance().run_task !=No_run){}
-						  LogData::getInstance().log_enable = False;
-						  enable = 0x00;
-						  HAL_Delay(500);
+						  HAL_Delay(300);
+			  			  FAN_Motor_SetDuty(700);;
+			  			  HAL_Delay(10000);
+			  			  FAN_Motor_SetDuty(0);;
+			  			  HAL_Delay(100);
+			  			  enable = 0x00;
 			  	    }
 					break;
 				case ENABLE|0x02:

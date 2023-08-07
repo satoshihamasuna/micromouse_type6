@@ -36,9 +36,19 @@ void Interrupt::preprocess(){
 	Encoder_SetSpeed_Right();
 	t_encoder Renc = Encoder_GetProperty_Right();
 	t_encoder Lenc = Encoder_GetProperty_Left();
-	float sp = KalmanFilter::getInstance().calc_speed_filter(read_accel_y_axis(), (Renc.wheel_speed - Lenc.wheel_speed)/2.0);
+	acc_sum = acc_sum - acc_buff[(acc_time_cnt)%ACC_BUFF_SIZE];
+	acc_buff[(acc_time_cnt)%ACC_BUFF_SIZE] = read_accel_y_axis();
+	acc_sum = acc_sum + acc_buff[(acc_time_cnt)%ACC_BUFF_SIZE];
+
+	velo_sum = velo_sum - velo_buff[(acc_time_cnt)%ACC_BUFF_SIZE];
+	velo_buff[(acc_time_cnt)%ACC_BUFF_SIZE] = (Renc.wheel_speed - Lenc.wheel_speed)/2.0;
+	velo_sum = velo_sum + velo_buff[(acc_time_cnt)%ACC_BUFF_SIZE];
+
+	acc_time_cnt = (acc_time_cnt == (ACC_BUFF_SIZE-1))? 0:acc_time_cnt + 1;
+	float sp = KalmanFilter::getInstance().calc_speed_filter((-1.0)*acc_sum/((float)(ACC_BUFF_SIZE)), velo_sum/((float)(ACC_BUFF_SIZE)));
 	motion_task::getInstance().mouse.velo 	  = sp;//(Renc.wheel_speed - Lenc.wheel_speed)/2.0;
-	motion_task::getInstance().mouse.length  += (Renc.wheel_speed - Lenc.wheel_speed)/2.0;
+	motion_task::getInstance().mouse.length  += 1.0*(Renc.wheel_speed - Lenc.wheel_speed)/2.0+0.0*sp;
+	motion_task::getInstance().mouse.accel    = (-1.0)*acc_sum/((float)(ACC_BUFF_SIZE));
 	motion_task::getInstance().mouse.rad_velo = (-1.0)*read_gyro_z_axis()*PI/180;
 	motion_task::getInstance().mouse.radian  += motion_task::getInstance().mouse.rad_velo/1000.0;
 
@@ -55,14 +65,16 @@ void Interrupt::postprocess()
 
 	if(LogData::getInstance().log_enable == True)
 	{
+
 		LogData::getInstance().data[0][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.velo;
 		LogData::getInstance().data[1][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.velo;
 		LogData::getInstance().data[2][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.rad_velo;
 		LogData::getInstance().data[3][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.rad_velo;
-		LogData::getInstance().data[4][LogData::getInstance().data_count%1000] = read_accel_x_axis();
-		LogData::getInstance().data[5][LogData::getInstance().data_count%1000] = read_accel_y_axis();
-		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = read_gyro_x_axis();
-		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = read_gyro_y_axis();
+		LogData::getInstance().data[4][LogData::getInstance().data_count%1000] = acc_sum/((float)(ACC_BUFF_SIZE));
+		LogData::getInstance().data[5][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.length ;
+		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = velo_buff[(acc_time_cnt)%ACC_BUFF_SIZE] ;
+		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = velo_sum/((float)(ACC_BUFF_SIZE));
+
 		LogData::getInstance().data_count++;
 		if(LogData::getInstance().data_count >= 1000) LogData::getInstance().data_count = 999;
 	}

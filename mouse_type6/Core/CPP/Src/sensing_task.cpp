@@ -206,15 +206,17 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,t_machine_par
 	}
 	else
 	{
-		/*
+/*
 		target_->rad_accel = 0.0f;
 		target_->rad_velo = 0.0f;
-		 */
+*/
+
 		float s = k2*machine_->radian;
 		float s_dot = k1*target_->velo*1000.0*target_->radian*1.0 + k2*target_->rad_velo;
-		target_->rad_accel = 300.0*s/k2 - 60.0*1.0/k2*s_dot
+		target_->rad_accel = (-1.0)*300.0*s/k2 - 60.0*1.0/k2*s_dot
 							-k1/k2*(target_->accel*1000.0*machine_->radian*1.0 + target_->velo*target_->rad_velo*1000.0);
 		target_->rad_velo = target_->rad_velo + target_->rad_accel*delta_tms/1000.0f;
+
 	}
 
 
