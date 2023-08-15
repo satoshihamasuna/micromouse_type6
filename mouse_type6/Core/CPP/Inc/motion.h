@@ -21,6 +21,8 @@ class motion_task:public Singleton<motion_task>
 		int error_cnt;
 		float z_acc;
 	public:
+		float V_r,V_l;
+		int motor_out_r,motor_out_l;
 		float delta_t;
 		float run_time;
 		float run_time_limit;

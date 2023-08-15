@@ -19,6 +19,6 @@ make_path.cpp:481:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_posit
 make_path.cpp:593:6:void Dijkstra::run_Dijkstra_suction(t_position, t_direction, t_position, uint8_t, int, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)	168	static
 run_task.h:79:7:constexpr RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
-controll.h:28:7:constexpr mouse_Controll::mouse_Controll()	16	static
+controll.h:30:7:constexpr mouse_Controll::mouse_Controll()	16	static
 motion.h:18:7:motion_task::motion_task()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = motion_task]	8	static

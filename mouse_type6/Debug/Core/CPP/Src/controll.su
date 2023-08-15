@@ -1,3 +1,5 @@
-controll.cpp:10:6:void PID_Controller::Gain_Set(float, float, float)	24	static
-controll.cpp:17:6:void PID_Controller::I_param_reset()	16	static
-controll.cpp:22:7:float PID_Controller::Controll(float, float, float)	32	static
+controll.cpp:11:6:void PID_Controller::Gain_Set(float, float, float)	24	static
+controll.cpp:18:6:void PID_Controller::I_param_reset()	16	static
+controll.cpp:23:7:float PID_Controller::Controll(float, float, float)	32	static
+controll.cpp:35:7:float PID_Controller::Anti_windup_1(float, float)	24	static
+controll.cpp:46:7:float PID_Controller::Anti_windup_2(float, float)	40	static

@@ -21,6 +21,11 @@ class Interrupt:public Singleton<Interrupt>
 		float acc_sum;
 		float velo_buff[ACC_BUFF_SIZE];
 		float velo_sum;
+		float Rvelo_buff[ACC_BUFF_SIZE];
+		float Rvelo_sum;
+		float Lvelo_buff[ACC_BUFF_SIZE];
+		float Lvelo_sum;
+
 
 	public:
 		void setTask();

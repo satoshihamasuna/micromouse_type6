@@ -6,7 +6,7 @@ search.cpp:46:12:t_position Search::search_adachi_1(t_position, t_position, int,
 search.cpp:267:12:t_position Search::search_adachi_2(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	80	static
 run_task.h:79:7:constexpr RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
-controll.h:28:7:constexpr mouse_Controll::mouse_Controll()	16	static
+controll.h:30:7:constexpr mouse_Controll::mouse_Controll()	16	static
 motion.h:18:7:motion_task::motion_task()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = motion_task]	8	static
 Kalman_filter.h:14:7:KalmanFilter::KalmanFilter()	16	static

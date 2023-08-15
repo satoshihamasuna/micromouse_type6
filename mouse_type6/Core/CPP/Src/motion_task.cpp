@@ -76,8 +76,10 @@ void motion_task::motion_inInterrupt(){
 
 void motion_task::motionControll()
 {
+	/*
 	float V_r,V_l;
 	int motor_out_r,motor_out_l;
+	*/
 	V_r			= V_l			= 0.0;
 	motor_out_r = motor_out_l	= 0;
 
@@ -85,13 +87,27 @@ void motion_task::motionControll()
 	{
 		float motor_r_rpm = (1.0f)*RAD_2_RPM*GEAR_N*(target.velo*1000/TIRE_RADIUS + 1.0f*TREAD_WIDTH*target.rad_velo/(2*TIRE_RADIUS));
 		float motor_l_rpm = (1.0f)*RAD_2_RPM*GEAR_N*(target.velo*1000/TIRE_RADIUS - 1.0f*TREAD_WIDTH*target.rad_velo/(2*TIRE_RADIUS));
-		float motor_r_ampere = 1/(MOTOR_K_TR*GEAR_N)*(WEIGHT*target.accel/1000*TIRE_RADIUS/2) + MOTOR_BR*motor_r_rpm/MOTOR_K_TR;
-		float motor_l_ampere = 1/(MOTOR_K_TR*GEAR_N)*(WEIGHT*target.accel/1000*TIRE_RADIUS/2) + MOTOR_BR*motor_l_rpm/MOTOR_K_TR;
+		float motor_r_ampere = 1/(MOTOR_K_TR*GEAR_N)*(WEIGHT*target.accel/1000*(TIRE_RADIUS)/2 + MOUSE_INERTIA*target.rad_accel *TIRE_RADIUS/(TREAD_WIDTH/2.0f)) +  MOTOR_BR*motor_r_rpm/MOTOR_K_TR*0.0;
+		float motor_l_ampere = 1/(MOTOR_K_TR*GEAR_N)*(WEIGHT*target.accel/1000*(TIRE_RADIUS)/2 - MOUSE_INERTIA*target.rad_accel *TIRE_RADIUS/(TREAD_WIDTH/2.0f)) +  MOTOR_BR*motor_l_rpm/MOTOR_K_TR*0.0;
 		float sp_FF_controll_r =  MOTOR_R*motor_r_ampere + MOTOR_K_ER*motor_r_rpm/1000;
 		float sp_FF_controll_l =  MOTOR_R*motor_l_ampere + MOTOR_K_ER*motor_l_rpm/1000;
 
 		float sp_fb_controll = ct.speed_ctrl.Controll(target.velo, mouse.velo, 1.0);
 		float om_fb_controll = ct.omega_ctrl.Controll(target.rad_velo, mouse.rad_velo,  1.0);
+
+
+
+		if(run_task == Straight)
+		{
+			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll + (sp_FF_controll_r-sp_FF_controll_l)/2.0, 1.5);
+			om_fb_controll = om_fb_controll - (sp_FF_controll_r-sp_FF_controll_l)/2.0;
+		}
+
+
+		float battery = Battery_GetVoltage();
+		if(battery < 3.30f) battery = 3.30f;
+
+		sp_fb_controll = ct.speed_ctrl.Anti_windup_2(sp_fb_controll + (sp_FF_controll_r + sp_FF_controll_l)/2.0, battery) - (sp_FF_controll_r + sp_FF_controll_l)/2.0;
 
 		//printf("initerrupt%lf\n",sp_fb_controll);
 		V_r += sp_FF_controll_r;
@@ -104,8 +120,6 @@ void motion_task::motionControll()
 		V_l += om_fb_controll;
 
 
-		float battery = Battery_GetVoltage();
-		if(battery < 3.30f) battery = 3.30f;
 
 		float duty_r = V_r/battery;
 		float duty_l = V_l/battery;
