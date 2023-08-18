@@ -89,8 +89,8 @@ void Interrupt::postprocess()
 		LogData::getInstance().data[5][LogData::getInstance().data_count%1000] = Battery_GetVoltage()  ;
 		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = acc_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = velo_sum/((float)(ACC_BUFF_SIZE));
-		LogData::getInstance().data[8][LogData::getInstance().data_count%1000] = Rvelo_sum/((float)(ACC_BUFF_SIZE));
-		LogData::getInstance().data[9][LogData::getInstance().data_count%1000] = Lvelo_sum/((float)(ACC_BUFF_SIZE));
+		LogData::getInstance().data[8][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_r.distance;//Rvelo_sum/((float)(ACC_BUFF_SIZE));
+		LogData::getInstance().data[9][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_l.distance;//Lvelo_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[10][LogData::getInstance().data_count%1000] = motion_task::getInstance().V_r;
 		LogData::getInstance().data[11][LogData::getInstance().data_count%1000] = motion_task::getInstance().V_l;
 		LogData::getInstance().data_count++;

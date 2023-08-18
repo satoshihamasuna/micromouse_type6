@@ -28,6 +28,8 @@ class motion_task:public Singleton<motion_task>
 		float run_time_limit;
 		t_run_pattern	run_task = No_run;
 		RunTask rT;
+		PID_Setting straight_gain_set;
+		PID_Setting turn_gain_set;
 		mouse_Controll ct;
 		t_machine_param target,mouse;
 		t_motion_param mt_set;

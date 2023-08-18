@@ -832,7 +832,7 @@ namespace Mode
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
-						  mp.straight( 90.0*8.0,20.0,3.50,0.0);
+						  mp.straight( 90.0*8.0,15.0,3.00,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  /*
 						  mp.searchSlalom( &param_L90_search);

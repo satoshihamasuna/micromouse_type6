@@ -41,6 +41,13 @@ typedef enum{
 	Fix_wall			= 27,
 }t_run_pattern;
 
+typedef enum{
+	NOP_MODE 		= 0,
+	STRAIGHT_MODE 	= 1,
+	DIAGONAL_MODE 	= 2,
+	TURN_MODE 		= 3,
+	SPIN_TURN_MODE  = 4,
+}t_run_mode;
 
 typedef struct{
 	float velo;
@@ -75,17 +82,47 @@ typedef enum
 	Enable_st = 1,
 	Enable_di = 2,
 }t_wall_controll;
+class PID_Setting
+{
+	private:
+		t_pid_gain sp_gain;
+		t_pid_gain om_gain;
+	public:
+		void set_sp_gain(float _kp,float _ki,float _kd)
+		{
+			sp_gain.Kp = _kp;
+			sp_gain.Kp = _ki;
+			sp_gain.Kp = _kd;
+		}
+		void set_om_gain(float _kp,float _ki,float _kd)
+		{
+			om_gain.Kp = _kp;
+			om_gain.Kp = _ki;
+			om_gain.Kp = _kd;
+		}
 
+		t_pid_gain get_sp_gain()
+		{
+			return sp_gain;
+		}
+
+		t_pid_gain get_om_gain()
+		{
+			return om_gain;
+		}
+};
 class RunTask
 {
 	private:
 		t_bool is_runTask = False;
 		int	   brake_time = 0;
 		float  run_turn_table_time = 0.0f;
-		//const t_param *turn_param;
+		t_run_mode run_mode_state;
 	public:
 		t_wall_controll is_wallControl_Enable = Non_controll;
+		float post_run_fix = 0.0;
 		t_bool is_exe_runTask();
+		void set_stragith_sp_gain(float _kp,float _ki,float _kd);
 		void MotionFree(float *run_time,float run_time_limit);
 		void search_straight(t_motion_param mt_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void search_slalom(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
@@ -98,9 +135,20 @@ class RunTask
 		void turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void turn_out(t_motion_param *mt_param,const t_param *turn_param,t_machine_param *target_,t_machine_param *machine_,float delta_t_ms);
 		void brake();
+
 		void reset_brake_time()
 		{
 			brake_time = 0;
+		}
+
+		void set_run_mode_state(t_run_mode _run_mode_state)
+		{
+			run_mode_state = _run_mode_state;
+		}
+
+		t_run_mode get_run_mode_state(t_run_mode _run_mode_state)
+		{
+			return run_mode_state;
 		}
 };
 

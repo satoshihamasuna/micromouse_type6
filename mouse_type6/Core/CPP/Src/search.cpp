@@ -15,6 +15,9 @@
 #include "adachi_class.h"
 #include "run_param.h"
 //#include "glob_var_machine.h"
+
+#define ALLOW_SIDE_DIFF 8.0
+
 t_bool Search::i_am_goal(int x,int y,int gx,int gy,int goal_size){
 	t_bool flag = False;
 	if(gx <= x && x < (gx + goal_size))
@@ -117,7 +120,7 @@ t_position Search::search_adachi_1(	t_position start_pos,t_position goal_pos,int
 				while(motion_task::getInstance().run_task !=No_run){}
 				break;
 			case Right:
-				if(SensingTask::getInstance().sen_l.is_wall == True && ABS(SensingTask::getInstance().sen_l.distance - 45.0) >= 8.0)
+				if(SensingTask::getInstance().sen_l.is_wall == True && ABS(SensingTask::getInstance().sen_l.distance - 45.0) >= ALLOW_SIDE_DIFF)
 				{
 					motion_plan->straight(45.0, 4.0, 0.30f, 0.00f);
 					_map->make_map_queue(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);
@@ -141,7 +144,7 @@ t_position Search::search_adachi_1(	t_position start_pos,t_position goal_pos,int
 					motion_plan->straight(45.0, 4.0, 0.30f, 0.30f);
 					while(motion_task::getInstance().run_task !=No_run){}
 				}
-				else if(_wall->get_WallState(my_position) == WALL && ABS(SensingTask::getInstance().sen_fr.distance - SensingTask::getInstance().sen_fl.distance) >= 8.0)
+				else if(_wall->get_WallState(my_position) == WALL && ABS(SensingTask::getInstance().sen_fr.distance - SensingTask::getInstance().sen_fl.distance) >= ALLOW_SIDE_DIFF)
 				{
 					motion_plan->straight(45.0, 4.0, 0.30f, 0.00f);
 					_map->make_map_queue(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);
@@ -166,7 +169,7 @@ t_position Search::search_adachi_1(	t_position start_pos,t_position goal_pos,int
 				}
 		  	    break;
 			case Left:
-				if(SensingTask::getInstance().sen_r.is_wall == True && ABS(SensingTask::getInstance().sen_r.distance - 45.0) >= 8.0)
+				if(SensingTask::getInstance().sen_r.is_wall == True && ABS(SensingTask::getInstance().sen_r.distance - 45.0) >= ALLOW_SIDE_DIFF)
 				{
 					motion_plan->straight(45.0, 4.0, 0.30f, 0.00f);
 					_map->make_map_queue(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);
@@ -190,7 +193,7 @@ t_position Search::search_adachi_1(	t_position start_pos,t_position goal_pos,int
 					motion_plan->straight(45.0, 4.0, 0.30f, 0.30f);
 					while(motion_task::getInstance().run_task !=No_run){}
 				}
-				else if(_wall->get_WallState(my_position) == WALL && ABS(SensingTask::getInstance().sen_fr.distance - SensingTask::getInstance().sen_fl.distance) >= 8.0)
+				else if(_wall->get_WallState(my_position) == WALL && ABS(SensingTask::getInstance().sen_fr.distance - SensingTask::getInstance().sen_fl.distance) >= ALLOW_SIDE_DIFF)
 				{
 					motion_plan->straight( 45.0, 4.0, 0.30f, 0.00f);
 					_map->make_map_queue(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);
@@ -338,7 +341,7 @@ t_position Search::search_adachi_2(	t_position start_pos,t_position goal_pos,int
 				while(motion_task::getInstance().run_task !=No_run){}
 				break;
 			case Right:
-				if(SensingTask::getInstance().sen_l.is_wall == True && ABS(SensingTask::getInstance().sen_l.distance - 45.0) >= 8.0)
+				if(SensingTask::getInstance().sen_l.is_wall == True && ABS(SensingTask::getInstance().sen_l.distance - 45.0) >= ALLOW_SIDE_DIFF)
 				{
 					motion_plan->straight( 45.0, 4.0, 0.30f, 0.00f);
 					_map->make_map_queue_zenmen(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);
@@ -362,7 +365,7 @@ t_position Search::search_adachi_2(	t_position start_pos,t_position goal_pos,int
 					motion_plan->straight( 45.0, 4.0, 0.30f, 0.30f);
 					while(motion_task::getInstance().run_task !=No_run){}
 				}
-				else if(_wall->get_WallState(my_position) == WALL && ABS(SensingTask::getInstance().sen_fr.distance - SensingTask::getInstance().sen_fl.distance) >= 8.0)
+				else if(_wall->get_WallState(my_position) == WALL && ABS(SensingTask::getInstance().sen_fr.distance - SensingTask::getInstance().sen_fl.distance) >= ALLOW_SIDE_DIFF)
 				{
 					motion_plan->straight( 45.0, 4.0, 0.30f, 0.00f);
 					_map->make_map_queue_zenmen(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);
@@ -387,7 +390,7 @@ t_position Search::search_adachi_2(	t_position start_pos,t_position goal_pos,int
 				}
 		  	    break;
 			case Left:
-				if(SensingTask::getInstance().sen_r.is_wall == True && ABS(SensingTask::getInstance().sen_r.distance - 45.0) >= 8.0)
+				if(SensingTask::getInstance().sen_r.is_wall == True && ABS(SensingTask::getInstance().sen_r.distance - 45.0) >= ALLOW_SIDE_DIFF)
 				{
 					motion_plan->straight( 45.0, 4.0, 0.30f, 0.00f);
 					_map->make_map_queue_zenmen(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);
@@ -411,7 +414,7 @@ t_position Search::search_adachi_2(	t_position start_pos,t_position goal_pos,int
 					motion_plan->straight( 45.0, 4.0, 0.30f, 0.30f);
 					while(motion_task::getInstance().run_task !=No_run){}
 				}
-				else if(_wall->get_WallState(my_position) == WALL && ABS(SensingTask::getInstance().sen_fr.distance - SensingTask::getInstance().sen_fl.distance) >= 8.0)
+				else if(_wall->get_WallState(my_position) == WALL && ABS(SensingTask::getInstance().sen_fr.distance - SensingTask::getInstance().sen_fl.distance) >= ALLOW_SIDE_DIFF)
 				{
 					motion_plan->straight( 45.0, 4.0, 0.30f, 0.00f);
 					_map->make_map_queue_zenmen(goal_pos.x, goal_pos.y, tmp_my_pos, goal_size, 0x01);

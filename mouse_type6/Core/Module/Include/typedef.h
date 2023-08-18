@@ -49,6 +49,8 @@ typedef enum{
 	Turn_None 	= 0,
 	Turn_R 		= 1,
 	Turn_L		= 2,
+	Prev_Turn	= 3,
+	Post_Turn	= 4,
 }t_turn_dir;
 
 typedef enum{

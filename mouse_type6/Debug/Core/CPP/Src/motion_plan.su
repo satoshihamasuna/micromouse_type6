@@ -1,4 +1,4 @@
-run_task.h:101:8:void RunTask::reset_brake_time()	16	static
+run_task.h:139:8:void RunTask::reset_brake_time()	16	static
 sensing_task.h:48:8:void SensingTask::Division_Wall_Correction_Reset()	16	static
 motion_plan.cpp:14:6:void motion_plan::motion_start()	16	static
 motion_plan.cpp:28:6:void motion_plan::free_rotation()	16	static
@@ -7,9 +7,9 @@ motion_plan.cpp:67:6:void motion_plan::straight(float, float, float, float)	88	s
 motion_plan.cpp:100:6:void motion_plan::diagonal(float, float, float, float)	88	static
 motion_plan.cpp:132:6:void motion_plan::pivot_turn(float, float, float)	80	static
 motion_plan.cpp:162:6:void motion_plan::searchSlalom(const t_param*)	72	static
-motion_plan.cpp:196:6:void motion_plan::turn_in(const t_param*, t_run_pattern)	80	static
-motion_plan.cpp:224:6:void motion_plan::turn_out(const t_param*, t_run_pattern)	80	static
-motion_plan.cpp:252:6:void motion_plan::long_turn(const t_param*, t_run_pattern)	80	static
-motion_plan.cpp:280:6:void motion_plan::turn_v90(const t_param*, t_run_pattern)	80	static
-motion_plan.cpp:309:6:void motion_plan::fix_wall(float)	72	static
+motion_plan.cpp:210:6:void motion_plan::turn_in(const t_param*, t_run_pattern)	80	static
+motion_plan.cpp:238:6:void motion_plan::turn_out(const t_param*, t_run_pattern)	80	static
+motion_plan.cpp:266:6:void motion_plan::long_turn(const t_param*, t_run_pattern)	80	static
+motion_plan.cpp:294:6:void motion_plan::turn_v90(const t_param*, t_run_pattern)	80	static
+motion_plan.cpp:323:6:void motion_plan::fix_wall(float)	72	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static

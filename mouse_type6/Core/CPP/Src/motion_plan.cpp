@@ -169,7 +169,7 @@ void motion_plan::searchSlalom(const t_param *turn_param)
 	mt_set_.rad_deccel  	=  0.0;
 	mt_set_.rad_max_velo    =  turn_param->param->velo/turn_param->param->r_min*1000.0f;
 	mt_set_.radian      	=  0.0;//DEG2RAD(turn_param->param->degree);
-	mt_set_.turn_d          =  Turn_None;//(turn_param->param->turn_dir == Turn_L) ? Turn_L:Turn_R;
+	mt_set_.turn_d          =  Prev_Turn;//(turn_param->param->turn_dir == Turn_L) ? Turn_L:Turn_R;
 	move_task->mt_set 		=  mt_set_;
 	move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Search_slalom_L:Search_slalom_R;
 	move_task->ct.speed_ctrl.I_param_reset();
@@ -191,6 +191,20 @@ void motion_plan::searchSlalom(const t_param *turn_param)
 	move_task->target.radian = 0.0;
 	move_task->rT.is_wallControl_Enable = Non_controll;
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
+	if(turn_param->param->turn_dir == Turn_L)
+	{
+		if(SensingTask::getInstance().sen_r.is_wall == True)
+			move_task->rT. post_run_fix = 45.0 -SensingTask::getInstance().sen_r.distance;
+		else
+			move_task->rT.post_run_fix = 0.0;
+	}
+	else if(turn_param->param->turn_dir == Turn_R)
+	{
+		if(SensingTask::getInstance().sen_l.is_wall == True)
+			move_task->rT.post_run_fix = 45.0 -SensingTask::getInstance().sen_l.distance;
+		else
+			move_task->rT.post_run_fix = 0.0;
+	}
 }
 
 void motion_plan::turn_in(const t_param *turn_param,t_run_pattern run_pt)
