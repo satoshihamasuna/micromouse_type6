@@ -91,14 +91,14 @@ class PID_Setting
 		void set_sp_gain(float _kp,float _ki,float _kd)
 		{
 			sp_gain.Kp = _kp;
-			sp_gain.Kp = _ki;
-			sp_gain.Kp = _kd;
+			sp_gain.Ki = _ki;
+			sp_gain.Kd = _kd;
 		}
 		void set_om_gain(float _kp,float _ki,float _kd)
 		{
 			om_gain.Kp = _kp;
-			om_gain.Kp = _ki;
-			om_gain.Kp = _kd;
+			om_gain.Ki = _ki;
+			om_gain.Kd = _kd;
 		}
 
 		t_pid_gain get_sp_gain()
@@ -146,7 +146,7 @@ class RunTask
 			run_mode_state = _run_mode_state;
 		}
 
-		t_run_mode get_run_mode_state(t_run_mode _run_mode_state)
+		t_run_mode get_run_mode_state()
 		{
 			return run_mode_state;
 		}

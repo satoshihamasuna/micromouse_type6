@@ -71,6 +71,33 @@ void motion_task::motion_inInterrupt(){
 				Motor_SetDuty_Right(0);
 			break;
 	}
+
+	switch(rT.get_run_mode_state())
+	{
+		case NOP_MODE:
+		case TURN_MODE:
+		case SPIN_TURN_MODE:
+			ct.speed_ctrl.Gain_Set(turn_gain_set.get_sp_gain().Kp
+								  ,turn_gain_set.get_sp_gain().Ki
+								  ,turn_gain_set.get_sp_gain().Kd);
+
+			ct.omega_ctrl.Gain_Set(turn_gain_set.get_om_gain().Kp
+								  ,turn_gain_set.get_om_gain().Ki
+								  ,turn_gain_set.get_om_gain().Kd);
+			break;
+		case STRAIGHT_MODE:
+		case DIAGONAL_MODE:
+			ct.speed_ctrl.Gain_Set(straight_gain_set.get_sp_gain().Kp
+								  ,straight_gain_set.get_sp_gain().Ki
+								  ,straight_gain_set.get_sp_gain().Kd);
+
+			ct.omega_ctrl.Gain_Set(straight_gain_set.get_om_gain().Kp
+								  ,straight_gain_set.get_om_gain().Ki
+								  ,straight_gain_set.get_om_gain().Kd);
+
+			break;
+	}
+
 }
 
 
@@ -179,7 +206,7 @@ void motion_task::motionPostControll()
 
 			if(ABS(mouse.rad_velo - target.rad_velo) > 10.0)
 			{
-				error_cnt = error_cnt +	100;
+				//error_cnt = error_cnt +	100;
 			}
 
 			if(ABS(V_r) > Battery_GetVoltage())

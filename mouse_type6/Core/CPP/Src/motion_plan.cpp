@@ -10,6 +10,7 @@
 #include "../../Module/Include/index.h"
 #include "controll.h"
 #include "sensing_task.h"
+#include "run_task.h"
 
 void motion_plan::motion_start()
 {
@@ -61,6 +62,10 @@ void motion_plan::search_straight(float len_target,float acc,float max_sp,float 
 	move_task->rT.reset_brake_time();
 	move_task->_turn_param = nullptr;
 	move_task->rT.is_wallControl_Enable = Non_controll;
+	move_task->straight_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->straight_gain_set.set_om_gain(0.2, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(0.4, 0.05, 0.00);
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
 }
 
@@ -93,6 +98,10 @@ void motion_plan::straight(float len_target,float acc,float max_sp,float end_sp)
 	move_task->rT.reset_brake_time();
 	move_task->_turn_param = nullptr;
 	move_task->rT.is_wallControl_Enable = Non_controll;
+	move_task->straight_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->straight_gain_set.set_om_gain(0.2, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(0.4, 0.05, 0.00);
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
 }
 
@@ -126,6 +135,10 @@ void motion_plan::diagonal(float len_target,float acc,float max_sp,float end_sp)
 	move_task->rT.reset_brake_time();
 	move_task->_turn_param = nullptr;
 	move_task->rT.is_wallControl_Enable = Non_controll;
+	move_task->straight_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->straight_gain_set.set_om_gain(0.05, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(0.4, 0.05, 0.00);
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
 }
 
@@ -155,6 +168,10 @@ void motion_plan::pivot_turn(float rad_target,float rad_acc,float rad_velo)
 	move_task->target.length = 0.0;
 	move_task->target.radian = 0.0;
 	move_task->rT.is_wallControl_Enable = Non_controll;
+	move_task->straight_gain_set.set_sp_gain( 6.0, 0.05, 0.00);
+	move_task->straight_gain_set.set_om_gain(0.4, 0.05, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.00);
+	move_task->turn_gain_set.set_om_gain(0.4, 0.05, 0.00);
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
 
 }
@@ -174,10 +191,6 @@ void motion_plan::searchSlalom(const t_param *turn_param)
 	move_task->run_task = (turn_param->param->turn_dir == Turn_L) ? Search_slalom_L:Search_slalom_R;
 	move_task->ct.speed_ctrl.I_param_reset();
 	move_task->ct.omega_ctrl.I_param_reset();
-
-	move_task->ct.omega_ctrl.Kp = turn_param->om_gain->Kp;
-	move_task->ct.omega_ctrl.Ki = turn_param->om_gain->Ki;
-	move_task->ct.omega_ctrl.Kd = turn_param->om_gain->Kd;
 
 	move_task->mouse.length  = 0.0;
 	move_task->mouse.radian  = 0.0;
@@ -205,6 +218,10 @@ void motion_plan::searchSlalom(const t_param *turn_param)
 		else
 			move_task->rT.post_run_fix = 0.0;
 	}
+	move_task->straight_gain_set.set_sp_gain(6.0,  0.05, 0.00);
+	move_task->straight_gain_set.set_om_gain(0.05, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(turn_param->om_gain->Kp, turn_param->om_gain->Ki, turn_param->om_gain->Kd);
 }
 
 void motion_plan::turn_in(const t_param *turn_param,t_run_pattern run_pt)
@@ -234,6 +251,10 @@ void motion_plan::turn_in(const t_param *turn_param,t_run_pattern run_pt)
 	move_task->target.radian = 0.0;
 	move_task->rT.is_wallControl_Enable = Non_controll;
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
+	move_task->straight_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->straight_gain_set.set_om_gain(0.05, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(turn_param->om_gain->Kp, turn_param->om_gain->Ki, turn_param->om_gain->Kd);
 }
 void motion_plan::turn_out(const t_param *turn_param,t_run_pattern run_pt)
 {
@@ -262,6 +283,10 @@ void motion_plan::turn_out(const t_param *turn_param,t_run_pattern run_pt)
 	move_task->target.radian = 0.0;
 	move_task->rT.is_wallControl_Enable = Non_controll;
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
+	move_task->straight_gain_set.set_sp_gain(6.0,  0.05, 0.00);
+	move_task->straight_gain_set.set_om_gain(0.05, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(turn_param->om_gain->Kp, turn_param->om_gain->Ki, turn_param->om_gain->Kd);
 }
 void motion_plan::long_turn(const t_param *turn_param,t_run_pattern run_pt)
 {
@@ -290,6 +315,10 @@ void motion_plan::long_turn(const t_param *turn_param,t_run_pattern run_pt)
 	move_task->target.radian = 0.0;
 	move_task->rT.is_wallControl_Enable = Non_controll;
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
+	move_task->straight_gain_set.set_sp_gain(6.0,  0.05, 0.0);
+	move_task->straight_gain_set.set_om_gain(0.05, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(turn_param->om_gain->Kp, turn_param->om_gain->Ki, turn_param->om_gain->Kd);
 }
 void motion_plan::turn_v90(const t_param *turn_param,t_run_pattern run_pt)
 {
@@ -317,7 +346,14 @@ void motion_plan::turn_v90(const t_param *turn_param,t_run_pattern run_pt)
 	move_task->target.length = 0.0;
 	move_task->target.radian = 0.0;
 	move_task->rT.is_wallControl_Enable = Non_controll;
+	//move_task->ct.omega_ctrl.Kp = turn_param->om_gain->Kp;
+	//move_task->ct.omega_ctrl.Ki = turn_param->om_gain->Ki;
+	//move_task->ct.omega_ctrl.Kd = turn_param->om_gain->Kd;
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
+	move_task->straight_gain_set.set_sp_gain(6.00, 0.05, 0.00);
+	move_task->straight_gain_set.set_om_gain(0.05, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.00, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(turn_param->om_gain->Kp, turn_param->om_gain->Ki, turn_param->om_gain->Kd);
 }
 
 void motion_plan::fix_wall(float set_time)
@@ -349,5 +385,8 @@ void motion_plan::fix_wall(float set_time)
 	move_task->run_time = 0.0;
 	move_task->rT.is_wallControl_Enable = Non_controll;
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
-
+	move_task->straight_gain_set.set_sp_gain(6.00, 0.05, 0.00);
+	move_task->straight_gain_set.set_om_gain(0.05, 0.01, 0.00);
+	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(0.4, 0.05, 0.0);
 }

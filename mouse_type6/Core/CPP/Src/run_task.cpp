@@ -11,7 +11,7 @@
 #include "../../Module/Include/macro.h"
 #include "turn_table.h"
 #include "sensing_task.h"
-
+#include "motion.h"
 #define BRAKE_TIME_LIMIT (200)
 
 void RunTask::MotionFree(float *run_time,float run_time_limit)
@@ -36,6 +36,7 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 	float deccel_length = 1000*(mt_param.max_velo*mt_param.max_velo
 								-mt_param.end_velo*mt_param.end_velo)
 								/(2.0*ABS(mt_param.deccel));
+
 	if(deccel_length < ( mt_param.length - machine_->length ))
 	{
 		target_->accel = mt_param.accel;
@@ -66,6 +67,7 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 				target_->accel = 0.0;
 				target_->rad_velo = 0.0;
 				target_->rad_accel = 0.0;
+				set_run_mode_state(NOP_MODE);
 			}
 		}
 		else if(target_->velo < mt_param.end_velo)
@@ -85,6 +87,7 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 			target_->rad_velo = 0.0;
 			target_->rad_accel = 0.0;
 			is_wallControl_Enable = Non_controll;
+			set_run_mode_state(NOP_MODE);
 		}
 		else
 		{
@@ -147,12 +150,14 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 				target_->accel = 0.0;
 				target_->rad_velo = 0.0;
 				target_->rad_accel = 0.0;
+				set_run_mode_state(NOP_MODE);
 			}
 		}
 		else if(target_->velo < mt_param.end_velo)
 		{
 			target_->velo = mt_param.end_velo;
 			target_->accel = 0.0;
+
 
 		}
 
@@ -166,6 +171,7 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 			target_->accel = 0.0;
 			target_->rad_velo = 0.0;
 			target_->rad_accel = 0.0;
+			set_run_mode_state(NOP_MODE);
 		}
 		else
 		{
@@ -201,6 +207,8 @@ void RunTask::diagonal(t_motion_param mt_param,t_machine_param *target_,t_machin
 	is_wallControl_Enable = Enable_di;
 	is_runTask = True;
 	set_run_mode_state(DIAGONAL_MODE);
+	motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.1, 0.0);//7.0/0.3
+	motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.05, 0.01, 0.00);
 	float deccel_length = 1000*(mt_param.max_velo*mt_param.max_velo
 								-mt_param.end_velo*mt_param.end_velo)
 								/(2.0*ABS(mt_param.deccel));
@@ -282,6 +290,8 @@ void RunTask::pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machi
 	target_->velo  = 0.0;
 	target_ ->accel = 0.0;
 	float deccel_radian = (mt_param.rad_max_velo*mt_param.rad_max_velo)/(2.0*ABS(mt_param.rad_accel));
+
+
 	if(ABS(deccel_radian) < ( ABS(mt_param.radian) - ABS(machine_->radian)))
 	{
 		target_->rad_accel = mt_param.rad_accel;
@@ -506,6 +516,7 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 {
 	is_runTask = True;
 	target_->velo = turn_param->param->velo;
+
 	if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
 	{
 		set_run_mode_state(DIAGONAL_MODE);
@@ -549,6 +560,7 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 		float turn_time_limit = DEG2RAD(turn_param->param->degree)/(accel_Integral*mt_param->rad_max_velo);
 		set_run_mode_state(TURN_MODE);
 		machine_->length = 0.0;
+
 		if(run_turn_table_time <= (turn_time_limit*1000.0f))
 		{
 			int std_a = (int)(run_turn_table_time/turn_time_limit);
@@ -585,6 +597,7 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 {
 	is_runTask = True;
 	target_->velo = turn_param->param->velo;
+;
 	if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
 	{
 		is_wallControl_Enable = Enable_st;
