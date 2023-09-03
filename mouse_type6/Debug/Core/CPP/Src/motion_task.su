@@ -1,11 +1,11 @@
 run_task.h:104:14:t_pid_gain PID_Setting::get_sp_gain()	48	static
 run_task.h:109:14:t_pid_gain PID_Setting::get_om_gain()	48	static
-run_task.h:149:14:t_run_mode RunTask::get_run_mode_state()	16	static
+run_task.h:151:14:t_run_mode RunTask::get_run_mode_state()	16	static
 core_cm4.h:1939:34:void __NVIC_SystemReset()	4	static,ignoring_inline_asm
 motion_task.cpp:15:6:void motion_task::motion_inInterrupt()	224	static
-motion_task.cpp:104:6:void motion_task::motionControll()	80	static
-motion_task.cpp:187:6:void motion_task::motionPostControll()	40	static
-motion_task.cpp:271:8:t_bool motion_task::is_controll_enable()	24	static
+motion_task.cpp:104:6:void motion_task::motionControll()	128	static
+motion_task.cpp:197:6:void motion_task::motionPostControll()	40	static
+motion_task.cpp:281:8:t_bool motion_task::is_controll_enable()	24	static
 run_task.h:114:7:RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
 controll.h:30:7:constexpr mouse_Controll::mouse_Controll()	16	static

@@ -624,7 +624,8 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 		HAL_Delay(5);
 	}
 	while(motion_task::getInstance().run_task !=No_run){}
-	motionPlan->search_straight(  15.0, straight_base_velo().param->acc, straight_base_velo().param->max_velo, straight_base_velo().param->max_velo);
+	motionPlan->motion_start( );
+	motionPlan->straight(  15.0, straight_base_velo().param->acc, straight_base_velo().param->max_velo, straight_base_velo().param->max_velo);
 	while(motion_task::getInstance().run_task !=No_run);
 	uint16_t section_count = 0;
 	for(int i = tail ; i >= 0;i--)

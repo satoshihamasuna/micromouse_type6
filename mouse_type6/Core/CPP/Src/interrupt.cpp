@@ -66,7 +66,14 @@ void Interrupt::preprocess(){
 	motion_task::getInstance().mouse.accel    = (-1.0)*acc_sum/((float)(ACC_BUFF_SIZE));
 	motion_task::getInstance().mouse.rad_velo = (-1.0)*read_gyro_z_axis()*PI/180;
 	motion_task::getInstance().mouse.radian  += motion_task::getInstance().mouse.rad_velo/1000.0;
-
+	//if(motion_task::getInstance().run_task == Straight || motion_task::getInstance().run_task == Diagonal || motion_task::getInstance().run_task == Search_st_section )
+	//{
+	//motion_task::getInstance().mouse.x_point += motion_task::getInstance().mouse.velo*motion_task::getInstance().mouse.radian;
+	//}
+	//else
+	//{
+		//motion_task::getInstance().mouse.x_point = 0.0;
+	//}
 }
 
 void Interrupt::main()
@@ -87,8 +94,8 @@ void Interrupt::postprocess()
 		LogData::getInstance().data[3][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.rad_velo;
 		LogData::getInstance().data[4][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.length ;
 		LogData::getInstance().data[5][LogData::getInstance().data_count%1000] = Battery_GetVoltage()  ;
-		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = acc_sum/((float)(ACC_BUFF_SIZE));
-		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = velo_sum/((float)(ACC_BUFF_SIZE));
+		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = motion_task::getInstance().ff_st;
+		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.x_point;
 		LogData::getInstance().data[8][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_r.distance;//Rvelo_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[9][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_l.distance;//Lvelo_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[10][LogData::getInstance().data_count%1000] = motion_task::getInstance().V_r;

@@ -110,6 +110,7 @@ void motion_task::motionControll()
 	V_r			= V_l			= 0.0;
 	motor_out_r = motor_out_l	= 0;
 
+
 	if(is_controll_enable() == True && run_task != motor_free)
 	{
 		float motor_r_rpm = (1.0f)*RAD_2_RPM*GEAR_N*(target.velo*1000/TIRE_RADIUS + 1.0f*TREAD_WIDTH*target.rad_velo/(2*TIRE_RADIUS));
@@ -127,7 +128,7 @@ void motion_task::motionControll()
 
 
 
-		if(run_task == Straight)
+		if(run_task == Straight || run_task == Diagonal)
 		{
 			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll + (sp_FF_controll_r-sp_FF_controll_l)/2.0, 1.0);
 			om_fb_controll = om_fb_controll - (sp_FF_controll_r-sp_FF_controll_l)/2.0;
@@ -137,11 +138,19 @@ void motion_task::motionControll()
 		float battery = Battery_GetVoltage();
 		if(battery < 3.30f) battery = 3.30f;
 
-		sp_fb_controll = ct.speed_ctrl.Anti_windup_2(sp_fb_controll + (sp_FF_controll_r + sp_FF_controll_l)/2.0, (battery- ABS(sp_FF_controll_r-sp_FF_controll_l)/2.0)) - (sp_FF_controll_r + sp_FF_controll_l)/2.0;
+		float ctrl_limit = ABS((sp_FF_controll_r + sp_FF_controll_l)/2.0) + ABS((sp_FF_controll_r - sp_FF_controll_l)/2.0);
 
-		om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll + (sp_FF_controll_r - sp_FF_controll_l)/2.0, (battery- ABS(sp_FF_controll_r+sp_FF_controll_l)/2.0))   - (sp_FF_controll_r - sp_FF_controll_l)/2.0;;
-
-
+		if( ctrl_limit < battery )
+		{
+			sp_fb_controll = ct.speed_ctrl.Anti_windup_2(sp_fb_controll,battery- ctrl_limit);
+			//om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll + (sp_FF_controll_r - sp_FF_controll_l)/2.0, (battery- ABS(sp_FF_controll_r+sp_FF_controll_l)/2.0)) - (sp_FF_controll_r - sp_FF_controll_l)/2.0;
+			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll,battery- ctrl_limit);
+		}
+		else
+		{
+			sp_fb_controll = ct.speed_ctrl.Anti_windup_2(sp_fb_controll+(sp_FF_controll_r + sp_FF_controll_l)/2.0, battery/ctrl_limit*ABS((sp_FF_controll_r + sp_FF_controll_l)/2.0))-(sp_FF_controll_r + sp_FF_controll_l)/2.0;
+			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll+(sp_FF_controll_r - sp_FF_controll_l)/2.0, battery/ctrl_limit*ABS((sp_FF_controll_r - sp_FF_controll_l)/2.0))-(sp_FF_controll_r - sp_FF_controll_l)/2.0;
+		}
 		//printf("initerrupt%lf\n",sp_fb_controll);
 		V_r += sp_FF_controll_r;
 		V_l -= sp_FF_controll_l;
@@ -152,7 +161,8 @@ void motion_task::motionControll()
 		V_r += om_fb_controll;
 		V_l += om_fb_controll;
 
-
+		ff_turn = (sp_FF_controll_r - sp_FF_controll_l)/2.0;
+		ff_st = (sp_FF_controll_r + sp_FF_controll_l)/2.0;
 
 		float duty_r = V_r/battery;
 		float duty_l = V_l/battery;

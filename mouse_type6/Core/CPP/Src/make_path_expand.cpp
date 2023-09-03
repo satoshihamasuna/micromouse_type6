@@ -23,8 +23,8 @@
 
 #define DIR_TURN_DIAG_R45(x) ((x - 3 + 4)%4)
 #define DIR_TURN_DIAG_L45(x) ((x - 4 + 4)%4)
-#define DIR_TURN_DIAG_R90(x) ((x + 1 + 8) % 8)
-#define DIR_TURN_DIAG_L90(x) ((x - 1 + 8) % 8)
+#define DIR_TURN_DIAG_R90(x)  (DIR_TURN_NEWS_R45((DIR_TURN_DIAG_R45(x))))
+#define DIR_TURN_DIAG_L90(x)  (DIR_TURN_NEWS_L45((DIR_TURN_DIAG_L45(x))))
 #define DIR_TURN_DIAG_R135(x) (DIR_TURN_NEWS_R90((DIR_TURN_DIAG_R45(x))))
 #define DIR_TURN_DIAG_L135(x) (DIR_TURN_NEWS_L90((DIR_TURN_DIAG_L45(x))))
 #define DIR_TURN_DIAG_R180(x) (DIR_TURN_DIAG_R90((DIR_TURN_DIAG_R90(x))))

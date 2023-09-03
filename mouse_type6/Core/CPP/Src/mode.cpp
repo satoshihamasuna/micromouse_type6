@@ -230,6 +230,23 @@ namespace Mode
 				case ENABLE|0x0D:
 					break;
 				case ENABLE|0x0E:
+				   if(SensingTask::getInstance().IrSensor_Avg() > 2500)
+				   {
+						for(int i = 0;i < 11;i++)
+						{
+							(i%2 == 0) ? Indicate_LED(Mode_State()):Indicate_LED(0x00|0x00);
+							HAL_Delay(50);
+						}
+						t_position start,goal;
+				  		start.x = start.y = 0;start.dir = North;
+				  		goal.x = MAZE_GOAL_X, goal.y = MAZE_GOAL_Y;
+				  		run_path.di_param_set(di_mode_1000_v0, 1);
+				  		run_path.di_param_set(di_mode_1000_v0, 1);
+				  		run_path.turn_time_set(mode_1000);
+						run_path.check_run_Dijkstra(start, Dir_None, goal, 2);
+
+						Mode_Disable();
+					}
 					break;
 				case ENABLE|0x0F:
 					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
@@ -262,9 +279,9 @@ namespace Mode
 		make_map map_data(&wall_data,&maze_q);
 		Dijkstra run_path(&wall_data);
 		const t_param *const *turn_mode;
-		turn_mode = mode_1000;
-		float acc  = 10.0;
-		float velo = 1.0;
+		turn_mode = mode_1200;
+		float acc  = 13.0;
+		float velo = 1.2;
 		uint32_t time = Interrupt::getInstance().return_time_count();
 		while(debug_end == False)
 		{
@@ -428,7 +445,7 @@ namespace Mode
 						  LogData::getInstance().log_enable = True;
 						  mp.turn_in(turn_mode[Turn_in_R45],Turn_in_R45);
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal( DIAG_SECTION,acc,velo,0.0);
+						  mp.diagonal( DIAG_SECTION*2,acc,velo,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  HAL_Delay(200);
 						  FAN_Motor_SetDuty(0);;
@@ -462,7 +479,7 @@ namespace Mode
 						  LogData::getInstance().log_enable = True;
 						  mp.turn_in(turn_mode[Turn_in_R135],Turn_in_R135);
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal( DIAG_SECTION,acc,velo,0.0);
+						  mp.diagonal( DIAG_SECTION*2,acc,velo,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  HAL_Delay(200);
 						  FAN_Motor_SetDuty(0);;
@@ -490,7 +507,7 @@ namespace Mode
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
@@ -524,7 +541,7 @@ namespace Mode
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
@@ -558,13 +575,13 @@ namespace Mode
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
 						  mp.turn_v90(turn_mode[Turn_RV90],Turn_RV90);
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal( SECTION,acc,velo,0.0);
+						  mp.diagonal( DIAG_SECTION*2,acc,velo,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  HAL_Delay(200);
 						  FAN_Motor_SetDuty(0);;
@@ -632,7 +649,7 @@ namespace Mode
 						  LogData::getInstance().log_enable = True;
 						  mp.turn_in(turn_mode[Turn_in_L45],Turn_in_L45);
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal( DIAG_SECTION,acc,velo,0.0);
+						  mp.diagonal( DIAG_SECTION*2,acc,velo,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  HAL_Delay(200);
 						  FAN_Motor_SetDuty(0);;
@@ -660,7 +677,7 @@ namespace Mode
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
@@ -694,7 +711,7 @@ namespace Mode
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
@@ -728,7 +745,7 @@ namespace Mode
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
@@ -788,9 +805,9 @@ namespace Mode
 		make_map map_data(&wall_data,&maze_q);
 		Dijkstra run_path(&wall_data);
 		const t_param *const *turn_mode;
-		turn_mode = mode_1200;
+		turn_mode = mode_1400;
 		float acc  = 12.0;
-		float velo = 1.2;
+		float velo = 1.4;
 		uint32_t time = Interrupt::getInstance().return_time_count();
 		while(debug_end == False)
 		{
@@ -832,7 +849,7 @@ namespace Mode
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
-						  mp.straight( 90.0*8.0,15.0,3.00,0.0);
+						  mp.straight( 90.0*8.0,20.0,3.50,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  /*
 						  mp.searchSlalom( &param_L90_search);
@@ -877,7 +894,7 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
@@ -911,7 +928,7 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
@@ -945,7 +962,7 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
@@ -955,7 +972,7 @@ namespace Mode
 						  LogData::getInstance().log_enable = True;
 						  mp.turn_in(turn_mode[Turn_in_R45],Turn_in_R45);
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal( DIAG_SECTION,acc,velo,0.0);
+						  mp.diagonal( DIAG_SECTION*2,acc,velo,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  HAL_Delay(200);
 						  FAN_Motor_SetDuty(0);;
@@ -979,7 +996,7 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
@@ -989,7 +1006,7 @@ namespace Mode
 						  LogData::getInstance().log_enable = True;
 						  mp.turn_in(turn_mode[Turn_in_R135],Turn_in_R135);
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal( DIAG_SECTION,acc,velo,0.0);
+						  mp.diagonal( DIAG_SECTION*2,acc,velo,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  HAL_Delay(200);
 						  FAN_Motor_SetDuty(0);;
@@ -1013,11 +1030,11 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
@@ -1047,11 +1064,11 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
@@ -1081,17 +1098,17 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
 						  mp.turn_v90(turn_mode[Turn_RV90],Turn_RV90);
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal( SECTION,acc,velo,0.0);
+						  mp.diagonal( DIAG_SECTION*2,acc,velo,0.0);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  HAL_Delay(200);
 						  FAN_Motor_SetDuty(0);;
@@ -1115,7 +1132,7 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
@@ -1149,7 +1166,7 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
@@ -1183,7 +1200,7 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
@@ -1217,11 +1234,11 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
@@ -1251,11 +1268,11 @@ namespace Mode
 						  mp.fix_wall( 400);
 						  for(int i = 50; i <= 500; i = i + 50)
 						  {
-							  FAN_Motor_SetDuty(i);;
+							  FAN_Motor_SetDuty(i*2);;
 							  HAL_Delay(5);
 						  }
 						  while(motion_task::getInstance().run_task !=No_run){}
-						  mp.diagonal(DIAG_SECTION,acc,velo,velo);
+						  mp.diagonal(DIAG_SECTION*2,acc,velo,velo);
 						  while(motion_task::getInstance().run_task !=No_run){}
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;

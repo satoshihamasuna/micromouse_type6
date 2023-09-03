@@ -121,6 +121,8 @@ class RunTask
 	public:
 		t_wall_controll is_wallControl_Enable = Non_controll;
 		float post_run_fix = 0.0;
+		float prev_run_fix = 0.0;
+		float turn_rmin_fix =0.0;
 		t_bool is_exe_runTask();
 		void set_stragith_sp_gain(float _kp,float _ki,float _kd);
 		void MotionFree(float *run_time,float run_time_limit);

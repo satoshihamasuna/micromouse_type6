@@ -48,8 +48,11 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 		}
 		if(SensingTask::getInstance().Division_Wall_Correction() == True)
 		{
-			machine_->length = (machine_->length + 45.0)/2.0f;
-			Indicate_LED(0xff);
+			if(mt_param.length == 90.0f)
+			{
+				machine_->length = (machine_->length + 45.0)/2.0f;
+				Indicate_LED(0xff);
+			}
 		}
 
 	}
@@ -289,6 +292,7 @@ void RunTask::pivotturn(t_motion_param mt_param,t_machine_param *target_,t_machi
 	set_run_mode_state(SPIN_TURN_MODE);
 	target_->velo  = 0.0;
 	target_ ->accel = 0.0;
+	machine_->x_point = 0.0f;
 	float deccel_radian = (mt_param.rad_max_velo*mt_param.rad_max_velo)/(2.0*ABS(mt_param.rad_accel));
 
 
@@ -346,6 +350,7 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 {
 	is_runTask = True;
 	target_->velo = turn_param->param->velo;
+	target_->accel = 0.0;
 	//if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
 	if(mt_param->turn_d == Prev_Turn)
 	{
@@ -380,7 +385,7 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 		is_wallControl_Enable = Enable_st;
 		set_run_mode_state(STRAIGHT_MODE);
 		run_turn_table_time = 0.0f;
-		if(machine_->length < turn_param->param->Lend+post_run_fix)
+		if(machine_->length < (turn_param->param->Lend+post_run_fix))
 		{
 			target_->velo = turn_param->param->velo;
 		}
@@ -404,8 +409,20 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 			float m = run_turn_table_time/turn_time_limit - (float)(std_a);
 			float n = (float)(std_b) - run_turn_table_time/turn_time_limit;
 			float set_rad_velo =  mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
-			target_->rad_accel = (set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
+
+			float next_time = (run_turn_table_time + delta_t_ms);
+			std_a = (int)(next_time/turn_time_limit);
+			std_b = std_a + 1;
+			m = next_time/turn_time_limit - (float)(std_a);
+			n = (float)(std_b) - next_time/turn_time_limit;
+
+			float next_rad_velo = 0.0;
+			if(next_time < (turn_time_limit*1000.0f))
+				next_rad_velo = mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
+
+			target_->rad_accel =(next_rad_velo - set_rad_velo)*1000.0f/delta_t_ms;//(set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
 			target_->rad_velo = set_rad_velo;
+			//target_->accel = ABS(machine_->accel);
 			Indicate_LED(0x04+0x08);
 		}
 		run_turn_table_time = run_turn_table_time + delta_t_ms;
@@ -418,7 +435,9 @@ void RunTask::search_slalom(t_motion_param *mt_param,const t_param *turn_param,t
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
 			machine_->radian = 0.0f;
+			machine_->x_point = 0.0f;
 			Indicate_LED(0x04);
+
 		}
 
 	}
@@ -435,17 +454,19 @@ void RunTask::turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machi
 {
 	is_runTask = True;
 	target_->velo = turn_param->param->velo;
-	if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
+	target_->accel = 0.0;
+	//if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
+	if(mt_param->turn_d == Prev_Turn)
 	{
 		is_wallControl_Enable = Enable_st;
 		run_turn_table_time = 0.0f;
 		set_run_mode_state(STRAIGHT_MODE);
-		if(machine_->length < turn_param->param->Lstart)
+		if(machine_->length < (turn_param->param->Lstart+prev_run_fix))
 		{
 			target_->velo = turn_param->param->velo;
 			if(SensingTask::getInstance().Division_Wall_Correction() == True)
 			{
-				//machine_->length = (0.2*machine_->length + 0.8*(0.0));
+				machine_->length = (0.2*machine_->length + 0.8*(6.0));
 				Indicate_LED(0xff);
 			}
 		}
@@ -456,12 +477,13 @@ void RunTask::turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machi
 		Indicate_LED(0x01);
 	}
 
-	if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)
+	//if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)
+	if(mt_param->turn_d == Post_Turn)
 	{
 		is_wallControl_Enable = Enable_di;
 		run_turn_table_time = 0.0f;
 		set_run_mode_state(DIAGONAL_MODE);
-		if(machine_->length < turn_param->param->Lend)
+		if(machine_->length < (turn_param->param->Lend+post_run_fix))
 		{
 			target_->velo = turn_param->param->velo;
 		}
@@ -485,21 +507,36 @@ void RunTask::turn_in(t_motion_param *mt_param,const t_param *turn_param,t_machi
 			float m = run_turn_table_time/turn_time_limit - (float)(std_a);
 			float n = (float)(std_b) - run_turn_table_time/turn_time_limit;
 			float set_rad_velo =  mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
-			target_->rad_accel = (set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
+
+			float next_time = (run_turn_table_time + delta_t_ms);
+			std_a = (int)(next_time/turn_time_limit);
+			std_b = std_a + 1;
+			m = next_time/turn_time_limit - (float)(std_a);
+			n = (float)(std_b) - next_time/turn_time_limit;
+
+			float next_rad_velo = 0.0;
+			if(next_time < (turn_time_limit*1000.0f))
+				next_rad_velo = mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
+
+			target_->rad_accel =(next_rad_velo - set_rad_velo)*1000.0f/delta_t_ms;//(set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
 			target_->rad_velo = set_rad_velo;
+			//target_->accel = (-1.0)*machine_->accel;
 			Indicate_LED(0x04+0x08);
 		}
 		run_turn_table_time = run_turn_table_time + delta_t_ms;
 		if(run_turn_table_time > (turn_time_limit*1000.0f))
 		{
 			mt_param->radian =  DEG2RAD(turn_param->param->degree);
-			mt_param->turn_d = Turn_None;
+			//mt_param->turn_d = Turn_None;
+			mt_param->turn_d = Post_Turn;
 			machine_->length = 0.0;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
 			machine_->radian = 0.0f;
+			machine_->x_point = 0.0f;
 			Indicate_LED(0x04);
+
 		}
 
 	}
@@ -516,8 +553,9 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 {
 	is_runTask = True;
 	target_->velo = turn_param->param->velo;
-
-	if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
+	target_->accel = 0.0;
+	//if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
+	if(mt_param->turn_d == Prev_Turn)
 	{
 		set_run_mode_state(DIAGONAL_MODE);
 		is_wallControl_Enable = Enable_di;
@@ -525,6 +563,18 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 		if(machine_->length < turn_param->param->Lstart)
 		{
 			target_->velo = turn_param->param->velo;
+			if(SensingTask::getInstance().Division_Wall_Correction() == True)
+			{
+				if(turn_param->param->turn_dir == Turn_R && SensingTask::getInstance().sen_r.is_wall == False)
+				{
+					machine_->length = (0.5*machine_->length + 0.5*(0.0));
+					Indicate_LED(0xff);
+				}else if(turn_param->param->turn_dir == Turn_L && SensingTask::getInstance().sen_l.is_wall == False)
+				{
+					machine_->length = (0.5*machine_->length + 0.5*(0.0));
+					Indicate_LED(0xff);
+				}
+			}
 		}
 		else
 		{
@@ -533,7 +583,8 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 		Indicate_LED(0x01);
 	}
 
-	if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)
+	//if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)
+	if(mt_param->turn_d == Post_Turn)
 	{
 		is_wallControl_Enable = Enable_st;
 		run_turn_table_time = 0.0f;
@@ -543,7 +594,7 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 			target_->velo = turn_param->param->velo;
 			if(SensingTask::getInstance().Division_Wall_Correction() == True)
 			{
-				//machine_->length = (machine_->length + turn_param->param->Lend)/2.0f;
+				machine_->length = (0.2*machine_->length + 0.8*(turn_param->param->Lend));
 				Indicate_LED(0xff);
 			}
 		}
@@ -568,21 +619,38 @@ void RunTask::turn_out(t_motion_param *mt_param,const t_param *turn_param,t_mach
 			float m = run_turn_table_time/turn_time_limit - (float)(std_a);
 			float n = (float)(std_b) - run_turn_table_time/turn_time_limit;
 			float set_rad_velo =  mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
-			target_->rad_accel = (set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
+
+			float next_time = (run_turn_table_time + delta_t_ms);
+			std_a = (int)(next_time/turn_time_limit);
+			std_b = std_a + 1;
+			m = next_time/turn_time_limit - (float)(std_a);
+			n = (float)(std_b) - next_time/turn_time_limit;
+
+			float next_rad_velo = 0.0;
+			if(next_time < (turn_time_limit*1000.0f))
+				next_rad_velo = mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
+
+			target_->rad_accel =(next_rad_velo - set_rad_velo)*1000.0f/delta_t_ms;//(set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
 			target_->rad_velo = set_rad_velo;
+			//target_->accel = (-1.0)*machine_->accel;
 			Indicate_LED(0x04+0x08);
 		}
 		run_turn_table_time = run_turn_table_time + delta_t_ms;
 		if(run_turn_table_time > (turn_time_limit*1000.0f))
 		{
 			mt_param->radian =  DEG2RAD(turn_param->param->degree);
-			mt_param->turn_d = Turn_None;
+			SensingTask::getInstance().Division_Wall_Correction_Reset();
+			motion_task::getInstance().ct.speed_ctrl.I_param_reset();
+			//mt_param->turn_d = Turn_None;
+			mt_param->turn_d = Post_Turn;
 			machine_->length = 0.0;
 			machine_->radian = 0.0f;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
+			machine_->x_point = 0.0f;
 			Indicate_LED(0x04);
+
 		}
 
 	}
@@ -597,40 +665,44 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 {
 	is_runTask = True;
 	target_->velo = turn_param->param->velo;
-;
-	if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
+	target_->accel = 0.0;
+	//if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
+	if(mt_param->turn_d == Prev_Turn)
 	{
 		is_wallControl_Enable = Enable_st;
 		run_turn_table_time = 0.0f;
 		set_run_mode_state(STRAIGHT_MODE);
-		if(machine_->length < turn_param->param->Lstart)
+		if(machine_->length < (turn_param->param->Lstart+prev_run_fix))
 		{
 			target_->velo = turn_param->param->velo;
 
 			if(SensingTask::getInstance().Division_Wall_Correction() == True)
 			{
-				//machine_->length = (0.2*machine_->length + 0.8*(0.0));
+				machine_->length = (0.2*machine_->length + 0.8*(5.0));
 				Indicate_LED(0xff);
 			}
 		}
 		else
 		{
 			mt_param->turn_d =  turn_param->param->turn_dir;
+			SensingTask::getInstance().Division_Wall_Correction_Reset();
 		}
 		Indicate_LED(0x01);
 	}
 
-	if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)
+	//if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)
+	if(mt_param->turn_d == Post_Turn)
 	{
 		is_wallControl_Enable = Enable_st;
 		run_turn_table_time = 0.0f;
 		set_run_mode_state(STRAIGHT_MODE);
-		if(machine_->length < turn_param->param->Lend)
+		if(machine_->length < (turn_param->param->Lend+post_run_fix))
 		{
 			target_->velo = turn_param->param->velo;
 			if(SensingTask::getInstance().Division_Wall_Correction() == True)
 			{
-				//machine_->length = (machine_->length + turn_param->param->Lend)/2.0f;
+
+				machine_->length = (0.2*machine_->length + 0.8*(turn_param->param->Lend+post_run_fix));
 				Indicate_LED(0xff);
 			}
 		}
@@ -654,20 +726,36 @@ void RunTask::long_turn(t_motion_param *mt_param,const t_param *turn_param,t_mac
 			float m = run_turn_table_time/turn_time_limit - (float)(std_a);
 			float n = (float)(std_b) - run_turn_table_time/turn_time_limit;
 			float set_rad_velo =  mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
-			target_->rad_accel = (set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
+
+			float next_time = (run_turn_table_time + delta_t_ms);
+			std_a = (int)(next_time/turn_time_limit);
+			std_b = std_a + 1;
+			m = next_time/turn_time_limit - (float)(std_a);
+			n = (float)(std_b) - next_time/turn_time_limit;
+
+			float next_rad_velo = 0.0;
+			if(next_time < (turn_time_limit*1000.0f))
+				next_rad_velo = mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
+
+			target_->rad_accel =(next_rad_velo - set_rad_velo)*1000.0f/delta_t_ms;//(set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
 			target_->rad_velo = set_rad_velo;
+			//target_->accel = (-1.0)*machine_->accel;
 			Indicate_LED(0x04+0x08);
 		}
 		run_turn_table_time = run_turn_table_time + delta_t_ms;
 		if(run_turn_table_time > (turn_time_limit*1000.0f))
 		{
 			mt_param->radian =  DEG2RAD(turn_param->param->degree);
-			mt_param->turn_d = Turn_None;
+			//mt_param->turn_d = Turn_None;
+			SensingTask::getInstance().Division_Wall_Correction_Reset();
+
+			mt_param->turn_d = Post_Turn;
 			machine_->length = 0.0;
 			machine_->radian = 0.0f;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
+			machine_->x_point = 0.0f;
 			Indicate_LED(0x04);
 		}
 
@@ -685,7 +773,9 @@ void RunTask::turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_mach
 {
 	is_runTask = True;
 	target_->velo = turn_param->param->velo;
-	if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
+	target_->accel = 0.0;
+	//if(mt_param->radian ==  0.0 && mt_param->turn_d == Turn_None)
+	if(mt_param->turn_d == Prev_Turn)
 	{
 		is_wallControl_Enable = Enable_di;
 		run_turn_table_time = 0.0f;
@@ -693,15 +783,29 @@ void RunTask::turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_mach
 		if(machine_->length < turn_param->param->Lstart)
 		{
 			target_->velo = turn_param->param->velo;
+			if(SensingTask::getInstance().Division_Wall_Correction() == True)
+			{
+				if(turn_param->param->turn_dir == Turn_R && SensingTask::getInstance().sen_r.is_wall == False)
+				{
+					machine_->length = (0.5*machine_->length + 0.5*(0.0));
+					Indicate_LED(0xff);
+				}else if(turn_param->param->turn_dir == Turn_L && SensingTask::getInstance().sen_l.is_wall == False)
+				{
+					machine_->length = (0.5*machine_->length + 0.5*(0.0));
+					Indicate_LED(0xff);
+				}
+			}
 		}
 		else
 		{
 			mt_param->turn_d =  turn_param->param->turn_dir;
+			motion_task::getInstance().ct.omega_ctrl.I_param_reset();
 		}
 		Indicate_LED(0x01);
 	}
 
-	if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)
+	//if(mt_param->radian ==  DEG2RAD(turn_param->param->degree) && mt_param->turn_d == Turn_None)
+	if(mt_param->turn_d == Post_Turn)
 	{
 		is_wallControl_Enable = Enable_di;
 		run_turn_table_time = 0.0f;
@@ -730,21 +834,37 @@ void RunTask::turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_mach
 			float m = run_turn_table_time/turn_time_limit - (float)(std_a);
 			float n = (float)(std_b) - run_turn_table_time/turn_time_limit;
 			float set_rad_velo =  mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
-			target_->rad_accel = (set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
+
+			float next_time = (run_turn_table_time + delta_t_ms);
+			std_a = (int)(next_time/turn_time_limit);
+			std_b = std_a + 1;
+			m = next_time/turn_time_limit - (float)(std_a);
+			n = (float)(std_b) - next_time/turn_time_limit;
+
+			float next_rad_velo = 0.0;
+			if(next_time < (turn_time_limit*1000.0f))
+				next_rad_velo = mt_param->rad_max_velo*(n*accel_table[std_a] + m*accel_table[std_b]);
+
+			target_->rad_accel =(next_rad_velo - set_rad_velo)*1000.0f/delta_t_ms;//(set_rad_velo - target_->rad_velo)*1000.0f/delta_t_ms;
 			target_->rad_velo = set_rad_velo;
+			//target_->accel = (-1.0)*machine_->accel;
 			Indicate_LED(0x04+0x08);
 		}
 		run_turn_table_time = run_turn_table_time + delta_t_ms;
 		if(run_turn_table_time > (turn_time_limit*1000.0f))
 		{
 			mt_param->radian =  DEG2RAD(turn_param->param->degree);
-			mt_param->turn_d = Turn_None;
+			//mt_param->turn_d = Turn_None;
+			mt_param->turn_d = Post_Turn;
 			machine_->length = 0.0;
-			machine_->radian = 0.0f;
+			machine_->radian = DEG2RAD(turn_param->param->degree)-machine_->radian;
 			target_->rad_velo = 0.0f;
 			target_->rad_accel = 0.0f;
 			target_->radian = 0.0f;
+			machine_->x_point = 0.0f;
+			motion_task::getInstance().ct.omega_ctrl.I_param_reset();
 			Indicate_LED(0x04);
+			motion_task::getInstance().ct.speed_ctrl.I_param_reset();
 		}
 
 	}

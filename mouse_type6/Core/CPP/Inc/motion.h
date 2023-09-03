@@ -23,6 +23,8 @@ class motion_task:public Singleton<motion_task>
 	public:
 		float V_r,V_l;
 		int motor_out_r,motor_out_l;
+		float ff_turn = 0.0f;
+		float ff_st = 0.0f;
 		float delta_t;
 		float run_time;
 		float run_time_limit;

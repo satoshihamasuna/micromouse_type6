@@ -27,7 +27,7 @@ extern "C" {
 #define MOTOR_K_TR		(0.54)	//0.4//0.594				//mNm/A
 #define MOTOR_R			(2.5)//6.0
 #define GEAR_N			(40.0/9.0)
-#define MOUSE_INERTIA	0.004f//0.001f//0.003,0.0022				//g・m^2
+#define MOUSE_INERTIA	0.0023f//0.001f//0.003,0.0022				//g・m^2
 #define RAD_2_RPM		60.0/(2.0*3.141592)
 #define TIRE_RADIUS_M	(TIRE_RADIUS/1000.0)		//m
 #define TREAD_WIDTH_M	((18.0-2.0)*2.0/1000.0)
@@ -70,9 +70,9 @@ extern "C" {
 #define MAZE_SIZE_Y  32
 #define MAZE_SIZE  1024
 
-#define MAZE_GOAL_X  3
+#define MAZE_GOAL_X  1
 #define MAZE_GOAL_Y  0
-#define MAZE_GOAL_SIZE  1
+#define MAZE_GOAL_SIZE  2
 #define MAP_MAX_VALUE 1024
 
 #ifdef __cplusplus
