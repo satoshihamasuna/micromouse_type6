@@ -41,6 +41,36 @@ void SensingTask::IrSensorSet()
 	filtering_z_radvelo = 0.95*filtering_z_radvelo + 0.05*motion_task::getInstance().mouse.rad_velo;
 }
 
+float SensingTask::IrSensor_adc2voltage(int16_t value)
+{
+	return (float)(value)/4096.0*3.3;
+}
+
+float SensingTask::IrSensor_Vce(int16_t value)
+{
+	return MAX(0.01,(3.30f - IrSensor_adc2voltage(value)));
+}
+
+float SensingTask::IrSensor_SensingCurrent(int16_t value)
+{
+	return (IrSensor_adc2voltage(value))/1000.0;
+}
+
+float SensingTask::IrSensor_RelativeCurrent(int16_t value)
+{
+	return (IrSensor_SensingCurrent(value))/((6.4)/5*IrSensor_Vce(value));
+}
+
+float SensingTask::IrSensor_Irradiance(int16_t value)
+{
+	float irradiance = IrSensor_RelativeCurrent(value);
+	if(irradiance > 4.0)
+	{
+		irradiance = irradiance * 2 -4.0f;
+	}
+	return irradiance;
+}
+
 float SensingTask::Sensor_CalcDistance(t_sensor_dir dir,int16_t value)
 {
 	float distance = 0.0f;

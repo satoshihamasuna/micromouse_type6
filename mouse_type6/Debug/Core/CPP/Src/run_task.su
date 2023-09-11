@@ -1,6 +1,6 @@
 run_task.h:146:8:void RunTask::set_run_mode_state(t_run_mode)	16	static
-sensing_task.h:31:10:t_bool SensingTask::Division_Wall_Correction()	24	static
-sensing_task.h:48:8:void SensingTask::Division_Wall_Correction_Reset()	16	static
+sensing_task.h:37:10:t_bool SensingTask::Division_Wall_Correction()	24	static
+sensing_task.h:54:8:void SensingTask::Division_Wall_Correction_Reset()	16	static
 run_task.cpp:17:6:void RunTask::MotionFree(float*, float)	24	static
 run_task.cpp:30:6:void RunTask::search_straight(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
 run_task.cpp:121:6:void RunTask::straight(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static

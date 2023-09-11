@@ -36,9 +36,9 @@ Core/CPP/Src/log_data.o: ../Core/CPP/Src/log_data.cpp \
  ../Core/CPP/Src/../../Module/Include/typedef.h \
  ../Core/CPP/Src/../../Module/Include/lsm6dsr_reg.h \
  ../Core/CPP/Src/../../Module/Include/macro.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/log_data.h \
- C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/singleton.h \
- c:\users\sato1\documents\git\mouse_type6_program\micromouse_type6\mouse_type6\core\module\include\typedef.h
+ C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/log_data.h \
+ C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/singleton.h \
+ c:\users\sato1\desktop\micromouse_type6\mouse_type6\core\module\include\typedef.h
 
 ../Core/CPP/Src/../../Module/Include/index.h:
 
@@ -126,8 +126,8 @@ Core/CPP/Src/log_data.o: ../Core/CPP/Src/log_data.cpp \
 
 ../Core/CPP/Src/../../Module/Include/macro.h:
 
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/log_data.h:
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/log_data.h:
 
-C:/Users/sato1/Documents/git/mouse_type6_program/micromouse_type6/mouse_type6/Core/CPP/Inc/singleton.h:
+C:/Users/sato1/Desktop/micromouse_type6/mouse_type6/Core/CPP/Inc/singleton.h:
 
-c:\users\sato1\documents\git\mouse_type6_program\micromouse_type6\mouse_type6\core\module\include\typedef.h:
+c:\users\sato1\desktop\micromouse_type6\mouse_type6\core\module\include\typedef.h:

@@ -18,11 +18,17 @@ class SensingTask:public Singleton<SensingTask>
 {
 	private:
 		float Sensor_CalcDistance(t_sensor_dir dir,int16_t value);
+		float IrSensor_adc2voltage(int16_t value);
+		float IrSensor_Vce(int16_t value);
+		float IrSensor_SensingCurrent(int16_t value);
+		float IrSensor_RelativeCurrent(int16_t value);
+
 	public:
 		t_sensor sen_fr,sen_fl,sen_r,sen_l;
 		t_bool r_check,l_check,wall_correction;
 
 		t_wall_state conv_Sensin2Wall(t_sensor_dir sens_dir);
+		float IrSensor_Irradiance(int16_t value);
 		void IrSensorSet();
 		void IrSensorDistanceSet();
 		int16_t IrSensor_Avg();

@@ -1363,17 +1363,17 @@ namespace Mode
 					 break;
 			  	    break;
 				case ENABLE|0x01:
-			  	   if(SensingTask::getInstance().IrSensor_Avg() > 2500){
-						  for(int i = 0;i < 11;i++)
-						  {
-							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
-							  HAL_Delay(50);
-						  }
-
-						  enable = 0x00;
-						  HAL_Delay(500);
-			  	    }
-					break;
+					 float on_fr,off_fr,on_fl,off_fl;
+					 int16_t int_on_fr,int_off_fr,int_on_fl,int_off_fl;
+					 int_on_fr = ADC_get_value(LED_FR_ON);
+					 fr = SensingTask::getInstance().sen_fr.distance;	fl = SensingTask::getInstance().sen_fl.distance;
+					 sr = SensingTask::getInstance().sen_r.distance;	sl = SensingTask::getInstance().sen_l.distance;
+					 int_fr = SensingTask::getInstance().sen_fr.value;	int_fl = SensingTask::getInstance().sen_fl.value;
+					 int_sr = SensingTask::getInstance().sen_r.value;	int_sl = SensingTask::getInstance().sen_l.value;
+					 printf("fr:%f,fl:%f,sr:%f,sl:%f\n",fr,fl,sr,sl);
+					 printf("fr:%4d,fl:%4d,sr:%4d,sl:%4d\n",int_fr,int_fl,int_sr,int_sl);
+					 break;
+				 break;
 				case ENABLE|0x02:
 					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
 						  for(int i = 0;i < 11;i++)

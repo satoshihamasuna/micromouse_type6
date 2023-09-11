@@ -9,7 +9,7 @@ mode.cpp:36:10:uint8_t Mode::Select(uint8_t, uint8_t, t_encoder)	24	static
 mode.cpp:51:7:void Mode::Demo()	45296	static
 mode.cpp:267:7:void Mode::Debug()	45320	static
 mode.cpp:793:7:void Mode::Debug2()	45320	static
-mode.cpp:1319:7:void Mode::Interface_Check()	45312	static
+mode.cpp:1319:7:void Mode::Interface_Check()	45304	static
 mode.cpp:1538:7:void Mode::Select_Mode()	64	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = Interrupt]	4	static
 queue_class.h:22:3:ring_queue<SIZE, T>::ring_queue() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static

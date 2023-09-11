@@ -6,16 +6,19 @@
  */
 
 #include "../Include/index.h"
+#include "../Include/typedef.h"
 #include "tim.h"
 #include "dma.h"
 #include "stm32f4xx_hal.h"
+
+
 
 #define NUM_ADC				(10)
 #define GET_ADC_DATA(x)		adc_value[x-1]
 
 #define	SENSOR_ALL_PATTERN		((photo_sr_Pin|photo_sl_Pin|photo_fr_Pin|photo_fl_Pin))
 //#define	SENSOR_ALL_PATTERN		((LED1_Pin|LED4_Pin))
-
+/*
 typedef  enum {
 	LED_FL_ON 	= 2,
 	LED_FL_OFF 	= 3,
@@ -26,6 +29,7 @@ typedef  enum {
 	LED_FR_ON 	= 0,
 	LED_FR_OFF 	= 1,
 }t_sensor_mode;
+*/
 
 static uint32_t		led_on_pattern[NUM_ADC]  	= {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};				// LED点灯コマンド
 

@@ -35,7 +35,8 @@ Core/Module/Src/ir_sensor.o: ../Core/Module/Src/ir_sensor.c \
  ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
  ../Core/Module/Src/../Include/typedef.h \
  ../Core/Module/Src/../Include/lsm6dsr_reg.h \
- ../Core/Module/Src/../Include/macro.h
+ ../Core/Module/Src/../Include/macro.h \
+ ../Core/Module/Src/../Include/typedef.h
 
 ../Core/Module/Src/../Include/index.h:
 
@@ -122,3 +123,5 @@ Core/Module/Src/ir_sensor.o: ../Core/Module/Src/ir_sensor.c \
 ../Core/Module/Src/../Include/lsm6dsr_reg.h:
 
 ../Core/Module/Src/../Include/macro.h:
+
+../Core/Module/Src/../Include/typedef.h:

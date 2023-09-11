@@ -65,6 +65,18 @@ typedef enum{
 	Dir_None	= 8,
 }t_direction;
 
+typedef  enum {
+	LED_FL_ON 	= 2,
+	LED_FL_OFF 	= 3,
+	LED_SL_ON 	= 6,
+	LED_SL_OFF 	= 7,
+	LED_SR_ON 	= 4,
+	LED_SR_OFF 	= 5,
+	LED_FR_ON 	= 0,
+	LED_FR_OFF 	= 1,
+}t_sensor_mode;
+
+
 typedef struct{
 	uint8_t x;
 	uint8_t y;

@@ -1,7 +1,7 @@
 run_task.h:91:8:void PID_Setting::set_sp_gain(float, float, float)	24	static
 run_task.h:97:8:void PID_Setting::set_om_gain(float, float, float)	24	static
 run_task.h:141:8:void RunTask::reset_brake_time()	16	static
-sensing_task.h:48:8:void SensingTask::Division_Wall_Correction_Reset()	16	static
+sensing_task.h:54:8:void SensingTask::Division_Wall_Correction_Reset()	16	static
 motion_plan.cpp:16:6:void motion_plan::motion_start()	16	static
 motion_plan.cpp:33:6:void motion_plan::free_rotation()	16	static
 motion_plan.cpp:40:6:void motion_plan::search_straight(float, float, float, float)	88	static
