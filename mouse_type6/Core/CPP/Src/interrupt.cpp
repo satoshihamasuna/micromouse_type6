@@ -58,7 +58,7 @@ void Interrupt::preprocess(){
 
 	acc_time_cnt = (acc_time_cnt == (ACC_BUFF_SIZE-1))? 0:acc_time_cnt + 1;
 	float sp = KalmanFilter::getInstance().calc_speed_filter((-1.0)*acc_sum/((float)(ACC_BUFF_SIZE)), velo_sum/((float)(ACC_BUFF_SIZE)));
-	motion_task::getInstance().mouse.velo 	  = sp;//(Renc.wheel_speed - Lenc.wheel_speed)/2.0;
+	motion_task::getInstance().mouse.velo 	  = (-1.0/2.0f)*acc_sum/((float)(ACC_BUFF_SIZE))*((float)(ACC_BUFF_SIZE))/1000.0f+velo_sum/((float)(ACC_BUFF_SIZE));//sp;//(Renc.wheel_speed - Lenc.wheel_speed)/2.0;
 	lambda_slip = (MAX(sp,(Renc.wheel_speed - Lenc.wheel_speed)/2.0) == 0.0f) ? 0.0 : (sp-(Renc.wheel_speed - Lenc.wheel_speed)/2.0)/MAX(sp,(Renc.wheel_speed - Lenc.wheel_speed)/2.0);
 	if(lambda_slip >= 0.2) lambda_slip = 0.2;
 	else if(lambda_slip <= -0.2) lambda_slip = -0.2;
@@ -94,8 +94,8 @@ void Interrupt::postprocess()
 		LogData::getInstance().data[3][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.rad_velo;
 		LogData::getInstance().data[4][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.length ;
 		LogData::getInstance().data[5][LogData::getInstance().data_count%1000] = Battery_GetVoltage()  ;
-		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = motion_task::getInstance().ff_st;
-		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.x_point;
+		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = acc_sum;
+		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = velo_sum ;
 		LogData::getInstance().data[8][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_r.distance;//Rvelo_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[9][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_l.distance;//Lvelo_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[10][LogData::getInstance().data_count%1000] = motion_task::getInstance().V_r;

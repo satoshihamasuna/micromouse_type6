@@ -161,7 +161,7 @@ namespace Mode
 				  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
 				  		KalmanFilter::getInstance().filter_init();
 				  		run_path.turn_time_set(mode_1000);
-						run_path.run_Dijkstra_suction(		start, Dir_None, goal,MAZE_GOAL_SIZE,900,
+						run_path.run_Dijkstra_suction(		start, Dir_None, goal,MAZE_GOAL_SIZE,800,
 															st_mode_1000_v0, (int)(sizeof(st_mode_1000_v0)/sizeof(t_straight_param *const)),
 															di_mode_1000_v0, (int)(sizeof(di_mode_1000_v0)/sizeof(t_straight_param *const)), mode_1000,&mp);
 
@@ -180,7 +180,7 @@ namespace Mode
 				  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
 				  		KalmanFilter::getInstance().filter_init();
 				  		run_path.turn_time_set(mode_1000);
-						run_path.run_Dijkstra_suction(		start, Dir_None, goal, MAZE_GOAL_SIZE,900,
+						run_path.run_Dijkstra_suction(		start, Dir_None, goal, MAZE_GOAL_SIZE,800,
 															st_mode_1000_v1, (int)(sizeof(st_mode_1000_v1)/sizeof(t_straight_param *const)),
 															di_mode_1000_v1, (int)(sizeof(di_mode_1000_v1)/sizeof(t_straight_param *const)), mode_1000,&mp);
 
@@ -199,7 +199,7 @@ namespace Mode
 				  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
 				  		KalmanFilter::getInstance().filter_init();
 				  		run_path.turn_time_set(mode_1200);
-						run_path.run_Dijkstra_suction(		start, Dir_None, goal, MAZE_GOAL_SIZE,900,
+						run_path.run_Dijkstra_suction(		start, Dir_None, goal, MAZE_GOAL_SIZE,800,
 															st_mode_1200_v0, (int)(sizeof(st_mode_1200_v0)/sizeof(t_straight_param *const)),
 															di_mode_1200_v0, (int)(sizeof(di_mode_1200_v0)/sizeof(t_straight_param *const)), mode_1200,&mp);
 
@@ -218,7 +218,7 @@ namespace Mode
 				  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
 				  		KalmanFilter::getInstance().filter_init();
 				  		run_path.turn_time_set(mode_1400);
-						run_path.run_Dijkstra_suction(		start, Dir_None, goal, MAZE_GOAL_SIZE,900,
+						run_path.run_Dijkstra_suction(		start, Dir_None, goal, MAZE_GOAL_SIZE,800,
 															st_mode_1400_v0, (int)(sizeof(st_mode_1400_v0)/sizeof(t_straight_param *const)),
 															di_mode_1400_v0, (int)(sizeof(di_mode_1400_v0)/sizeof(t_straight_param *const)), mode_1400,&mp);
 
@@ -872,8 +872,14 @@ namespace Mode
 							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
 							  HAL_Delay(50);
 						  }
-						  HAL_Delay(300);
-			  			  FAN_Motor_SetDuty(700);;
+						 // mp.motion_start();
+						 // mp.fix_wall(  10000);
+							for(int i = 10; i <= 800; i = i + 10)
+							{
+								FAN_Motor_SetDuty(i);;
+								HAL_Delay(10);
+							}
+						  //while(motion_task::getInstance().run_task !=No_run){}
 			  			  HAL_Delay(10000);
 			  			  FAN_Motor_SetDuty(0);;
 			  			  HAL_Delay(100);
@@ -1365,7 +1371,9 @@ namespace Mode
 				case ENABLE|0x01:
 					 float on_fr,off_fr,on_fl,off_fl;
 					 int16_t int_on_fr,int_off_fr,int_on_fl,int_off_fl;
-					 int_on_fr = ADC_get_value(LED_FR_ON);
+					 int_on_fr = ADC_get_value(LED_FR_ON);int_off_fr = ADC_get_value(LED_FR_OFF);
+					 int_on_fl = ADC_get_value(LED_FL_ON);int_off_fl = ADC_get_value(LED_FL_OFF);
+
 					 fr = SensingTask::getInstance().sen_fr.distance;	fl = SensingTask::getInstance().sen_fl.distance;
 					 sr = SensingTask::getInstance().sen_r.distance;	sl = SensingTask::getInstance().sen_l.distance;
 					 int_fr = SensingTask::getInstance().sen_fr.value;	int_fl = SensingTask::getInstance().sen_fl.value;

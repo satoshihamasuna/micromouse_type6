@@ -124,9 +124,11 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 	is_wallControl_Enable = Enable_st;
 	is_runTask = True;
 	set_run_mode_state(STRAIGHT_MODE);
+
 	float deccel_length = 1000*(mt_param.max_velo*mt_param.max_velo
 								-mt_param.end_velo*mt_param.end_velo)
-								/(2.0*ABS(mt_param.deccel)) + 20.0;
+								/(2.0*ABS(mt_param.deccel)) + 0.0;
+	if(mt_param.max_velo > mt_param.end_velo) deccel_length += 10.0;
 	if(deccel_length < ( mt_param.length - machine_->length ))
 	{
 		target_->accel = mt_param.accel;

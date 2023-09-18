@@ -11,7 +11,7 @@
 #include "make_path.h"
 #include "run_task.h"
 #include "motion.h"
-
+#include "log_data.h"
 #define DIJKSTRA_MAX_TIME (65535-1)
 
 t_posDijkstra Dijkstra::conv_t_pos2t_posDijkstra(t_position pos,t_direction wall_pos)
@@ -617,14 +617,16 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 	}
 
 	motionPlan->motion_start();
-	motionPlan->fix_wall(  800);
-	for(int i = 50; i <= suction; i = i + 50)
+	motionPlan->fix_wall( suction+200);
+	for(int i = 10; i <= suction; i = i + 10)
 	{
 		FAN_Motor_SetDuty(i);;
-		HAL_Delay(5);
+		HAL_Delay(10);
 	}
 	while(motion_task::getInstance().run_task !=No_run){}
 	motionPlan->motion_start( );
+	  LogData::getInstance().data_count = 0;
+	  LogData::getInstance().log_enable = True;
 	motionPlan->straight(  15.0, straight_base_velo().param->acc, straight_base_velo().param->max_velo, straight_base_velo().param->max_velo);
 	while(motion_task::getInstance().run_task !=No_run);
 	uint16_t section_count = 0;

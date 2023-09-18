@@ -577,8 +577,8 @@ void motion_plan::fix_wall(float set_time)
 	move_task->run_time = 0.0;
 	move_task->rT.is_wallControl_Enable = Non_controll;
 	SensingTask::getInstance().Division_Wall_Correction_Reset();
-	move_task->straight_gain_set.set_sp_gain(6.00, 0.05, 0.00);
+	move_task->straight_gain_set.set_sp_gain(6.0, 0.01, 0.0);
 	move_task->straight_gain_set.set_om_gain(0.05, 0.01, 0.00);
 	move_task->turn_gain_set.set_sp_gain(6.0, 0.05, 0.0);
-	move_task->turn_gain_set.set_om_gain(0.4, 0.05, 0.0);
+	move_task->turn_gain_set.set_om_gain(0.4, 0.05, 0.00);
 }

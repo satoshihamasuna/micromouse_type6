@@ -58,7 +58,7 @@ float SensingTask::IrSensor_SensingCurrent(int16_t value)
 
 float SensingTask::IrSensor_RelativeCurrent(int16_t value)
 {
-	return (IrSensor_SensingCurrent(value))/((6.4)/5*IrSensor_Vce(value));
+	return (IrSensor_SensingCurrent(value))/((6.4)/5*IrSensor_Vce(value))*1000.0f;
 }
 
 float SensingTask::IrSensor_Irradiance(int16_t value)

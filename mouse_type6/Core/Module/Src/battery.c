@@ -8,8 +8,8 @@
 
 #include "../Include/index.h"
 
-#define BATTRY_REFERENCE	(3.25f)
-#define BATTERY_LIMIT		(3.4f)
+#define BATTRY_REFERENCE	(3.30f)
+#define BATTERY_LIMIT		(3.5f)
 
 
 float Battery_GetVoltage(){

@@ -10,7 +10,7 @@
 
 #include "singleton.h"
 
-#define ACC_BUFF_SIZE (10)
+#define ACC_BUFF_SIZE (30)
 
 class Interrupt:public Singleton<Interrupt>
 {
