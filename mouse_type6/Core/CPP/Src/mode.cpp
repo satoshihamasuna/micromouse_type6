@@ -1361,8 +1361,8 @@ namespace Mode
 					 float fr,fl,sr,sl;
 					 int16_t int_fr,int_fl,int_sr,int_sl;
 					 fr = SensingTask::getInstance().sen_fr.distance;	fl = SensingTask::getInstance().sen_fl.distance;
-					 sr = SensingTask::getInstance().sen_r.distance;	sl = SensingTask::getInstance().sen_l.distance;
-					 int_fr = SensingTask::getInstance().sen_fr.value;	int_fl = SensingTask::getInstance().sen_fl.value;
+					 sr = SensingTask::getInstance().sen_r.avg_distance;	sl = SensingTask::getInstance().sen_l.avg_distance;
+					 int_fr = SensingTask::getInstance().sen_r.value_sum;	int_fl = SensingTask::getInstance().sen_l.value_sum;
 					 int_sr = SensingTask::getInstance().sen_r.value;	int_sl = SensingTask::getInstance().sen_l.value;
 					 printf("fr:%f,fl:%f,sr:%f,sl:%f\n",fr,fl,sr,sl);
 					 printf("fr:%4d,fl:%4d,sr:%4d,sl:%4d\n",int_fr,int_fl,int_sr,int_sl);

@@ -144,6 +144,9 @@ typedef struct{
 	float controll_th;
 	uint16_t controll_cnt;
 	float error;
+	int16_t value_log[20];
+	int value_sum;
+	float avg_distance;
 }t_sensor;
 
 

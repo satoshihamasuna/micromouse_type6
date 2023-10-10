@@ -23,6 +23,9 @@ class Search
 	public:
 		t_position search_adachi_1(	t_position start_pos,	t_position goal_pos,	int goal_size,
 									wall_class *_wall,		make_map *_map,			motion_plan *motion_plan );
+		t_position search_adachi_1_acc(	t_position start_pos,t_position goal_pos,int goal_size,
+												wall_class *_wall,make_map *_map,motion_plan *motion_plan);
+
 		t_position search_adachi_2(	t_position start_pos,	t_position goal_pos,	int goal_size,
 									wall_class *_wall,		make_map *_map,			motion_plan *motion_plan );
 

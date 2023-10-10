@@ -138,21 +138,24 @@ void motion_task::motionControll()
 
 
 		float ctrl_battery = battery;
-		//if(battery < 3.30f) battery = 3.30f;
+		if(ctrl_battery < 3.30f) ctrl_battery = 3.30f;
 
-		float ctrl_limit = ABS((sp_FF_controll_r + sp_FF_controll_l)/2.0) + ABS((sp_FF_controll_r - sp_FF_controll_l)/2.0);
+		float ctrl_limit = MAX( ABS( (sp_FF_controll_r + sp_FF_controll_l)/2.0 + ((sp_FF_controll_r - sp_FF_controll_l)/2.0)),
+								ABS(-(sp_FF_controll_r + sp_FF_controll_l)/2.0 + ((sp_FF_controll_r - sp_FF_controll_l)/2.0)));
 
-		if( ctrl_limit < battery )
+		if( ctrl_limit < ctrl_battery )
 		{
 			//sp_fb_controll = ct.speed_ctrl.Anti_windup_2(sp_fb_controll,battery- ctrl_limit);
-			sp_fb_controll = ct.speed_ctrl.Anti_windup_1(sp_fb_controll,battery- ctrl_limit);
+			sp_fb_controll = ct.speed_ctrl.Anti_windup_1(sp_fb_controll,ctrl_battery - ctrl_limit);
 			//om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll + (sp_FF_controll_r - sp_FF_controll_l)/2.0, (battery- ABS(sp_FF_controll_r+sp_FF_controll_l)/2.0)) - (sp_FF_controll_r - sp_FF_controll_l)/2.0;
-			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll,battery- ctrl_limit);
+			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll,ctrl_battery - ctrl_limit);
 		}
 		else
 		{
-			sp_fb_controll = ct.speed_ctrl.Anti_windup_1(sp_fb_controll+(sp_FF_controll_r + sp_FF_controll_l)/2.0, battery/ctrl_limit*ABS((sp_FF_controll_r + sp_FF_controll_l)/2.0))-(sp_FF_controll_r + sp_FF_controll_l)/2.0;
-			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll+(sp_FF_controll_r - sp_FF_controll_l)/2.0, battery/ctrl_limit*ABS((sp_FF_controll_r - sp_FF_controll_l)/2.0))-(sp_FF_controll_r - sp_FF_controll_l)/2.0;
+			//sp_fb_controll = ct.speed_ctrl.Anti_windup_1(sp_fb_controll+(sp_FF_controll_r + sp_FF_controll_l)/2.0, battery/ctrl_limit*ABS((sp_FF_controll_r + sp_FF_controll_l)/2.0))-(sp_FF_controll_r + sp_FF_controll_l)/2.0;
+			//om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll+(sp_FF_controll_r - sp_FF_controll_l)/2.0, battery/ctrl_limit*ABS((sp_FF_controll_r - sp_FF_controll_l)/2.0))-(sp_FF_controll_r - sp_FF_controll_l)/2.0;
+			sp_fb_controll = ct.speed_ctrl.Anti_windup_1(sp_fb_controll+(sp_FF_controll_r + sp_FF_controll_l)/2.0,ctrl_battery) - (sp_FF_controll_r + sp_FF_controll_l)/2.0;
+			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll+(sp_FF_controll_r - sp_FF_controll_l)/2.0,ctrl_battery) - (sp_FF_controll_r - sp_FF_controll_l)/2.0;
 		}
 		//printf("initerrupt%lf\n",sp_fb_controll);
 		V_r += sp_FF_controll_r;
