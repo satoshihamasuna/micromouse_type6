@@ -100,9 +100,9 @@ namespace Mode
 						motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
 						motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
 						KalmanFilter::getInstance().filter_init();
-						t_position return_pos = solve_maze.search_adachi_1(start, goal, goal_size, &wall_data, &map_data,&mp);
+						t_position return_pos = solve_maze.search_adachi_1_acc(start, goal, goal_size, &wall_data, &map_data,&mp);
 						write_save_data(&wall_data);
-						solve_maze.search_adachi_2(return_pos, start, 1, &wall_data, &map_data,&mp);
+						solve_maze.search_adachi_2_acc(return_pos, start, 1, &wall_data, &map_data,&mp);
 						write_save_data(&wall_data);
 						enable = 0x00;
 					}
@@ -218,7 +218,7 @@ namespace Mode
 				  		motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.01, 0.0);
 				  		KalmanFilter::getInstance().filter_init();
 				  		run_path.turn_time_set(mode_1400);
-						run_path.run_Dijkstra_suction(		start, Dir_None, goal, MAZE_GOAL_SIZE,800,
+						run_path.run_Dijkstra_suction(		start, Dir_None, goal, MAZE_GOAL_SIZE,950,
 															st_mode_1400_v0, (int)(sizeof(st_mode_1400_v0)/sizeof(t_straight_param *const)),
 															di_mode_1400_v0, (int)(sizeof(di_mode_1400_v0)/sizeof(t_straight_param *const)), mode_1400,&mp);
 
