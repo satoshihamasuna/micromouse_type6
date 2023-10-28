@@ -70,8 +70,8 @@ extern "C" {
 #define MAZE_SIZE_Y  32
 #define MAZE_SIZE  1024
 
-#define MAZE_GOAL_X  1
-#define MAZE_GOAL_Y  0
+#define MAZE_GOAL_X  7
+#define MAZE_GOAL_Y  7
 #define MAZE_GOAL_SIZE  2
 #define MAP_MAX_VALUE 1024
 

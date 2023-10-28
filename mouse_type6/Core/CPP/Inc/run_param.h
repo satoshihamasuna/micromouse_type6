@@ -164,9 +164,10 @@ const static t_straight_param *const st_mode_500_v0[] = {&st_param_500,&st_param
 const static t_straight_param *const st_mode_1000_v0[] = {&st_param_1000};
 const static t_straight_param *const st_mode_1000_v1[] = {&st_param_1000,&st_param_1100,&st_param_1200,&st_param_1300,&st_param_1400,&st_param_1500,&st_param_2000};
 const static t_straight_param *const st_mode_1200_v0[] = {&st_param_1200,&st_param_1300,&st_param_1400,&st_param_1500};
-const static t_straight_param *const st_mode_1200_v1[] = {&st_param_1200,&st_param_1300,&st_param_1400,&st_param_1500};
+const static t_straight_param *const st_mode_1200_v1[] = {&st_param_1200,&st_param_1300,&st_param_1400,&st_param_1500,&st_param_1600,&st_param_1800,&st_param_2000};
 const static t_straight_param *const st_mode_1400_v0[] = {	&st_param_1400,&st_param_1600,&st_param_1800,&st_param_2000,&st_param_2200,&st_param_2400,
 															&st_param_2600,&st_param_2800,&st_param_3000	};
+const static t_straight_param *const st_mode_1400_v1[] = {	&st_param_1400,&st_param_1600,&st_param_1800,&st_param_2000};
 
 const static t_straight_param *const di_mode_300_v0[] = {&st_param_300};
 const static t_straight_param *const di_mode_300_v1[] = {&st_param_300,&st_param_500};
@@ -174,8 +175,9 @@ const static t_straight_param *const di_mode_500_v0[] = {&st_param_500,&st_param
 const static t_straight_param *const di_mode_1000_v0[] = {&st_param_1000};
 const static t_straight_param *const di_mode_1000_v1[] = {&st_param_1000,&st_param_1100,&st_param_1200,&st_param_1300,&st_param_1400,&st_param_1500,&st_param_2000};
 const static t_straight_param *const di_mode_1200_v0[] = {&st_param_1200,&st_param_1300,&st_param_1400,&st_param_1500};
-const static t_straight_param *const di_mode_1200_v1[] = {&st_param_1200,&st_param_1300,&st_param_1400,&st_param_1500};
+const static t_straight_param *const di_mode_1200_v1[] = {&st_param_1200,&st_param_1300,&st_param_1400,&st_param_1500,&st_param_1600,&st_param_1800,&st_param_2000};
 const static t_straight_param *const di_mode_1400_v0[] = {&st_param_1400,&st_param_1600,&st_param_1800,&st_param_2000};
+const static t_straight_param *const di_mode_1400_v1[] = {	&st_param_1400,&st_param_1600,&st_param_1800,&st_param_2000};
 
 const static t_pid_gain sp_gain_dummy = {0.0f,0.0f,0.0f};
 const static t_pid_gain om_gain_dummy = {0.0f, 0.0f, 0.0f};
