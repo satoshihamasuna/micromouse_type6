@@ -67,8 +67,8 @@ void motion_task::motion_inInterrupt(){
 				rT.fix_wall(&target, &run_time, run_time_limit, 1.0);
 				break;
 		default:
-				target.accel = 0.0;
-				target.velo  = 0.0;
+				//target.accel = 0.0;
+				//target.velo  = 0.0;
 				Motor_SetDuty_Left(0);
 				Motor_SetDuty_Right(0);
 			break;

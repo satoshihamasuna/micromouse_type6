@@ -235,10 +235,12 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,t_machine_par
 	if(sen_r.is_controll == True && sen_l.is_controll == True)
 	{
 		ir_rad_acc_controll = (sen_l.error - sen_r.error)/2.0;
+		machine_->x_point = ir_rad_acc_controll;
 	}
 	else
 	{
 		ir_rad_acc_controll = (sen_l.error - sen_r.error);
+		machine_->x_point = ir_rad_acc_controll;
 	}
 
 	if(sen_r.is_controll == True || sen_l.is_controll == True)
@@ -260,8 +262,8 @@ void SensingTask::SetWallControll_RadVelo(t_machine_param *target_,t_machine_par
 	else
 	{
 
-		float s = k2*machine_->radian;//k1*machine_->x_point+k2*machine_->radian;
-		//float s = k1*machine_->x_point+k2*machine_->radian;
+		//float s = k2*machine_->radian;//k1*machine_->x_point+k2*machine_->radian;
+		float s = k1*machine_->x_point+k2*machine_->radian;
 
 		float s_dot = k1*target_->velo*1000.0*target_->radian*1.0 + k2*target_->rad_velo;
 		target_->rad_accel = (-1.0)*300.0*s/k2 - 60.0*1.0/k2*s_dot

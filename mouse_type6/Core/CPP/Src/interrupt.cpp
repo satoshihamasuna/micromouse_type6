@@ -68,7 +68,7 @@ void Interrupt::preprocess(){
 	motion_task::getInstance().mouse.radian  += motion_task::getInstance().mouse.rad_velo/1000.0;
 	//if(motion_task::getInstance().run_task == Straight || motion_task::getInstance().run_task == Diagonal || motion_task::getInstance().run_task == Search_st_section )
 	//{
-	//motion_task::getInstance().mouse.x_point += motion_task::getInstance().mouse.velo*motion_task::getInstance().mouse.radian;
+	motion_task::getInstance().mouse.x_point += (1.0)*(Renc.wheel_speed - Lenc.wheel_speed)/2.0*motion_task::getInstance().mouse.radian;
 	//}
 	//else
 	//{
