@@ -5,13 +5,13 @@ sensing_task.h:54:8:void SensingTask::Division_Wall_Correction_Reset()	16	static
 motion_plan.cpp:16:6:void motion_plan::motion_start()	16	static
 motion_plan.cpp:33:6:void motion_plan::free_rotation()	16	static
 motion_plan.cpp:40:6:void motion_plan::search_straight(float, float, float, float)	88	static
-motion_plan.cpp:77:6:void motion_plan::straight(float, float, float, float)	88	static
-motion_plan.cpp:115:6:void motion_plan::diagonal(float, float, float, float)	88	static
-motion_plan.cpp:152:6:void motion_plan::pivot_turn(float, float, float)	80	static
-motion_plan.cpp:187:6:void motion_plan::searchSlalom(const t_param*)	72	static
-motion_plan.cpp:235:6:void motion_plan::turn_in(const t_param*, t_run_pattern)	120	static
-motion_plan.cpp:346:6:void motion_plan::turn_out(const t_param*, t_run_pattern)	80	static
-motion_plan.cpp:381:6:void motion_plan::long_turn(const t_param*, t_run_pattern)	144	static
-motion_plan.cpp:517:6:void motion_plan::turn_v90(const t_param*, t_run_pattern)	80	static
-motion_plan.cpp:556:6:void motion_plan::fix_wall(float)	72	static
+motion_plan.cpp:77:6:void motion_plan::straight(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	96	static
+motion_plan.cpp:117:6:void motion_plan::diagonal(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	96	static
+motion_plan.cpp:156:6:void motion_plan::pivot_turn(float, float, float)	80	static
+motion_plan.cpp:191:6:void motion_plan::searchSlalom(const t_param*)	72	static
+motion_plan.cpp:239:6:void motion_plan::turn_in(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	120	static
+motion_plan.cpp:351:6:void motion_plan::turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	80	static
+motion_plan.cpp:387:6:void motion_plan::long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	144	static
+motion_plan.cpp:524:6:void motion_plan::turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	80	static
+motion_plan.cpp:564:6:void motion_plan::fix_wall(float)	72	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static

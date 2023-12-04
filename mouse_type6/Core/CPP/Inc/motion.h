@@ -13,7 +13,7 @@
 #include "singleton.h"
 #include "run_task.h"
 #include "controll.h"
-
+#include "run_param.h"
 
 class motion_task:public Singleton<motion_task>
 {
@@ -57,14 +57,14 @@ class motion_plan
 		void motion_start();
 		void free_rotation();
 		void search_straight(float len_target,float acc,float max_sp,float end_sp);
-		void straight(float len_target,float acc,float max_sp,float end_sp);
-		void diagonal(float len_target,float acc,float max_sp,float end_sp);
+		void straight(float len_target,float acc,float max_sp,float end_sp,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
+		void diagonal(float len_target,float acc,float max_sp,float end_sp,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
 		void pivot_turn(float rad_target,float rad_acc,float rad_velo);
 		void searchSlalom(const t_param *turn_param);
-		void turn_in(const t_param *turn_param,t_run_pattern run_pt);
-		void turn_out(const t_param *turn_param,t_run_pattern run_pt);
-		void long_turn(const t_param *turn_param,t_run_pattern run_pt);
-		void turn_v90(const t_param *turn_param,t_run_pattern run_pt);
+		void turn_in(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
+		void turn_out(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
+		void long_turn(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
+		void turn_v90(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
 		void fix_wall(float set_time);
 		void stop_brake();
 };

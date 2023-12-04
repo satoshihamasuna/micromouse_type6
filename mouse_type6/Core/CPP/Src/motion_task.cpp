@@ -132,8 +132,8 @@ void motion_task::motionControll()
 
 		if(run_task == Straight || run_task == Diagonal)
 		{
-			om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll + (sp_FF_controll_r-sp_FF_controll_l)/2.0, 1.0);
-			om_fb_controll = om_fb_controll - (sp_FF_controll_r-sp_FF_controll_l)/2.0;
+			//om_fb_controll = ct.omega_ctrl.Anti_windup_2(om_fb_controll + (sp_FF_controll_r-sp_FF_controll_l)/2.0, 1.0);
+			//om_fb_controll = om_fb_controll - (sp_FF_controll_r-sp_FF_controll_l)/2.0;
 		}
 
 

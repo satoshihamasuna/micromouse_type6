@@ -746,7 +746,7 @@ void Dijkstra::turn_outL45_expand(t_posDijkstra pos,t_direction m_dir)
 			break;
 	}
  	next_pos = SetNodePos(next_pos.x, next_pos.y, C_pos);
-	if(get_wall_inf(pos1) == NOWALL && (next_pos.x != pos.x||next_pos.x != pos.y))
+	if(get_wall_inf(pos1) == NOWALL)
 	{
 		int time = return_turn_time(Turn_out_L45) + (*get_closure_inf(pos)) .time;
 		if((*get_closure_inf(next_pos)) .determine == False && (*get_closure_inf(next_pos)) .time >= time)

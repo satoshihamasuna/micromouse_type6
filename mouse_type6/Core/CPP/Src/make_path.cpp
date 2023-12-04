@@ -517,59 +517,59 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 				section_count = straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
 				st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
 				if(i == 0)
-					motionPlan->straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+					motionPlan->straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f,st_parameter.sp_gain,st_parameter.om_gain);
 				else
-					motionPlan->straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo);
+					motionPlan->straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo,st_parameter.sp_gain,st_parameter.om_gain);
 				break;
 			case Diagonal:
 				section_count = diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
 				st_parameter =  calc_end_diagonal_max_velo(DIAG_SECTION * section_count);
 				if(i == 0)
-					motionPlan->diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+					motionPlan->diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f,st_parameter.sp_gain,st_parameter.om_gain);
 				else
-					motionPlan->diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, diagonal_base_velo().param->max_velo);
+					motionPlan->diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, diagonal_base_velo().param->max_velo,st_parameter.sp_gain,st_parameter.om_gain);
 				break;
 			case Long_turnR90:
-				motionPlan->long_turn(  turn_mode[Long_turnR90],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->long_turn(  turn_mode[Long_turnR90],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Long_turnL90:
-				motionPlan->long_turn(  turn_mode[Long_turnL90],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->long_turn(  turn_mode[Long_turnL90],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Long_turnR180:
-				motionPlan->long_turn(  turn_mode[Long_turnR180],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->long_turn(  turn_mode[Long_turnR180],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Long_turnL180:
-				motionPlan->long_turn(  turn_mode[Long_turnL180],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->long_turn(  turn_mode[Long_turnL180],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_in_R45:
-				motionPlan->turn_in(  turn_mode[Turn_in_R45],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_in(  turn_mode[Turn_in_R45],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_in_L45:
-				motionPlan->turn_in(  turn_mode[Turn_in_L45],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_in(  turn_mode[Turn_in_L45],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_R45:
-				motionPlan->turn_out(  turn_mode[Turn_out_R45],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_out(  turn_mode[Turn_out_R45],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_L45:
-				motionPlan->turn_out(  turn_mode[Turn_out_L45],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_out(  turn_mode[Turn_out_L45],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_in_R135:
-				motionPlan->turn_in(  turn_mode[Turn_in_R135],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_in(  turn_mode[Turn_in_R135],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_in_L135:
-				motionPlan->turn_in(  turn_mode[Turn_in_L135],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_in(  turn_mode[Turn_in_L135],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_R135:
-				motionPlan->turn_out(  turn_mode[Turn_out_R135],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_out(  turn_mode[Turn_out_R135],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_L135:
-				motionPlan->turn_out(  turn_mode[Turn_out_L135],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_out(  turn_mode[Turn_out_L135],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_RV90:
-				motionPlan->turn_v90(  turn_mode[Turn_RV90],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_v90(  turn_mode[Turn_RV90],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_LV90:
-				motionPlan->turn_v90(  turn_mode[Turn_LV90],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_v90(  turn_mode[Turn_LV90],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Diagonal_R: 		break;
 			case Diagonal_L: 		break;
@@ -640,59 +640,59 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 				section_count = straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
 				st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
 				if(i == 0)
-					motionPlan->straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+					motionPlan->straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f,st_parameter.sp_gain,st_parameter.om_gain);
 				else
-					motionPlan->straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo);
+					motionPlan->straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, straight_base_velo().param->max_velo,st_parameter.sp_gain,st_parameter.om_gain);
 				break;
 			case Diagonal:
 				section_count = diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
 				st_parameter =  calc_end_diagonal_max_velo(DIAG_SECTION * section_count);
 				if(i == 0)
-					motionPlan->diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f);
+					motionPlan->diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f,st_parameter.sp_gain,st_parameter.om_gain);
 				else
-					motionPlan->diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, diagonal_base_velo().param->max_velo);
+					motionPlan->diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, diagonal_base_velo().param->max_velo,st_parameter.sp_gain,st_parameter.om_gain);
 				break;
 			case Long_turnR90:
-				motionPlan->long_turn(  turn_mode[Long_turnR90],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->long_turn(  turn_mode[Long_turnR90],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Long_turnL90:
-				motionPlan->long_turn(  turn_mode[Long_turnL90],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->long_turn(  turn_mode[Long_turnL90],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Long_turnR180:
-				motionPlan->long_turn(  turn_mode[Long_turnR180],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->long_turn(  turn_mode[Long_turnR180],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Long_turnL180:
-				motionPlan->long_turn(  turn_mode[Long_turnL180],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->long_turn(  turn_mode[Long_turnL180],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_in_R45:
-				motionPlan->turn_in(  turn_mode[Turn_in_R45],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_in(  turn_mode[Turn_in_R45],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_in_L45:
-				motionPlan->turn_in(  turn_mode[Turn_in_L45],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_in(  turn_mode[Turn_in_L45],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_R45:
-				motionPlan->turn_out(  turn_mode[Turn_out_R45],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_out(  turn_mode[Turn_out_R45],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_L45:
-				motionPlan->turn_out(  turn_mode[Turn_out_L45],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_out(  turn_mode[Turn_out_L45],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_in_R135:
-				motionPlan->turn_in(  turn_mode[Turn_in_R135],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_in(  turn_mode[Turn_in_R135],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_in_L135:
-				motionPlan->turn_in(  turn_mode[Turn_in_L135],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_in(  turn_mode[Turn_in_L135],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_R135:
-				motionPlan->turn_out(  turn_mode[Turn_out_R135],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_out(  turn_mode[Turn_out_R135],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_L135:
-				motionPlan->turn_out(  turn_mode[Turn_out_L135],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_out(  turn_mode[Turn_out_L135],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_RV90:
-				motionPlan->turn_v90(  turn_mode[Turn_RV90],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_v90(  turn_mode[Turn_RV90],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_LV90:
-				motionPlan->turn_v90(  turn_mode[Turn_LV90],(*get_closure_inf(run_pos_buff[i])).run_pt);
+				motionPlan->turn_v90(  turn_mode[Turn_LV90],(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Diagonal_R: 		break;
 			case Diagonal_L: 		break;
