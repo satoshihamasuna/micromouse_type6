@@ -15,8 +15,9 @@
 namespace Mode
 {
 	void Demo();
-	void Debug();
-	void Debug2();
+	void Debug(const  t_straight_param *st_param,const t_param *const *turn_mode);
+	void Debug2(const  t_straight_param *st_param,const t_param *const *turn_mode);
+	void Debug3();
 	void Interface_Check();
 	uint8_t Select(uint8_t _param,uint8_t max,t_encoder enc);
 	void Select_Mode();

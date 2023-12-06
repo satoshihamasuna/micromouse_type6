@@ -7,16 +7,16 @@ make_path.cpp:77:11:t_element Dijkstra::SetNode(t_posDijkstra, uint16_t, t_direc
 make_path.cpp:89:6:void Dijkstra::init_dijkstra_map()	80	static
 make_path.cpp:114:6:void Dijkstra::start_node_setUp(t_posDijkstra, t_direction)	80	static
 make_path.cpp:130:8:t_bool Dijkstra::is_goal_Dijkstra(t_posDijkstra, t_position, uint8_t)	24	static
-make_path.cpp:159:6:void Dijkstra::set_determine(t_posDijkstra)	16	static
-make_path.cpp:175:15:t_posDijkstra Dijkstra::min_search()	40	static
-make_path.cpp:203:15:t_posDijkstra Dijkstra::make_path_Dijkstra(t_position, t_direction, t_position, uint8_t)	48	static
-make_path.cpp:229:6:void Dijkstra::expand(t_posDijkstra)	24	static
-make_path.cpp:260:15:t_posDijkstra Dijkstra::last_expand(t_posDijkstra, t_direction, t_position, uint8_t)	104	static
-make_path.cpp:334:10:uint16_t Dijkstra::straight_section_num(t_posDijkstra, t_posDijkstra, t_direction)	24	static
-make_path.cpp:350:10:uint16_t Dijkstra::diagonal_section_num(t_posDijkstra, t_posDijkstra, t_direction)	32	static
-make_path.cpp:375:6:void Dijkstra::check_run_Dijkstra(t_position, t_direction, t_position, uint8_t)	72	static
-make_path.cpp:481:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)	512	static
-make_path.cpp:593:6:void Dijkstra::run_Dijkstra_suction(t_position, t_direction, t_position, uint8_t, int, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)	512	static
+make_path.cpp:162:6:void Dijkstra::set_determine(t_posDijkstra)	16	static
+make_path.cpp:178:15:t_posDijkstra Dijkstra::min_search()	40	static
+make_path.cpp:206:15:t_posDijkstra Dijkstra::make_path_Dijkstra(t_position, t_direction, t_position, uint8_t)	48	static
+make_path.cpp:232:6:void Dijkstra::expand(t_posDijkstra)	24	static
+make_path.cpp:263:15:t_posDijkstra Dijkstra::last_expand(t_posDijkstra, t_direction, t_position, uint8_t)	104	static
+make_path.cpp:337:10:uint16_t Dijkstra::straight_section_num(t_posDijkstra, t_posDijkstra, t_direction)	24	static
+make_path.cpp:353:10:uint16_t Dijkstra::diagonal_section_num(t_posDijkstra, t_posDijkstra, t_direction)	32	static
+make_path.cpp:378:6:void Dijkstra::check_run_Dijkstra(t_position, t_direction, t_position, uint8_t)	72	static
+make_path.cpp:484:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)	512	static
+make_path.cpp:596:6:void Dijkstra::run_Dijkstra_suction(t_position, t_direction, t_position, uint8_t, int, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, motion_plan*)	512	static
 run_task.h:114:7:RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
 controll.h:30:7:constexpr mouse_Controll::mouse_Controll()	16	static

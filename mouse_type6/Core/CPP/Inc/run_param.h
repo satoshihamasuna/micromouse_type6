@@ -76,16 +76,24 @@ const static t_pid_gain sp_gain_1400 = {6.0, 0.01, 0.0};
 const static t_pid_gain om_gain_1400 = {0.2, 0.01, 0.00};
 const static t_velo_param param_1400 = {1.40f,12.0f};
 const static t_straight_param st_param_1400 = {&param_1400,&sp_gain_1400,&om_gain_1400};
+const static t_velo_param param_1400_acc16 = {1.40f,16.0f};
+const static t_straight_param st_param_1400_acc16 = {&param_1400_acc16,&sp_gain_1400,&om_gain_1400};
 
 const static t_pid_gain sp_gain_1500 = {6.0, 0.05, 0.0};
 const static t_pid_gain om_gain_1500 = {0.2, 0.01, 0.00};
 const static t_velo_param param_1500 = {1.50f,12.0f};
 const static t_straight_param st_param_1500 = {&param_1500,&sp_gain_1500,&om_gain_1500};
+const static t_velo_param param_1500_acc16 = {1.50f,16.0f};
+const static t_straight_param st_param_1500_acc16 = {&param_1500_acc16,&sp_gain_1500,&om_gain_1500};
+
 
 const static t_pid_gain sp_gain_1600 = {6.0, 0.05, 0.0};
 const static t_pid_gain om_gain_1600 = {0.2, 0.01, 0.00};
 const static t_velo_param param_1600 = {1.60f,12.0f};
 const static t_straight_param st_param_1600 = {&param_1600,&sp_gain_1600,&om_gain_1600};
+const static t_velo_param param_1600_acc16 = {1.60f,16.0f};
+const static t_straight_param st_param_1600_acc16 = {&param_1600_acc16,&sp_gain_1600,&om_gain_1600};
+
 
 const static t_pid_gain sp_gain_1700 = {6.0, 0.05, 0.0};
 const static t_pid_gain om_gain_1700 = {0.2, 0.01, 0.00};
@@ -453,8 +461,8 @@ const static t_param param_R180_1400 = {&slalom_R180_1400_table,&sp_gain_turn180
 //not adjust
 const static t_pid_gain sp_gain_turnV90_1400 = {7.5, 0.01, 0.0};
 const static t_pid_gain om_gain_turnV90_1400 = {0.4, 0.02, 0.0};
-const static t_turn_param_table slalom_LV90_1400_table = {1.40f, 38.50f,9.57,26.82, 90.0f,Turn_L};
-const static t_turn_param_table slalom_RV90_1400_table = {1.40f,-38.50f,9.57,26.82,-90.0f,Turn_R};
+const static t_turn_param_table slalom_LV90_1400_table = {1.40f, 38.50f,8.59,25.34, 90.0f,Turn_L};
+const static t_turn_param_table slalom_RV90_1400_table = {1.40f,-38.50f,8.59,25.34,-90.0f,Turn_R};
 const static t_param param_LV90_1400 = {&slalom_LV90_1400_table,&sp_gain_turnV90_1400,&om_gain_turnV90_1400};
 const static t_param param_RV90_1400 = {&slalom_RV90_1400_table,&sp_gain_turnV90_1400,&om_gain_turnV90_1400};
 

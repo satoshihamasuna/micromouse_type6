@@ -7,6 +7,7 @@
 
 
 #include <motion.h>
+#include <math.h>
 #include "../../Module/Include/index.h"
 #include "interrupt.h"
 #include "sensing_task.h"
@@ -66,9 +67,20 @@ void Interrupt::preprocess(){
 	motion_task::getInstance().mouse.accel    = (-1.0)*acc_sum/((float)(ACC_BUFF_SIZE));
 	motion_task::getInstance().mouse.rad_velo = (-1.0)*read_gyro_z_axis()*PI/180;
 	motion_task::getInstance().mouse.radian  += motion_task::getInstance().mouse.rad_velo/1000.0;
+
+
 	//if(motion_task::getInstance().run_task == Straight || motion_task::getInstance().run_task == Diagonal || motion_task::getInstance().run_task == Search_st_section )
 	//{
 	motion_task::getInstance().mouse.x_point += (1.0)*(Renc.wheel_speed - Lenc.wheel_speed)/2.0*motion_task::getInstance().mouse.radian;
+	if(motion_task::getInstance().rT.get_run_mode_state() == TURN_MODE )
+	{
+		motion_task::getInstance().mouse.turn_slip_dot =  -250.0f*motion_task::getInstance().mouse.turn_slip_theta/motion_task::getInstance().mouse.velo-motion_task::getInstance().mouse.rad_velo;
+		motion_task::getInstance().mouse.turn_slip_theta += motion_task::getInstance().mouse.turn_slip_dot/1000.0f;
+		motion_task::getInstance().mouse.turn_x_dash = motion_task::getInstance().mouse.velo*sin((-1.0)*(motion_task::getInstance().mouse.radian + motion_task::getInstance().mouse.turn_slip_theta)  );
+		motion_task::getInstance().mouse.turn_y_dash = motion_task::getInstance().mouse.velo*cos(motion_task::getInstance().mouse.radian + motion_task::getInstance().mouse.turn_slip_theta );
+		motion_task::getInstance().mouse.turn_x += motion_task::getInstance().mouse.turn_x_dash;
+		motion_task::getInstance().mouse.turn_y += motion_task::getInstance().mouse.turn_y_dash;
+	}
 	//}
 	//else
 	//{
@@ -94,8 +106,8 @@ void Interrupt::postprocess()
 		LogData::getInstance().data[3][LogData::getInstance().data_count%1000] = motion_task::getInstance().target.rad_velo;
 		LogData::getInstance().data[4][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.length ;
 		LogData::getInstance().data[5][LogData::getInstance().data_count%1000] = Battery_GetVoltage()  ;
-		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = acc_sum;
-		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = velo_sum ;
+		LogData::getInstance().data[6][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.turn_x;
+		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.turn_y ;
 		LogData::getInstance().data[8][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_r.distance;//Rvelo_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[9][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_l.distance;//Lvelo_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[10][LogData::getInstance().data_count%1000] = motion_task::getInstance().V_r;

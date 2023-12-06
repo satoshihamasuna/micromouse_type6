@@ -106,7 +106,12 @@ typedef struct{
 	float rad_velo;
 	float radian;
 	float x_point;
-	float y_point;
+	float turn_x;
+	float turn_x_dash;
+	float turn_y;
+	float turn_y_dash;
+	float turn_slip_theta;
+	float turn_slip_dot;
 }t_machine_param;
 
 typedef struct{

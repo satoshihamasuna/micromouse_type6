@@ -133,10 +133,12 @@ t_bool Dijkstra::is_goal_Dijkstra(t_posDijkstra check_pos,t_position goal_pos,ui
 	{
 		if(goal_pos.y <= check_pos.y  && check_pos.y < (goal_pos.y + goal_size))
 		{
-			return True;
+			if(check_pos.NodePos == C_pos)
+				return True;
 		}
 	}
 
+	/*
 	if(check_pos.x == (goal_pos.x - 1) && check_pos.NodePos == E_pos)
 	{
 		if(goal_pos.y <= check_pos.y  && check_pos.y < (goal_pos.y + goal_size))
@@ -153,6 +155,7 @@ t_bool Dijkstra::is_goal_Dijkstra(t_posDijkstra check_pos,t_position goal_pos,ui
 			return True;
 		}
 	}
+	*/
 	return False;
 }
 
