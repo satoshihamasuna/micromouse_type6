@@ -163,6 +163,13 @@ namespace Mode
 							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
 							  HAL_Delay(50);
 						  }
+							for(int i = 10; i <= 800; i = i + 10)
+							{
+								FAN_Motor_SetDuty(i);;
+								HAL_Delay(3);
+							}
+							HAL_Delay(10000);
+							FAN_Motor_SetDuty(0);
 						  enable = 0x00;
 						  HAL_Delay(500);
 					}

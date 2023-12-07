@@ -649,12 +649,12 @@ void motion_plan::turn_v90(const t_param *turn_param,t_run_pattern run_pt,const 
 
 	if(turn_param->param->turn_dir == Turn_R)
 	{
-		move_task->rT.prev_run_fix = 0.0;
+		move_task->rT.prev_run_fix = (-1.0)*move_task->mouse.x_point;
 		move_task->rT.post_run_fix = move_task->mouse.x_point;
 	}
 	else if(turn_param->param->turn_dir == Turn_L)
 	{
-		move_task->rT.prev_run_fix = 0.0;
+		move_task->rT.prev_run_fix = (1.0)*move_task->mouse.x_point;
 		move_task->rT.post_run_fix = (-1.0)*move_task->mouse.x_point;
 	}
 

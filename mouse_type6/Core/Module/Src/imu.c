@@ -46,6 +46,8 @@ void IMU_initialize()
 	  HAL_Delay(50);
 	  write_byte(CTRL1_XL, ACCEL_ODR_SET|ACCEL_8G);
 	  HAL_Delay(50);
+	  //write_byte(0x17, 0x29);
+	  HAL_Delay(50);
 	  write_byte(CTRL2_G, GYRO_ODR_SET|GYRO_4000_DPS);
 	  HAL_Delay(50);
 }

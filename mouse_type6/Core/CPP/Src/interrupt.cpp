@@ -74,7 +74,7 @@ void Interrupt::preprocess(){
 	motion_task::getInstance().mouse.x_point += (1.0)*(Renc.wheel_speed - Lenc.wheel_speed)/2.0*motion_task::getInstance().mouse.radian;
 	if(motion_task::getInstance().rT.get_run_mode_state() == TURN_MODE )
 	{
-		motion_task::getInstance().mouse.turn_slip_dot =  -250.0f*motion_task::getInstance().mouse.turn_slip_theta/motion_task::getInstance().mouse.velo-motion_task::getInstance().mouse.rad_velo;
+		motion_task::getInstance().mouse.turn_slip_dot =  -200.0f*motion_task::getInstance().mouse.turn_slip_theta/motion_task::getInstance().mouse.velo-motion_task::getInstance().mouse.rad_velo;
 		motion_task::getInstance().mouse.turn_slip_theta += motion_task::getInstance().mouse.turn_slip_dot/1000.0f;
 		motion_task::getInstance().mouse.turn_x_dash = motion_task::getInstance().mouse.velo*sin((-1.0)*(motion_task::getInstance().mouse.radian + motion_task::getInstance().mouse.turn_slip_theta)  );
 		motion_task::getInstance().mouse.turn_y_dash = motion_task::getInstance().mouse.velo*cos(motion_task::getInstance().mouse.radian + motion_task::getInstance().mouse.turn_slip_theta );
@@ -110,7 +110,7 @@ void Interrupt::postprocess()
 		LogData::getInstance().data[7][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.turn_y ;
 		LogData::getInstance().data[8][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_r.distance;//Rvelo_sum/((float)(ACC_BUFF_SIZE));
 		LogData::getInstance().data[9][LogData::getInstance().data_count%1000] = SensingTask::getInstance().sen_l.distance;//Lvelo_sum/((float)(ACC_BUFF_SIZE));
-		LogData::getInstance().data[10][LogData::getInstance().data_count%1000] = motion_task::getInstance().V_r;
+		LogData::getInstance().data[10][LogData::getInstance().data_count%1000] = motion_task::getInstance().mouse.x_point;
 		LogData::getInstance().data[11][LogData::getInstance().data_count%1000] = motion_task::getInstance().V_l;
 		LogData::getInstance().data_count++;
 		if(LogData::getInstance().data_count >= 1000) LogData::getInstance().data_count = 999;
