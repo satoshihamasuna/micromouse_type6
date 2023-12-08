@@ -432,6 +432,7 @@ void motion_plan::turn_out(const t_param *turn_param,t_run_pattern run_pt,const 
 	move_task->rT.post_run_fix  = 0.0f;
 	move_task->rT.prev_run_fix  = 0.0f;
 
+
 	if(ABS(turn_param->param->degree) == 135.0f)
 	{
 		if(turn_param->param->turn_dir == Turn_R)
@@ -458,6 +459,7 @@ void motion_plan::turn_out(const t_param *turn_param,t_run_pattern run_pt,const 
 			move_task->rT.post_run_fix = (-1.0)*move_task->mouse.x_point*SQRT2;
 		}
 	}
+
 
 }
 void motion_plan::long_turn(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain,const t_pid_gain *om_gain)
@@ -645,6 +647,7 @@ void motion_plan::turn_v90(const t_param *turn_param,t_run_pattern run_pt,const 
 	move_task->turn_gain_set.set_om_gain(turn_param->om_gain->Kp, turn_param->om_gain->Ki, turn_param->om_gain->Kd);
 	move_task->rT.post_run_fix  = 0.0f;
 	move_task->rT.prev_run_fix  = 0.0f;
+
 
 
 	if(turn_param->param->turn_dir == Turn_R)

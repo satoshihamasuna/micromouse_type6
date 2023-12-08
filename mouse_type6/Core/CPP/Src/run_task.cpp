@@ -111,7 +111,7 @@ void RunTask::search_straight(t_motion_param mt_param,t_machine_param *target_,t
 		}
 	}
 
-	if(is_wallControl_Enable != Non_controll)
+	if(is_wallControl_Enable != Non_controll )
 	{
 		SensingTask::getInstance().SetWallControll_RadVelo(&(*target_),&(*machine_),1.0);
 	}
@@ -131,6 +131,7 @@ void RunTask::straight(t_motion_param mt_param,t_machine_param *target_,t_machin
 	if(mt_param.max_velo > mt_param.end_velo) deccel_length += 10.0;
 	if(deccel_length < ( mt_param.length - machine_->length ))
 	{
+		if(mt_param.length < 50.0f) is_wallControl_Enable = Non_controll;
 		target_->accel = mt_param.accel;
 		target_->velo  = target_->velo + target_->accel*delta_t_ms/1000.0;
 		if(target_->velo > mt_param.max_velo)
@@ -914,11 +915,11 @@ void RunTask::turn_v90(t_motion_param *mt_param,const t_param *turn_param,t_mach
 			machine_->x_point = 0.0f;
 			if(turn_param->param->turn_dir == Turn_R)
 			{
-				machine_->x_point = -(45.0*SQRT2 - motion_task::getInstance().mouse.turn_y-turn_param->param->Lstart);
+				//machine_->x_point = -(45.0*SQRT2 - motion_task::getInstance().mouse.turn_y-turn_param->param->Lstart);
 			}
 			if(turn_param->param->turn_dir == Turn_L)
 			{
-				machine_->x_point = (45.0*SQRT2 - motion_task::getInstance().mouse.turn_y-turn_param->param->Lstart);
+				//machine_->x_point = (45.0*SQRT2 - motion_task::getInstance().mouse.turn_y-turn_param->param->Lstart);
 			}
 			//motion_task::getInstance().ct.omega_ctrl.I_param_reset();
 			Indicate_LED(0x04);

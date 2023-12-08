@@ -4,15 +4,15 @@ sensing_task.h:54:8:void SensingTask::Division_Wall_Correction_Reset()	16	static
 run_task.cpp:17:6:void RunTask::MotionFree(float*, float)	24	static
 run_task.cpp:30:6:void RunTask::search_straight(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
 run_task.cpp:121:6:void RunTask::straight(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
-run_task.cpp:209:6:void RunTask::diagonal(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
-run_task.cpp:289:6:void RunTask::pivotturn(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
-run_task.cpp:351:6:void RunTask::search_slalom(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	88	static
-run_task.cpp:455:6:void RunTask::turn_in(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	72	static
-run_task.cpp:578:6:void RunTask::turn_out(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	72	static
-run_task.cpp:714:6:void RunTask::long_turn(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	72	static
-run_task.cpp:822:6:void RunTask::turn_v90(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	72	static
-run_task.cpp:937:6:void RunTask::fix_wall(t_machine_param*, float*, float, float)	56	static
-run_task.cpp:997:8:t_bool RunTask::is_exe_runTask()	16	static
+run_task.cpp:210:6:void RunTask::diagonal(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
+run_task.cpp:290:6:void RunTask::pivotturn(t_motion_param, t_machine_param*, t_machine_param*, float)	32	static
+run_task.cpp:352:6:void RunTask::search_slalom(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	88	static
+run_task.cpp:456:6:void RunTask::turn_in(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	72	static
+run_task.cpp:579:6:void RunTask::turn_out(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	72	static
+run_task.cpp:715:6:void RunTask::long_turn(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	72	static
+run_task.cpp:823:6:void RunTask::turn_v90(t_motion_param*, const t_param*, t_machine_param*, t_machine_param*, float)	72	static
+run_task.cpp:938:6:void RunTask::fix_wall(t_machine_param*, float*, float, float)	56	static
+run_task.cpp:998:8:t_bool RunTask::is_exe_runTask()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static
 run_task.h:114:7:RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static

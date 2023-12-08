@@ -324,10 +324,12 @@ namespace Mode
 					enable = 0;
 					break;
 				case ENABLE|0x02:
+				    Mode::Debug(&st_param_1200,mode_1200);
 					Mode::Debug(&st_param_1400,mode_1400);
 					enable = 0;
 					break;
 				case ENABLE|0x03:
+				Mode::Debug2(&st_param_1200,mode_1200);
 					Mode::Debug2(&st_param_1400_acc16,mode_1400);
 					enable = 0;
 					break;
