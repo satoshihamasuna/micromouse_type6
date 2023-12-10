@@ -6,6 +6,8 @@ search.cpp:50:12:t_position Search::search_adachi_1(t_position, t_position, int,
 search.cpp:271:12:t_position Search::search_adachi_1_acc(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	96	static
 search.cpp:514:12:t_position Search::search_adachi_2(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	80	static
 search.cpp:738:12:t_position Search::search_adachi_2_acc(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	96	static
+search.cpp:984:12:t_position Search::search_adachi_3(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	80	static
+search.cpp:1205:12:t_position Search::search_adachi_3_acc(t_position, t_position, int, wall_class*, make_map*, motion_plan*)	96	static
 run_task.h:114:7:RunTask::RunTask()	16	static
 controll.h:13:7:constexpr PID_Controller::PID_Controller()	16	static
 controll.h:30:7:constexpr mouse_Controll::mouse_Controll()	16	static
@@ -14,6 +16,6 @@ singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = motion_task]	8
 Kalman_filter.h:14:7:KalmanFilter::KalmanFilter()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = KalmanFilter]	8	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = SensingTask]	4	static
-search.cpp:982:1:void __static_initialization_and_destruction_0(int, int)	16	static
-search.cpp:982:1:cpp)	8	static
-search.cpp:982:1:cpp)	8	static
+search.cpp:1446:1:void __static_initialization_and_destruction_0(int, int)	16	static
+search.cpp:1446:1:cpp)	8	static
+search.cpp:1446:1:cpp)	8	static

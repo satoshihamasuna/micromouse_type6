@@ -25,8 +25,9 @@ class adachi{
 			map_property 	= _make_map_class;
 		}
 		int get_priority(t_position mypos,t_position next_pos);
+		int get_priority2(t_position mypos,t_position next_pos,t_position goal_pos);
 		int get_next_dir(t_position mypos,int mask,t_position *glob_next_pos);
-
+		int get_next_dir2(t_position mypos,t_position goal_pos,int mask,t_position *glob_next_pos);
 };
 
 #endif /* CPP_INC_ADACHI_CLASS_H_ */

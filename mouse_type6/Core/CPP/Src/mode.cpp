@@ -127,9 +127,42 @@ namespace Mode
 					}
 					break;
 				case ENABLE|0x02:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						for(int i = 0;i < 11;i++)
+						{
+							(i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							HAL_Delay(50);
+						}
 
+						Indicate_LED(mode|param);
+						motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						KalmanFilter::getInstance().filter_init();
+						t_position return_pos = solve_maze.search_adachi_3_acc(start, goal, goal_size, &wall_data, &map_data,&mp);
+						write_save_data(&wall_data);
+						solve_maze.search_adachi_2_acc(return_pos, start, 1, &wall_data, &map_data,&mp);
+						write_save_data(&wall_data);
+						enable = 0x00;
+					}
 					break;
 				case ENABLE|0x03:
+					if(SensingTask::getInstance().IrSensor_Avg() > 2500){
+						for(int i = 0;i < 11;i++)
+						{
+							(i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+							HAL_Delay(50);
+						}
+
+						Indicate_LED(mode|param);
+						motion_task::getInstance().ct.speed_ctrl.Gain_Set(6.0, 0.05, 0.0);
+						motion_task::getInstance().ct.omega_ctrl.Gain_Set(0.4, 0.05, 0.0);
+						KalmanFilter::getInstance().filter_init();
+						t_position return_pos = solve_maze.search_adachi_3_acc(start, goal, goal_size, &wall_data, &map_data,&mp);
+						write_save_data(&wall_data);
+						solve_maze.search_adachi_3_acc(return_pos, start, 1, &wall_data, &map_data,&mp);
+						write_save_data(&wall_data);
+						enable = 0x00;
+					}
 					break;
 				case ENABLE|0x04:
 					break;

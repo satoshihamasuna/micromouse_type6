@@ -184,8 +184,8 @@ void SensingTask::IrSensorWallSet()
 
 	sen_fr.controll_cnt = (sen_fr.is_wall == True) ? sen_fr.controll_cnt + 1 : 0;
 	sen_fl.controll_cnt = (sen_fl.is_wall == True) ? sen_fl.controll_cnt + 1 : 0;
-	sen_r.controll_cnt = (sen_r.is_wall == True && ABS(sen_r.distance - sen_r.avg_distance) < 5.0) ? sen_r.controll_cnt + 1 : 0;
-	sen_l.controll_cnt = (sen_l.is_wall == True && ABS(sen_l.distance - sen_l.avg_distance) < 5.0) ? sen_l.controll_cnt + 1 : 0;
+	sen_r.controll_cnt = (sen_r.is_wall == True && ABS(sen_r.distance - sen_r.avg_distance) < 2.0) ? sen_r.controll_cnt + 1 : 0;
+	sen_l.controll_cnt = (sen_l.is_wall == True && ABS(sen_l.distance - sen_l.avg_distance) < 2.0) ? sen_l.controll_cnt + 1 : 0;
 
 	//sen_r.controll_cnt = (sen_r.is_wall == True) ? sen_r.controll_cnt + 1 : 0;
 	//sen_l.controll_cnt = (sen_l.is_wall == True) ? sen_l.controll_cnt + 1 : 0;
