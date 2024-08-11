@@ -8,11 +8,18 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Drivers/ntshell-v0.3.1/src/lib/util/subdir.mk
+-include Drivers/ntshell-v0.3.1/src/lib/core/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
--include Core/Module/Src/subdir.mk
--include Core/CPP/Src/subdir.mk
+-include Core/CPP/Task/Src/subdir.mk
+-include Core/CPP/System/Src/subdir.mk
+-include Core/CPP/Subsys/Src/subdir.mk
+-include Core/CPP/Pheripheral/Src/subdir.mk
+-include Core/CPP/Module/Src/subdir.mk
+-include Core/CPP/Component/codegen/subdir.mk
+-include Core/CPP/Component/Src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -58,7 +65,7 @@ all: mouse_type6.elf secondary-outputs
 
 # Tool invocations
 mouse_type6.elf: $(OBJS) $(USER_OBJS) C:\Users\sato1\Documents\git\mouse_type6_program\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld
-	arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\sato1\Documents\git\mouse_type6_program\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+	arm-none-eabi-g++ -o "mouse_type6.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\sato1\Documents\git\mouse_type6_program\micromouse_type6\mouse_type6\STM32F411CEUX_FLASH.ld" -Wl,-Map="mouse_type6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

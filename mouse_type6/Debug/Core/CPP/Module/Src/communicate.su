@@ -1,0 +1,18 @@
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+communicate.cpp:34:9:uint8_t Communicate_TerminalRecv()	16	static
+communicate.cpp:42:6:void Communicate_RxPushData()	8	static
+communicate.cpp:57:9:uint8_t Communicate_RxPopData()	16	static,ignoring_inline_asm
+communicate.cpp:113:6:void Communicate_TxPushData(int8_t)	16	static,ignoring_inline_asm
+communicate.cpp:154:6:void Communicate_TxPopData()	8	static
+communicate.cpp:176:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	16	static
+communicate.cpp:183:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	16	static
+communicate.cpp:193:6:void Communicate_Initialize()	8	static
+communicate.cpp:207:12:int __io_putchar(int)	16	static
+communicate.cpp:221:12:int __io_getchar()	8	static
+queue_class.h:22:3:ring_queue<SIZE, T>::ring_queue() [with unsigned int SIZE = 128; T = volatile unsigned char]	16	static
+queue_class.h:41:7:int ring_queue<SIZE, T>::queue_length() [with unsigned int SIZE = 128; T = volatile unsigned char]	16	static
+queue_class.h:35:8:void ring_queue<SIZE, T>::push(T) [with unsigned int SIZE = 128; T = volatile unsigned char]	16	static
+queue_class.h:28:5:T ring_queue<SIZE, T>::pop() [with unsigned int SIZE = 128; T = volatile unsigned char]	24	static
+communicate.cpp:226:1:void __static_initialization_and_destruction_0(int, int)	16	static
+communicate.cpp:226:1:cpp)	8	static
+communicate.cpp:226:1:cpp)	8	static

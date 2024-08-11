@@ -1,0 +1,5 @@
+interface.c:14:6:Mode_Change_ENC	440	static
+interface.c:37:6:Mode_Init	4	static
+interface.c:43:9:Mode_State	4	static
+interface.c:48:6:Mode_Disable	4	static
+interface.c:53:8:button_status	16	static

@@ -1,0 +1,8 @@
+pheripheral_flash.cpp:19:6:void eraseALL()	8	static
+pheripheral_flash.cpp:26:6:void eraseFlash()	32	static
+pheripheral_flash.cpp:45:6:void writeFlash(uint32_t, uint16_t*)	24	static
+pheripheral_flash.cpp:60:6:void loadFlash(uint32_t, uint16_t*, uint32_t)	24	static
+pheripheral_flash.cpp:66:10:uint8_t* Flash_Load()	24	static
+pheripheral_flash.cpp:81:9:uint8_t Flash_Save()	32	static
+pheripheral_flash.cpp:112:6:void work_ram_set(uint32_t, uint8_t)	16	static
+pheripheral_flash.cpp:117:9:uint8_t work_ram_read(uint32_t)	16	static

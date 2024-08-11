@@ -1,0 +1,3 @@
+ntopt.c:53:12:ntopt_get_count	32	static
+ntopt.c:82:14:ntopt_get_text	48	static
+ntopt.c:126:5:ntopt_parse	248	static

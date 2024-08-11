@@ -1,0 +1,7 @@
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+mode.cpp:43:7:void Mode::indicate_error()	8	static
+mode.cpp:54:10:uint8_t Mode::Select(uint8_t, uint8_t, t_encoder)	24	static
+mode.cpp:69:7:void Mode::Select_Mode()	448	static
+mode.cpp:108:1:void __static_initialization_and_destruction_0(int, int)	16	static
+mode.cpp:108:1:cpp)	8	static
+mode.cpp:108:1:cpp)	8	static

@@ -29,7 +29,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../Module/Include/index.h"
+#include "../CPP/Module/Inc/communicate.h"
+#include "../CPP/Pheripheral/Include/index.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -104,7 +105,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
-
+  CPP_Main();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -114,7 +115,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	 CPP_Main();
+	// CPP_Main();
 
 	  }
 

@@ -1,0 +1,3 @@
+cmath:184:3:constexpr float std::cos(float)	16	static
+cmath:425:3:constexpr float std::sin(float)	16	static
+path_follow.cpp:12:7:float path_follow_class::calc_control_yaw_rate(float, float, float, float)	40	static
