@@ -962,6 +962,89 @@ void Motion::Init_Motion_turn_v90		(const t_param *turn_param,t_run_pattern run_
 	error_counter_reset();
 }
 
+
+void Motion::Init_Motion_long_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain  ,const t_pid_gain *om_gain  )
+{
+	if(motion_exeStatus_get() == error)
+	{
+		Motion_error_handling();
+		return;
+	}
+	motion_plan.velo.set				(turn_param->param->velo);
+	motion_plan.max_velo.set			(turn_param->param->velo);
+	motion_plan.end_velo.set			(turn_param->param->velo);
+	motion_plan.accel.set			(0.0f);
+	motion_plan.deccel.set			(0.0f);
+	motion_plan.end_length.set		(0.0f);
+	motion_plan.length_accel.set		(0.0f);
+	motion_plan.length_deccel.set	(0.0f);
+
+	motion_plan.rad_accel.set		(0.0f);//計算できないわけではない
+	motion_plan.rad_deccel.set		(0.0f);//計算できないわけではない
+	motion_plan.rad_max_velo.set		(turn_param->param->velo/(turn_param->param->r_min/1000.0f));
+	motion_plan.end_radian.set		(turn_param->param->degree/180*PI);
+	motion_plan.radian_accel.set		(0.0f);//計算できないわけではない
+	motion_plan.radian_deccel.set	(0.0f);//計算できないわけではない
+	motion_plan.turn_r_min.set		(turn_param->param->r_min);
+	motion_plan.turn_state.set		(Prev_Turn);
+	motion_plan.turn_time_ms.set		( ABS(DEG2RAD(turn_param->param->degree)/(accel_Integral*motion_plan.rad_max_velo.get()))*1000.0f);
+
+	motion_plan.fix_prev_run.init();
+	motion_plan.fix_post_run.init();
+
+	//Set control gain & turn_param
+	turn_motion_param = *turn_param;
+	straight_motion_param.sp_gain = sp_gain;
+	straight_motion_param.om_gain = om_gain;
+
+	vehicle->Vehicle_controller.speed_ctrl.Gain_Set(*straight_motion_param.sp_gain);
+	vehicle->Vehicle_controller.omega_ctrl.Gain_Set(*straight_motion_param.om_gain);
+	//vehicle->Vehicle_controller.speed_ctrl.I_param_reset();
+	vehicle->Vehicle_controller.omega_ctrl.I_param_reset();
+
+	/*
+	vehicle->ego.length.init();
+	vehicle->ego.radian.init();
+	//vehicle->ego.x_point.init();
+	vehicle->ego.turn_x.init();
+	vehicle->ego.turn_y.init();
+	vehicle->ego.turn_slip_theta.init();
+
+	vehicle->ideal.length.init();
+	vehicle->ideal.radian.init();
+	//vehicle->ideal.x_point.init();
+	vehicle->ideal.turn_x.init();
+	vehicle->ideal.turn_y.init();
+	vehicle->ideal.turn_slip_theta.init();
+	*/
+
+	float diff = vehicle->ego.x_point.get();
+	if(ABS(diff) < 10.0)
+	{
+		if(turn_param->param->turn_dir == Turn_R)
+		{
+			motion_plan.fix_prev_run.set(0.0);
+			motion_plan.fix_post_run.set(diff*0.0);
+		}
+		else if(turn_param->param->turn_dir == Turn_L)
+		{
+			motion_plan.fix_prev_run.set(0.0);
+			motion_plan.fix_post_run.set((-1.0)*diff*0.0);
+		}
+	}
+
+	motion_pattern_set(run_pt);
+	motion_exeStatus_set(execute);
+	motion_state_set(DIAGONAL_STATE);
+	run_time_ms_reset();
+	run_time_limit_ms_reset();
+
+	ir_sens->EnableIrSensStraight();
+	ir_sens->Division_Wall_Correction_Reset();
+
+	error_counter_reset();
+}
+
 void Motion::Init_Motion_fix_wall		(float set_time,const t_pid_gain *sp_gain  ,const t_pid_gain *om_gain  )
 {
 	if(motion_exeStatus_get() == error)

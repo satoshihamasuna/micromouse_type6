@@ -479,8 +479,8 @@ void Dijkstra::check_run_Dijkstra(t_position start_pos,t_direction start_wallPos
 			case Turn_out_L135: 	printf("Turn_out_L135\n"); 		break;
 			case Turn_RV90: 		printf("Turn_RV90\n"); 			break;
 			case Turn_LV90: 		printf("Turn_LV90\n"); 			break;
-			case Diagonal_R: 		printf("Diagonal_R\n"); 		break;
-			case Diagonal_L: 		printf("Diagonal_L\n"); 		break;
+//			case Diagonal_R: 		printf("Diagonal_R\n"); 		break;
+//			case Diagonal_L: 		printf("Diagonal_L\n"); 		break;
 			case Search_st_section: printf("Search_st_section\n"); 	break;
 			case Search_st_half: 	printf("Search_st_half\n"); 	break;
 			case Pivot_turn_R: 		printf("Pivot_turn_R\n"); 		break;
@@ -591,8 +591,8 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 			case Turn_LV90:
 				motion->exe_Motion_turn_v90(  turn_mode[Turn_LV90],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
-			case Diagonal_R: 		break;
-			case Diagonal_L: 		break;
+//			case Diagonal_R: 		break;
+//			case Diagonal_L: 		break;
 			case Search_st_section: break;
 			case Search_st_half: 	break;
 			case Pivot_turn_R: 		break;
@@ -704,10 +704,40 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 				motion->exe_Motion_turn_in(  turn_mode[Turn_in_L45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_R45:
-				motion->exe_Motion_turn_out(  turn_mode[Turn_out_R45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				if(i > 0)
+				{
+					if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Turn_in_R45)
+					{
+						i--;
+						motion->exe_Motion_turn_out(  turn_mode[Long_turn_RV90],Long_turn_RV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+					}
+					else
+					{
+						motion->exe_Motion_turn_out(  turn_mode[Turn_out_R45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+					}
+				}
+				else
+				{
+					motion->exe_Motion_turn_out(  turn_mode[Turn_out_R45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				}
 				break;
 			case Turn_out_L45:
-				motion->exe_Motion_turn_out(  turn_mode[Turn_out_L45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				if(i > 0)
+				{
+					if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Turn_in_L45)
+					{
+						i--;
+						motion->exe_Motion_turn_out(  turn_mode[Long_turn_LV90],Long_turn_LV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+					}
+					else
+					{
+						motion->exe_Motion_turn_out(  turn_mode[Turn_out_L45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+					}
+				}
+				else
+				{
+					motion->exe_Motion_turn_out(  turn_mode[Turn_out_L45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				}
 				break;
 			case Turn_in_R135:
 				motion->exe_Motion_turn_in(  turn_mode[Turn_in_R135],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
@@ -727,8 +757,8 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 			case Turn_LV90:
 				motion->exe_Motion_turn_v90(  turn_mode[Turn_LV90],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
-			case Diagonal_R: 		break;
-			case Diagonal_L: 		break;
+//			case Diagonal_R: 		break;
+//			case Diagonal_L: 		break;
 			case Search_st_section: break;
 			case Search_st_half: 	break;
 			case Pivot_turn_R: 		break;

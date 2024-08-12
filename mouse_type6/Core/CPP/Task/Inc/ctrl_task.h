@@ -109,6 +109,7 @@ class Motion
 		void SetIdeal_turn_out		();
 		void SetIdeal_long_turn		();
 		void SetIdeal_turn_v90		();
+		void SetIdeal_long_turn_v90		();
 
 		void SetIdeal_fix_wall		();
 		void SetIdeal_suction_start ();
@@ -186,6 +187,9 @@ class Motion
 		void Init_Motion_long_turn		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
 		void Init_Motion_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
 
+		void Init_Motion_long_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
+
+
 		void Init_Motion_fix_wall		(float set_time,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
 		void Init_Motion_suction_start	(float suction_voltage,float set_time,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
 		void Init_Motion_stop_brake		(float set_time,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
@@ -262,6 +266,12 @@ class Motion
 			return execute_Motion();
 		}
 
+
+		inline t_exeStatus exe_Motion_long_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain)
+		{
+			Init_Motion_long_turn_v90		(turn_param,run_pt,sp_gain,om_gain);
+			return execute_Motion();
+		}
 
 		Vehicle *return_vehicleObj() 	{return vehicle;};
 		IrSensTask *return_irObj() 		{return ir_sens;};

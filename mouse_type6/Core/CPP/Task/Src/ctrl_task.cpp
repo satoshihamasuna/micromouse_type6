@@ -38,8 +38,6 @@ void CtrlTask::motion_ideal_param_set()
 			SetIdeal_straight( );
 			break;
 		case Diagonal:
-		case Diagonal_L:
-		case Diagonal_R:
 			SetIdeal_diagonal( );
 			break;
 		case Pivot_turn_L:
@@ -71,6 +69,10 @@ void CtrlTask::motion_ideal_param_set()
 		case Turn_LV90:
 		case Turn_RV90:
 			SetIdeal_turn_v90( );
+			break;
+		case Long_turn_LV90:
+		case Long_turn_RV90:
+			SetIdeal_long_turn_v90( );
 			break;
 		case motor_free:
 			SetIdeal_free_rotation_set();

@@ -11,16 +11,16 @@ sensing_task.h:75:15:void IrSensTask::EnableIrSens()	16	static
 sensing_task.h:77:8:void IrSensTask::EnableIrSensStraight()	16	static
 sensing_task.h:78:8:void IrSensTask::EnableIrSensDiagonal()	16	static
 sensing_task.h:106:8:void IrSensTask::Division_Wall_Correction_Reset()	16	static
-ctrl_task.h:125:15:void Motion::run_time_ms_reset()	16	static
-ctrl_task.h:130:15:void Motion::run_time_limit_ms_reset()	16	static
-ctrl_task.h:131:15:void Motion::run_time_limit_ms_set(float)	16	static
-ctrl_task.h:135:18:void Motion::motion_pattern_set(t_run_pattern)	16	static
-ctrl_task.h:138:18:void Motion::motion_state_set(t_runStatus)	16	static
-ctrl_task.h:141:18:void Motion::motion_exeStatus_set(t_exeStatus)	16	static
-ctrl_task.h:144:17:void Motion::motion_enable_set()	16	static
-ctrl_task.h:145:17:void Motion::motion_disable_set()	16	static
-ctrl_task.h:150:8:void Motion::error_counter_reset()	16	static
-ctrl_task.h:166:24:t_exeStatus Motion::motion_exeStatus_get()	16	static
+ctrl_task.h:126:15:void Motion::run_time_ms_reset()	16	static
+ctrl_task.h:131:15:void Motion::run_time_limit_ms_reset()	16	static
+ctrl_task.h:132:15:void Motion::run_time_limit_ms_set(float)	16	static
+ctrl_task.h:136:18:void Motion::motion_pattern_set(t_run_pattern)	16	static
+ctrl_task.h:139:18:void Motion::motion_state_set(t_runStatus)	16	static
+ctrl_task.h:142:18:void Motion::motion_exeStatus_set(t_exeStatus)	16	static
+ctrl_task.h:145:17:void Motion::motion_enable_set()	16	static
+ctrl_task.h:146:17:void Motion::motion_disable_set()	16	static
+ctrl_task.h:151:8:void Motion::error_counter_reset()	16	static
+ctrl_task.h:167:24:t_exeStatus Motion::motion_exeStatus_get()	16	static
 init_motion.cpp:13:6:void Motion::Motion_start()	16	static
 init_motion.cpp:29:6:void Motion::Motion_end()	16	static
 init_motion.cpp:45:6:void Motion::Motion_error_handling()	16	static
@@ -35,6 +35,7 @@ init_motion.cpp:546:6:void Motion::Init_Motion_turn_in(const t_param*, t_run_pat
 init_motion.cpp:646:6:void Motion::Init_Motion_turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	64	static
 init_motion.cpp:746:6:void Motion::Init_Motion_long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	64	static
 init_motion.cpp:883:6:void Motion::Init_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	56	static
-init_motion.cpp:965:6:void Motion::Init_Motion_fix_wall(float, const t_pid_gain*, const t_pid_gain*)	24	static
-init_motion.cpp:1028:6:void Motion::Init_Motion_suction_start(float, float, const t_pid_gain*, const t_pid_gain*)	32	static
-init_motion.cpp:1096:6:void Motion::Init_Motion_stop_brake(float, const t_pid_gain*, const t_pid_gain*)	24	static
+init_motion.cpp:966:6:void Motion::Init_Motion_long_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	56	static
+init_motion.cpp:1048:6:void Motion::Init_Motion_fix_wall(float, const t_pid_gain*, const t_pid_gain*)	24	static
+init_motion.cpp:1111:6:void Motion::Init_Motion_suction_start(float, float, const t_pid_gain*, const t_pid_gain*)	32	static
+init_motion.cpp:1179:6:void Motion::Init_Motion_stop_brake(float, const t_pid_gain*, const t_pid_gain*)	24	static
