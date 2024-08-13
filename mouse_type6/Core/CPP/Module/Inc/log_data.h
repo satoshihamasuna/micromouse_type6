@@ -12,7 +12,7 @@
 #include "../../Component/Inc/half_float.h"
 #include "../../Component/Inc/singleton.h"
 
-#define LOG_DATA_SIZE 1000
+#define LOG_DATA_SIZE 999
 #define LOG_DATA_NUM  28
 #define LOG_DATA_PRIOD 3
 
@@ -22,7 +22,7 @@ class LogData:public Singleton<LogData>
 	public:
 	    t_bool log_enable = False;
 		const int data_size = LOG_DATA_SIZE;
-		const int data_num  = LOG_DATA_NUM;
+		const uint8_t data_num  = LOG_DATA_NUM;
 		int data_count = 0;
 		uint8_t mode = 2;
 		half_float data[LOG_DATA_NUM][LOG_DATA_SIZE];

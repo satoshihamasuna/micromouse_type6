@@ -168,6 +168,7 @@ class Dijkstra:public calcRunTime
 		uint16_t diagonal_section_num(t_posDijkstra s_pos,t_posDijkstra e_pos,t_direction dir);
 };
 
+
 /*
 class Dijkstra_type7: public Dijkstra,public Singleton<Dijkstra_type7>
 {

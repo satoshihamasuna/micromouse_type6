@@ -20,7 +20,6 @@
 
 #define DIJKSTRA_MAX_TIME (65535-1)
 
-
 void log_enable()
 {
 	  LogData::getInstance().data_count = 0;
