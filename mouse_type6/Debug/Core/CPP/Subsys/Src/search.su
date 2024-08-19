@@ -5,12 +5,11 @@ wall_class.h:29:8:void wall_class::goal_set_vwall(int, int, int)	32	static
 wall_class.h:37:8:void wall_class::goal_clear_vwall(int, int, int)	32	static
 adachi_class.h:22:3:adachi::adachi(wall_class*, make_map*)	24	static
 ctrl_task.h:167:24:t_exeStatus Motion::motion_exeStatus_get()	16	static
-ctrl_task.h:197:22:t_exeStatus Motion::execute_Motion()	16	static
-ctrl_task.h:209:22:t_exeStatus Motion::exe_Motion_straight(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
-ctrl_task.h:215:22:t_exeStatus Motion::exe_Motion_backward(const t_pid_gain*, const t_pid_gain*)	24	static
-ctrl_task.h:229:22:t_exeStatus Motion::exe_Motion_pivot_turn(float, float, float, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:236:22:t_exeStatus Motion::exe_Motion_fix_wall(float, const t_pid_gain*, const t_pid_gain*)	24	static
-ctrl_task.h:276:12:Vehicle* Motion::return_vehicleObj()	16	static
+ctrl_task.h:202:22:t_exeStatus Motion::execute_Motion()	16	static
+ctrl_task.h:214:22:t_exeStatus Motion::exe_Motion_straight(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
+ctrl_task.h:234:22:t_exeStatus Motion::exe_Motion_pivot_turn(float, float, float, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:241:22:t_exeStatus Motion::exe_Motion_fix_wall(float, const t_pid_gain*, const t_pid_gain*)	24	static
+ctrl_task.h:281:12:Vehicle* Motion::return_vehicleObj()	16	static
 interrupt.h:32:12:uint32_t Interrupt::return_time_count()	16	static
 search_class.h:56:11:int32_t Search::return_search_time()	16	static
 search.cpp:24:8:t_bool Search::i_am_goal(int, int, int, int, int)	32	static

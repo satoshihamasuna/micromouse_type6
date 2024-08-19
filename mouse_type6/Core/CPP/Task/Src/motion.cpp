@@ -520,6 +520,7 @@ void Motion::SetIdeal_straight()
 	run_time_ms_update();
 	vehicle->ideal.length.set(vehicle->ideal.length.get() + vehicle->ideal.velo.get()*(float)deltaT_ms);
 	vehicle->ideal.radian.set(vehicle->ideal.radian.get() + vehicle->ideal.rad_velo.get()*(float)deltaT_ms/1000.0f);
+	//vehicle->ideal.radian.set(0.0);
 }
 
 

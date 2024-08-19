@@ -208,6 +208,28 @@ void Demo()
 			case ENABLE|0x04:
 				break;
 			case ENABLE|0x05:
+			   if(irsens->IrSensor_Avg() > 2000)
+			   {
+					for(int i = 0;i < 11;i++)
+					{
+						(i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
+						HAL_Delay(50);
+					}
+
+					run_path.turn_time_set(mode_1000);
+					run_path.run_Dijkstra(		start, Dir_None, goal,MAZE_GOAL_SIZE,
+														st_mode_500_v0, (int)(sizeof(st_mode_500_v0)/sizeof(t_straight_param *const)),
+														di_mode_500_v0, (int)(sizeof(di_mode_500_v0)/sizeof(t_straight_param *const)), mode_500,motion);
+
+
+					if(motion->motion_exeStatus_get() == error)
+					{
+						Mode::indicate_error();
+						enable = 0x00;
+						break;
+					}
+					enable = 0x00;
+				}
 				break;
 			case ENABLE|0x06:
 			   if(irsens->IrSensor_Avg() > 2000)
@@ -220,8 +242,8 @@ void Demo()
 
 			  		run_path.turn_time_set(mode_1000);
 					run_path.run_Dijkstra(		start, Dir_None, goal,MAZE_GOAL_SIZE,
-														st_mode_500_v0, (int)(sizeof(st_mode_500_v0)/sizeof(t_straight_param *const)),
-														di_mode_500_v0, (int)(sizeof(di_mode_500_v0)/sizeof(t_straight_param *const)), mode_500,motion);
+														st_mode_650_v0, (int)(sizeof(st_mode_650_v0)/sizeof(t_straight_param *const)),
+														di_mode_650_v0, (int)(sizeof(di_mode_650_v0)/sizeof(t_straight_param *const)), mode_650,motion);
 
 
 					if(motion->motion_exeStatus_get() == error)

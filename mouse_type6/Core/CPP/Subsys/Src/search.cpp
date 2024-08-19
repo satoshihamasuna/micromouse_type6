@@ -238,9 +238,9 @@ t_exeStatus Search::turn_rear_process (	t_position my_position,t_position tmp_my
 		result = motion->exe_Motion_pivot_turn( DEG2RAD(180.0f), 40.0*PI, 4.0*PI);
 	}
 
-	result = motion->exe_Motion_backward();
+	//result = motion->exe_Motion_backward();
 
-	result = motion->exe_Motion_straight(45.0 + 15.0, search_st_param->param->acc, search_st_param->param->max_velo, search_st_param->param->max_velo);
+	result = motion->exe_Motion_straight(45.0 + 15.0*0.0, search_st_param->param->acc, search_st_param->param->max_velo, search_st_param->param->max_velo);
 	return result;
 }
 

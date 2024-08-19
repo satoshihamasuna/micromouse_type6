@@ -11,18 +11,18 @@ sensing_task.h:117:8:virtual void IrSensTask_type7::IrSensorSet()	16	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 ctrl_task.h:158:3:Motion::Motion(Vehicle*, IrSensTask*, int)	24	static
 ctrl_task.h:167:24:t_exeStatus Motion::motion_exeStatus_get()	16	static
-ctrl_task.h:197:22:t_exeStatus Motion::execute_Motion()	16	static
-ctrl_task.h:209:22:t_exeStatus Motion::exe_Motion_straight(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
-ctrl_task.h:215:22:t_exeStatus Motion::exe_Motion_backward(const t_pid_gain*, const t_pid_gain*)	24	static
-ctrl_task.h:221:22:t_exeStatus Motion::exe_Motion_diagonal(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
-ctrl_task.h:242:22:t_exeStatus Motion::exe_Motion_suction_start(float, float, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:248:22:t_exeStatus Motion::exe_Motion_turn_in(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:253:22:t_exeStatus Motion::exe_Motion_turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:258:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:263:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:277:15:IrSensTask* Motion::return_irObj()	16	static
-ctrl_task.h:290:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
-ctrl_task.h:308:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
+ctrl_task.h:202:22:t_exeStatus Motion::execute_Motion()	16	static
+ctrl_task.h:214:22:t_exeStatus Motion::exe_Motion_straight(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
+ctrl_task.h:220:22:t_exeStatus Motion::exe_Motion_backward(const t_pid_gain*, const t_pid_gain*)	24	static
+ctrl_task.h:226:22:t_exeStatus Motion::exe_Motion_diagonal(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
+ctrl_task.h:247:22:t_exeStatus Motion::exe_Motion_suction_start(float, float, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:253:22:t_exeStatus Motion::exe_Motion_turn_in(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:258:22:t_exeStatus Motion::exe_Motion_turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:263:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:268:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:282:15:IrSensTask* Motion::return_irObj()	16	static
+ctrl_task.h:295:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
+ctrl_task.h:313:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
 interrupt.h:32:12:uint32_t Interrupt::return_time_count()	16	static
 path_follow.h:34:8:void path_follow_class::set_path_follow_gain(float, float)	24	static
 debug.cpp:42:7:void Mode::Debug(const t_straight_param*, const t_param* const*, int)	640	static

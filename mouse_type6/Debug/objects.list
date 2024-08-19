@@ -33,6 +33,7 @@
 "Core/CPP/System/Src/myshell.o"
 "Core/CPP/Task/Src/ctrl_task.o"
 "Core/CPP/Task/Src/init_motion.o"
+"Core/CPP/Task/Src/init_motion2.o"
 "Core/CPP/Task/Src/ir_sens_task.o"
 "Core/CPP/Task/Src/motion.o"
 "Core/Src/adc.o"

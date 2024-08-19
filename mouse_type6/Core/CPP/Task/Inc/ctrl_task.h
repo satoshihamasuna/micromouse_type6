@@ -186,8 +186,13 @@ class Motion
 		void Init_Motion_turn_out		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
 		void Init_Motion_long_turn		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
 		void Init_Motion_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
-
 		void Init_Motion_long_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
+
+		void Init_Motion_turn_in		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain );
+		void Init_Motion_turn_out		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain );
+		void Init_Motion_long_turn		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain );
+		void Init_Motion_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain );
+		void Init_Motion_long_turn_v90	(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain );
 
 
 		void Init_Motion_fix_wall		(float set_time,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain);
