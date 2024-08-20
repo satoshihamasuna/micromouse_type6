@@ -25,19 +25,19 @@ float lambda_slip;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if (htim == &htim5){
-    	Interrupt::getInstance().preprocess();
-    	Interrupt::getInstance().main();
-    	Interrupt::getInstance().postprocess();
+    	//Interrupt::getInstance().preprocess();
+    	//Interrupt::getInstance().main();
+    	//Interrupt::getInstance().postprocess();
     }
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-	/*
+
 	Interrupt::getInstance().preprocess();
 	Interrupt::getInstance().main();
 	Interrupt::getInstance().postprocess();
-	*/
+
 }
 
 

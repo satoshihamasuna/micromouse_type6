@@ -15,6 +15,8 @@
 
 #define ENC_ZERO		(20000)
 
+#define CORRECTION		(50)
+
 float   m_dt = 1.0;
 
 t_encoder enc_R,enc_L;
@@ -60,6 +62,9 @@ void Encoder_SetSpeed_Right(){
 
 	enc_R.sp_pulse = Encoder_GetPosition_Right();
 
+	//if(ABS(enc_R.prev_sp_pulse - enc_R.sp_pulse) > 50)
+		//enc_R.sp_pulse = enc_R.prev_sp_pulse;
+
 	Encoder_ResetPosition_Right();
 	//raw dataの確認．
 	enc_R.cnt = (enc_R.cnt == ACC_BUFF_SIZE - 1) ? 0 : enc_R.cnt + 1;
@@ -79,6 +84,9 @@ void Encoder_SetSpeed_Left(){
 	enc_L.prev_sp_pulse = enc_L.sp_pulse;
 
 	enc_L.sp_pulse = Encoder_GetPosition_Left();
+
+	//if(ABS(enc_L.prev_sp_pulse - enc_L.sp_pulse) > 50)
+		//enc_L.sp_pulse = enc_L.prev_sp_pulse;
 
 	Encoder_ResetPosition_Left();
 
