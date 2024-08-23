@@ -1,8 +1,9 @@
 calcRunTime.cpp:17:6:void calcRunTime::turn_time_set(const t_param* const*)	40	static
-calcRunTime.cpp:57:10:uint16_t calcRunTime::return_turn_time(t_run_pattern)	16	static
-calcRunTime.cpp:87:10:uint16_t calcRunTime::straight_time_set(float)	72	static
-calcRunTime.cpp:110:18:t_straight_param calcRunTime::calc_end_straight_max_velo(float)	72	static
-calcRunTime.cpp:141:10:uint16_t calcRunTime::diagonal_time_set(float)	72	static
-calcRunTime.cpp:164:18:t_straight_param calcRunTime::calc_end_diagonal_max_velo(float)	72	static
-calcRunTime.cpp:195:6:void calcRunTime::st_param_set(const t_straight_param* const*, uint16_t)	24	static
-calcRunTime.cpp:200:6:void calcRunTime::di_param_set(const t_straight_param* const*, uint16_t)	24	static
+calcRunTime.cpp:58:6:void calcRunTime::turn_time_set(const t_param* const* const*, uint16_t)	48	static
+calcRunTime.cpp:124:10:uint16_t calcRunTime::return_turn_time(t_run_pattern)	16	static
+calcRunTime.cpp:154:10:uint16_t calcRunTime::straight_time_set(float)	72	static
+calcRunTime.cpp:177:18:t_straight_param calcRunTime::calc_end_straight_max_velo(float)	72	static
+calcRunTime.cpp:208:10:uint16_t calcRunTime::diagonal_time_set(float)	72	static
+calcRunTime.cpp:231:18:t_straight_param calcRunTime::calc_end_diagonal_max_velo(float)	72	static
+calcRunTime.cpp:262:6:void calcRunTime::st_param_set(const t_straight_param* const*, uint16_t)	24	static
+calcRunTime.cpp:267:6:void calcRunTime::di_param_set(const t_straight_param* const*, uint16_t)	24	static

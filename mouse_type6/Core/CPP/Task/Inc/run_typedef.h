@@ -43,6 +43,7 @@ typedef enum{
 	Fix_wall			= 27,
 	Suction_start		= 28,
 	Backward			= 29,
+	Run_Pause			= 30,
 }t_run_pattern;
 
 typedef enum{

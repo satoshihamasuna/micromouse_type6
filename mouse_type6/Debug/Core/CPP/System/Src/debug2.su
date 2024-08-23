@@ -16,12 +16,12 @@ ctrl_task.h:208:22:t_exeStatus Motion::exe_Motion_search_turn(const t_param*, co
 ctrl_task.h:214:22:t_exeStatus Motion::exe_Motion_straight(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
 ctrl_task.h:226:22:t_exeStatus Motion::exe_Motion_diagonal(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
 ctrl_task.h:253:22:t_exeStatus Motion::exe_Motion_turn_in(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:258:22:t_exeStatus Motion::exe_Motion_turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:263:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:268:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:282:15:IrSensTask* Motion::return_irObj()	16	static
-ctrl_task.h:295:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
-ctrl_task.h:313:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
+ctrl_task.h:265:22:t_exeStatus Motion::exe_Motion_turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:277:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:290:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:317:15:IrSensTask* Motion::return_irObj()	16	static
+ctrl_task.h:330:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
+ctrl_task.h:348:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
 interrupt.h:32:12:uint32_t Interrupt::return_time_count()	16	static
 path_follow.h:34:8:void path_follow_class::set_path_follow_gain(float, float)	24	static
 debug2.cpp:40:7:void Mode::Debug2(const t_straight_param*, const t_param* const*, int)	608	static

@@ -12,17 +12,17 @@ wall_class.h:20:3:wall_class::wall_class(IrSensTask*)	16	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 ctrl_task.h:158:3:Motion::Motion(Vehicle*, IrSensTask*, int)	24	static
 ctrl_task.h:167:24:t_exeStatus Motion::motion_exeStatus_get()	16	static
-ctrl_task.h:282:15:IrSensTask* Motion::return_irObj()	16	static
-ctrl_task.h:295:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
-ctrl_task.h:313:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
+ctrl_task.h:317:15:IrSensTask* Motion::return_irObj()	16	static
+ctrl_task.h:330:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
+ctrl_task.h:348:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
 interrupt.h:32:12:uint32_t Interrupt::return_time_count()	16	static
 search_class.h:57:8:void Search::reset_search_time()	16	static
 search_class.h:64:14:t_position Search::search_adachi_1(t_position, t_position, int, wall_class*, make_map*, Motion*)	48	static
 search_class.h:72:14:t_position Search::search_adachi_1_acc(t_position, t_position, int, wall_class*, make_map*, Motion*)	48	static
 search_class.h:91:14:t_position Search::search_adachi_2_acc(t_position, t_position, int, wall_class*, make_map*, Motion*)	48	static
 search_class.h:109:14:t_position Search::search_adachi_3_acc(t_position, t_position, int, wall_class*, make_map*, Motion*)	48	static
-make_path.h:94:3:calcRunTime::calcRunTime()	16	static
-make_path.h:145:3:Dijkstra::Dijkstra(wall_class*)	16	static
+make_path.h:95:3:calcRunTime::calcRunTime()	16	static
+make_path.h:146:3:Dijkstra::Dijkstra(wall_class*)	16	static
 path_follow.h:34:8:void path_follow_class::set_path_follow_gain(float, float)	24	static
 search_class.h:27:7:Search::Search()	16	static
 demo.cpp:43:6:void Mode::Demo()	30344	static

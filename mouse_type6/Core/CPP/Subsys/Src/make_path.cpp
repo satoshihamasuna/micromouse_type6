@@ -582,7 +582,7 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 					if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Turn_in_R45)
 					{
 						i--;
-						motion->exe_Motion_turn_out(  turn_mode[Long_turn_RV90],Long_turn_RV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+						motion->exe_Motion_long_turn_v90(  turn_mode[Long_turn_RV90],Long_turn_RV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 					}
 					else
 					{
@@ -600,7 +600,7 @@ void Dijkstra::run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_pos
 					if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Turn_in_L45)
 					{
 						i--;
-						motion->exe_Motion_turn_out(  turn_mode[Long_turn_LV90],Long_turn_LV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+						motion->exe_Motion_long_turn_v90(  turn_mode[Long_turn_LV90],Long_turn_LV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 					}
 					else
 					{
@@ -743,12 +743,12 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 				motion->exe_Motion_turn_in(  turn_mode[Turn_in_L45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 			case Turn_out_R45:
-				if(i > 0)
+				if(i > 0 && turn_mode[Long_turn_RV90] != NULL)
 				{
 					if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Turn_in_R45)
 					{
 						i--;
-						motion->exe_Motion_turn_out(  turn_mode[Long_turn_RV90],Long_turn_RV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+						motion->exe_Motion_long_turn_v90(  turn_mode[Long_turn_RV90],Long_turn_RV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 					}
 					else
 					{
@@ -761,12 +761,12 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 				}
 				break;
 			case Turn_out_L45:
-				if(i > 0)
+				if(i > 0 && turn_mode[Long_turn_LV90] != NULL)
 				{
 					if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Turn_in_L45)
 					{
 						i--;
-						motion->exe_Motion_turn_out(  turn_mode[Long_turn_LV90],Long_turn_LV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+						motion->exe_Motion_long_turn_v90(  turn_mode[Long_turn_LV90],Long_turn_LV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 					}
 					else
 					{
@@ -795,6 +795,201 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 				break;
 			case Turn_LV90:
 				motion->exe_Motion_turn_v90(  turn_mode[Turn_LV90],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+//			case Diagonal_R: 		break;
+//			case Diagonal_L: 		break;
+			case Search_st_section: break;
+			case Search_st_half: 	break;
+			case Pivot_turn_R: 		break;
+			case Pivot_turn_L: 		break;
+			case Search_slalom_R: 	break;
+			case Search_slalom_L: 	break;
+			case run_brake: 		break;
+			case motor_free: 		break;
+			case Fix_wall: 			break;
+			//#endif
+			default :
+				break;
+		}
+		//while(controll_task::getInstance().run_task !=No_run);
+		if(motion->motion_exeStatus_get() == error)
+		{
+			break;
+		}
+	}
+
+	log_disable();
+	motion->Motion_end();
+	HAL_Delay(200);
+	FAN_Motor_SetDuty(0);;
+	HAL_Delay(200);
+}
+
+void Dijkstra::run_Dijkstra_suction_acc(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size,int suction,
+									  const t_straight_param *const *st_mode,uint16_t size_st_mode,
+									  const t_straight_param *const *di_mode,uint16_t size_di_mode,
+									  const t_param *const*const *turn_mode ,uint16_t size_turn_mode, Motion *motion)
+{
+	turn_time_set(turn_mode,size_turn_mode);
+	st_param_set(st_mode, size_st_mode);
+	di_param_set(di_mode, size_di_mode);
+
+	t_posDijkstra last_pos = make_path_Dijkstra(start_pos, start_wallPos, goal_pos, goal_size);
+	t_posDijkstra tmp_pos = last_pos;
+	t_posDijkstra start = conv_t_pos2t_posDijkstra(start_pos, start_wallPos);
+	t_straight_param st_parameter ;
+
+	uint8_t turn_select[MAZE_SIZE];
+
+	int tail = 0;
+	for(int i = 0;;i++)
+	{
+		run_pos_buff[i] = tmp_pos;
+		turn_select [i] = 0;
+		tmp_pos = (*get_closure_inf(tmp_pos)).parent_pos;
+		for(int turn_cnt = 0; turn_cnt < size_turn_mode;turn_cnt++)
+		{
+			if(turn_mode[turn_cnt][(*get_closure_inf(run_pos_buff[i])).run_pt] != NULL)
+			{
+				turn_select [i] = turn_cnt;
+			}
+
+		}
+
+		if(tmp_pos.x == start.x && tmp_pos.y == start.y && tmp_pos.NodePos == start.NodePos)
+		{
+			tail = i;
+			break;
+		}
+	}
+
+	motion->Motion_start();
+	float suction_value = suction/1000.0f*3.50;
+	int stay_time 	= (int)(suction_value/0.05) + 300;
+	motion->exe_Motion_suction_start(suction/1000.0f*3.50, stay_time);
+	log_enable();
+	motion->exe_Motion_straight(  16.10-3.0, straight_base_velo().param->acc, straight_base_velo().param->max_velo, straight_base_velo().param->max_velo);
+
+	uint16_t section_count = 0;
+	float end_velo = straight_base_velo().param->max_velo;
+	for(int i = tail ; i >= 0;i--)
+	{
+
+		end_velo = straight_base_velo().param->max_velo;
+		if(i > 0)
+		{
+
+			if(!((*get_closure_inf(run_pos_buff[i-1])).run_pt == Straight || (*get_closure_inf(run_pos_buff[i-1])).run_pt == Diagonal ))
+			{
+				if(turn_mode[turn_select[i-1]][(*get_closure_inf(run_pos_buff[i-1])).run_pt] != NULL)
+					end_velo = turn_mode[turn_select[i-1]][(*get_closure_inf(run_pos_buff[i-1])).run_pt]->param->velo;
+			}
+			/*
+			else if(!((*get_closure_inf(run_pos_buff[i-1])).run_pt == Straight || (*get_closure_inf(run_pos_buff[i-1])).run_pt == Diagonal ))
+			{
+				if(turn_mode[turn_select[i]][(*get_closure_inf(run_pos_buff[i])).run_pt] != NULL)
+					end_velo = turn_mode[turn_select[i]][(*get_closure_inf(run_pos_buff[i])).run_pt]->param->velo;
+			}
+			*/
+		}
+
+		switch((*get_closure_inf(run_pos_buff[i])).run_pt)
+		{
+			//#ifdef DEBUG_MODE
+			case No_run: 	break;
+			case Straight:
+				section_count = straight_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
+				st_parameter =  calc_end_straight_max_velo(SECTION * section_count);
+				if(i == 0)
+					motion->exe_Motion_straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f,st_parameter.sp_gain,st_parameter.om_gain);
+				else
+					if(st_parameter.param->max_velo >= end_velo)
+						motion->exe_Motion_straight(  SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, end_velo,st_parameter.sp_gain,st_parameter.om_gain);
+					else
+						motion->exe_Motion_straight(  SECTION * section_count, st_parameter.param->acc, end_velo					, end_velo,st_parameter.sp_gain,st_parameter.om_gain);
+				break;
+			case Diagonal:
+				section_count = diagonal_section_num((*get_closure_inf(run_pos_buff[i])).parent_pos, run_pos_buff[i], (*get_closure_inf(run_pos_buff[i])).dir);
+				st_parameter =  calc_end_diagonal_max_velo(DIAG_SECTION * section_count);
+				if(i == 0)
+					motion->exe_Motion_diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, 0.0f,st_parameter.sp_gain,st_parameter.om_gain);
+				else
+					if(st_parameter.param->max_velo >= end_velo)
+						motion->exe_Motion_diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, st_parameter.param->max_velo, end_velo,st_parameter.sp_gain,st_parameter.om_gain);
+					else
+						motion->exe_Motion_diagonal(  DIAG_SECTION * section_count, st_parameter.param->acc, end_velo					 , end_velo,st_parameter.sp_gain,st_parameter.om_gain);
+				break;
+			case Long_turnR90:
+				motion->exe_Motion_long_turn(  turn_mode[turn_select[i]][Long_turnR90],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Long_turnL90:
+				motion->exe_Motion_long_turn(  turn_mode[turn_select[i]][Long_turnL90],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Long_turnR180:
+				motion->exe_Motion_long_turn(  turn_mode[turn_select[i]][Long_turnR180],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Long_turnL180:
+				motion->exe_Motion_long_turn(  turn_mode[turn_select[i]][Long_turnL180],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Turn_in_R45:
+				motion->exe_Motion_turn_in(  turn_mode[turn_select[i]][Turn_in_R45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Turn_in_L45:
+				motion->exe_Motion_turn_in(  turn_mode[turn_select[i]][Turn_in_L45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Turn_out_R45:
+				if(i > 0 && turn_mode[turn_select[i]][Long_turn_RV90] != NULL)
+				{
+					if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Turn_in_R45)
+					{
+						motion->exe_Motion_long_turn_v90(  turn_mode[turn_select[i]][Long_turn_RV90],Long_turn_RV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+						i--;
+					}
+					else
+					{
+						motion->exe_Motion_turn_out(  turn_mode[turn_select[i]][Turn_out_R45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+					}
+				}
+				else
+				{
+					motion->exe_Motion_turn_out(  turn_mode[turn_select[i]][Turn_out_R45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				}
+				break;
+			case Turn_out_L45:
+				if(i > 0 && turn_mode[turn_select[i]][Long_turn_LV90] != NULL)
+				{
+					if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Turn_in_L45)
+					{
+						motion->exe_Motion_long_turn_v90(  turn_mode[turn_select[i]][Long_turn_LV90],Long_turn_LV90,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+						i--;
+					}
+					else
+					{
+						motion->exe_Motion_turn_out(  turn_mode[turn_select[i]][Turn_out_L45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+					}
+				}
+				else
+				{
+					motion->exe_Motion_turn_out(  turn_mode[turn_select[i]][Turn_out_L45],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				}
+				break;
+			case Turn_in_R135:
+				motion->exe_Motion_turn_in(  turn_mode[turn_select[i]][Turn_in_R135],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Turn_in_L135:
+				motion->exe_Motion_turn_in(  turn_mode[turn_select[i]][Turn_in_L135],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Turn_out_R135:
+				motion->exe_Motion_turn_out(  turn_mode[turn_select[i]][Turn_out_R135],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Turn_out_L135:
+				motion->exe_Motion_turn_out(  turn_mode[turn_select[i]][Turn_out_L135],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Turn_RV90:
+				motion->exe_Motion_turn_v90(  turn_mode[turn_select[i]][Turn_RV90],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
+				break;
+			case Turn_LV90:
+				motion->exe_Motion_turn_v90(  turn_mode[turn_select[i]][Turn_LV90],(t_run_pattern)(*get_closure_inf(run_pos_buff[i])).run_pt,end_velo,straight_base_velo().param->acc,straight_base_velo().sp_gain,straight_base_velo().om_gain);
 				break;
 //			case Diagonal_R: 		break;
 //			case Diagonal_L: 		break;

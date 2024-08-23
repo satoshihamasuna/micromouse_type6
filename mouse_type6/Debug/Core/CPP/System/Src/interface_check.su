@@ -15,10 +15,10 @@ ctrl_task.h:167:24:t_exeStatus Motion::motion_exeStatus_get()	16	static
 ctrl_task.h:202:22:t_exeStatus Motion::execute_Motion()	16	static
 ctrl_task.h:234:22:t_exeStatus Motion::exe_Motion_pivot_turn(float, float, float, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:241:22:t_exeStatus Motion::exe_Motion_fix_wall(float, const t_pid_gain*, const t_pid_gain*)	24	static
-ctrl_task.h:281:12:Vehicle* Motion::return_vehicleObj()	16	static
-ctrl_task.h:282:15:IrSensTask* Motion::return_irObj()	16	static
-ctrl_task.h:295:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
-ctrl_task.h:313:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
+ctrl_task.h:316:12:Vehicle* Motion::return_vehicleObj()	16	static
+ctrl_task.h:317:15:IrSensTask* Motion::return_irObj()	16	static
+ctrl_task.h:330:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
+ctrl_task.h:348:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
 interrupt.h:32:12:uint32_t Interrupt::return_time_count()	16	static
 interface_check.cpp:43:7:void Mode::Interface_Check()	856	static
 controller.h:19:7:constexpr PID_Controller::PID_Controller()	16	static

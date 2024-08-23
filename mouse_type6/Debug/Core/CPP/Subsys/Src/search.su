@@ -9,7 +9,7 @@ ctrl_task.h:202:22:t_exeStatus Motion::execute_Motion()	16	static
 ctrl_task.h:214:22:t_exeStatus Motion::exe_Motion_straight(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
 ctrl_task.h:234:22:t_exeStatus Motion::exe_Motion_pivot_turn(float, float, float, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:241:22:t_exeStatus Motion::exe_Motion_fix_wall(float, const t_pid_gain*, const t_pid_gain*)	24	static
-ctrl_task.h:281:12:Vehicle* Motion::return_vehicleObj()	16	static
+ctrl_task.h:316:12:Vehicle* Motion::return_vehicleObj()	16	static
 interrupt.h:32:12:uint32_t Interrupt::return_time_count()	16	static
 search_class.h:56:11:int32_t Search::return_search_time()	16	static
 search.cpp:24:8:t_bool Search::i_am_goal(int, int, int, int, int)	32	static

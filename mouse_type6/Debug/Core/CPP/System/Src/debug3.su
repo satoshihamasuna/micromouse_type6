@@ -10,9 +10,9 @@ vehicle.h:202:7:virtual void Vehicle_type7::suctionStop()	16	static
 sensing_task.h:117:8:virtual void IrSensTask_type7::IrSensorSet()	16	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 ctrl_task.h:158:3:Motion::Motion(Vehicle*, IrSensTask*, int)	24	static
-ctrl_task.h:282:15:IrSensTask* Motion::return_irObj()	16	static
-ctrl_task.h:295:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
-ctrl_task.h:313:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
+ctrl_task.h:317:15:IrSensTask* Motion::return_irObj()	16	static
+ctrl_task.h:330:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
+ctrl_task.h:348:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
 interrupt.h:32:12:uint32_t Interrupt::return_time_count()	16	static
 path_follow.h:34:8:void path_follow_class::set_path_follow_gain(float, float)	24	static
 debug3.cpp:46:7:void Mode::Debug3()	520	static

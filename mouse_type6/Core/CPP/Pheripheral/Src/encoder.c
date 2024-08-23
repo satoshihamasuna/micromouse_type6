@@ -62,8 +62,8 @@ void Encoder_SetSpeed_Right(){
 
 	enc_R.sp_pulse = Encoder_GetPosition_Right();
 
-	//if(ABS(enc_R.prev_sp_pulse - enc_R.sp_pulse) > 50)
-		//enc_R.sp_pulse = enc_R.prev_sp_pulse;
+	if(ABS(enc_R.prev_sp_pulse - enc_R.sp_pulse) > 50)
+		enc_R.sp_pulse = enc_R.prev_sp_pulse;
 
 	Encoder_ResetPosition_Right();
 	//raw dataの確認．
@@ -85,8 +85,8 @@ void Encoder_SetSpeed_Left(){
 
 	enc_L.sp_pulse = Encoder_GetPosition_Left();
 
-	//if(ABS(enc_L.prev_sp_pulse - enc_L.sp_pulse) > 50)
-		//enc_L.sp_pulse = enc_L.prev_sp_pulse;
+	if(ABS(enc_L.prev_sp_pulse - enc_L.sp_pulse) > 50)
+		enc_L.sp_pulse = enc_L.prev_sp_pulse;
 
 	Encoder_ResetPosition_Left();
 

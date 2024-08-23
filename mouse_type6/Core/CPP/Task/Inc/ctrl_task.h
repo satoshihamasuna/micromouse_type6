@@ -255,26 +255,61 @@ class Motion
 			Init_Motion_turn_in			(turn_param,run_pt,sp_gain,om_gain);
 			return execute_Motion();
 		}
+		inline t_exeStatus exe_Motion_turn_in		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain )
+		{
+			Init_Motion_turn_in			(turn_param,run_pt,end_velo,acc,sp_gain,om_gain);
+			return execute_Motion();
+		}
+
+
 		inline t_exeStatus exe_Motion_turn_out		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain)
 		{
 			Init_Motion_turn_out		(turn_param,run_pt,sp_gain,om_gain);
 			return execute_Motion();
 		}
+
+		inline t_exeStatus exe_Motion_turn_out		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain )
+		{
+			Init_Motion_turn_out		(turn_param,run_pt,end_velo,acc,sp_gain,om_gain);
+			return execute_Motion();
+		}
+
 		inline t_exeStatus exe_Motion_long_turn		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain)
 		{
 			Init_Motion_long_turn		(turn_param,run_pt,sp_gain,om_gain);
 			return execute_Motion();
 		}
+
+		inline t_exeStatus exe_Motion_long_turn		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain )
+		{
+			Init_Motion_long_turn		(turn_param,run_pt,end_velo,acc,sp_gain,om_gain);
+			return execute_Motion();
+		}
+
+
 		inline t_exeStatus exe_Motion_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain)
 		{
 			Init_Motion_turn_v90		(turn_param,run_pt,sp_gain,om_gain);
 			return execute_Motion();
 		}
 
+		inline t_exeStatus exe_Motion_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain )
+		{
+				Init_Motion_turn_v90		(turn_param,run_pt,end_velo,acc,sp_gain,om_gain);
+				return execute_Motion();
+		}
 
-		inline t_exeStatus exe_Motion_long_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain,const t_pid_gain *om_gain = &basic_om_gain)
+
+		inline t_exeStatus exe_Motion_long_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain )
 		{
 			Init_Motion_long_turn_v90		(turn_param,run_pt,sp_gain,om_gain);
+			return execute_Motion();
+		}
+
+
+		inline t_exeStatus exe_Motion_long_turn_v90		(const t_param *turn_param,t_run_pattern run_pt,float end_velo, float acc,const t_pid_gain *sp_gain = &basic_sp_gain ,const t_pid_gain *om_gain = &basic_om_gain )
+		{
+			Init_Motion_long_turn_v90		(turn_param,run_pt,end_velo,acc,sp_gain,om_gain);
 			return execute_Motion();
 		}
 

@@ -753,6 +753,17 @@ const static t_param *const mode_1200[TURN_MODES] = 	{	&param_dummy,			&param_du
 															&param_LongRV90_1200,	&param_LongLV90_1200
 														};
 
+const static t_param *const mode_1200_v2[] = 	{	NULL,			NULL,		NULL,
+															&param_R90_1200,		&param_L90_1200,
+															&param_R180_1200,		&param_L180_1200,
+															&param_inR45_1200,		&param_inL45_1200,
+															&param_outR45_1200,		&param_outL45_1200,
+															&param_inR135_1200,		&param_inL135_1200,
+															&param_outR135_1200,	&param_outL135_1200,
+															&param_RV90_1200,		&param_LV90_1200,
+															NULL,	NULL
+														};
+
 const static t_pid_gain sp_gain_turn90_1400 = {7.50, 0.01, 0.0};
 const static t_pid_gain om_gain_turn90_1400 = {0.4, 0.02, 0.0};
 const static t_turn_param_table slalom_L90_1400_table = {1.40f, 50.0f,18.83,36.69, 90.0f,Turn_L};
@@ -824,5 +835,19 @@ const static t_param *const mode_1400[TURN_MODES] = 	{	&param_dummy,			&param_du
 															&param_RV90_1400,		&param_LV90_1400,
 															&param_LongRV90_1400,	&param_LongLV90_1400
 														};
+
+const static t_param *const mode_1400_v2[] = 	{	NULL,			NULL,		NULL,
+															&param_R90_1400,		&param_L90_1400,
+															&param_R180_1400,		&param_L180_1400,
+															NULL,					NULL,
+															&param_outR45_1400,		&param_outL45_1400,
+															&param_inR135_1400,		&param_inL135_1400,
+															&param_outR135_1400,	&param_outL135_1400,
+															NULL,		NULL,
+															NULL,		NULL
+														};
+
+const static t_param *const *const acc_mode_1200[] = {mode_1200_v2,mode_1400_v2};
+
 
 #endif /* CPP_INC_RUN_PARAM_H_ */

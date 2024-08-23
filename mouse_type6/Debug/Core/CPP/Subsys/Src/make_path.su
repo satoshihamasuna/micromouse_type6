@@ -4,11 +4,16 @@ ctrl_task.h:214:22:t_exeStatus Motion::exe_Motion_straight(float, float, float, 
 ctrl_task.h:226:22:t_exeStatus Motion::exe_Motion_diagonal(float, float, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
 ctrl_task.h:247:22:t_exeStatus Motion::exe_Motion_suction_start(float, float, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:253:22:t_exeStatus Motion::exe_Motion_turn_in(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:258:22:t_exeStatus Motion::exe_Motion_turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:263:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-ctrl_task.h:268:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
-make_path.h:76:20:t_straight_param calcRunTime::straight_base_velo()	16	static
-make_path.h:86:20:t_straight_param calcRunTime::diagonal_base_velo()	16	static
+ctrl_task.h:258:22:t_exeStatus Motion::exe_Motion_turn_in(const t_param*, t_run_pattern, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
+ctrl_task.h:265:22:t_exeStatus Motion::exe_Motion_turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:271:22:t_exeStatus Motion::exe_Motion_turn_out(const t_param*, t_run_pattern, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
+ctrl_task.h:277:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:283:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_run_pattern, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
+ctrl_task.h:290:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:296:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
+ctrl_task.h:303:22:t_exeStatus Motion::exe_Motion_long_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+make_path.h:77:20:t_straight_param calcRunTime::straight_base_velo()	16	static
+make_path.h:87:20:t_straight_param calcRunTime::diagonal_base_velo()	16	static
 make_path.cpp:23:6:void log_enable()	8	static
 make_path.cpp:29:6:void log_disable()	8	static
 make_path.cpp:35:15:t_posDijkstra Dijkstra::conv_t_pos2t_posDijkstra(t_position, t_direction)	32	static
@@ -28,5 +33,6 @@ make_path.cpp:368:10:uint16_t Dijkstra::diagonal_section_num(t_posDijkstra, t_po
 make_path.cpp:393:6:void Dijkstra::check_run_Dijkstra(t_position, t_direction, t_position, uint8_t)	72	static
 make_path.cpp:499:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, Motion*)	608	static
 make_path.cpp:661:6:void Dijkstra::run_Dijkstra_suction(t_position, t_direction, t_position, uint8_t, int, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, Motion*)	616	static
+make_path.cpp:828:6:void Dijkstra::run_Dijkstra_suction_acc(t_position, t_direction, t_position, uint8_t, int, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const* const*, uint16_t, Motion*)	1840	static
 log_data.h:19:7:LogData::LogData()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = LogData]	8	static

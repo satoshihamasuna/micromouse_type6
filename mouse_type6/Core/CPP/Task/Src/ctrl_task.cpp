@@ -90,6 +90,7 @@ void CtrlTask::motion_ideal_param_set()
 			SetIdeal_backward();
 			break;
 		case No_run:
+		case Run_Pause:
 			break;
 	}
 }
