@@ -884,13 +884,13 @@ void Dijkstra::run_Dijkstra_suction_acc(t_position start_pos,t_direction start_w
 				if(turn_mode[turn_select[i-1]][(*get_closure_inf(run_pos_buff[i-1])).run_pt] != NULL)
 					end_velo = turn_mode[turn_select[i-1]][(*get_closure_inf(run_pos_buff[i-1])).run_pt]->param->velo;
 			}
-			/*
-			else if(!((*get_closure_inf(run_pos_buff[i-1])).run_pt == Straight || (*get_closure_inf(run_pos_buff[i-1])).run_pt == Diagonal ))
+
+			if((*get_closure_inf(run_pos_buff[i-1])).run_pt == Straight || (*get_closure_inf(run_pos_buff[i-1])).run_pt == Diagonal )
 			{
 				if(turn_mode[turn_select[i]][(*get_closure_inf(run_pos_buff[i])).run_pt] != NULL)
 					end_velo = turn_mode[turn_select[i]][(*get_closure_inf(run_pos_buff[i])).run_pt]->param->velo;
 			}
-			*/
+
 		}
 
 		switch((*get_closure_inf(run_pos_buff[i])).run_pt)
