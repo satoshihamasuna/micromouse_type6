@@ -939,14 +939,14 @@ const static t_turn_param_table slalom_outL135_1400_table = {1.40f, 41.0f,9.04,3
 const static t_turn_param_table slalom_outR135_1400_table = {1.40f,-41.0f,9.04,34.98,-135.0f,Turn_R};
 const static t_param param_outL135_1400 = {&slalom_outL135_1400_table,&sp_gain_turnOut135_1400,&om_gain_turnOut135_1400};
 const static t_param param_outR135_1400 = {&slalom_outR135_1400_table,&sp_gain_turnOut135_1400,&om_gain_turnOut135_1400};
-
-const static t_pid_gain sp_gain_long_turnV90_1400 = {6.5, 0.01, 0.0};
-const static t_pid_gain om_gain_long_turnV90_1400 = {0.4, 0.01, 0.0};
-const static t_turn_param_table slalom_LongLV90_1400_table = {1.40f, 76.0f,17.59,42.84, 90.0f,Turn_L};
-const static t_turn_param_table slalom_LongRV90_1400_table = {1.40f,-76.0f,17.59,42.84,-90.0f,Turn_R};
-const static t_param param_LongLV90_1400 = {&slalom_LongLV90_1400_table,&sp_gain_long_turnV90_1400,&om_gain_long_turnV90_1400};
-const static t_param param_LongRV90_1400 = {&slalom_LongRV90_1400_table,&sp_gain_long_turnV90_1400,&om_gain_long_turnV90_1400};
 */
+const static t_pid_gain sp_gain_long_turnV90_1600 = {6.5, 0.01, 0.0};
+const static t_pid_gain om_gain_long_turnV90_1600 = {0.4, 0.01, 0.0};
+const static t_turn_param_table slalom_LongLV90_1600_table = {1.60f, 76.0f,17.88,36.96, 90.0f,Turn_L};
+const static t_turn_param_table slalom_LongRV90_1600_table = {1.60f,-76.0f,17.88,36.96,-90.0f,Turn_R};
+const static t_param param_LongLV90_1600 = {&slalom_LongLV90_1600_table,&sp_gain_long_turnV90_1600,&om_gain_long_turnV90_1600};
+const static t_param param_LongRV90_1600 = {&slalom_LongRV90_1600_table,&sp_gain_long_turnV90_1600,&om_gain_long_turnV90_1600};
+
 
 const static t_param *const mode_1600[TURN_MODES] = 	{	NULL,					NULL,			NULL,
 															&param_R90_1600,		&param_L90_1600,
@@ -956,7 +956,7 @@ const static t_param *const mode_1600[TURN_MODES] = 	{	NULL,					NULL,			NULL,
 															NULL,	NULL,
 															NULL,	NULL,
 															NULL,	NULL,
-															NULL,	NULL,
+															&param_LongRV90_1600,	&param_LongLV90_1600
 														};
 
 

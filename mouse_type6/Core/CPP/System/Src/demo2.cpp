@@ -254,6 +254,16 @@ void Demo2()
 						HAL_Delay(50);
 					}
 
+			  		run_path.turn_time_set(mode_1400);
+					run_path.check_run_Dijkstra(start, Dir_None, goal, MAZE_GOAL_SIZE,acc_mode_1400,(int)(sizeof(acc_mode_1400)  /sizeof(t_param *const*const)));
+
+					if(motion->motion_exeStatus_get() == error)
+					{
+						Mode::indicate_error();
+						enable = 0x00;
+						break;
+					}
+
 
 
 					enable = 0x00;

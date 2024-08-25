@@ -36,6 +36,6 @@ singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = CtrlTask_type7
 queue_class.h:22:3:ring_queue<SIZE, T>::ring_queue() [with unsigned int SIZE = 1024; T = t_MapNode]	16	static
 path_follow.h:15:7:path_follow_class::path_follow_class()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = path_follow_class]	8	static
-demo2.cpp:318:1:void __static_initialization_and_destruction_0(int, int)	16	static
-demo2.cpp:318:1:cpp)	8	static
-demo2.cpp:318:1:cpp)	8	static
+demo2.cpp:328:1:void __static_initialization_and_destruction_0(int, int)	16	static
+demo2.cpp:328:1:cpp)	8	static
+demo2.cpp:328:1:cpp)	8	static

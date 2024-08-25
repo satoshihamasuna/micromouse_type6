@@ -155,6 +155,8 @@ class Dijkstra:public calcRunTime
 		t_posDijkstra min_search();
 		t_posDijkstra make_path_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
 		void check_run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size);
+		void check_run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size,
+										  const t_param *const*const *turn_mode ,uint16_t size_turn_mode);
 		void run_Dijkstra(t_position start_pos,t_direction start_wallPos,t_position goal_pos,uint8_t goal_size,
 						  const t_straight_param *const *st_mode,uint16_t size_st_mode,
 						  const t_straight_param *const *di_mode,uint16_t size_di_mode,

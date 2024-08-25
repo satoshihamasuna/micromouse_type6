@@ -289,6 +289,8 @@ void  Motion::SetIdeal_search_straight(){
 			vehicle->ego.radian.set(0.0f);
 			vehicle->ego.turn_slip_theta.set(0.0f);
 
+			motion_pattern_set(Run_Pause);
+			motion_state_set(STRAIGHT_STATE);
 			Init_Motion_stop_brake(400);
 			return;
 		}
@@ -310,6 +312,8 @@ void  Motion::SetIdeal_search_straight(){
 			vehicle->ideal.turn_x.set(0.0f);
 			vehicle->ideal.turn_y.set(0.0f);
 
+			motion_pattern_set(Run_Pause);
+			motion_state_set(STRAIGHT_STATE);
 			motion_exeStatus_set(complete);
 		}
 	}
@@ -415,6 +419,8 @@ void  Motion::SetIdeal_search_turn()
 			vehicle->ideal.turn_x.set(0.0f);
 			vehicle->ideal.turn_y.set(0.0f);
 
+			motion_pattern_set(Run_Pause);
+			motion_state_set(STRAIGHT_STATE);
 			motion_exeStatus_set(complete);
 		}
 	}
@@ -486,7 +492,8 @@ void Motion::SetIdeal_straight()
 
 			vehicle->Vehicle_controller.speed_ctrl.I_param_reset();
 			//vehicle->Vehicle_controller.omega_ctrl.I_param_reset();
-
+			motion_pattern_set(Run_Pause);
+			motion_state_set(STRAIGHT_STATE);
 			Init_Motion_stop_brake(400);
 			return;
 		}
@@ -510,7 +517,8 @@ void Motion::SetIdeal_straight()
 
 			vehicle->Vehicle_controller.speed_ctrl.I_param_reset();
 			//vehicle->Vehicle_controller.omega_ctrl.I_param_reset();
-
+			motion_pattern_set(Run_Pause);
+			motion_state_set(STRAIGHT_STATE);
 			motion_exeStatus_set(complete);
 		}
 	}
@@ -564,7 +572,8 @@ void Motion::SetIdeal_backward()
 			vehicle->ego.length.set(0.0f);
 			vehicle->ego.radian.set(0.0f);
 			vehicle->ego.turn_slip_theta.set(0.0f);
-
+			motion_pattern_set(Run_Pause);
+			motion_state_set(STRAIGHT_STATE);
 			Init_Motion_stop_brake(200);
 			return;
 	}
@@ -632,7 +641,8 @@ void Motion::SetIdeal_diagonal		( )
 			vehicle->ego.length.set(0.0f);
 			vehicle->ego.radian.set(0.0f);
 			vehicle->ego.turn_slip_theta.set(0.0f);
-
+			motion_pattern_set(Run_Pause);
+			motion_state_set(DIAGONAL_STATE);
 			Init_Motion_stop_brake(400);
 			return;
 		}
@@ -654,6 +664,8 @@ void Motion::SetIdeal_diagonal		( )
 			vehicle->ideal.turn_x.set(0.0f);
 			vehicle->ideal.turn_y.set(0.0f);
 
+			motion_pattern_set(Run_Pause);
+			motion_state_set(DIAGONAL_STATE);
 			motion_exeStatus_set(complete);
 		}
 	}
@@ -722,7 +734,8 @@ void Motion::SetIdeal_pivot_turn()
 		vehicle->ego.turn_x.set(0.0f);
 		vehicle->ego.turn_y.set(0.0f);
 		vehicle->ego.x_point.set(0.0f);
-
+		motion_pattern_set(Run_Pause);
+		motion_state_set(PIVTURN_STATE);
 		Init_Motion_stop_brake(400);
 		return;
 	}
@@ -1802,7 +1815,7 @@ void Motion::SetIdeal_fix_wall		( )
 		vehicle->ego.turn_x.set(0.0f);
 		vehicle->ego.turn_y.set(0.0f);
 		vehicle->ego.x_point.set(0.0f);
-
+		motion_pattern_set(Run_Pause);
 		Init_Motion_stop_brake(100);
 		return;
 

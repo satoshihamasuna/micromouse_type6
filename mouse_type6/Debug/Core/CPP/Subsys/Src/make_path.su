@@ -12,6 +12,7 @@ ctrl_task.h:283:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_ru
 ctrl_task.h:290:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:296:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
 ctrl_task.h:303:22:t_exeStatus Motion::exe_Motion_long_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:310:22:t_exeStatus Motion::exe_Motion_long_turn_v90(const t_param*, t_run_pattern, float, float, const t_pid_gain*, const t_pid_gain*)	40	static
 make_path.h:77:20:t_straight_param calcRunTime::straight_base_velo()	16	static
 make_path.h:87:20:t_straight_param calcRunTime::diagonal_base_velo()	16	static
 make_path.cpp:23:6:void log_enable()	8	static
@@ -33,6 +34,7 @@ make_path.cpp:368:10:uint16_t Dijkstra::diagonal_section_num(t_posDijkstra, t_po
 make_path.cpp:393:6:void Dijkstra::check_run_Dijkstra(t_position, t_direction, t_position, uint8_t)	72	static
 make_path.cpp:499:6:void Dijkstra::run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, Motion*)	608	static
 make_path.cpp:661:6:void Dijkstra::run_Dijkstra_suction(t_position, t_direction, t_position, uint8_t, int, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const*, Motion*)	616	static
-make_path.cpp:828:6:void Dijkstra::run_Dijkstra_suction_acc(t_position, t_direction, t_position, uint8_t, int, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const* const*, uint16_t, Motion*)	1840	static
+make_path.cpp:828:6:void Dijkstra::run_Dijkstra_suction_acc(t_position, t_direction, t_position, uint8_t, int, const t_straight_param* const*, uint16_t, const t_straight_param* const*, uint16_t, const t_param* const* const*, uint16_t, Motion*)	1800	static
+make_path.cpp:1053:6:void Dijkstra::check_run_Dijkstra(t_position, t_direction, t_position, uint8_t, const t_param* const* const*, uint16_t)	88	static
 log_data.h:19:7:LogData::LogData()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = LogData]	8	static
