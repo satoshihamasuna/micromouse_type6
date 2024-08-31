@@ -268,36 +268,44 @@ void IrSensTask::IrSensorWallSet()
 
 	sen_fr.control_cnt = (sen_fr.is_wall == True) ? sen_fr.control_cnt + 1 : 0;
 	sen_fl.control_cnt = (sen_fl.is_wall == True) ? sen_fl.control_cnt + 1 : 0;
-	sen_r.control_cnt = (sen_r.is_wall == True && ABS(sen_r.distance - sen_r.avg_distance) < 1.0) ? sen_r.control_cnt + 1 : 0;
-	sen_l.control_cnt = (sen_l.is_wall == True && ABS(sen_l.distance - sen_l.avg_distance) < 1.0) ? sen_l.control_cnt + 1 : 0;
+	sen_r.control_cnt = (sen_r.distance <= SIDE_CTRL_THRESHOLD && ABS(sen_r.distance - sen_r.avg_distance) < 1.0) ? sen_r.control_cnt + 1 : 0;
+	sen_l.control_cnt = (sen_l.distance <= SIDE_CTRL_THRESHOLD && ABS(sen_l.distance - sen_l.avg_distance) < 1.0) ? sen_l.control_cnt + 1 : 0;
 
 	//sen_r.control_cnt = (sen_r.is_wall == True ) ? sen_r.control_cnt + 1 : 0;
 	//sen_l.control_cnt = (sen_l.is_wall == True ) ? sen_l.control_cnt + 1 : 0;
 
-	sen_fr.control_th = (sen_fr.control_cnt > 10) ? FRONT_THRESHOLD : 90.0;
-	sen_fl.control_th = (sen_fl.control_cnt > 10) ? FRONT_THRESHOLD : 90.0;
+	sen_fr.control_th = (sen_fr.control_cnt > sidewall_control_cnt) ? FRONT_THRESHOLD : 90.0;
+	sen_fl.control_th = (sen_fl.control_cnt > sidewall_control_cnt) ? FRONT_THRESHOLD : 90.0;
 	//need to update
 	if(isEnableIrSens == True)
 	{
 
-		if(irsens_motion == STRAIGHT_IRSENS || irsens_motion == DIAGONAL_IRSENS)
+		if(irsens_motion == STRAIGHT_IRSENS)
 		{
-			sen_r.control_th = (sen_r.control_cnt > 10) ? SIDE_THRESHOLD: wall_ref;
-			sen_l.control_th = (sen_l.control_cnt > 10) ? SIDE_THRESHOLD: wall_ref;
+			sen_r.control_th = (sen_r.control_cnt > sidewall_control_cnt) ? SIDE_THRESHOLD: wall_ref;
+			sen_l.control_th = (sen_l.control_cnt > sidewall_control_cnt) ? SIDE_THRESHOLD: wall_ref;
+		}
+		else if(irsens_motion == DIAGONAL_IRSENS)
+		{
+			sen_r.control_th = (sen_r.control_cnt > sidewall_control_cnt) ? SIDE_THRESHOLD: wall_ref;
+			sen_l.control_th = (sen_l.control_cnt > sidewall_control_cnt) ? SIDE_THRESHOLD: wall_ref;
 		}
 		else
 		{
-			sen_r.control_th = (sen_r.control_cnt > 10) ? wall_ref: wall_ref;
-			sen_l.control_th = (sen_l.control_cnt > 10) ? wall_ref: wall_ref;
+			sen_r.control_th = (sen_r.control_cnt > sidewall_control_cnt) ? wall_ref: wall_ref;
+			sen_l.control_th = (sen_l.control_cnt > sidewall_control_cnt) ? wall_ref: wall_ref;
 		}
 
 		sen_r.is_control 	= (sen_r.is_wall == True && sen_r.distance <= sen_r.control_th)? True:False;
 		sen_l.is_control 	= (sen_l.is_wall == True && sen_l.distance <= sen_l.control_th)? True:False;
 
+
 		if(irsens_motion == STRAIGHT_IRSENS || irsens_motion == DIAGONAL_IRSENS)
 		{
-			sen_r.is_control 	= (sen_fr.distance > SIDE_THRESHOLD+1.0)? sen_r.is_control:False;
-			sen_l.is_control 	= (sen_fl.distance > SIDE_THRESHOLD+1.0)? sen_l.is_control:False;
+			sen_r.is_control 	= (sen_fr.distance > 50.0+1.0)? sen_r.is_control:False;
+			sen_r.control_cnt 	= (sen_fr.distance > 50.0+1.0)? sen_r.control_cnt : 0;
+			sen_l.is_control 	= (sen_fl.distance > 50.0+1.0)? sen_l.is_control:False;
+			sen_l.control_cnt 	= (sen_fl.distance > 50.0+1.0)? sen_l.control_cnt : 0;
 		}
 		else
 		{

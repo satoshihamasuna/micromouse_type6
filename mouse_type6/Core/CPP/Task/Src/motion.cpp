@@ -53,6 +53,7 @@ float get_turn2_table_value(float time_period_ms,float time_ms)
 */
 void Motion::SetIdeal_wall_control()
 {
+	ir_sens->set_sidewall_control_cnt(vehicle->ideal.velo.get());
 	if(motion_state_get() == STRAIGHT_STATE || motion_state_get() == DIAGONAL_STATE)
 	{
 		if(motion_state_get() == STRAIGHT_STATE) ir_sens->EnableIrSensStraight();
@@ -84,8 +85,8 @@ void Motion::Adjust_wall_corner()
 		{
 			//ir_sens->Division_Wall_Correction();
 
-			if(ir_sens->r_wall_corner == True)	{		Indicate_LED(0x10|Return_LED_Status());		}
-			if(ir_sens->l_wall_corner == True)	{		Indicate_LED(0x20|Return_LED_Status());		}
+			if(ir_sens->r_wall_corner == True)	{		Indicate_LED(0x01|Return_LED_Status());		}
+			if(ir_sens->l_wall_corner == True)	{		Indicate_LED(0x08|Return_LED_Status());		}
 
 			if(ABS(ir_sens->r_corner_time - ir_sens->l_corner_time) < (int)((8.0)/vehicle->ideal.velo.get())
 						&& motion_plan.end_length.get() >= 90.0f)
@@ -104,11 +105,11 @@ void Motion::Adjust_wall_corner()
 		{
 			if(ir_sens->r_corner_time > (int)((8.0)/vehicle->ideal.velo.get()) )
 			{
-				Indicate_LED((~0x10)&Return_LED_Status());
+				Indicate_LED((~0x01)&Return_LED_Status());
 			}
 			if(ir_sens->l_corner_time > (int)((8.0)/vehicle->ideal.velo.get()) )
 			{
-				Indicate_LED((~0x20)&Return_LED_Status());
+				Indicate_LED((~0x08)&Return_LED_Status());
 			}
 			if(ir_sens->r_corner_time > (int)((8.0)/vehicle->ideal.velo.get())
 					&& ir_sens->l_corner_time > (int)((8.0)/vehicle->ideal.velo.get()) )
@@ -120,11 +121,11 @@ void Motion::Adjust_wall_corner()
 		{
 			if(ir_sens->r_corner_time > 40 )
 			{
-				Indicate_LED((~0x10)&Return_LED_Status());
+				Indicate_LED((~0x01)&Return_LED_Status());
 			}
 			if(ir_sens->l_corner_time > 40 )
 			{
-				Indicate_LED((~0x20)&Return_LED_Status());
+				Indicate_LED((~0x08)&Return_LED_Status());
 			}
 
 			if(ir_sens->l_corner_time > 40 && ir_sens->r_corner_time > 40 )
@@ -139,8 +140,8 @@ void Motion::Adjust_wall_corner()
 		{
 			//ir_sens->Division_Wall_Correction();
 
-			if(ir_sens->r_wall_corner == True)	{		Indicate_LED(0x10|Return_LED_Status());		}
-			if(ir_sens->l_wall_corner == True)	{		Indicate_LED(0x20|Return_LED_Status());		}
+			if(ir_sens->r_wall_corner == True)	{		Indicate_LED(0x01|Return_LED_Status());		}
+			if(ir_sens->l_wall_corner == True)	{		Indicate_LED(0x08|Return_LED_Status());		}
 
 
 			int time_diff = ABS(ir_sens->r_corner_time - ir_sens->l_corner_time);
@@ -182,11 +183,11 @@ void Motion::Adjust_wall_corner()
 		{
 			if(ir_sens->r_corner_time > (int)((8.0)/vehicle->ideal.velo.get()) )
 			{
-				Indicate_LED((~0x10)&Return_LED_Status());
+				Indicate_LED((~0x01)&Return_LED_Status());
 			}
 			if(ir_sens->l_corner_time > (int)((8.0)/vehicle->ideal.velo.get()) )
 			{
-				Indicate_LED((~0x20)&Return_LED_Status());
+				Indicate_LED((~0x08)&Return_LED_Status());
 			}
 			if(ir_sens->r_corner_time > (int)((8.0)/vehicle->ideal.velo.get())
 					&& ir_sens->l_corner_time > (int)((8.0)/vehicle->ideal.velo.get()) )
@@ -198,11 +199,11 @@ void Motion::Adjust_wall_corner()
 		{
 			if(ir_sens->r_corner_time > 40 )
 			{
-				Indicate_LED((~0x10)&Return_LED_Status());
+				Indicate_LED((~0x01)&Return_LED_Status());
 			}
 			if(ir_sens->l_corner_time > 40 )
 			{
-				Indicate_LED((~0x20)&Return_LED_Status());
+				Indicate_LED((~0x08)&Return_LED_Status());
 			}
 
 			if(ir_sens->l_corner_time > 40 && ir_sens->r_corner_time > 40 )

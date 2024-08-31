@@ -19,10 +19,13 @@
 #define SIDE_R_THRESHOLD		(65.0)
 #define SIDE_L_THRESHOLD		(65.0)
 #define SIDE_THRESHOLD		(65.0)
+#define SIDE_CTRL_THRESHOLD	(60.0)
 
 #define FRONT_THRESHOLD		(122.0)
 
 #define SIDE_CORNER_THRESHOLD (68.0)
+
+#define CNT_THRESHOLD		(30)
 
 typedef struct{
 	int16_t value;
@@ -64,6 +67,7 @@ class IrSensTask
 		t_bool 	 wall_correction;
 		t_bool 	 r_wall_corner,l_wall_corner;
 		uint16_t r_corner_time,l_corner_time;
+		uint16_t sidewall_control_cnt = CNT_THRESHOLD;
 		t_wall_state conv_Sensin2Wall(t_sensor_dir sens_dir);
 		virtual 		void IrSensorSet();
 		void IrSensMotion_Set(t_irsens_motion _irsens_motion){irsens_motion = _irsens_motion;	}
@@ -76,6 +80,12 @@ class IrSensTask
 		inline void DisableIrSens()			{isEnableIrSens = False;}
 		void EnableIrSensStraight()		{	EnableIrSens();		IrSensMotion_Set(STRAIGHT_IRSENS);	IrSensorReferenceSet(STRAIGHT_REF);	}
 		void EnableIrSensDiagonal()		{	EnableIrSens();		IrSensMotion_Set(DIAGONAL_IRSENS);	IrSensorReferenceSet(DIAGONAL_REF);	}
+		void set_sidewall_control_cnt(float ideal_velo)
+		{
+			if(ideal_velo < 0.30)		 {	sidewall_control_cnt = CNT_THRESHOLD;	}
+			else if(ideal_velo > 1.0 )   {	sidewall_control_cnt = 10;				}
+			else						 {	sidewall_control_cnt = (int)(((float)(CNT_THRESHOLD))*0.30/ideal_velo);}
+		}
 		float IrSensorMaxValueFromLog(t_sensor_dir dir);
 		int16_t IrSensor_Avg();
 		t_bool Division_Wall_Correction()
@@ -88,7 +98,7 @@ class IrSensTask
 					wall_correction = True;
 					flag = True;
 				}
-				Indicate_LED(0x10|Return_LED_Status());
+				Indicate_LED(0x01|Return_LED_Status());
 			}
 			if(l_wall_corner == True)
 			{
@@ -97,7 +107,7 @@ class IrSensTask
 					wall_correction = True;
 					flag = True;
 				}
-				Indicate_LED(0x20|Return_LED_Status());
+				Indicate_LED(0x08|Return_LED_Status());
 			}
 
 

@@ -235,10 +235,10 @@ void LogData::logging()
 
 		else if(mode == 2)
 		{
-			data[14][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(Vehicle_type7::getInstance().ego.horizon_accel.get());
-			data[15][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(Vehicle_type7::getInstance().ideal.horizon_accel.get());
-			data[16][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(Vehicle_type7::getInstance().ego.horizon_velo.get());
-			data[17][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(Vehicle_type7::getInstance().ideal.horizon_velo.get());
+			data[14][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(IrSensTask_type7::getInstance().sen_l.avg_distance);
+			data[15][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(IrSensTask_type7::getInstance().sen_r.avg_distance);
+			data[16][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(IrSensTask_type7::getInstance().sen_l.distance);
+			data[17][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(IrSensTask_type7::getInstance().sen_r.distance);
 			data[18][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(Vehicle_type7::getInstance().ego.x_point.get());
 			data[19][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(Vehicle_type7::getInstance().ideal.x_point.get());
 			data[20][(data_count/LOG_DATA_PRIOD)%data_size] =  float_to_half(Vehicle_type7::getInstance().ego.turn_x.get());

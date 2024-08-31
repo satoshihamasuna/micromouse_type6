@@ -144,8 +144,8 @@ static int usrcmd_log(int argc, char **argv)
 
 int shell_debug_straight(int argc, char **argv)
 {
-	static t_pid_gain debug_sp_gain = {15.0,0.04,0.0};
-	static t_pid_gain debug_om_gain = {0.60f, 0.01f, 0.00f};
+	static t_pid_gain debug_sp_gain = {6.0,0.01,0.0};
+	static t_pid_gain debug_om_gain = {0.20f, 0.01f, 0.00f};
 
 	Motion *motion = &(CtrlTask_type7::getInstance());
 	IrSensTask *irsens = (CtrlTask_type7::getInstance().return_irObj());
@@ -214,8 +214,8 @@ int shell_debug_straight(int argc, char **argv)
 
 int shell_debug_diagonal(int argc, char **argv)
 {
-	static t_pid_gain debug_sp_gain = {12.0,0.04,0.0};
-	static t_pid_gain debug_om_gain = {0.60f, 0.01f, 0.00f};
+	static t_pid_gain debug_sp_gain = {6.0,0.01,0.0};
+	static t_pid_gain debug_om_gain = {0.20f, 0.01f, 0.00f};
 
 	Motion *motion = &(CtrlTask_type7::getInstance());
 	IrSensTask *irsens = (CtrlTask_type7::getInstance().return_irObj());
@@ -284,11 +284,11 @@ int shell_debug_diagonal(int argc, char **argv)
 
 int shell_debug_turn(int argc, char **argv)
 {
-	static t_pid_gain debug_sp_gain = {12.0,0.04,0.0};
-	static t_pid_gain debug_om_gain = {0.60f, 0.01f, 0.00f};
+	static t_pid_gain debug_sp_gain = {6.0,0.01,0.0};
+	static t_pid_gain debug_om_gain = {0.20f, 0.01f, 0.00f};
 
-	static t_pid_gain debug_turn_sp_gain = {12.0,0.04,0.0};
-	static t_pid_gain debug_turn_om_gain = {0.60f, 0.01f, 0.00f};
+	static t_pid_gain debug_turn_sp_gain = {6.0,0.01,0.0};
+	static t_pid_gain debug_turn_om_gain = {0.40f, 0.01f, 0.00f};
 
 
 	Motion *motion = &(CtrlTask_type7::getInstance());
