@@ -1510,6 +1510,7 @@ void Motion::SetIdeal_turn_v90		( )
 			vehicle->ideal.turn_x.set(0.0f);
 			vehicle->ideal.turn_y.set(0.0f);
 
+			motion_state_set(DIAGONAL_STATE);
 			motion_pattern_set(Run_Pause);
 			motion_exeStatus_set(complete);
 		}

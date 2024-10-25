@@ -164,6 +164,16 @@ namespace Mode
 							  (i%2 == 0) ? Indicate_LED(mode|param):Indicate_LED(0x00|0x00);
 							  HAL_Delay(50);
 						  }
+
+						  int suction = 700;
+						  float suction_value = suction/1000.0f*3.50;
+						  int stay_time 	= (int)(suction_value/0.05) + 300;
+						  motion->Motion_start();
+						  motion->exe_Motion_suction_start(suction/1000.0f*3.50, stay_time);
+						  HAL_Delay(2000);
+						  motion->Motion_end();
+
+
 						  enable = 0x00;
 						  HAL_Delay(500);
 					}

@@ -15,12 +15,13 @@ ctrl_task.h:167:24:t_exeStatus Motion::motion_exeStatus_get()	16	static
 ctrl_task.h:202:22:t_exeStatus Motion::execute_Motion()	16	static
 ctrl_task.h:234:22:t_exeStatus Motion::exe_Motion_pivot_turn(float, float, float, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:241:22:t_exeStatus Motion::exe_Motion_fix_wall(float, const t_pid_gain*, const t_pid_gain*)	24	static
+ctrl_task.h:247:22:t_exeStatus Motion::exe_Motion_suction_start(float, float, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:316:12:Vehicle* Motion::return_vehicleObj()	16	static
 ctrl_task.h:317:15:IrSensTask* Motion::return_irObj()	16	static
 ctrl_task.h:330:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
 ctrl_task.h:348:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static
 interrupt.h:32:12:uint32_t Interrupt::return_time_count()	16	static
-interface_check.cpp:43:7:void Mode::Interface_Check()	856	static
+interface_check.cpp:43:7:void Mode::Interface_Check()	864	static
 controller.h:19:7:constexpr PID_Controller::PID_Controller()	16	static
 controller.h:37:7:constexpr mouse_Controller::mouse_Controller()	16	static
 vehicle.h:60:7:Vehicle::Vehicle()	16	static
@@ -35,6 +36,6 @@ Kalman_filter.h:13:7:KalmanFilter::KalmanFilter()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = KalmanFilter]	8	static
 log_data.h:19:7:LogData::LogData()	16	static
 singleton.h:15:12:static T& Singleton<T>::getInstance() [with T = LogData]	8	static
-interface_check.cpp:265:1:void __static_initialization_and_destruction_0(int, int)	16	static
-interface_check.cpp:265:1:cpp)	8	static
-interface_check.cpp:265:1:cpp)	8	static
+interface_check.cpp:275:1:void __static_initialization_and_destruction_0(int, int)	16	static
+interface_check.cpp:275:1:cpp)	8	static
+interface_check.cpp:275:1:cpp)	8	static
