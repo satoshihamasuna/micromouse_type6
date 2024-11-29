@@ -54,6 +54,16 @@ Core/CPP/Task/Src/ctrl_task.o: ../Core/CPP/Task/Src/ctrl_task.cpp \
  ../Core/CPP/Task/Src/../../Params/run_param.h \
  ../Core/CPP/Task/Src/../../Params/../Component/Inc/controller.h \
  ../Core/CPP/Task/Src/../../Params/../Module/Inc/vehicle.h \
+ ../Core/CPP/Task/Src/../../Params/typedef_run_param.h \
+ ../Core/CPP/Task/Src/../../Params/turn_300.h \
+ ../Core/CPP/Task/Src/../../Params/turn_500.h \
+ ../Core/CPP/Task/Src/../../Params/turn_650.h \
+ ../Core/CPP/Task/Src/../../Params/turn_800.h \
+ ../Core/CPP/Task/Src/../../Params/turn_1000.h \
+ ../Core/CPP/Task/Src/../../Params/turn_1200.h \
+ ../Core/CPP/Task/Src/../../Params/turn_1400.h \
+ ../Core/CPP/Task/Src/../../Params/turn_1500.h \
+ ../Core/CPP/Task/Src/../../Params/turn_1600.h \
  ../Core/CPP/Task/Src/../Inc/ctrl_task.h \
  ../Core/CPP/Task/Src/../Inc/sensing_task.h \
  ../Core/CPP/Task/Src/../Inc/../../Module/Inc/vehicle.h \
@@ -186,6 +196,26 @@ Core/CPP/Task/Src/ctrl_task.o: ../Core/CPP/Task/Src/ctrl_task.cpp \
 ../Core/CPP/Task/Src/../../Params/../Component/Inc/controller.h:
 
 ../Core/CPP/Task/Src/../../Params/../Module/Inc/vehicle.h:
+
+../Core/CPP/Task/Src/../../Params/typedef_run_param.h:
+
+../Core/CPP/Task/Src/../../Params/turn_300.h:
+
+../Core/CPP/Task/Src/../../Params/turn_500.h:
+
+../Core/CPP/Task/Src/../../Params/turn_650.h:
+
+../Core/CPP/Task/Src/../../Params/turn_800.h:
+
+../Core/CPP/Task/Src/../../Params/turn_1000.h:
+
+../Core/CPP/Task/Src/../../Params/turn_1200.h:
+
+../Core/CPP/Task/Src/../../Params/turn_1400.h:
+
+../Core/CPP/Task/Src/../../Params/turn_1500.h:
+
+../Core/CPP/Task/Src/../../Params/turn_1600.h:
 
 ../Core/CPP/Task/Src/../Inc/ctrl_task.h:
 

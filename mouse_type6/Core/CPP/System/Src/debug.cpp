@@ -493,9 +493,9 @@ namespace Mode
 
 						  LogData::getInstance().data_count = 0;
 						  LogData::getInstance().log_enable = True;
-						  motion->exe_Motion_turn_v90(turn_mode[Turn_LV90],Turn_LV90,st_param->sp_gain,st_param->om_gain);
+						  motion->exe_Motion_long_turn_v90(turn_mode[Long_turn_LV90],Long_turn_LV90,st_param->sp_gain,st_param->om_gain);
 
-						  motion->exe_Motion_diagonal( SECTION,st_param->param->acc,st_param->param->max_velo,0.0,st_param->sp_gain,st_param->om_gain);
+						  motion->exe_Motion_diagonal( DIAG_SECTION,st_param->param->acc,st_param->param->max_velo,0.0,st_param->sp_gain,st_param->om_gain);
 
 						  motion->Motion_end();
 						  HAL_Delay(200);

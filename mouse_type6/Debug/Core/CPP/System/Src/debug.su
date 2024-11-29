@@ -20,6 +20,7 @@ ctrl_task.h:253:22:t_exeStatus Motion::exe_Motion_turn_in(const t_param*, t_run_
 ctrl_task.h:265:22:t_exeStatus Motion::exe_Motion_turn_out(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:277:22:t_exeStatus Motion::exe_Motion_long_turn(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:290:22:t_exeStatus Motion::exe_Motion_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
+ctrl_task.h:303:22:t_exeStatus Motion::exe_Motion_long_turn_v90(const t_param*, t_run_pattern, const t_pid_gain*, const t_pid_gain*)	32	static
 ctrl_task.h:317:15:IrSensTask* Motion::return_irObj()	16	static
 ctrl_task.h:330:3:CtrlTask::CtrlTask(Vehicle*, IrSensTask*, int)	24	static
 ctrl_task.h:348:3:CtrlTask_type7::CtrlTask_type7(Vehicle*, IrSensTask*)	24	static

@@ -694,9 +694,9 @@ void Dijkstra::run_Dijkstra_suction(t_position start_pos,t_direction start_wallP
 	}
 	motion->execute_Motion();
 	*/
-	float suction_value = suction/1000.0f*3.50;
+	float suction_value = suction/1000.0f*3.80;
 	int stay_time 	= (int)(suction_value/0.05) + 300;
-	motion->exe_Motion_suction_start(suction/1000.0f*3.50, stay_time);
+	motion->exe_Motion_suction_start(suction/1000.0f*3.80, stay_time);
 	//motion->Motion_start();
 	log_enable();
 	motion->exe_Motion_straight(  16.10-3.0, straight_base_velo().param->acc, straight_base_velo().param->max_velo, straight_base_velo().param->max_velo);
@@ -901,9 +901,9 @@ void Dijkstra::run_Dijkstra_suction_acc(t_position start_pos,t_direction start_w
 	}
 
 	motion->Motion_start();
-	float suction_value = suction/1000.0f*3.50;
+	float suction_value = suction/1000.0f*3.80;
 	int stay_time 	= (int)(suction_value/0.05) + 300;
-	motion->exe_Motion_suction_start(suction/1000.0f*3.50, stay_time);
+	motion->exe_Motion_suction_start(suction/1000.0f*3.80, stay_time);
 	log_enable();
 	motion->exe_Motion_straight(  16.10-3.0, straight_base_velo().param->acc, straight_base_velo().param->max_velo, straight_base_velo().param->max_velo);
 

@@ -431,27 +431,39 @@ void IrSensTask::SetWallControl_RadVelo(Vehicle *vehicle,float delta_tms)
 
 	if(isEnableIrSens == True && (sen_r.is_control == True || sen_l.is_control == True))
 	{
-		s 		= ir_rad_acc_control;
-		s_dot 	= k1*vehicle->ideal.velo.get()*1000.0*vehicle->ideal.radian.get()*1.0 + k2*vehicle->ideal.rad_velo.get();
 
-		//s_dot 	= k1*vehicle->ideal.velo.get()*1000.0*vehicle->ego.radian.get()*1.0 + k2*vehicle->ideal.rad_velo.get();
+		s 		= ir_rad_acc_control;
+		s_dot 	= k1*vehicle->ideal.velo.get()*1000.0*(vehicle->ideal.radian.get())*1.0 + k2*vehicle->ideal.rad_velo.get();
+
+		//s 		= ir_rad_acc_control;
+		//s_dot 	= k1*vehicle->ideal.velo.get()*1000.0*vehicle->ego.radian.get()*0.0 + k2*vehicle->ego.rad_velo.get();
+
+
 	}
 
 	else
 	{
+
 		s 		= k1*vehicle->ego.x_point.get()+k2*vehicle->ego.radian.get()*1.0;//k2*machine_->radian;//
-		s_dot 	= k1*vehicle->ideal.velo.get()*1000.0*vehicle->ideal.radian.get()*1.0 + k2*vehicle->ideal.rad_velo.get();
-		//s_dot 	= k1*vehicle->ideal.velo.get()*1000.0*vehicle->ego.radian.get()*1.0 + k2*vehicle->ideal.rad_velo.get();
+		s_dot 	= k1*vehicle->ideal.velo.get()*1000.0*(vehicle->ideal.radian.get())*1.0 + k2*vehicle->ideal.rad_velo.get();
+
+
+		//s 		= k1*vehicle->ego.x_point.get()+k2*vehicle->ego.radian.get()*1.0;//k2*machine_->radian;//
+		//s_dot 	= k1*vehicle->ideal.velo.get()*1000.0*vehicle->ego.radian.get()*0.0 + k2*vehicle->ego.rad_velo.get();
 
 	}
 
-	float target_rad_acc	= 	(-1.0)*300.0*s/k2 - 60.0*1.0/k2*s_dot
-							     - k1/k2*(vehicle->ideal.accel.get()*1000.0*vehicle->ego.radian.get()*1.0
-							    		 + vehicle->ideal.velo.get()*vehicle->ego.rad_velo.get()*1000.0);
+
+	float target_rad_acc	= 	(-1.0)*600.0*s/k2 - 60.0*1.0/k2*s_dot
+							     - k1/k2*(vehicle->ideal.accel.get()*1000.0*vehicle->ego.radian.get()*0.0
+							    		 + vehicle->ideal.velo.get()*vehicle->ideal.rad_velo.get()*1000.0);
+
+
 
 	float target_rad_velo	= vehicle->ideal.rad_velo.get() + target_rad_acc*delta_tms/1000.0f;
 	vehicle->ideal.rad_accel.set(target_rad_acc);
 	vehicle->ideal.rad_velo.set(target_rad_velo);
+
 
 }
 

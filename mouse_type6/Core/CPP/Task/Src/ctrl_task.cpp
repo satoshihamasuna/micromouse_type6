@@ -107,7 +107,7 @@ void CtrlTask::motion_control()
 {
 	if(is_control_enable() == True)
 	{
-		if(motion_pattern_get() != motor_free )
+		if(motion_pattern_get() != motor_free &&  motion_pattern_get() != Suction_start)
 		{
 			//
 			vehicle->V_r = 0.0f;			vehicle->V_l = 0.0f;

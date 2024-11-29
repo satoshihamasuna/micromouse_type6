@@ -46,6 +46,7 @@ typedef enum{
 	Run_Pause			= 30,
 }t_run_pattern;
 
+/*
 typedef enum{
 	NOP_MODE 		= 0,
 	STRAIGHT_MODE 	= 1,
@@ -53,7 +54,7 @@ typedef enum{
 	TURN_MODE 		= 3,
 	SPIN_TURN_MODE  = 4,
 }t_run_mode;
-
+*/
 typedef enum
 {
 	Non_controll = 0,
