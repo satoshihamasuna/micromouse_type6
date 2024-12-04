@@ -454,7 +454,7 @@ void IrSensTask::SetWallControl_RadVelo(Vehicle *vehicle,float delta_tms)
 	}
 
 
-	float target_rad_acc	= 	(-1.0)*600.0*s/k2 - 60.0*1.0/k2*s_dot
+	float target_rad_acc	= 	(-1.0)*400.0*s/k2 - 60.0*1.0/k2*s_dot
 							     - k1/k2*(vehicle->ideal.accel.get()*1000.0*vehicle->ego.radian.get()*0.0
 							    		 + vehicle->ideal.velo.get()*vehicle->ideal.rad_velo.get()*1000.0);
 
